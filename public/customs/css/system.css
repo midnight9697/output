@@ -8,10 +8,12 @@
 #mainbody .article {
     /* -webkit-box-flex: 1;
     -webkit-flex: 1 1 auto;
-    -ms-flex: 1 1 auto; */
-    /* flex: 1 1 auto;  */
-    min-width: 0px;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto; 
+    min-width: 0px; */
     margin-left: 250px;
+    
+    /* width: 100%; */
 }
 
 #mainbody:not(.site) > .pusher > .full.height {
@@ -49,3 +51,6 @@
     border:none
 }
 
+#ui-dividing-header {
+    border-left: solid 100px;
+}

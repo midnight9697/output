@@ -1,5 +1,8 @@
 @extends('layout.app')
 
-@section('content')
-    <a href="#">Shitty Boy</a>
+@section('main_content')
+    <a href="#">Tropang EMB</a>
+@endsection
+@section('sub_content')
+    Yow
 @endsection

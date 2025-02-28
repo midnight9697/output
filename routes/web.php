@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SettingController;
 use App\Models\Division;
 use Illuminate\Support\Facades\Route;
 
@@ -18,11 +19,7 @@ Route::get('/', function () {
     return view('admin.home');
 });
 
-Route::get('divisions', function() {
-    return view('divisions.divisions', [
-        'divisions' => Division::get()
-    ]);
-});
+Route::get('divisions',[SettingController::class, 'divisionsView'])->name('manage.divisions');
 
 Route::get('login', function() {
     return view('auth.login');

@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Division extends Model
 {
     use HasFactory;
+
+    public function sections() {
+        $sections = $this->hasMany(Section::class, 'division_id');
+        return $sections;
+    }
 }

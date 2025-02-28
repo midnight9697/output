@@ -36,6 +36,7 @@
                 </div>
             </div>
         </div>
+        
         <div class="article">
             <div class="ui masthead vertical tab segment" style="border: 1px; padding-bottom:0px">
                 <div class="ui container">
@@ -46,8 +47,20 @@
                     </div>
                 </div>
             </div>
-            <div class="main ui container" style="padding-top: 10px">
-                @yield('content')
+            <div class="main ui container" style="padding-top: 10px;border: solid 1px">
+                <div class="ui internally celled grid">
+                    <div class="row">
+                        <div class="fourteen wide computer sixteen wide tablet column">
+                            <div class="ui dividing header">
+                                DIVISIONS
+                            </div>
+                            @yield('main_content')
+                        </div>
+                        <div class="one wide column computer only">
+                            @yield('sub_content')
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

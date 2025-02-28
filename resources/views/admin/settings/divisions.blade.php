@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('content')
+@section('main_content')
     <div class="ui container">
         <table class="ui table">
             <thead>
@@ -23,6 +23,11 @@
     </div>
     
 @endsection
+
+@section('sub_content')
+    Right
+@endsection
+
 
 @section('custom_js')
     

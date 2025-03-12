@@ -4,3 +4,4 @@
   crossorigin="anonymous"></script>
 <script src="{{url('plugins/semantic/semantic.min.js')}}"></script>
 <script src="{{url('customs/js/system.js')}}"></script>
+<script src="{{url('customs/js/app.js')}}"></script>

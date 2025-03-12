@@ -1,74 +1,60 @@
-{{-- <div class="ui fixed inverted menu">
-    <div class="ui container">
-        <a class="launch icon item">
-            <i class="content icon"></i>
-          </a>
-        <div class="item">
-            <div class="header">
-                Motorcycle
-            </div>
+<div class="ui sidebar inverted vertical menu sidebar-menu" id="sidebar">
+    <div class="item ">
+        <div class="header">General</div>
+        <div class="menu">
+            <a class="item">
+                <div><i class="icon tachometer alternate"></i>Dashboard</div>
+            </a>
         </div>
     </div>
-</div> --}}
 
-<div class="pusher">
-    <div class="full height">
-        <div class="ui simple sidebar inverted vertical menu visible" id="ui_sidebar">
-            <div class="item">
-                <a class="ui medium image" style="display:flex;justify-content:center">
-                    <img src="{{ url('files/images/emb logo.jpg') }}" style="height:50px;margin:auto">
-                    <h3 style="margin:auto">EMB SYSTEM</h3>
-                </a>
-            </div>
-            <div class="item">
-                <div class="header">System</div>
-                <div class="menu">
-                   <a href="#" class="item">Cars</a>
-                   <a href="#" class="item">Motorcycles</a>
-                </div>
-            </div>
-            <div class="item">
-                <div class="header">Settings</div>
-                <div class="menu">
-                    <a href="#" class="item">Users</a>
-                    <a href="{{ url('divisions') }}" class="item">Divisions</a>
-                    <a href="#" class="item">Sections</a>
-                </div>
-            </div>
-        </div>
-        
-        <div class="article">
-            <div class="ui masthead vertical tab segment" style="border: 1px; padding-bottom:0px">
-                <div class="ui container">
-                    <div class="introduction">
-                        <h1 class="header">Division</h1>
-                        <div class="sub header">EMB8 DIVISIONS</div>
-                        <div class="ui hidden divider"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="main ui container" style="padding-top: 10px;border: solid 1px">
-                <div class="ui internally celled grid">
-                    <div class="row">
-                        <div class="fourteen wide computer sixteen wide tablet column">
-                            <div class="ui dividing header">
-                                DIVISIONS
-                            </div>
-                            @yield('main_content')
-                        </div>
-                        <div class="one wide column computer only">
-                            @yield('sub_content')
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div class="item ">
+        <div class="header">Administration</div>
+        <div class="menu">
+            <a href="#" class="item">
+                <div><i class="icon users"></i>User</div>
+            </a>
+            <a href="#" class="item">
+                <div><i class="icon users"></i>Registree</div>
+            </a>
+            <a href="#" class="item">
+                <div><i class="icon users"></i>Division</div>
+            </a>
         </div>
     </div>
 </div>
 
-{{-- <div class="pusher">
-    <!-- Site content !-->
-    <div class="full height">
-        @yield('content')
+{{-- Top Inverted Menu --}}
+<nav class="ui top fixed inverted menu">
+    <div class="left menu">
+        <a href="#" class="sidebar-menu-toggler item" data-target="#sidebar">
+            <i class="sidebar icon"></i>
+        </a>
+        <a href="#" class="header item">
+            EMB 8 PROCEDURES
+        </a>
     </div>
-</div> --}}
+    <div class="right menu">
+        <a href="#" class="item">
+            <i class="bell icon"></i>
+        </a>
+        <div class="ui dropdown item">
+            <i class="user circle icon"></i>
+            <div class="menu">
+                <a href="#" class="item">
+                    <i class="info circle icon"></i> Profile
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="pusher">
+    <div class="main-content">
+        <div class="content_header">
+            <h1 class="header">{{ "Dashboard" }}</h1>
+            <div class="ui divider"></div>
+        </div>
+        @yield('main_content')
+    </div>
+</div>

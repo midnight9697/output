@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingController;
 use App\Models\Division;
 use Illuminate\Support\Facades\Route;
@@ -23,5 +24,13 @@ Route::get('divisions',[SettingController::class, 'divisionsView'])->name('manag
 
 Route::get('login', function() {
     return view('auth.login');
+});
+
+Route::prefix('users')->group(function () {
+    Route::post('insert', [ProfileController::class, 'insertUser']);
+});
+
+Route::get('/token', function () {
+    return csrf_token(); 
 });
 // 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

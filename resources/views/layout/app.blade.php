@@ -8,7 +8,7 @@
     @include('layout.cssinclude')
 </head>
 @yield('custom_css')
-<body id="mainbody">
+<body>
     @include('layout.head')
     @include('layout.body')
     @include('layout.foot')

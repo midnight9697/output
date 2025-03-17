@@ -1,8 +1,12 @@
 @extends('layout.app')
 
+@section('extra_content')
+  <button class="ui primary button" id="create_user_vbtn">Create User</button>
+@endsection
 @section('main_content')
+@include('admin.settings.users.modal')
 <div class="ui grid stackable padded users_content">
-    
+
 </div>
 @endsection
 
@@ -12,6 +16,22 @@
         const usersElement = document.getElementsByClassName('users_content')[0];
         document.addEventListener('DOMContentLoaded', () => {
            usersClass.getUsers(fetchUsers);
+            $('#create_user_vbtn').on('click', UserMod.createUserAction)
+            $('#division').on('change', UserMod.sectionGetAction)
+            $('#formCreateUser').on('submit', UserMod.createUser)
+            $('#createUserFinalize').on('click', () =>  { $('#formCreateUser').trigger('submit') });
+            $('.ui.form')
+            .form({
+              fields: {
+                firstname     : 'empty',
+                middlename   : 'empty',
+                lastname : 'empty',
+                email : 'empty',
+                position : 'empty',
+                division : 'empty',
+                section : 'empty',
+              }
+            });
         })
 
         function fetchUsers(users) {
@@ -35,23 +55,18 @@
                           </div>
                       </div>
                       <div class="content">
-                          <a class="header">${user.profile.lastname+", "+user.profile.firstname+" "+user.profile.middlename.charAt(0).toUpperCase()+"."}</a>
+                          <a class="header">${user.profile.firstname+" "+user.profile.middlename.charAt(0).toUpperCase()+"."+" "+user.profile.lastname}</a>
                           <div class="meta">
                             <span class="description">Computer Programmer</span>
                           </div>
-                      </div>
-                      <div class="extra content">
-                          <a>
-                            <i class="users icon"></i>
-                              PISMU
-                          </a>
                       </div>
                   </div>
               </div>
             `;
           });
-
+          
           usersElement.innerHTML = ht;
         }
+
     </script>
 @endsection

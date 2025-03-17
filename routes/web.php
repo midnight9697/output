@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\SystemController;
 use App\Http\Controllers\User\ProfileController as UserProfileController;
 use App\Models\Division;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +34,10 @@ Route::prefix('users')->group(function () {
     Route::post('update', [ProfileController::class, 'updateUser']);
 
     Route::get('/', [UserProfileController::class, 'userView'])->name("Users");
+});
+
+Route::prefix('system')->group(function () {
+    Route::post('sections', [SystemController::class, 'getSections']);
 });
 
 Route::get('/token', function () {

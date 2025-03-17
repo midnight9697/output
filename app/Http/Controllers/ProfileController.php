@@ -35,12 +35,12 @@ class ProfileController extends Controller {
                 'd'
             ]])
         ]);
-
+        
         $new_profile = Profile::create([
             'user_id' => $new_user->id,
             'firstname' => $request->firstname,
             'middlename' => $request->middlename,
-            'lastname' => $request->lastanme,
+            'lastname' => $request->lastname,
             'suffix' => $request->suffix,
             'division_id' => $request->division,
             'section_id' => $request->section
@@ -66,7 +66,7 @@ class ProfileController extends Controller {
         $new_profile = Profile::where('user_id', $request->user_id)->update([
             'firstname' => $request->firstname,
             'middlename' => $request->middlename,
-            'lastname' => $request->lastanme,
+            'lastname' => $request->lastname,
             'suffix' => $request->suffix,
             'division_id' => $request->division,
             'section_id' => $request->section

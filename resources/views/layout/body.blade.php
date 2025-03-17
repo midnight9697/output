@@ -53,6 +53,7 @@
     <div class="main-content" style="padding:40px">
         <div class="content_header">
             <h1 class="header">{{ Request::route()->getName() }}</h1>
+            @yield('extra_content')
             <div class="ui divider"></div>
         </div>
         <div class="ui segment">

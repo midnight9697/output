@@ -1,0 +1,1 @@
+<div class="ui disabled loader" id="content-loader"></div>

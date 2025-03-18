@@ -12,6 +12,13 @@
     /* padding: 20px; */
 }
 
+.truncate {
+    /* width: 250px; */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
 @media (min-width: 768px) {
     .ui.vertical.menu.sidebar-menu {
         visibility: visible;

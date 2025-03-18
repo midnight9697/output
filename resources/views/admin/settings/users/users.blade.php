@@ -30,6 +30,8 @@
                 position : 'empty',
                 division : 'empty',
                 section : 'empty',
+                password: ['empty', 'minLength[6]'],
+                password_confirmation: ['empty', 'match[password]']
               }
             });
         })
@@ -55,9 +57,9 @@
                           </div>
                       </div>
                       <div class="content">
-                          <a class="header">${user.profile.firstname+" "+user.profile.middlename.charAt(0).toUpperCase()+"."+" "+user.profile.lastname}</a>
+                          <a class="header truncate">${user.profile.firstname+" "+user.profile.middlename.charAt(0).toUpperCase()+"."+" "+user.profile.lastname}</a>
                           <div class="meta">
-                            <span class="description">Computer Programmer</span>
+                            <span class="description truncate"${user.profile.position}</span>
                           </div>
                       </div>
                   </div>

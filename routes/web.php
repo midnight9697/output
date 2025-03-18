@@ -43,3 +43,7 @@ Route::prefix('system')->group(function () {
 Route::get('/token', function () {
     return csrf_token();
 });
+
+Route::get('testing', function() {
+    return view('admin.test');
+});

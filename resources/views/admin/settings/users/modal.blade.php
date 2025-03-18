@@ -7,6 +7,9 @@
     <div class="content">
         <form class="ui form" action="#" id="formCreateUser" method="post">
             <h4 class="ui dividing header">REGISTER NEW USER</h4>
+            <div class="ui error message">
+                {{--  --}}
+            </div>
             <div class="field">
                 <label>Name</label>
                 <div class="two fields">
@@ -35,6 +38,17 @@
                 <input required type="text" name="position" id="position" placeholder="Position">
             </div>
             <div class="field">
+                <label>Password</label>
+                <div class="two fields">
+                    <div class="field">
+                        <input type="password" name="password" id="password" placeholder="Passsword">
+                    </div>
+                    <div class="field">
+                        <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Password Confirm">
+                    </div>
+                </div>
+            </div>
+            <div class="field">
                 <label>Division</label>
                 <select required name="division" id="division" class="ui fluid dropdown">
                     @foreach (Division::get() as $division)
@@ -48,6 +62,7 @@
                     
                 </select>
             </div>
+           
         </form>
     </div>
     <div class="actions">

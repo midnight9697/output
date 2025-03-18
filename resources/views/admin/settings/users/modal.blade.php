@@ -62,10 +62,12 @@
                     
                 </select>
             </div>
-           
+            {{-- <div class="ui active loader"></div> --}}
         </form>
     </div>
     <div class="actions">
-        <button type="submit" class="ui primary button" id="createUserFinalize">REGISTER USER</button>
+        <div type="submit" class="ui primary button" id="createUserFinalize">
+            REGISTER USER
+        </div>
     </div>
 </div>

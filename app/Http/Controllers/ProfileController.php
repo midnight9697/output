@@ -35,7 +35,8 @@ class ProfileController extends Controller {
             'lastname' => $request->lastname,
             'suffix' => $request->suffix,
             'division_id' => $request->division,
-            'section_id' => $request->section
+            'section_id' => $request->section,
+            'position' => $request->position
         ]);
 
         return User::where('id', $new_user->id)->with('profile')->first();
@@ -53,7 +54,8 @@ class ProfileController extends Controller {
             'lastname' => $request->lastname,
             'suffix' => $request->suffix,
             'division_id' => $request->division,
-            'section_id' => $request->section
+            'section_id' => $request->section,
+            'position' => $request->position
         ]);
 
         return User::with('user_profile')->find($request->user_id);

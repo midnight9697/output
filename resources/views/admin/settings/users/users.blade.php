@@ -26,7 +26,7 @@
                 firstname     : 'empty',
                 middlename   : 'empty',
                 lastname : 'empty',
-                email : 'empty',
+                email : ['empty'],
                 position : 'empty',
                 division : 'empty',
                 section : 'empty',
@@ -59,7 +59,7 @@
                       <div class="content">
                           <a class="header truncate">${user.profile.firstname+" "+user.profile.middlename.charAt(0).toUpperCase()+"."+" "+user.profile.lastname}</a>
                           <div class="meta">
-                            <span class="description truncate"${user.profile.position}</span>
+                            <span class="description truncate">${user.profile.position}</span>
                           </div>
                       </div>
                   </div>

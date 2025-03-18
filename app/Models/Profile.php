@@ -19,5 +19,6 @@ class Profile extends Model
         'user_id',
         'position',
         'status',
+        'position'
     ];
 }

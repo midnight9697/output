@@ -1,3 +1,4 @@
+
 class Users {
     constructor() {
         const users = [];
@@ -21,13 +22,7 @@ class Users {
               // 'responseType': 'application/json',
             },
           })
-          .then(function (response) {
-            usersClone.users = response.data;
-            // action(response.data);
-          }).catch((err) => {
-            const contentType = err;
-            console.log('Shit', contentType);
-          })
+          .then(action).catch(action)
     }
 }
 
@@ -47,12 +42,18 @@ class UserController {
   createUser(e) {
     e.preventDefault();
     let user = {};
-    $('#formCreateUser').serializeArray().forEach(data => {
-      user[data.name] = data.value;
-    });
-    new Users().createUser(user, (json) => {
-      console.log('json', json);
-    });
+    $('#formCreateUser :input').prop('readonly', true);
+    setTimeout(() => {
+      $('#formCreateUser').serializeArray().forEach(data => {
+        user[data.name] = data.value;
+      });
+      new Users().createUser(user, (json) => {
+        $('#formCreateUser').form('reset');
+        $('#formCreateUser .message').html('');
+        $('#formCreateUser :input').prop('readonly', false);
+      });
+    }, 2000);
+      
   }
 
   createUserAction() {

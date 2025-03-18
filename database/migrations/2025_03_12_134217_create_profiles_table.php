@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string("suffix")->nullable();
             $table->integer('division_id')->nullable();
             $table->integer('section_id')->nullable();
-            $table->integer('position')->nullable();
+            $table->string('position')->nullable();
             $table->enum('status', [
                 'active',
                 'inactive',

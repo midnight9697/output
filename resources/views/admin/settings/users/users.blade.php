@@ -1,12 +1,51 @@
 @extends('layout.app')
 
-@section('extra_content')
-  <button class="ui primary button" id="create_user_vbtn">Create User</button>
-@endsection
 @section('main_content')
 @include('admin.settings.users.modal')
-<div class="ui grid stackable padded users_content">
-
+<div class="ui grid stackable padded">
+  <table class="ui very basic collapsing celled table" style="width: 100%">
+    <thead>
+      <tr>
+        <th>Employee</th>
+        <th>Division</th>
+        <th>Section</th>
+        <th>Registered Date</th>
+      </tr>
+    </thead>
+    <tbody class="users_content">
+      
+    </tbody>
+    <tfoot class="full-width">
+      <tr>
+        <th>
+          <div class="ui small primary labeled icon button" id="create_user_vbtn">
+            <i class="user icon"></i> Add User
+          </div>
+          
+        </th>
+        <th colspan="4" id="page_content">
+          <div class="ui right floated pagination menu">
+            <a class="active item">
+              1
+            </a>
+            <div class="disabled item">
+              ...
+            </div>
+            <a class="item">
+              10
+            </a>
+            <a class="item">
+              11
+            </a>
+            <a class="item">
+              12
+            </a>
+          </div>
+        </th>
+      </tr>
+    </tfoot>
+  </table>
+ 
 </div>
 @endsection
 
@@ -15,60 +54,20 @@
         const usersClass = new Users();
         const usersElement = document.getElementsByClassName('users_content')[0];
         document.addEventListener('DOMContentLoaded', () => {
-           usersClass.getUsers(fetchUsers);
-            $('#create_user_vbtn').on('click', UserMod.createUserAction)
-            $('#division').on('change', UserMod.sectionGetAction)
-            $('#formCreateUser').on('submit', UserMod.createUser)
-            $('#createUserFinalize').on('click', () =>  { $('#formCreateUser').trigger('submit') });
-            $('.ui.form')
-            .form({
-              fields: {
-                firstname     : 'empty',
-                middlename   : 'empty',
-                lastname : 'empty',
-                email : ['empty'],
-                position : 'empty',
-                division : 'empty',
-                section : 'empty',
-                password: ['empty', 'minLength[6]'],
-                password_confirmation: ['empty', 'match[password]']
-              }
-            });
-        })
-
-        function fetchUsers(users) {
-          users = users.data;     
-          console.log(users);
-               
-          let ht = "";
-
-          users.forEach(user => {
-            ht += `
-              <div class="two wide computer eight wide tablet sixteen wide mobile column">
-                  <div class="ui card">
-                      <div class="ui slide masked reveal image">
-                          <div class="ui fade reveal">
-                              <div class="visible content">
-                                  <img src="{{ url('files/images/square-image.png') }}" class="visible content">
-                              </div>
-                              <div class="hidden content">
-                                  <img src="{{ url('files/images/middle.avif') }}" class="visible content">
-                              </div>
-                          </div>
-                      </div>
-                      <div class="content">
-                          <a class="header truncate">${user.profile.firstname+" "+user.profile.middlename.charAt(0).toUpperCase()+"."+" "+user.profile.lastname}</a>
-                          <div class="meta">
-                            <span class="description truncate">${user.profile.position}</span>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-            `;
-          });
           
-          usersElement.innerHTML = ht;
-        }
-
+          usersClass.getUsers((users) => {
+            GValidator.StoreUserValidation(users);
+            UserMod.fetchUsersTable(users)
+          });
+          $('#create_user_vbtn').on('click', UserMod.createUserAction)
+          $('#division').on('change', UserMod.sectionGetAction)
+          $('#formCreateUser').on('submit', UserMod.createUser)
+          $('#createUserFinalize').on('click', () =>  { $('#formCreateUser').trigger('submit') });
+          $('#show_password').on('change', () => {
+            document.getElementById('password').type = ($('#show_password').is(':checked')?'text':'password');
+            document.getElementById('password_confirmation').type = ($('#show_password').is(':checked')?'text':'password');
+          });
+        })
+        
     </script>
 @endsection

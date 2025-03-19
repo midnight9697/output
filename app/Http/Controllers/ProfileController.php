@@ -11,10 +11,15 @@ use Illuminate\Validation\Rules\Password;
 class ProfileController extends Controller {
     
     public function fetchUsers() {
-        $users = User::with('profile')->paginate();
+        $users = User::with('profile')->addSelect([
+            'name' => Profile::select('firstname')
+            ->whereColumn('user_id', 'users.id')
+            ->limit(1)
+        ])->orderBy('name', 'asc')->paginate(8);
+        
         return $users;
     }
-
+    
     public function insertUser(StoreUserRequest $request) {
 
         $new_user = User::create([

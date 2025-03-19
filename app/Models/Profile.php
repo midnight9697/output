@@ -21,4 +21,18 @@ class Profile extends Model
         'status',
         'position'
     ];
+
+    public function getDateAttribute(): string {
+        return "Shit";
+    }
+
+    public function division() {
+        $division = $this->belongsTo(Division::class, 'division_id');
+        return $division;
+    }
+
+    public function section() {
+        $section = $this->belongsTo(Section::class, 'section_id');
+        return $section;
+    }
 }

@@ -5,4 +5,5 @@
 <script src="{{url('customs/js/app.js')}}"></script>
 <script src="{{url('customs/js/User.js')}}"></script>
 <script src="{{url('customs/js/Message.js')}}"></script>
+<script src="{{url('customs/js/Validation.js')}}"></script>
 <script src="{{url('plugins/axios/axios.min.js')}}"></script>

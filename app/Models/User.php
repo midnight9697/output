@@ -44,6 +44,7 @@ class User extends Authenticatable
     ];
 
     public function profile() {
-        return $this->hasOne(Profile::class, 'id');
+        $user = $this->hasOne(Profile::class, 'id')->with('division')->with('section');
+        return $user;
     }
 }

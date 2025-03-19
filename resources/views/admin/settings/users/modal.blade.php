@@ -48,6 +48,12 @@
                     </div>
                 </div>
             </div>
+            <div class="inline field">
+                <div class="ui checkbox">
+                    <input type="checkbox" name="show_password" id="show_password">
+                    <label>Show Password</label>
+                </div>
+            </div>
             <div class="field">
                 <label>Division</label>
                 <select required name="division" id="division" class="ui fluid dropdown">
@@ -66,8 +72,8 @@
         </form>
     </div>
     <div class="actions">
-        <div type="submit" class="ui primary button" id="createUserFinalize">
+        <button type="submit" class="ui primary button" id="createUserFinalize">
             REGISTER USER
-        </div>
+        </button>
     </div>
 </div>

@@ -122,10 +122,17 @@ class UserController {
     let data = users;
     users = users.data;     
     console.log(users);
-         
+    
     let ht = "";
 
     users.forEach(user => {
+      content.push({
+        title: user.profile.firstname+" "+user.profile.middlename.charAt(0).toUpperCase()+"."+" "+user.profile.lastname
+      });
+
+      $('.ui.search_people').search({
+        source: content
+      })
       ht += `
         <tr>
           <td>

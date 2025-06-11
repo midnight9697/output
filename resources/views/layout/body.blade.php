@@ -44,6 +44,9 @@
                 <a href="#" class="item">
                     <i class="info circle icon"></i> Profile
                 </a>
+                <a href="{{ url('logout') }}" class="item">
+                    <i class="power off icon"></i> Logout
+                </a>
             </div>
         </div>
     </div>

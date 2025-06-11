@@ -26,9 +26,8 @@ class UserPolicy
      * @param  \App\Models\User  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, User $model)
-    {
-        //
+    public function view(User $user, User $model) {
+        return true;
     }
 
     /**
@@ -49,9 +48,8 @@ class UserPolicy
      * @param  \App\Models\User  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, User $model)
-    {
-        //
+    public function update(User $user, User $model) {
+        return $user->id == 1;
     }
 
     /**

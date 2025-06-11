@@ -20,8 +20,9 @@ class ProfileController extends Controller {
         return $users;
     }
     
-    public function insertUser(StoreUserRequest $request) {
-
+    public function insertUser(StoreUserRequest $request, User $user) {
+        $this->authorize('update', $user, "Diri Pwede");
+        return 'authorize';
         $new_user = User::create([
             'email' => $request->email,
             'password' => bcrypt($request->password),
@@ -47,8 +48,10 @@ class ProfileController extends Controller {
         return User::where('id', $new_user->id)->with('profile')->first();
     }
 
-    public function updateUser(Request $request) {
-        
+    public function updateUser(Request $request, User $user) {
+
+        $this->authorize('update', $user, "Diri Pwede");
+        return 'authorize';
         $new_user = User::where('id', $request->user_id)->update([
             'email' => $request->email,
         ]);

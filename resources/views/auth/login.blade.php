@@ -4,7 +4,8 @@
 <div class="ui middle aligned center aligned grid">
     <div class="column">
         <h2 class="ui teal image header">
-          <img src="{{ url('plugins/login/logo.png') }}" class="image">
+          <img src="{{ url('files/images/emb.png') }}" class="image">
+          {{-- <img src="{{ url('files/images/logoko.png') }}" class="image"> --}}
           <div class="content">
             Log-in to your account
           </div>

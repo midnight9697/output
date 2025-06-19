@@ -49,7 +49,7 @@ class UserPolicy
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function update(User $user, User $model) {
-        return $user->id == 2;
+        return $user->id == 2;~
     }
 
     /**

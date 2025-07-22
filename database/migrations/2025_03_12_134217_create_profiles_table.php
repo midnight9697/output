@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->string("firstname")->nullable();
-            $table->string("middlename")->nullable();
+            $table->string("middlename")->default('waived');
             $table->string("lastname")->nullable();
             $table->string("suffix")->nullable();
             $table->integer('division_id')->nullable();

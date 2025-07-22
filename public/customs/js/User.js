@@ -16,14 +16,14 @@ class Users {
 
     createUser(user, action, fail) {
       var usersClone = this;
-        axios.post('./users/insert', user, {
-            headers: {
-              'Content-Type': 'application/json; charset=utf-8',
-              'Accept': 'application/vnd.github+json',
-              // 'responseType': 'application/json',
-            },
-          })
-          .then(action).catch(fail)
+      axios.post('./users/insert', user, {
+          headers: {
+            'Content-Type': 'application/json; charset=utf-8',
+            'Accept': 'application/vnd.github+json',
+            // 'responseType': 'application/json',
+          },
+        })
+        .then(action).catch(fail)
     }
 }
 
@@ -47,11 +47,15 @@ class UserController {
   createUser(e) {
     e.preventDefault();
     let user = {};
+    if (!GValidator.form.form('is valid')) {  // Reject Process if all fields are not filled
+      return 0;
+    }
     $('#formCreateUser :input').prop('readonly', true);
     BtnLoaderMod.start(new UserController().btnCreateFinalize);
     $('#formCreateUser').serializeArray().forEach(data => {
       user[data.name] = data.value;
     });
+    
     new Users().createUser(user, (json) => {
       BtnLoaderMod.load(document.getElementById('createUserFinalize'), () => {
         new UserController().failedCreate();
@@ -62,7 +66,7 @@ class UserController {
         BtnLoaderMod.load(document.getElementById('createUserFinalize'), () => {
           $('#formCreateUser .message').html('');
           $('#formCreateUser :input').prop('readonly', false);
-          MessageMod.fail("Server Error");
+          MessageMod.fail(response.message);
         });
     });
   }
@@ -127,7 +131,7 @@ class UserController {
 
     users.forEach(user => {
       content.push({
-        title: user.profile.firstname+" "+user.profile.middlename.charAt(0).toUpperCase()+"."+" "+user.profile.lastname
+        title: user.profile.firstname+" "+(user.profile.middlename == "waived"?"":user.profile.middlename.charAt(0).toUpperCase()+".")+" "+user.profile.lastname
       });
 
       $('.ui.search_people').search({
@@ -139,7 +143,7 @@ class UserController {
             <h4 class="ui image header">
               <img src="files/images/square-image.png" class="ui mini rounded image">
               <div class="content">
-                ${user.profile.firstname+" "+user.profile.middlename.charAt(0).toUpperCase()+"."+" "+user.profile.lastname}
+                ${user.profile.firstname+" "+(user.profile.middlename == "waived"?"":user.profile.middlename.charAt(0).toUpperCase()+".")+" "+user.profile.lastname}
                 <div class="sub header">
                   ${user.profile.position}
                 </div>
@@ -153,6 +157,7 @@ class UserController {
             ${user.profile.section.section}
           </td>
           <td>
+            ${humanDate.humanDate(user.created_at, 's')}
           </td>
         </tr>
       `;

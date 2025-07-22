@@ -38,12 +38,13 @@
                 <input required type="text" name="position" id="position" placeholder="Position">
             </div>
             <div class="field">
-                <label>Password</label>
                 <div class="two fields">
                     <div class="field">
+                        <label>Password</label>
                         <input type="password" name="password" id="password" placeholder="Passsword">
                     </div>
                     <div class="field">
+                        <label for="Password Confirm">Password Confirm</label>
                         <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Password Confirm">
                     </div>
                 </div>

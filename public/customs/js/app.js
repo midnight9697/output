@@ -66,32 +66,57 @@ class BtnLoader {
     start(element) {
         this.defbtn = element.innerHTML;
         element.disabled = true;
-        element.innerHTML = this.ldbtn;
+        // element.innerHTML = this.ldbtn;
+        element.innerHTML = `<i class="loading spinner icon"></i> Please wait...`;
     }
 
     load(element = false, action) {
         var self = this;
-        let cnt = 3;
+        element.innerHTML = self.defbtn;
+        element.disabled = false;
+        action();
+        // let cnt = 1;
 
-        let x = setInterval(() => {
-            element.innerHTML = `<i class="loading spinner icon"></i> Please wait ${cnt}`;
-            console.log('Count', cnt);
-            if (cnt <= 0) {
-                clearInterval(x);
-                element.innerHTML = self.defbtn;
-                element.disabled = false;
-                action();
-            }
-            cnt--;
-        }, 1000);
+        // let x = setInterval(() => {
+        //     console.log('Count', cnt);
+        //     if (cnt <= 0) {
+        //         clearInterval(x);
+        //         element.innerHTML = self.defbtn;
+        //         element.disabled = false;
+        //         action();
+        //     }
+        //     cnt--;
+        // }, 1000);
 
     }
 }
 
+class CustomDate {
+
+    constructor() {
+        this.date = new Date();
+        this.month = [
+            'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December',
+        ]
+
+        this.smonth = [
+            'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec',
+        ]
+    }
+
+    humanDate(date = new Date(), month = 's') { //month = short/whole
+        this.cdate = new Date(date);
+        return (month == 's'?this.smonth[this.cdate.getMonth()]:this.month[this.cdate.getMonth()])+" "+String(this.cdate.getDate()).padStart('2', '0')+', '+this.cdate.getFullYear();
+    }
+
+
+
+    
+}
 const SectionMod = new Section();
 const MessageMod = new Message();
 const BtnLoaderMod = new BtnLoader();
-
+const humanDate = new CustomDate();
 document.addEventListener('DOMContentLoaded', () => {
     $('.ui.dropdown').dropdown();
 

@@ -89,9 +89,6 @@
             document.getElementById('password').type = ($('#show_password').is(':checked')?'text':'password');
             document.getElementById('password_confirmation').type = ($('#show_password').is(':checked')?'text':'password');
           });
-
-          
         })
-        
     </script>
 @endsection

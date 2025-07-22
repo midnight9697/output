@@ -15,14 +15,13 @@ class ProfileController extends Controller {
             'name' => Profile::select('firstname')
             ->whereColumn('user_id', 'users.id')
             ->limit(1)
-        ])->orderBy('name', 'asc')->paginate(8);
+        ])->orderBy('created_at', 'desc')->paginate(10);
         
         return $users;
     }
     
     public function insertUser(StoreUserRequest $request, User $user) {
-        $this->authorize('update', $user, "Diri Pwede");
-        return 'authorize';
+        // $this->authorize('update', $user, "Diri Pwede");
         $new_user = User::create([
             'email' => $request->email,
             'password' => bcrypt($request->password),

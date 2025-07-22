@@ -2,7 +2,7 @@ class Validator {
     
     StoreUserValidation(users) {
         $.fn.form.settings.rules['checkEmailExists'] = function(value) {
-            return (users.data.filter(el => el.email == value).length == 0);
+            return (users.filter(el => el.email == value).length == 0);
         };
         
         this.form = 
@@ -11,12 +11,6 @@ class Validator {
           fields: {
             firstname     : {
               identifier: 'firstname',
-              rules: [{
-                type: 'empty'
-              }]
-            },
-            middlename   : {
-              identifier: 'middlename',
               rules: [{
                 type: 'empty'
               }]

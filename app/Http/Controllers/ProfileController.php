@@ -19,6 +19,15 @@ class ProfileController extends Controller {
         
         return $users;
     }
+
+    public function fetchAllUsers() {
+        $users = User::with('profile')->addSelect([
+            'name' => Profile::select('firstname')
+            ->whereColumn('user_id', 'users.id')
+            ->limit(1)
+        ])->orderBy('created_at', 'desc')->get();
+        return $users;
+    }
     
     public function insertUser(StoreUserRequest $request, User $user) {
         // $this->authorize('update', $user, "Diri Pwede");
@@ -36,7 +45,7 @@ class ProfileController extends Controller {
         $new_profile = Profile::create([
             'user_id' => $new_user->id,
             'firstname' => $request->firstname,
-            'middlename' => $request->middlename,
+            'middlename' => ($request->middlename==""?'waived':$request->middlename),
             'lastname' => $request->lastname,
             'suffix' => $request->suffix,
             'division_id' => $request->division,

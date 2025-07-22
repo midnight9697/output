@@ -76,10 +76,13 @@
         const usersElement = document.getElementsByClassName('users_content')[0];
         var content = [];
         document.addEventListener('DOMContentLoaded', () => {
-          
-          usersClass.getUsers((users) => {
+          // Load all users for validation
+          usersClass.getAllUsers((users) => {
             GValidator.StoreUserValidation(users);
-            UserMod.fetchUsersTable(users)
+          });
+          // Load paginated users
+          usersClass.getUsers((paging) => {
+            UserMod.fetchUsersTable(paging)
           });
           $('#create_user_vbtn').on('click', UserMod.createUserAction)
           $('#division').on('change', UserMod.sectionGetAction)

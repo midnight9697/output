@@ -42,6 +42,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::prefix('users')->group(function () {
         Route::get('list', [ProfileController::class, 'fetchUsers']);
+        Route::get('all', [ProfileController::class, 'fetchAllUsers']);
         Route::post('insert', [ProfileController::class, 'insertUser']);
         Route::post('update', [ProfileController::class, 'updateUser']);
         Route::get('/', [UserProfileController::class, 'userView'])->name("Users");

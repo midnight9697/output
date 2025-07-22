@@ -7,12 +7,21 @@ class Users {
 
     getUsers(action, page = false) {
         var usersClone = this;
-        axios.get('./users/list?'+(page?page:""))
+        axios.get('./users/list?'+(page?"page="+page:""))
           .then(function (response) {
             usersClone.users = response.data;
             action(response.data)
           });
     }
+
+    getAllUsers(action, page = false) {
+      var usersClone = this;
+      axios.get('./users/all?')
+        .then(function (response) {
+          usersClone.users = response.data;
+          action(response.data)
+        });
+  }
 
     createUser(user, action, fail) {
       var usersClone = this;

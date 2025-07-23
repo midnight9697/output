@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>BRIEFING SHITS</title>
+    <title>PROCUREMENT SYSTEM</title>
     @include('layout.cssinclude')
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 @yield('custom_css')
 <body>

@@ -46,6 +46,9 @@
         </th>
         <th colspan="4" id="page_content">
           <div class="ui right floated pagination menu">
+            <a class="icon item">
+              <i class="left chevron icon"></i>
+            </a>
             <a class="active item">
               1
             </a>
@@ -61,6 +64,9 @@
             <a class="item">
               12
             </a>
+            <a class="icon item">
+              <i class="right chevron icon"></i>
+            </a>
           </div>
         </th>
       </tr>
@@ -71,27 +77,8 @@
 @endsection
 
 @section('custom_js')
-    <script>
-        const usersClass = new Users();
-        const usersElement = document.getElementsByClassName('users_content')[0];
-        var content = [];
-        document.addEventListener('DOMContentLoaded', () => {
-          // Load all users for validation
-          usersClass.getAllUsers((users) => {
-            GValidator.StoreUserValidation(users);
-          });
-          // Load paginated users
-          usersClass.getUsers((paging) => {
-            UserMod.fetchUsersTable(paging)
-          });
-          $('#create_user_vbtn').on('click', UserMod.createUserAction)
-          $('#division').on('change', UserMod.sectionGetAction)
-          $('#formCreateUser').on('submit', UserMod.createUser)
-          $('#createUserFinalize').on('click', () =>  { $('#formCreateUser').trigger('submit') });
-          $('#show_password').on('change', () => {
-            document.getElementById('password').type = ($('#show_password').is(':checked')?'text':'password');
-            document.getElementById('password_confirmation').type = ($('#show_password').is(':checked')?'text':'password');
-          });
-        })
-    </script>
+@vite(['resources/js/User/Index.js'])
+  <script>
+      
+  </script>
 @endsection

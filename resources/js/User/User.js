@@ -1,13 +1,22 @@
+import { BtnLoader, CustomDate, Message, Section } from "../app";
+import Validator from "./Validation";
 
+const SectionMod = new Section;
+const MessageMod = new Message;
+const BtnLoaderMod = new BtnLoader();
+const humanDate = new CustomDate();
+var user_controller = null;
+const maxActivePage = 5-1;
+export const GValidator = new Validator;
 
-class Users {
+export class Users {
     constructor() {
         const users = [];
     }
 
-    getUsers(action, page = false) {
+    getByPage(action, page = false) {
         var usersClone = this;
-        axios.get('./users/list?'+(page?"page="+page:""))
+        axios.get('./api/users/getpage?'+(page?"page="+page:""))
           .then(function (response) {
             usersClone.users = response.data;
             action(response.data)
@@ -36,10 +45,13 @@ class Users {
     }
 }
 
-class UserController {
+export class UserController {
 
   constructor() {
+    user_controller = this;
     this.btnCreateFinalize = document.getElementById('createUserFinalize');
+    // content = [];
+    // usersElement = document.getElementsByClassName('users_content')[0];
   }
 
   getSection(sections) {
@@ -132,6 +144,9 @@ class UserController {
   }
 
   fetchUsersTable(users) {
+    const usersElement = document.getElementsByClassName('users_content')[0];
+    var content = [];
+
     let data = users;
     users = users.data;     
     console.log(users);
@@ -171,23 +186,64 @@ class UserController {
         </tr>
       `;
     });
-    console.log('data', data);
-    let page = "";
-    for (let p = 1; p <= 3; p++) {
-      page += `
-        <a class="${(data.current_page == p?'active':'')} item">
-          ${p}
-        </a>
-      `;
+    
+    let prevBtn = document.createElement('a');
+    prevBtn.className = `icon item ${(data.current_page == 1?"":"prev-page")}`;
+    prevBtn.innerHTML = `<i class="left chevron icon"></i>`;
+    prevBtn.onclick =  function(e) {
+      if (data.current_page == 1) {
+        return 0;
+      }
+      new Users().getByPage((paging) => {
+          user_controller.fetchUsersTable(paging)
+      },  data.current_page - 1);
     }
-    document.getElementById('page_content').innerHTML = `
-      <div class="ui right floated pagination menu">
-            ${page}
-      </div>
-    `;
+
+    let nextBtn = document.createElement('a');
+    nextBtn.className = `icon item ${(data.current_page == data.last_page?"":"next-page")}`;
+    nextBtn.innerHTML = `<i class="right chevron icon"></i>`;
+    nextBtn.onclick =  function(e) {
+      if (data.current_page == data.last_page) {
+        return 0;
+      }
+      new Users().getByPage((paging) => {
+          user_controller.fetchUsersTable(paging)
+      },  data.current_page + 1);
+    }
+
+    let div = document.createElement('div')
+    div.className = 'ui right floated pagination menu';
+    div.appendChild(prevBtn);
+
+    let page = "";
+    let maxPage = (data.last_page >= maxActivePage?maxActivePage:data.last_page);
+    let startPage = (data.last_page >= maxActivePage?(data.current_page):1);
+    console.log('Start - Max: ', startPage, maxPage);
+    if ((startPage+maxActivePage) < data.last_page) {
+        maxPage = startPage + maxActivePage;
+    }
+    else {
+      maxPage = (startPage + (data.last_page - startPage));
+      startPage = startPage - ((maxActivePage + startPage) - data.last_page);
+    }
+    console.log('Start - Max: ', startPage, maxPage);
+
+    for (let p = startPage; p <=  maxPage; p++) {
+      let anchor = document.createElement('a');
+      anchor.className = `${(data.current_page == p?'active':'')} item`;
+      anchor.innerHTML = p;
+      anchor.onclick = function() {
+        new Users().getByPage((paging) => {
+            user_controller.fetchUsersTable(paging)
+        },  p);
+      }
+      div.appendChild(anchor);
+    }
+    div.appendChild(nextBtn);
+    document.getElementById('page_content').innerHTML = "";
+    document.getElementById('page_content').appendChild(div);
     usersElement.innerHTML = ht;
   }
   
 }
 
-const UserMod = new UserController();

@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\User\CreateUserRequest;
+use App\Http\Requests\User\EditUserRequest;
 use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -29,7 +30,7 @@ class ProfileController extends Controller {
         return $users;
     }
     
-    public function insertUser(StoreUserRequest $request, User $user) {
+    public function insertUser(CreateUserRequest $request, User $user) {
         // $this->authorize('update', $user, "Diri Pwede");
         $new_user = User::create([
             'email' => $request->email,
@@ -56,7 +57,7 @@ class ProfileController extends Controller {
         return User::where('id', $new_user->id)->with('profile')->first();
     }
 
-    public function updateUser(Request $request, User $user) {
+    public function updateUser(EditUserRequest $request, User $user) {
 
         $this->authorize('update', $user, "Diri Pwede");
         return 'authorize';

@@ -1,4 +1,4 @@
-class Validator {
+export default class Validator {
     
     StoreUserValidation(users) {
         $.fn.form.settings.rules['checkEmailExists'] = function(value) {
@@ -25,10 +25,12 @@ class Validator {
               identifier: 'email',
               rules: [{
                   type: 'checkEmailExists',
-                  prompt: 'Email already used.'
+                  prompt: 'Email already used.',
                 }, {
                   type: 'email',
-                  prompt: 'Please enter email.'
+                  prompt: 'Please enter valid email email.',
+                }, {
+                  type: 'empty',
                 }
               ]
             },
@@ -75,6 +77,8 @@ class Validator {
         });
 
     }
-}
 
-const GValidator = new Validator();
+    UpdateUserValidation(users) {
+      
+    } 
+}

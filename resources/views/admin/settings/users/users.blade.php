@@ -6,8 +6,9 @@
 
 @section('main_content')
 @include('admin.settings.users.modal')
-<div class="ui grid stackable padded">
-  <table class="ui very basic collapsing celled table" style="width: 100%">
+<div class="ui grid stackable padded" id="users_table">
+  
+  {{-- <table class="ui very basic collapsing celled table" style="width: 100%">
     <thead>
       <tr>
         <th colspan="5">
@@ -42,7 +43,6 @@
     <tfoot class="full-width">
       <tr>
         <th>
-          {{-- Extra Content --}}
         </th>
         <th colspan="4" id="page_content">
           <div class="ui right floated pagination menu">
@@ -71,7 +71,7 @@
         </th>
       </tr>
     </tfoot>
-  </table>
+  </table> --}}
  
 </div>
 @endsection

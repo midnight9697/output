@@ -8,7 +8,7 @@
 @include('admin.settings.users.modal')
 <div class="ui grid stackable padded" id="users_table">
   
-  {{-- <table class="ui very basic collapsing celled table" style="width: 100%">
+  <table class="ui very basic collapsing celled table" style="width: 100%">
     <thead>
       <tr>
         <th colspan="5">
@@ -71,7 +71,7 @@
         </th>
       </tr>
     </tfoot>
-  </table> --}}
+  </table>
  
 </div>
 @endsection

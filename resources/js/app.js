@@ -1,3 +1,5 @@
+// axios.defaults.baseURL = 'http://172.16.6.103';
+
 export class Section {
 
     constructor() {

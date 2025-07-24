@@ -21,4 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::prefix('users')->group(function() {
     Route::get('getpage', [UserController::class, 'fetchByPage']);
+    Route::get('all', [UserController::class, 'fetchAll']);
+    Route::post('insert', [UserController::class, 'insertUser']);
+    Route::post('update', [UserController::class, 'updateUser']);
 });

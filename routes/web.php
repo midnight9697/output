@@ -23,28 +23,20 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('divisions',[SettingController::class, 'divisionsView'])->name('manage.divisions');
 
-Route::get('login', function() {
-    return view('auth.login');
-})->name('login');
 
-Route::post('authenticate', [AuthController::class, 'authenticate']);
+
+Route::prefix('login')->group(function() {
+    Route::get('/', [AuthController::class, 'loginView'])->name('login');
+    Route::post('auth', [AuthController::class, 'authenticate']);
+});
 
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::get('/', function () {
-        return redirect('admin.home');
-    })->name('home');
-
+    Route::get('/', [ProfileController::class, 'homeView'])->name('main');
     Route::get('logout', [AuthController::class, 'logout']);
-    
-    Route::get('dashboard', function() {
-        return view('admin.home');
-    });
-
+    Route::get('dashboard', [ProfileController::class, 'homeView']);
+    //Users View
     Route::prefix('users')->group(function () {
         Route::get('list', [ProfileController::class, 'fetchUsers']);
-        Route::get('all', [ProfileController::class, 'fetchAllUsers']);
-        Route::post('insert', [ProfileController::class, 'insertUser']);
-        Route::post('update', [ProfileController::class, 'updateUser']);
         Route::get('/', [UserProfileController::class, 'userView'])->name("Users");
     });
 });

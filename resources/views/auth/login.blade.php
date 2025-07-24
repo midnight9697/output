@@ -10,7 +10,7 @@
             Log-in to your account
           </div>
         </h2>
-        <form class="ui large form" method="POST" action="{{ url('authenticate') }}">
+        <form class="ui large form" method="POST" action="{{ url('login/auth') }}">
             {{ csrf_field() }}
             <div class="ui stacked segment">
               <div class="field">

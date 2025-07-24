@@ -31,7 +31,7 @@
             <i class="sidebar icon"></i>
         </a>
         <a href="#" class="header item">
-            EMB 8 PROCEDURES
+            EMB 8 PROCUREMENT SYSTEM
         </a>
     </div>
     <div class="right menu">

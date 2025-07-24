@@ -33,7 +33,7 @@ export class Users {
 
     getAllUsers(action, page = false) {
       var usersClone = this;
-      axios.get('./users/all?')
+      axios.get('./api/users/all?')
         .then(function (response) {
           usersClone.users = response.data;
           action(response.data)
@@ -42,7 +42,7 @@ export class Users {
 
     createUser(user, action, fail) {
       var usersClone = this;
-      axios.post('./users/insert', user, {
+      axios.post('./api/users/insert', user, {
           headers: {
             'Content-Type': 'application/json; charset=utf-8',
             'Accept': 'application/vnd.github+json',
@@ -88,7 +88,7 @@ export class UserController {
     new Users().createUser(user, (json) => {
       BtnLoaderMod.load(document.getElementById('createUserFinalize'), () => {
         new UserController().failedCreate();
-        new Users().getUsers(new UserController().fetchUsersTable);
+        new Users().getByPage(new UserController().fetchUsersTable);
         MessageMod.success("User Successfully Created");
       });
     }, (response) => {
@@ -158,8 +158,8 @@ export class UserController {
     let data = users;
     users = users.data;     
     console.log(users);
-    usersTable.load();
-    return 0;
+    // usersTable.load();
+    // return 0;
     
     let ht = "";
 

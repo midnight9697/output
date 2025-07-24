@@ -162,7 +162,7 @@ export class UserController {
     // return 0;
     
     let ht = "";
-
+    
     users.forEach(user => {
       content.push({
         title: user.profile.firstname+" "+(user.profile.middlename == "waived"?"":user.profile.middlename.charAt(0).toUpperCase()+".")+" "+user.profile.lastname

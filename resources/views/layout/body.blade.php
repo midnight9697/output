@@ -1,10 +1,32 @@
-<div class="ui sidebar inverted vertical menu sidebar-menu" id="sidebar">
-    <div class="item ">
+<div class="ui sidebar very wide inverted vertical menu sidebar-menu" id="sidebar">
+    <div class="item">
         <div class="header">General</div>
         <div class="menu">
             <a class="item">
                 <div><i class="icon tachometer alternate"></i>Dashboard</div>
             </a>
+            <a href="{{ url('pr') }}" class="item">
+                <div><i class="icon users"></i>Purchase Request</div>
+            </a>
+            <a href="#" class="item">
+                <div><i class="icon users"></i>APP</div>
+            </a>
+            <a href="#" class="item">
+                <div><i class="icon users"></i>PPMP</div>
+            </a>
+            <a href="#" class="item">
+                <div><i class="icon users"></i>Supplemental</div>
+            </a>
+            <a href="#" class="item">
+                <div><i class="icon users"></i>RFQ</div>
+            </a>
+            <a href="#" class="item">
+                <div><i class="icon users"></i>Purchase Order</div>
+            </a>
+            <a href="#" class="item">
+                <div><i class="icon users"></i>Abstract</div>
+            </a>
+            
         </div>
     </div>
 
@@ -17,8 +39,20 @@
             <a href="#" class="item">
                 <div><i class="icon users"></i>Registree</div>
             </a>
+            <a href="http://notices.ps-philgeps.gov.ph" target="__blank" class="item">
+                <div><i class="icon users"></i>PhilGeps</div>
+            </a>
             <a href="#" class="item">
                 <div><i class="icon users"></i>Division</div>
+            </a>
+            <a href="#" class="item">
+                <div><i class="icon users"></i>BAC</div>
+            </a>
+            <a href="#" class="item">
+                <div><i class="icon users"></i>Inspector</div>
+            </a>
+            <a href="#" class="item">
+                <div><i class="icon users"></i>RA 9184</div>
             </a>
         </div>
     </div>
@@ -55,7 +89,7 @@
 <div class="pusher">
     <div class="main-content" style="padding:40px">
         <div class="content_header">
-            <h1 class="header">{{ Request::route()->getName() }}</h1>
+            <h1 class="header">{{ strtoupper(Request::route()->getName()) }}</h1>
             @yield('extra_content')
             <div class="ui divider"></div>
         </div>

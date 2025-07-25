@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PR\PurchaseRequestController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SystemController;
@@ -39,6 +40,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('list', [ProfileController::class, 'fetchUsers']);
         Route::get('/', [UserProfileController::class, 'userView'])->name("Users");
     });
+
+    Route::get('pr', [PurchaseRequestController::class, 'prView'])->name('purchase request');
 });
 
 Route::prefix('system')->group(function () {

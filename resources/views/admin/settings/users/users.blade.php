@@ -7,7 +7,6 @@
 @section('main_content')
 @include('admin.settings.users.modal')
 <div class="ui grid stackable padded" id="users_table">
-  
   <table class="ui very basic collapsing celled table" style="width: 100%">
     <thead>
       <tr>
@@ -15,7 +14,7 @@
           <div class="ui right aligned grid">
             <div class="left floated left aligned six wide column">
                 <div class="ui small primary labeled icon button" id="create_user_vbtn">
-                  <i class="user icon"></i> Add User
+                  <i class="user icon"></i> REGISTER
                 </div>
             </div>
             <div class="right floated right aligned six wide column">

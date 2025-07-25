@@ -43,8 +43,24 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function getFullNameAttribute() {
+        $profile = Profile::where('user_id', $this->id)->whereHas('user')->first();
+        $fullname = $profile->firstname." ".($profile->middlename == "waived"?"":strtoupper($profile->middlename).".")." ".$profile->lastname;
+        return $fullname;
+    }
+
     public function profile() {
         $user = $this->hasOne(Profile::class, 'user_id')->with('division')->with('section');
         return $user;
+    }
+
+    public function getDivisionNameAttribute() {
+        $profile = Profile::where('user_id', $this->id)->with('division')->with('section')->first();
+        return $profile->division->division;
+    }
+
+    public function getSectionNameAttribute() {
+        $profile = Profile::where('user_id', $this->id)->with('division')->with('section')->first();
+        return $profile->section->section;
     }
 }

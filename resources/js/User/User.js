@@ -6,13 +6,6 @@ const SectionMod = new Section;
 const MessageMod = new Message;
 const BtnLoaderMod = new BtnLoader();
 const humanDate = new CustomDate();
-const usersTable = new CustomTable('users_table', [
-  'Name', 'Address', 'Gender', 'Sex'
-], {
-  name: 'Marco Pantonial', address: 'Tacloban City', gender: 'Male', sex: 'None'
-}, [
-  'name', 'address', 'gender', 'sex'
-]);
 var user_controller = null;
 const maxActivePage = 5-1;
 export const GValidator = new Validator;
@@ -158,8 +151,6 @@ export class UserController {
     let data = users;
     users = users.data;     
     console.log(users);
-    // usersTable.load();
-    // return 0;
     
     let ht = "";
     

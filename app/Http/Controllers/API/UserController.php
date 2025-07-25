@@ -12,11 +12,18 @@ use Illuminate\Http\Request;
 class UserController extends Controller {
 
     public function fetchByPage(Request $request) {
-        return  User::with('profile')->addSelect([
+        $users = User::with('profile')->addSelect([
             'name' => Profile::select('firstname')
             ->whereColumn('user_id', 'users.id')
             ->limit(1)
         ])->whereHas('profile')->orderBy('created_at', 'desc')->paginate(10);
+        foreach ($users as $user) {
+            $user->full_name = $user->full_name;
+            $user->division_name = $user->division_name;
+            $user->section_name = $user->section_name;
+            $user->date = date('M d, Y', strtotime($user->created_at));
+        }
+        return $users;
     }
 
     public function fetchAll() {
@@ -25,6 +32,9 @@ class UserController extends Controller {
             ->whereColumn('user_id', 'users.id')
             ->limit(1)
         ])->orderBy('created_at', 'desc')->get();
+        foreach ($users as $user) {
+            $user->full_name = $user->full_name;
+        }
         return $users;
     }
 
@@ -51,7 +61,7 @@ class UserController extends Controller {
             'section_id' => $request->section,
             'position' => $request->position
         ]);
-
+        
         return User::where('id', $new_user->id)->with('profile')->first();
     }
 

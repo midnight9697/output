@@ -9,7 +9,7 @@ export default defineConfig({
                 'resources/js/app.js',
                 // 'resources/js/User/User.js',
             ],
-            refresh: false,
+            refresh: true,
         }),
     ],
     // server: {

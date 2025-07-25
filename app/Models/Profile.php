@@ -22,6 +22,11 @@ class Profile extends Model
         'position'
     ];
 
+    public function user() {
+        $user = $this->hasOne(User::class, 'id', 'user_id');
+        return $user;
+    }
+
     public function getDateAttribute(): string {
         return "Shit";
     }

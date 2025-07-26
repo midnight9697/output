@@ -4,9 +4,13 @@ namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
 
+use App\Models\PurchaseRequest;
 use App\Models\User;
+use App\Policies\PRPolicy;
+use App\Policies\PurchaseRequestPolicy;
 use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -17,7 +21,6 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
-        User::class => UserPolicy::class
     ];
 
     /**
@@ -28,5 +31,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot() {
         $this->registerPolicies();
+        Gate::define('pr-user-view', [PRPolicy::class, 'userView']);
+        Gate::define('pr-update-view', [PRPolicy::class, 'updateView']);
     }
 }

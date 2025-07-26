@@ -8,6 +8,7 @@ use App\Http\Requests\User\EditUserRequest;
 use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller {
 
@@ -84,5 +85,24 @@ class UserController extends Controller {
         ]);
 
         return User::with('user_profile')->find($request->user_id);
+    }
+
+    public function authenticate(Request $request) {
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+ 
+        if (Auth::attempt($credentials)) {
+            // $request->session()->regenerate();
+            $user = \App\Models\User::find(1); 
+            // Or if authenticated via Auth::user()
+            $user = Auth::user(); 
+
+            $token = $user->createToken('my-app-token')->plainTextToken;
+            return ['token' => $token];
+        }
+        
+        return response()->json(['UNAUTHENTICATED']);
     }
 }

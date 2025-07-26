@@ -5,7 +5,9 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Profile;
+use App\Models\PurchaseRequest;
 use App\Models\User;
+use Database\Factories\PRFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,13 +18,16 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
     public function run() {
-        // User::factory()->count(100)->create();
-        $users = User::factory(100)->create();
-              Profile::factory(200)->recycle($users)->create(); 
+       
         $this->call([
-            // DivisionSeeder::class,
-            // UserSeeeder::class
+            DivisionSeeder::class,
+            UserSeeeder::class
         ]);
+        $purchase_requests = PurchaseRequest::factory(100)->create();
+        
+        $users = User::factory(100)->create();
+        Profile::factory(200)->recycle($users)->create();
+
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

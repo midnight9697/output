@@ -3,9 +3,56 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PR\CreatePrRequest;
+use App\Http\Requests\PR\SearchPrRequest;
+use App\Models\PurchaseRequest;
+use App\Models\User;
+use App\Policies\PurchaseRequestPolicy;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
-class PurchaseRequestController extends Controller
-{
-    //
+class PurchaseRequestController extends Controller {
+    
+    public function fetch_by_page() {
+        if (!Gate::allows('pr-user-view')) {
+            abort(403, 'Unauthorized action.'); 
+        }
+        $purchase_requests = PurchaseRequest::paginate(10);
+        return $purchase_requests;
+    }
+
+    public function fetch_all() {
+        if (!Gate::allows('pr-user-view')) {
+            abort(403, 'Unauthorized action.');
+        }
+        $purchase_requests = PurchaseRequest::get();
+        return $purchase_requests;
+    }
+
+    public function search_pr(SearchPrRequest $request) {
+        $columns = [
+            'entity_name', 'fund_cluster', 'office', 'pr_number', 'date', 'responsibility_center_code', 'purpose'
+        ];
+        $keyword = "";
+        $keyword = $request->input('query');
+        $result =  PurchaseRequest::where(function($q) use ($columns, $keyword) {
+            foreach ($columns as $col) {
+                $q->orWhere($col, 'LIKE', '%' . $keyword . '%');
+            }
+        })->paginate(10);
+        return $result;
+    }
+
+    public function create_update_pr(CreatePrRequest $request, $id = null) {
+        $new = PurchaseRequest::find($id);
+        if ($new) {
+            if (!Gate::allows('pr-update-view', $new)) {
+                abort(403, 'Unauthorized action.');
+            }
+        }
+        $new = ($new?PurchaseRequest::find($id):new PurchaseRequest());
+        $new->fill($request->all());
+        $new->save();
+        return $new;
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Factories\PRFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,15 +10,17 @@ class PurchaseRequest extends Model
 {
     use HasFactory;
 
+    protected static function  newFactory() {
+        return PRFactory::new();
+    }
+
     protected $fillable = [
         'entity_name',
         'fund_cluster',
         'office',
         'pr_number',
-        'date',
         'responsibility_center_code',
         'purpose',
-        'approver',
-        'requester'
+        'created_by'
     ];
 }

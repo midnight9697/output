@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUserRequest;
 use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -14,16 +15,7 @@ class ProfileController extends Controller {
         return $users;
     }
 
-    public function insertUser(Request $request) {
-
-        $request->validate([
-            'email' => ['required', 'unique:users'],
-            'password' => ['required', Password::min(8), 'confirmed'],
-            'firstname' => 'required',
-            'lastname' => 'required',
-            'division' => 'required',
-            'section' => 'required',
-        ]);
+    public function insertUser(StoreUserRequest $request) {
 
         $new_user = User::create([
             'email' => $request->email,
@@ -49,15 +41,7 @@ class ProfileController extends Controller {
         return User::where('id', $new_user->id)->with('profile')->first();
     }
 
-    public function updateUser(Request $request) {
-        // return "Shit";
-        $request->validate([ 
-            'email' => 'required',
-            'firstname' => 'required',
-            'lastname' => 'required',
-            'division' => 'required',
-            'section' => 'required',
-        ]);
+    public function updateUser(StoreUserRequest $request) {
         
         $new_user = User::where('id', $request->user_id)->update([
             'email' => $request->email,
@@ -74,6 +58,4 @@ class ProfileController extends Controller {
 
         return User::with('user_profile')->find($request->user_id);
     }
-
-
 }

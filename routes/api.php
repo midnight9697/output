@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,4 +17,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::prefix('users')->group(function() {
+    Route::get('getpage', [UserController::class, 'fetchByPage']);
+    Route::get('all', [UserController::class, 'fetchAll']);
+    Route::post('insert', [UserController::class, 'insertUser']);
+    Route::post('update', [UserController::class, 'updateUser']);
 });

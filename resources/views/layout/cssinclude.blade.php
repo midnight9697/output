@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="{{ url('plugins/datatables/dataTables.semanticui.css')}}">
 <link rel="stylesheet" type="text/css" href="{{ url('plugins/semantic/semantic.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{ url('customs/css/system.css')}}">
 <link rel="stylesheet" type="text/css" href="{{ url('customs/css/app.css')}}">

@@ -19,5 +19,25 @@ class Profile extends Model
         'user_id',
         'position',
         'status',
+        'position'
     ];
+
+    public function user() {
+        $user = $this->hasOne(User::class, 'id', 'user_id');
+        return $user;
+    }
+
+    public function getDateAttribute(): string {
+        return "Shit";
+    }
+
+    public function division() {
+        $division = $this->belongsTo(Division::class, 'division_id');
+        return $division;
+    }
+
+    public function section() {
+        $section = $this->belongsTo(Section::class, 'section_id');
+        return $section;
+    }
 }

@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('divisions',[SettingController::class, 'divisionsView'])->name('manage.divisions');
 
+    Route::get('logout', [AuthController::class, 'logout']);
 
 
 Route::prefix('login')->group(function() {
@@ -33,7 +34,7 @@ Route::prefix('login')->group(function() {
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/', [ProfileController::class, 'homeView'])->name('main');
-    Route::get('logout', [AuthController::class, 'logout']);
+    // Route::get('logout', [AuthController::class, 'logout']);
     Route::get('dashboard', [ProfileController::class, 'homeView']);
     //Users View
     Route::prefix('users')->group(function () {

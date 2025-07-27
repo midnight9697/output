@@ -10,19 +10,19 @@
             Log-in to your account
           </div>
         </h2>
-        <form class="ui large form" method="POST" action="{{ url('login/auth') }}">
+        <form class="ui large form" method="POST" action="{{ url('login/auth') }}" id="loginForm">
             {{ csrf_field() }}
             <div class="ui stacked segment">
               <div class="field">
                 <div class="ui left icon input">
                   <i class="user icon"></i>
-                  <input type="text" name="email" placeholder="E-mail address">
+                  <input type="text" name="email" id="email" placeholder="E-mail address">
                 </div>
               </div>
               <div class="field">
                 <div class="ui left icon input">
                   <i class="lock icon"></i>
-                  <input type="password" name="password" placeholder="Password">
+                  <input type="password" name="password" id="password" placeholder="Password">
                 </div>
               </div>
               <div class="ui fluid large teal submit button">Login</div>
@@ -35,3 +35,4 @@
     </div>
   </div>
 @endsection
+@vite(['resources/js/login/index.js'])

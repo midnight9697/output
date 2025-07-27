@@ -15,7 +15,7 @@ class PurchaseRequestController extends Controller {
     
     public function fetch_by_page() {
         if (!Gate::allows('pr-user-view')) {
-            abort(403, 'Unauthorized action.'); 
+            abort(403, 'Unauthorized action.');
         }
         $purchase_requests = PurchaseRequest::paginate(10);
         return $purchase_requests;
@@ -33,7 +33,6 @@ class PurchaseRequestController extends Controller {
         $columns = [
             'entity_name', 'fund_cluster', 'office', 'pr_number', 'date', 'responsibility_center_code', 'purpose'
         ];
-        $keyword = "";
         $keyword = $request->input('query');
         $result =  PurchaseRequest::where(function($q) use ($columns, $keyword) {
             foreach ($columns as $col) {
@@ -55,4 +54,14 @@ class PurchaseRequestController extends Controller {
         $new->save();
         return $new;
     }
+
+    public function delete_pr($id) {
+        $pr = PurchaseRequest::find($id);
+        if (Gate::allows('pr-delete', $pr)) {
+            abort(403, 'Unauthorize action.');
+        }
+        return $pr->delete();
+    }
+
+
 }

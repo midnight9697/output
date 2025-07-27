@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller {
 
@@ -19,13 +20,18 @@ class AuthController extends Controller {
  
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect('dashboard');
+            $user = \App\Models\User::find(1); 
+            // Or if authenticated via Auth::user()
+            $user = Auth::user(); 
+            $token = $user->createToken('web-app-token')->plainTextToken;
+            return response()->json(['auth' => 1, 'message' => 'authenticated', 'bearer' => $token]);
         }
         
-        return redirect('login');
+        return response()->json(['auth' => 0, 'message' => 'Unauthenticated']);
+    
     }
 
-    public function logout() {
+    public function logout( Request $request) {
         auth()->guard('web')->logout();
         return redirect('login');
     }

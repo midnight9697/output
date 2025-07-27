@@ -94,11 +94,10 @@ class UserController extends Controller {
         ]);
  
         if (Auth::attempt($credentials)) {
-            // $request->session()->regenerate();
             $user = \App\Models\User::find(1); 
             // Or if authenticated via Auth::user()
             $user = Auth::user(); 
-
+            
             $token = $user->createToken('my-app-token')->plainTextToken;
             return ['token' => $token];
         }

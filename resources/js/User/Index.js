@@ -1,7 +1,6 @@
-import { GValidator, UserController, Users } from "./User";
-
-const UserMod = new UserController();
-const usersClass = new Users();
+import { PRClass } from "../PR/purchase_request";
+import { UserMod, usersClass } from "./User";
+import { GValidator } from "./Validation";
 
 document.addEventListener('DOMContentLoaded', () => {
   // Load all users for validation

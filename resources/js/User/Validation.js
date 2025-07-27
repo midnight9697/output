@@ -82,3 +82,5 @@ export default class Validator {
       
     } 
 }
+
+export const GValidator = new Validator();

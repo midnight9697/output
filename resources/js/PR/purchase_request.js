@@ -1,20 +1,14 @@
-import { CustomTable } from "../custom_table";
+export class PurchaseRequests {
+    
+    getByPage(action, page = false) {
+      console.log('local', localStorage.getItem('bearer'));
+      axios.get('./api/pr/list?+(page?"page="+page:""', {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('bearer')}`
+        }
+      })
+      .then(action)
+    }
+}
 
-document.addEventListener('DOMContentLoaded', () => {
-    const prTable = new CustomTable('prs_table', [
-        'PR No.', 'Fund Cluster', 'Office',
-        'Entity Name', 'Date', 'Responsibility Code',
-        'Purpose'
-    ], ['pr_number', 'fund_cluster', 'office', 'entity_name', 'date', 'responsibility_center_code', 'purpose']);
-    prTable.load([{
-        entity_name: 'Marco Pantonial',
-        fund_cluster: 'PISMU',
-        office: 'PISMU',
-        pr_number: '123456',
-        date: 'July 25, 2025',
-        responsibility_center_code: 'DONT KNOW',
-        purpose: 'Walang Purpose',
-        approver: 'Vincent Morastil',
-        requester: 'Jay Arwim Lipayon'
-    }]);
-});
+export var PRClass = new PurchaseRequests();

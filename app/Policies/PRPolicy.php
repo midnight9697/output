@@ -19,4 +19,8 @@ class PRPolicy {
     public function updateView(User $user, PurchaseRequest $pr) {
         return ($user->id == $pr->created_by);
     }
+
+    public function delete_pr(User $user, PurchaseRequest $pr) {
+        return $user->id == $pr->created_by;
+    }
 }

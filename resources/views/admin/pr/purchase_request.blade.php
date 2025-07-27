@@ -24,5 +24,5 @@
 @endsection
 
 @section('custom_js')
-    @vite(['resources/js/PR/purchase_request.js'])
+    @vite(['resources/js/PR/index.js'])
 @endsection

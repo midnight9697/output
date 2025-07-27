@@ -1,6 +1,5 @@
 import { BtnLoader, CustomDate, Message, Section } from "../app";
-import { CustomTable } from "../custom_table";
-import Validator from "./Validation";
+import { GValidator } from "./Validation";
 
 const SectionMod = new Section;
 const MessageMod = new Message;
@@ -8,8 +7,6 @@ const BtnLoaderMod = new BtnLoader();
 const humanDate = new CustomDate();
 var user_controller = null;
 const maxActivePage = 5-1;
-export const GValidator = new Validator;
-
 export class Users {
     constructor() {
         const users = [];
@@ -249,3 +246,6 @@ export class UserController {
   
 }
 
+
+export const usersClass = new Users();
+export const UserMod = new UserController();

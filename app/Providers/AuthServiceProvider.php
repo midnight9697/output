@@ -31,7 +31,10 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot() {
         $this->registerPolicies();
+
+        // Purchase Request Permission
         Gate::define('pr-user-view', [PRPolicy::class, 'userView']);
         Gate::define('pr-update-view', [PRPolicy::class, 'updateView']);
+        Gate::define('pr-delete', [PRPolicy::class, 'delete_pr']);
     }
 }

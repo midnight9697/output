@@ -106,15 +106,17 @@ class UserController extends Controller {
     }
 
     public function search_user(Request $request) {
-        $columns = [
-            'firstname', 'middlename', 'lastname', 'suffix', 'position'
-        ];
-        $keyword = $request->input('query');
-        $result =  User::whereHas('profile', function($q) use ($columns, $keyword) {
-            foreach ($columns as $col) {
-                $q->orWhere($col, 'LIKE', '%' . $keyword . '%');
-            }
-        })->with('profile')->paginate(10);
-        return $result;
+        // $keyword = $request->input('query');
+        // $columns = [
+        //     'firstname' => $keyword, 
+        //     'middlename' => $keyword, 
+        //     'lastname' => $keyword, 
+        //     'suffix' => $keyword, 
+        //     'position' => $keyword,
+        // ];
+        // $result =  User::whereHas('profile', function($q) use ($columns, $keyword) {
+        //     $q->orWhere($col, 'LIKE', '%' . $keyword . '%');
+        // })->with('profile')->paginate(10);
+        // return $result;
     }
 }

@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   $('.search_user').on('keyup', (e) => {
     usersClass.searchQuery((data) => {
-
+    UserMod.fetchUsersTable(data);
     }, e.target.value);
   });
 });

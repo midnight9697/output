@@ -20,12 +20,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-
 Route::get('divisions',[SettingController::class, 'divisionsView'])->name('manage.divisions');
-
-    Route::get('logout', [AuthController::class, 'logout']);
-
 
 Route::prefix('login')->group(function() {
     Route::get('/', [AuthController::class, 'loginView'])->name('login');
@@ -43,6 +38,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     });
 
     Route::get('pr', [PurchaseRequestController::class, 'prView'])->name('purchase request');
+    Route::prefix('login')->group(function() {
+        Route::post('logout', [AuthController::class, 'logout']);
+    });
 });
 
 Route::prefix('system')->group(function () {

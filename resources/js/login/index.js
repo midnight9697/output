@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, (rsponse) => {
             if (rsponse.data.auth == 1) {
                 localStorage.setItem('bearer', rsponse.data.bearer);
+                localStorage.setItem('token_id', rsponse.data.tokenId);
                 window.location = 'dashboard';
             }
         });

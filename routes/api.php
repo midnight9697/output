@@ -27,6 +27,7 @@ Route::post('auth', [UserController::class, 'authenticate']);
 Route::prefix('users')->group(function() {
     Route::get('getpage', [UserController::class, 'fetchByPage']);
     Route::get('all', [UserController::class, 'fetchAll']);
+    Route::post('search', [UserController::class, 'search_user']);
     Route::post('insert', [UserController::class, 'insertUser']);
     Route::post('update', [UserController::class, 'updateUser']);
 });
@@ -34,7 +35,7 @@ Route::prefix('users')->group(function() {
 Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('pr')->group(function() {
         Route::get('list', [PurchaseRequestController::class, 'fetch_all'])->name('list.pr');// get all PR
-        Route::get('page', [PurchaseRequest::class, 'fetch_by_page'])->name('page.pr'); //get PR by Page
+        Route::get('page', [PurchaseRequestController::class, 'fetch_by_page'])->name('page.pr'); //get PR by Page
         Route::post('create_update/{id?}', [PurchaseRequestController::class, 'create_update_pr'])->name('create.pr'); //Create Or Update Uri
         Route::post('delete/{id}', [PurchaseRequest::class, 'delete_pr'])->name('delete.pr');    //Delete PR
         Route::post('search', [PurchaseRequestController::class, 'search_pr'])->name('search.pr');  //search for PR

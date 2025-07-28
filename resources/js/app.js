@@ -1,4 +1,7 @@
 // axios.defaults.baseURL = 'http://172.16.6.103';
+import { Authentication } from "./login/login";
+
+const authentication =  new Authentication();
 
 export class Section {
 
@@ -128,4 +131,8 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Hide');
         MessageMod.hide();
     })
+
+    $('#logout_user').on('click', () => {
+        authentication.logout();
+    });
 });

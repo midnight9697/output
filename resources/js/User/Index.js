@@ -12,11 +12,21 @@ document.addEventListener('DOMContentLoaded', () => {
     UserMod.fetchUsersTable(paging)
   });
   $('#create_user_vbtn').on('click', UserMod.createUserAction)
+  
   $('#division').on('change', UserMod.sectionGetAction)
+  
   $('#formCreateUser').on('submit', UserMod.createUser)
+  
   $('#createUserFinalize').on('click', () =>  { $('#formCreateUser').trigger('submit') });
+
   $('#show_password').on('change', () => {
     document.getElementById('password').type = ($('#show_password').is(':checked')?'text':'password');
     document.getElementById('password_confirmation').type = ($('#show_password').is(':checked')?'text':'password');
   });
-})
+  
+  $('.search_user').on('keyup', (e) => {
+    usersClass.searchQuery((data) => {
+
+    }, e.target.value);
+  });
+});

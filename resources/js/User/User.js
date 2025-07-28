@@ -21,6 +21,17 @@ export class Users {
           });
     }
 
+    searchQuery(action, query) {
+      var usersClone = this;
+      axios.post('./api/users/search', {
+        'query': query
+      })
+        .then(function (response) {
+          usersClone.users = response.data;
+          action(response.data)
+        });
+  }
+
     getAllUsers(action, page = false) {
       var usersClone = this;
       axios.get('./api/users/all?')
@@ -156,9 +167,9 @@ export class UserController {
         title: user.profile.firstname+" "+(user.profile.middlename == "waived"?"":user.profile.middlename.charAt(0).toUpperCase()+".")+" "+user.profile.lastname
       });
 
-      $('.ui.search_people').search({
-        source: content
-      });
+      // $('.ui.search_people').search({
+      //   source: content
+      // });
 
       ht += `
         <tr>

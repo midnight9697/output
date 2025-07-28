@@ -45,7 +45,7 @@ class User extends Authenticatable
 
     public function getFullNameAttribute() {
         $profile = Profile::where('user_id', $this->id)->whereHas('user')->first();
-        $fullname = $profile->firstname." ".($profile->middlename == "waived"?"":strtoupper($profile->middlename).".")." ".$profile->lastname;
+        $fullname = ($profile->firstname." "?$profile->firstname:"").($profile->middlename == "waived"?"":strtoupper($profile->middlename).".").($profile->lastname?" ".$profile->lastname:"");
         return $fullname;
     }
 

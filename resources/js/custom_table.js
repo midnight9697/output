@@ -6,31 +6,33 @@ export class CustomTable {
         this.keys = keys;
     }
 
-    load(data = []) {
-        this.data = data;
-        this.table = document.createElement('table');
-        this.theadRow = document.createElement('tr');
+    load(data = [], tableMod) {
+        tableMod.data = data;
+        console.log('column', tableMod);
+
+        tableMod.table = document.createElement('table');
+        tableMod.theadRow = document.createElement('tr');
         
-        this.column.forEach(col => {
+        tableMod.column.forEach(col => {
             let theadCol = document.createElement('th');
             theadCol.innerHTML = col;
-            this.theadRow.appendChild(theadCol);
+            tableMod.theadRow.appendChild(theadCol);
         });
+        
+        tableMod.table.appendChild(tableMod.theadRow);
 
-        this.table.appendChild(this.theadRow);
-
-        this.data.forEach(row => {
+        tableMod.data.forEach(row => {
             let tbodyRow = document.createElement('tr');
-            this.keys.forEach(key => {
+            tableMod.keys.forEach(key => {
                 let tbodyCol = document.createElement('td');
                 tbodyCol.innerHTML = row[key];
                 tbodyRow.appendChild(tbodyCol);
             });
-            this.table.appendChild(tbodyRow);
+            tableMod.table.appendChild(tbodyRow);
         });
-        this.table.className = "ui very basic collapsing celled table";
-        this.table.style = "width:100%";
-        this.parent.appendChild(this.table);
+        tableMod.table.className = "ui very basic collapsing celled table";
+        tableMod.table.style = "width:100%";
+        tableMod.parent.appendChild(this.table);
 
     }
 }

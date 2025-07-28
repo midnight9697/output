@@ -20,7 +20,7 @@
             <div class="right floated right aligned six wide column">
                 <div class="ui right aligned search search_people">
                   <div class="ui icon input">
-                    <input class="prompt" type="text" placeholder="Search People...">
+                    <input class="prompt search_user" type="text" placeholder="Search People...">
                     <i class="search icon"></i>
                   </div>
                   <div class="results"></div>
@@ -77,7 +77,4 @@
 
 @section('custom_js')
 @vite(['resources/js/User/Index.js'])
-  <script>
-      
-  </script>
 @endsection

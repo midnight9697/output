@@ -2,7 +2,7 @@
     <div class="item">
         <div class="header">General</div>
         <div class="menu">
-            <a class="item">
+            <a href="{{ route('main') }}" class="item">
                 <div><i class="icon tachometer alternate"></i>Dashboard</div>
             </a>
             <a href="{{ url('pr') }}" class="item">
@@ -78,7 +78,7 @@
                 <a href="#" class="item">
                     <i class="info circle icon"></i> Profile
                 </a>
-                <a href="{{ url('logout') }}" class="item">
+                <a href="#" class="item" id="logout_user">
                     <i class="power off icon"></i> Logout
                 </a>
             </div>

@@ -1,7 +1,19 @@
 @extends('layout.app')
 
 @section('main_content')
+@php
+    $lastActivity = strtotime(date('Y-m-d h:m a'));
 
+    // Get the session lifetime in minutes from the configuration
+    $sessionLifetimeMinutes = Config::get('session.lifetime');
+    
+    // Calculate the expiration timestamp
+    $expirationTimestamp = $lastActivity + ($sessionLifetimeMinutes * 60);
+    
+    // Calculate the remaining minutes
+    $remainingMinutes = floor(($expirationTimestamp - time()) / 60);
+    echo "Remaining session time: " . $remainingMinutes . " minutes.";
+@endphp
 <div class="ui grid stackable padded">
     <div class="four wide computer eight wide tablet sixteen wide mobile column">
         <div class="ui fluid card">

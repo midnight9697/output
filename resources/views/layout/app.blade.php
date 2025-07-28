@@ -13,8 +13,10 @@
 <body>
     @include('layout.head')
     @include('layout.body')
+    
     @include('layout.foot')
 </body>
 </html>
 @include('layout.jsinclude')
+
 @yield('custom_js')

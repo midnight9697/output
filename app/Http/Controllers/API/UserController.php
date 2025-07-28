@@ -32,7 +32,7 @@ class UserController extends Controller {
             'name' => Profile::select('firstname')
             ->whereColumn('user_id', 'users.id')
             ->limit(1)
-        ])->orderBy('created_at', 'desc')->get();
+        ])->whereHas('profile')->orderBy('created_at', 'desc')->get();
         foreach ($users as $user) {
             $user->full_name = $user->full_name;
         }
@@ -103,5 +103,18 @@ class UserController extends Controller {
         }
         
         return response()->json(['UNAUTHENTICATED']);
+    }
+
+    public function search_user(Request $request) {
+        $columns = [
+            'firstname', 'middlename', 'lastname', 'suffix', 'position'
+        ];
+        $keyword = $request->input('query');
+        $result =  User::whereHas('profile', function($q) use ($columns, $keyword) {
+            foreach ($columns as $col) {
+                $q->orWhere($col, 'LIKE', '%' . $keyword . '%');
+            }
+        })->with('profile')->paginate(10);
+        return $result;
     }
 }

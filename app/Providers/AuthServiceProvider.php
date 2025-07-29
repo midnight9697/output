@@ -36,5 +36,10 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('pr-user-view', [PRPolicy::class, 'userView']);
         Gate::define('pr-update-view', [PRPolicy::class, 'updateView']);
         Gate::define('pr-delete', [PRPolicy::class, 'delete_pr']);
+
+        // User Management Permissions
+        // Gate::define('user-view', [UserPolicy::class, 'viewAny']);
+        Gate::define('user-view-page', [UserPolicy::class, 'view']);
+        Gate::define('user-update-view', [UserPolicy::class, 'update']);
     }
 }

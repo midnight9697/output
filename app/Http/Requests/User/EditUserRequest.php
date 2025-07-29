@@ -3,6 +3,7 @@
 namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rules\Password;
 
 class EditUserRequest extends FormRequest
@@ -12,8 +13,7 @@ class EditUserRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
-    {
+    public function authorize(){
         return true;
     }
 
@@ -22,11 +22,10 @@ class EditUserRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             'email' => ['required'],
-            'password' => ['required', Password::min(8), 'confirmed'],
+            // 'password' => ['required', Password::min(8), 'confirmed'],
             'firstname' => 'required',
             'lastname' => 'required',
             'division' => 'required',

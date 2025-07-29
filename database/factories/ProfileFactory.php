@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Division;
 use App\Models\Profile;
+use App\Models\Section;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -19,14 +21,18 @@ class ProfileFactory extends Factory
     protected $model = Profile::class;
 
     public function definition()
-    {
+    {   
+        $division = Division::inRandomOrder()->first();
+
+        // Get a section that belongs to the selected division
+        $section = Section::where('division_id', $division->id)->inRandomOrder()->first();
         return [
             'firstname' => fake()->firstName(),
             'middlename' => 'waived',
             'lastname' => fake()->lastName(),
             'suffix' => null,
-            'division_id' => '1',
-            'section_id' => '2',
+            'division_id' => $division->id,
+            'section_id' => $section ? $section->id : null,
             'user_id' => User::factory(),
             'position' => fake()->jobTitle(),
             'status' => 'active',

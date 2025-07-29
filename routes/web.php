@@ -31,13 +31,20 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/', [ProfileController::class, 'homeView'])->name('main');
     // Route::get('logout', [AuthController::class, 'logout']);
     Route::get('dashboard', [ProfileController::class, 'homeView']);
-    //Users View
+
+    //Users Management Routes
     Route::prefix('users')->group(function () {
-        Route::get('list', [ProfileController::class, 'fetchUsers']);
         Route::get('/', [UserProfileController::class, 'userView'])->name("Users");
+        Route::get('{id}/edit', [UserProfileController::class, 'userUpdateView'])->name("user.update");
+        Route::get('list', [ProfileController::class, 'fetchUsers']);
     });
 
-    Route::get('pr', [PurchaseRequestController::class, 'prView'])->name('purchase request');
+    // Purchase Request Routes
+    Route::prefix('pr')->group(function() {
+        Route::get('/', [PurchaseRequestController::class, 'prView'])->name('purchase request');
+    });
+
+    // Authentication Routes
     Route::prefix('login')->group(function() {
         Route::post('logout', [AuthController::class, 'logout']);
     });

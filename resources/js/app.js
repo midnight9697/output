@@ -1,4 +1,3 @@
-// axios.defaults.baseURL = 'http://172.16.6.103';
 import { Authentication } from "./login/login";
 
 const authentication =  new Authentication();
@@ -118,6 +117,11 @@ export class CustomDate {
 
     
 }
+
+export const SectionMod = new Section();
+export const MessageMod = new Message();
+export const BtnLoaderMod = new BtnLoader();
+export const humanDate = new CustomDate();
 
 document.addEventListener('DOMContentLoaded', () => {
     $('.ui.dropdown').dropdown();

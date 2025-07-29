@@ -18,5 +18,7 @@
 </body>
 </html>
 @include('layout.jsinclude')
-
+<script>
+    axios.defaults.baseURL = "{{ url('/') }}";
+</script>
 @yield('custom_js')

@@ -2,7 +2,7 @@ export class PurchaseRequests {
     
     getByPage(action, page = false) {
       console.log('local', localStorage.getItem('bearer'));
-      axios.get('./api/pr/page?+(page?"page="+page:""', {
+      axios.get('./api/pr/page'+(page?"?page="+page:""), {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('bearer')}`
         }

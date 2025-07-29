@@ -23,16 +23,8 @@ class DatabaseSeeder extends Seeder
             DivisionSeeder::class,
             UserSeeeder::class
         ]);
-        $purchase_requests = PurchaseRequest::factory(100)->create();
-        
+        PurchaseRequest::factory(100)->create();
         $users = User::factory(100)->create();
         Profile::factory(200)->recycle($users)->create();
-
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
     }
 }

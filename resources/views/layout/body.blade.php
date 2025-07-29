@@ -1,3 +1,6 @@
+@php
+    $routesplit = explode(".", Request::route()->getName());
+@endphp
 <div class="ui sidebar very wide inverted vertical menu sidebar-menu" id="sidebar">
     <div class="item">
         <div class="header">General</div>
@@ -33,12 +36,14 @@
     <div class="item ">
         <div class="header">Administration</div>
         <div class="menu">
-            <a href="{{ url('users') }}" class="item">
-                <div><i class="icon users"></i>User</div>
+            <a href="{{ url('users') }}" class="item {{ in_array("user"||"users", $routesplit)?"active":"" }}">
+                <div>
+                    <i class="icon users"></i>User
+                </div>
             </a>
-            <a href="#" class="item">
+            {{-- <a href="#" class="item">
                 <div><i class="icon users"></i>Registree</div>
-            </a>
+            </a> --}}
             <a href="http://notices.ps-philgeps.gov.ph" target="__blank" class="item">
                 <div><i class="icon users"></i>PhilGeps</div>
             </a>
@@ -89,7 +94,12 @@
 <div class="pusher">
     <div class="main-content" style="padding:40px">
         <div class="content_header">
-            <h1 class="header">{{ strtoupper(Request::route()->getName()) }}</h1>
+            <h1 class="header">
+                @php
+                    $name = str_replace(".", " ", strtoupper(Request::route()->getName()));
+                    echo $name;
+                @endphp
+            </h1>
             @yield('extra_content')
             <div class="ui divider"></div>
         </div>

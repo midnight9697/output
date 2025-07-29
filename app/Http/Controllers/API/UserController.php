@@ -9,6 +9,7 @@ use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller {
 
@@ -66,17 +67,17 @@ class UserController extends Controller {
         return User::where('id', $new_user->id)->with('profile')->first();
     }
 
-    public function updateUser(EditUserRequest $request, User $user) {
+    public function updateUser(EditUserRequest $request, $id) {
+        $user = User::where('id', $id)->first();
+        Gate::allows('user-update-view', $user);
 
-        $this->authorize('update', $user, "Diri Pwede");
-        return 'authorize';
-        $new_user = User::where('id', $request->user_id)->update([
+        User::where('id', $id)->update([
             'email' => $request->email,
         ]);
 
-        $new_profile = Profile::where('user_id', $request->user_id)->update([
+        Profile::where('user_id', $id)->update([
             'firstname' => $request->firstname,
-            'middlename' => $request->middlename,
+            'middlename' => ($request->middlename==""?'waived':$request->middlename),
             'lastname' => $request->lastname,
             'suffix' => $request->suffix,
             'division_id' => $request->division,
@@ -84,7 +85,7 @@ class UserController extends Controller {
             'position' => $request->position
         ]);
 
-        return User::with('user_profile')->find($request->user_id);
+        return response()->json(User::where('id', $id)->with('profile')->first());
     }
 
     public function authenticate(Request $request) {
@@ -121,7 +122,7 @@ class UserController extends Controller {
         })->get('user_id')->toArray();
         $userids = array_column($result, 'user_id');
 
-        $users = User::whereIn('id', $userids)->with('profile')->paginate();
+        $users = User::whereIn('id', $userids)->with('profile')->paginate(10);
         return $users;
     }
 }

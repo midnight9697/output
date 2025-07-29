@@ -1,11 +1,12 @@
-import { PRClass } from "../PR/purchase_request";
-import { UserMod, usersClass } from "./User";
+import {  usersClass } from "./User";
+import {  UserMod } from "./action";
 import { GValidator } from "./Validation";
 
 document.addEventListener('DOMContentLoaded', () => {
   // Load all users for validation
   usersClass.getAllUsers((users) => {
     GValidator.StoreUserValidation(users);
+    // GValidator.Store
   });
   // Load paginated users
   usersClass.getByPage((paging) => {

@@ -33,8 +33,8 @@ class AuthController extends Controller {
     }
 
     public function logout( Request $request) {
-        DB::table('personal_access_tokens')->where('id', $request->token_id)->delete();
         auth()->guard('web')->logout();
+        DB::table('personal_access_tokens')->where('id', $request->token_id)->delete();
         return redirect('login');
     }
 }

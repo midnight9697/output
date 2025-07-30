@@ -22,6 +22,10 @@ export class Users {
       var usersClone = this;
       axios.post('./api/users/search', {
         'query': query
+      }, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('bearer')}`
+        }
       })
         .then(function (response) {
           usersClone.users = response.data;

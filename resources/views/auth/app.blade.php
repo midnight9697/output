@@ -88,3 +88,4 @@
 </body>
 </html>
 @include('layout.jsinclude')
+@yield('custom_js')

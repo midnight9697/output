@@ -71,7 +71,8 @@ class UserController extends Controller {
         $user = User::where('id', $id)->first();
         Gate::allows('user-update-view', $user);
 
-        User::where('id', $id)->update([
+        $update_user = User::where('id', $id);
+        $update_user->update([
             'email' => $request->email,
         ]);
 
@@ -84,6 +85,12 @@ class UserController extends Controller {
             'section_id' => $request->section,
             'position' => $request->position
         ]);
+
+        if ($request->password) {
+            $update_user->update([
+                'password' => bcrypt($request->password)
+            ]);
+        }
 
         return response()->json(User::where('id', $id)->with('profile')->first());
     }

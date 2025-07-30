@@ -10,7 +10,7 @@
             Log-in to your account
           </div>
         </h2>
-        <form class="ui large form" method="POST" action="{{ url('login/auth') }}" id="loginForm">
+        <form class="ui large form" method="POST" action="#" id="loginForm">
             {{ csrf_field() }}
             <div class="ui stacked segment">
               <div class="field">
@@ -30,9 +30,11 @@
             <div class="ui error message"></div>
         </form>
         <div class="ui message">
-          New to us? <a href="{{ url('register') }}">Sign Up</a>
+          Forgot Password? <a href="{{ url('forgot_password') }}">Click here</a>
         </div>
     </div>
   </div>
 @endsection
-@vite(['resources/js/login/index.js'])
+@section('custom_js')
+  @vite(['resources/js/login/index.js'])
+@endsection

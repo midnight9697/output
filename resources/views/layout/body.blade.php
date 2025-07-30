@@ -103,9 +103,11 @@
             @yield('extra_content')
             <div class="ui divider"></div>
         </div>
-        <div class="ui segment">
+        <div class="ui segment" id="main_event">
             @include('default.loader')
-            @yield('main_content')
+            {{-- <div id=""> --}}
+                @yield('main_content')
+            {{-- </div> --}}
         </div>
     </div>
 </div>

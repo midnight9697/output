@@ -1,6 +1,4 @@
-import { Authentication } from "./login/login";
-
-const authentication =  new Authentication();
+import { AuthClass } from "./login/login";
 
 export class Section {
 
@@ -23,7 +21,7 @@ export class Message {
 
     constructor() {
         this.msgEl = document.createElement('div');
-        this.msgEl.className = "ui small modal";
+        this.msgEl.className = "ui very tiny modal";
         this.msgEl.innerHTML = `
             <div class="content">
             </div>
@@ -33,9 +31,19 @@ export class Message {
 
     success(msg) {
         this.msgEl.innerHTML = `
-            <div style="padding:30px;display:flex;justify-content:center;flex-direction:column;text-align:center">
-                <h2 style="margin:0px">${msg}<h2>
-                <div class="ui green button" onclick="$('.modal').modal('hide')" id="modalSuccessDoneBtn" style="margin:0px">Done</div>
+            <div class="ui icon header">
+                <i class="check green icon"></i>
+                ${msg}
+            </div>
+            <div class="actions">
+                <div class="ui red basic cancel inverted button">
+                    <i class="remove icon"></i>
+                    No
+                </div>
+                <div class="ui green ok inverted button confirm_warning_action" id="modalSuccessDoneBtn">
+                <i class="checkmark icon"></i>
+                    Yes
+                </div>
             </div>
         `;
         $(this.msgEl).modal('show');
@@ -43,9 +51,19 @@ export class Message {
 
     fail(msg) {
         this.msgEl.innerHTML = `
-            <div style="padding:30px;display:flex;justify-content:center;flex-direction:column;text-align:center">
-                <h2 style="margin:0px">${msg}<h2>
-                <div class="ui red button" id="modalFailDoneBtn" onclick="$('.modal').modal('hide')" style="margin:0px">Done</div>
+            <div class="ui icon header">
+                <i class="warning red icon"></i>
+                ${msg}
+            </div>
+            <div class="actions">
+                <div class="ui red basic cancel inverted button">
+                    <i class="remove icon"></i>
+                    No
+                </div>
+                <div class="ui green ok inverted button confirm_warning_action" id="modalSuccessDoneBtn">
+                <i class="checkmark icon"></i>
+                    Yes
+                </div>
             </div>
         `;
         $(this.msgEl).modal('show');
@@ -118,10 +136,42 @@ export class CustomDate {
     
 }
 
+export class confModal {
+    load(accept, message = false) {
+        const ht = `
+            <div class="ui icon header">
+                <i class="warning yellow icon"></i>
+                Confirm Action
+            </div>
+            <div class="content">
+                <p>${message?message:"Are you sure you want to proceed with this action?"}</p>
+            </div>
+            <div class="actions">
+                <div class="ui red basic cancel inverted button">
+                    <i class="remove icon"></i>
+                    No
+                </div>
+                <div class="ui green ok inverted button confirm_warning_action">
+                <i class="checkmark icon"></i>
+                    Yes
+                </div>
+            </div>
+        `;
+        this.modal = document.createElement('div');
+        this.modal.className = 'ui modal';
+        this.modal.innerHTML = ht;
+        document.getElementById('main_event').appendChild(this.modal);
+        $('.confirm_warning_action').on('click', accept);
+        $(this.modal).modal('show');
+
+    }
+}
+
 export const SectionMod = new Section();
 export const MessageMod = new Message();
 export const BtnLoaderMod = new BtnLoader();
 export const humanDate = new CustomDate();
+export const confirmMod = new confModal();
 
 document.addEventListener('DOMContentLoaded', () => {
     $('.ui.dropdown').dropdown();
@@ -137,6 +187,6 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     $('#logout_user').on('click', () => {
-        authentication.logout();
+        AuthClass.logout();
     });
 });

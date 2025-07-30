@@ -158,7 +158,7 @@ export class confModal {
             </div>
         `;
         this.modal = document.createElement('div');
-        this.modal.className = 'ui modal';
+        this.modal.className = 'ui very tiny modal';
         this.modal.innerHTML = ht;
         document.getElementById('main_event').appendChild(this.modal);
         $('.confirm_warning_action').on('click', accept);

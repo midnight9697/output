@@ -37,4 +37,8 @@ class AuthController extends Controller {
         DB::table('personal_access_tokens')->where('id', $request->token_id)->delete();
         return redirect('login');
     }
+
+    public function forgotPasswordView() {
+        return view('auth.forgot_password');
+    }
 }

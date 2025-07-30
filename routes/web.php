@@ -25,6 +25,7 @@ Route::get('divisions',[SettingController::class, 'divisionsView'])->name('manag
 Route::prefix('login')->group(function() {
     Route::get('/', [AuthController::class, 'loginView'])->name('login');
     Route::post('auth', [AuthController::class, 'authenticate']);
+    Route::get('forgot_password', [AuthController::class, 'forgotPasswordView']);
 });
 
 Route::middleware(['auth:sanctum'])->group(function () {

@@ -82,6 +82,13 @@
                             @endforeach
                         </select>
                     </div>
+                    <div class="field">
+                        <label>Role</label>
+                        <select name="role" id="role" class="ui fluid dropdown" required>
+                            <option {{ Auth::user()->role=="admin"?"selected":"" }} value="admin">ADMIN</option>
+                            <option {{ Auth::user()->role=="user"?"selected":"" }} value="user">USER</option> 
+                        </select>
+                    </div>
                     <div class="ui divider"></div>
                     <div class="ui right aligned grid">
                         <div class="wide column">

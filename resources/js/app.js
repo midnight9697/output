@@ -2,10 +2,6 @@ import { AuthClass } from "./login/login";
 
 export class Section {
 
-    constructor() {
-
-    }
-
     getSection(division_id = false, action) {
         var usersClone = this;
         axios.post('./system/sections', {
@@ -39,10 +35,6 @@ export class Message {
                     ${msg}
                 </div>
                 <div class="actions">
-                    <div class="ui red basic cancel inverted button">
-                        <i class="remove icon"></i>
-                        No
-                    </div>
                     <div class="ui green ok inverted button confirm_warning_action" id="modalSuccessDoneBtn">
                     <i class="checkmark icon"></i>
                         Yes

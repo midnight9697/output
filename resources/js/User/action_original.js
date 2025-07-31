@@ -175,11 +175,11 @@ export class UserController {
             user_controller.fetchUsersTable(paging)
         },  data.current_page + 1);
       }
-      
+  
       let div = document.createElement('div')
       div.className = 'ui right floated pagination menu';
       div.appendChild(prevBtn);
-      
+  
       let page = "";
       let maxPage = (data.last_page >= maxActivePage?maxActivePage:data.last_page);
       let startPage = (data.last_page >= maxActivePage?(data.current_page):1);

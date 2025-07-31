@@ -13,7 +13,13 @@ export default class Validator {
               identifier: 'firstname',
               rules: [{
                 type: 'empty'
-              }]
+              },]
+            },
+            role     : {
+              identifier: 'role',
+              rules: [{
+                type: 'empty'
+              },]
             },
             lastname : {
               identifier: 'lastname',
@@ -93,6 +99,12 @@ export default class Validator {
             rules: [{
               type: 'empty'
             }]
+          },
+          role     : {
+            identifier: 'role',
+            rules: [{
+              type: 'empty'
+            },]
           },
           lastname : {
             identifier: 'lastname',

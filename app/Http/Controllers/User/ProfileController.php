@@ -12,10 +12,12 @@ use Illuminate\Support\Facades\Gate;
 class ProfileController extends Controller {
     
     public function userView() {
-        Gate::allows('user-view-page');
+        if (!Gate::allows('user-view-page')) {
+            abort('403', 'Unauthorized action');
+        }
         return view('admin.settings.users.users');
     }
-
+    
     public function userUpdateView($id) {
         $user = User::where('id', $id)->with('profile')->first();
         Gate::allows('user-update-view', $user);

@@ -69,12 +69,20 @@
                     
                 </select>
             </div>
-            {{-- <div class="ui active loader"></div> --}}
+            <div class="field">
+                <label>Role</label>
+                <select name="role" id="role" class="ui fluid dropdown" required>
+                    <option value="admin">ADMIN</option>
+                    <option value="user" selected>USER</option> 
+                </select>
+            </div>
+            <div class="ui dividing header"></div>
+            <div class="actions">
+                <button type="submit" class="ui primary button" id="createUserFinalize">
+                    REGISTER USER
+                </button>
+            </div>
         </form>
     </div>
-    <div class="actions">
-        <button type="submit" class="ui primary button" id="createUserFinalize">
-            REGISTER USER
-        </button>
-    </div>
+    
 </div>

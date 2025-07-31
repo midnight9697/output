@@ -19,7 +19,9 @@ class Profile extends Model
         'user_id',
         'position',
         'status',
-        'position'
+        'position',
+        'bac',
+        'inspector',
     ];
 
     public function user() {

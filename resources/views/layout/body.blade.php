@@ -1,64 +1,31 @@
 @php
+    use Illuminate\Support\Facades\Gate;
     $routesplit = explode(".", Request::route()->getName());
 @endphp
 <div class="ui sidebar very wide inverted vertical menu sidebar-menu" id="sidebar">
     <div class="item">
         <div class="header">General</div>
         <div class="menu">
-            <a href="{{ route('main') }}" class="item">
-                <div><i class="icon tachometer alternate"></i>Dashboard</div>
-            </a>
-            <a href="{{ url('pr') }}" class="item">
-                <div><i class="icon users"></i>Purchase Request</div>
-            </a>
-            <a href="#" class="item">
-                <div><i class="icon users"></i>APP</div>
-            </a>
-            <a href="#" class="item">
-                <div><i class="icon users"></i>PPMP</div>
-            </a>
-            <a href="#" class="item">
-                <div><i class="icon users"></i>Supplemental</div>
-            </a>
-            <a href="#" class="item">
-                <div><i class="icon users"></i>RFQ</div>
-            </a>
-            <a href="#" class="item">
-                <div><i class="icon users"></i>Purchase Order</div>
-            </a>
-            <a href="#" class="item">
-                <div><i class="icon users"></i>Abstract</div>
-            </a>
-            
+            {{ view('layout.menu', [ 'url' => url('main'), 'title' => 'Dashboard', 'routesplit' => $routesplit, 'permission' => true]) }}
+            {{ view('layout.menu', [ 'url' => url('pr'), 'title' => 'Purchase Request', 'routesplit' => $routesplit, 'permission' => true]) }}
+            {{ view('layout.menu', [ 'url' => url('#'), 'title' => 'APP', 'routesplit' => $routesplit, 'permission' => true]) }}
+            {{ view('layout.menu', [ 'url' => url('#'), 'title' => 'PPMP', 'routesplit' => $routesplit, 'permission' => true]) }}
+            {{ view('layout.menu', [ 'url' => url('#'), 'title' => 'Supplemental', 'routesplit' => $routesplit, 'permission' => true]) }}
+            {{ view('layout.menu', [ 'url' => url('#'), 'title' => 'RFQ', 'routesplit' => $routesplit, 'permission' => true]) }}
+            {{ view('layout.menu', [ 'url' => url('#'), 'title' => 'Purchase Order', 'routesplit' => $routesplit, 'permission' => true]) }}
+            {{ view('layout.menu', [ 'url' => url('#'), 'title' => 'Abstract', 'routesplit' => $routesplit, 'permission' => true]) }}
         </div>
     </div>
 
     <div class="item ">
         <div class="header">Administration</div>
         <div class="menu">
-            <a href="{{ url('users') }}" class="item {{ in_array("user"||"users", $routesplit)?"active":"" }}">
-                <div>
-                    <i class="icon users"></i>User
-                </div>
-            </a>
-            {{-- <a href="#" class="item">
-                <div><i class="icon users"></i>Registree</div>
-            </a> --}}
-            <a href="http://notices.ps-philgeps.gov.ph" target="__blank" class="item">
-                <div><i class="icon users"></i>PhilGeps</div>
-            </a>
-            <a href="#" class="item">
-                <div><i class="icon users"></i>Division</div>
-            </a>
-            <a href="#" class="item">
-                <div><i class="icon users"></i>BAC</div>
-            </a>
-            <a href="#" class="item">
-                <div><i class="icon users"></i>Inspector</div>
-            </a>
-            <a href="#" class="item">
-                <div><i class="icon users"></i>RA 9184</div>
-            </a>
+            {{ view('layout.menu', [ 'url' => url('users'), 'title' => 'Users', 'routesplit' => $routesplit , 'permission' => Gate::allows('user-view-page')]) }}
+            {{ view('layout.menu', [ 'url' => "http://notices.ps-philgeps.gov.ph", 'title' => 'PhilGeps', 'routesplit' => $routesplit, 'permission' => true,'target' => true]) }}
+            {{ view('layout.menu', [ 'url' => "#", 'title' => 'Division', 'routesplit' => $routesplit, 'permission' => true]) }}
+            {{ view('layout.menu', [ 'url' => "#", 'title' => 'BAC', 'routesplit' => $routesplit, 'permission' => true]) }}
+            {{ view('layout.menu', [ 'url' => "#", 'title' => 'Inspector', 'routesplit' => $routesplit, 'permission' => true]) }}
+            {{ view('layout.menu', [ 'url' => "#", 'title' => 'RA 9184', 'routesplit' => $routesplit, 'permission' => true]) }}
         </div>
     </div>
 </div>

@@ -14,7 +14,7 @@ class UserPolicy
     }
 
     public function view(User $user) {
-        return ($user->role == "superadmin" || $user->role == "admin")?true:abort('403', 'Unauthorized user');
+        return ($user->role == "superadmin" || $user->role == "admin")?true:false;
     }
 
     public function create(User $user) {
@@ -24,7 +24,7 @@ class UserPolicy
     public function update(User $user, User $model) {
         return (($user->role == "superadmin" || $user->role == "admin")  || $model->id == $user->id)?true:abort('403', 'Unauthorized action');
     }
-
+    
     public function delete(User $user, User $model) {
         //
     }

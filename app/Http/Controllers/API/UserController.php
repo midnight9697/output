@@ -54,7 +54,8 @@ class UserController extends Controller {
                 'r',
                 'u',
                 'd'
-            ]])
+            ]]),
+            'role' => $request->role,
         ]);
         
         $new_profile = Profile::create([
@@ -65,7 +66,7 @@ class UserController extends Controller {
             'suffix' => $request->suffix,
             'division_id' => $request->division,
             'section_id' => $request->section,
-            'position' => $request->position
+            'position' => $request->position,
         ]);
         
         return User::where('id', $new_user->id)->with('profile')->first();
@@ -73,11 +74,14 @@ class UserController extends Controller {
 
     public function updateUser(EditUserRequest $request, $id) {
         $user = User::where('id', $id)->first();
-        Gate::allows('user-update-view', $user);
+        if (!Gate::allows('user-update-view', $user)) {
+            abort('403', 'Unauthorized action');
+        }
 
         $update_user = User::where('id', $id);
         $update_user->update([
             'email' => $request->email,
+            'role' => $request->role,
         ]);
 
         Profile::where('user_id', $id)->update([
@@ -87,9 +91,9 @@ class UserController extends Controller {
             'suffix' => $request->suffix,
             'division_id' => $request->division,
             'section_id' => $request->section,
-            'position' => $request->position
+            'position' => $request->position,
         ]);
-
+        
         if ($request->password) {
             $update_user->update([
                 'password' => bcrypt($request->password)

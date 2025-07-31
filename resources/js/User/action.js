@@ -3,7 +3,9 @@ import { usersClass } from "./User";
 import { GValidator } from "./Validation";
 
 var user_controller = null;
-const maxActivePage = 5-1;
+const maxActivePage = 5;
+let lastEvenPage = 1;
+let pageNext = 'current';
 
 export class UserController {
 
@@ -156,6 +158,7 @@ export class UserController {
       prevBtn.className = `icon item ${(data.current_page == 1?"":"prev-page")}`;
       prevBtn.innerHTML = `<i class="left chevron icon"></i>`;
       prevBtn.onclick =  function(e) {
+        pageNext = "prev";
         if (data.current_page == 1) {
           return 0;
         }
@@ -163,11 +166,12 @@ export class UserController {
             user_controller.fetchUsersTable(paging)
         },  data.current_page - 1);
       }
-  
+      
       let nextBtn = document.createElement('a');
       nextBtn.className = `icon item ${(data.current_page == data.last_page?"":"next-page")}`;
       nextBtn.innerHTML = `<i class="right chevron icon"></i>`;
       nextBtn.onclick =  function(e) {
+        pageNext = "next";
         if (data.current_page == data.last_page) {
           return 0;
         }
@@ -180,30 +184,30 @@ export class UserController {
       div.className = 'ui right floated pagination menu';
       div.appendChild(prevBtn);
       
-      let page = "";
-      let maxPage = (data.last_page >= maxActivePage?maxActivePage:data.last_page);
-      let startPage = (data.last_page >= maxActivePage?(data.current_page):1);
-      console.log('Start - Max: ', startPage, maxPage);
-      if ((startPage+maxActivePage) < data.last_page) {
-          maxPage = startPage + maxActivePage;
+      let maxPage = (data.last_page < maxActivePage?data.last_page:(lastEvenPage+4));
+      if (data.current_page % (maxPage+1) == 0 && pageNext == "next") {
+        maxPage += 5;
+        lastEvenPage = data.current_page;
       }
-      else {
-        maxPage = (startPage + (data.last_page - startPage));
-        startPage = startPage - ((maxActivePage + startPage) - data.last_page);
+
+      if ((data.current_page+1) % maxPage == 0 && pageNext == "prev") {
+        lastEvenPage = data.current_page - (maxActivePage - 1);
       }
-      console.log('Start - Max: ', startPage, maxPage);
-  
-      for (let p = startPage; p <=  maxPage; p++) {
-        let anchor = document.createElement('a');
-        anchor.className = `${(data.current_page == p?'active':'')} item`;
-        anchor.innerHTML = p;
-        anchor.onclick = function() {
-          usersClass.getByPage((paging) => {
-              user_controller.fetchUsersTable(paging)
-          },  p);
-        }
-        div.appendChild(anchor);
+      
+      let startPage = (data.current_page % (maxPage+1) == 0?data.current_page:lastEvenPage);
+
+      if (((data.current_page+1) % maxPage) == 0 && pageNext == "prev") {
+        startPage = startPage - (maxPage - 1);
       }
+
+      console.log('Start', startPage);
+      for (let index = startPage; index <= maxPage; index++) {
+        let page = document.createElement('a');
+        page.className = `${(data.current_page == index?'active':'')} item`;
+        page.innerHTML = index;
+        div.appendChild(page);
+      }
+      
       div.appendChild(nextBtn);
       document.getElementById('page_content').innerHTML = "";
       document.getElementById('page_content').appendChild(div);

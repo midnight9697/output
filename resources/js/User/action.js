@@ -197,7 +197,7 @@ export class UserController {
       let startPage = (data.current_page % (maxPage+1) == 0?data.current_page:lastEvenPage);
 
       if (((data.current_page+1) % maxPage) == 0 && pageNext == "prev") {
-        startPage = startPage - (maxPage - 1);
+        startPage = startPage - (maxActivePage - 1);
       }
 
       console.log('Start', startPage);

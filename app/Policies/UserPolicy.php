@@ -13,8 +13,8 @@ class UserPolicy
         return $user->role == "superadmin" || $user->role == "admin";
     }
 
-    public function view(User $user, User $model) {
-        return $user->role == "superadmin" || $user->role == "admin";
+    public function view(User $user) {
+        return ($user->role == "superadmin" || $user->role == "admin")?true:abort('403', 'Unauthorized user');
     }
 
     public function create(User $user) {

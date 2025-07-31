@@ -26,6 +26,30 @@ export class Authentication {
             window.location.reload();
         });
     }
+
+    forgot_password(action, email) {
+        axios({
+            method: 'post',
+            url: './api/login/forgot_password',
+            data: {
+                'email': email
+            },
+            responseType: 'json',
+        }).then(action)
+    }
+
+    reset_password(action, password) {
+        axios({
+            method: 'post',
+            url: './api/login/reset_password',
+            data: {
+                'email': localStorage.getItem('email'),
+                'password': password,
+                
+            },
+            responseType: 'json',
+        }).then(action)
+    }
 }
 
 export const AuthClass = new Authentication();

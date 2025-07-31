@@ -1,6 +1,9 @@
 @extends('auth.app')
 
 @section('content')
+{{-- <script> --}}
+     @vite(['resources/js/login/reset_password.js'])
+{{-- </script> --}}
 <div class="ui middle aligned center aligned grid">
     <div class="column">
         <h2 class="ui teal image header">
@@ -15,20 +18,31 @@
             <div class="ui stacked segment">
               <div class="field">
                 <div class="ui left icon input">
-                  <i class="user icon"></i>
-                  <input type="text" name="email" id="email" placeholder="Enter Registered Email">
+                  <i class="lock icon"></i>
+                  <input type="password" name="password" id="password" placeholder="Password">
                 </div>
               </div>
-              <div class="ui fluid large teal submit button" id="update_password_button">SUBMIT</div>
+              <div class="field">
+                <div class="ui left icon input">
+                  <i class="user icon"></i>
+                  <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Password Confirmation">
+                </div>
+              </div>
+              <div class="ui fluid large teal submit button">UPDATE PASSWORD</div>
             </div>
             <div class="ui error message"></div>
         </form>
         <div class="ui message">
-          Back to Login <a href="{{ url('login') }}">Click here</a>
+          Remember? <a href="{{ url('login') }}">Click here</a>
         </div>
     </div>
   </div>
 @endsection
 @section('custom_js')
-  @vite(['resources/js/login/forgot_password.js'])
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        localStorage.setItem('email', "{{ $email }}");
+    })
+  </script>
+
 @endsection

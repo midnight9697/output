@@ -43,13 +43,13 @@ export class UserController {
           new UserController().failedAction('formCreateUser');
           usersClass.getByPage(new UserController().fetchUsersTable);
           MessageMod.success("User Successfully Created");
-        });
+        }, "REGISTER USER");
       }, (response) => {
           BtnLoaderMod.load(document.getElementById('createUserFinalize'), () => {
             $('#formCreateUser .message').html('');
             $('#formCreateUser :input').prop('readonly', false);
             MessageMod.fail(response.message);
-          });
+          }, "REGISTER USER");
       });
     }
 

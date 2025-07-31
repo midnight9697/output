@@ -3,13 +3,17 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PasswordResetRequest;
 use App\Http\Requests\User\CreateUserRequest;
 use App\Http\Requests\User\EditUserRequest;
+use App\Mail\ForgotMail;
 use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller {
 
@@ -131,5 +135,42 @@ class UserController extends Controller {
 
         $users = User::whereIn('id', $userids)->with('profile')->paginate(10);
         return $users;
+    }
+
+    public function send_forgot_password_link(Request $request) {
+        $user = User::where('email', $request->email)->exists();
+        if ($user) {
+            $selector = bin2hex(random_bytes(8));
+            $token = random_bytes(32);
+            $url = url('reset_password')."/".$selector."/".bin2hex($token);
+    
+            // $expired = date("U") + 1800;
+            $expired = strtotime('+5 minutes');
+            DB::delete('DELETE FROM password_resets WHERE email=?', [$request->email]);
+            $hashtoken = password_hash($token, PASSWORD_DEFAULT);
+            DB::table('password_resets')->insert( [
+                    'email' => $request->email,
+                    'token' => $hashtoken,
+                    'selector' => $selector,
+                    'expires_at' => $expired
+                ]
+            );
+
+            Mail::to($request->email)
+            ->send(new ForgotMail([
+                'url' => $url
+            ]));
+            return response()->json(['message' => 'success', 'result' => 1]);
+        }
+        return response()->json(['message' => 'success', 'result' => 0]);
+    }
+
+    public function reset_password(PasswordResetRequest $request) {
+        $user = User::where('email', $request->email);
+        $user->update([
+            'password' => bcrypt($request->password)
+        ]);
+        DB::delete('DELETE FROM password_resets WHERE email=?', [$request->email]);
+        return response()->json(['message' => 'success']);
     }
 }

@@ -80,7 +80,7 @@
         <div class="ui dropdown item">
             <i class="user circle icon"></i>
             <div class="menu">
-                <a href="#" class="item">
+                <a href="{{ url('users/'.Auth::user()->id.'/edit') }}" class="item">
                     <i class="info circle icon"></i> Profile
                 </a>
                 <a href="#" class="item" id="logout_user">

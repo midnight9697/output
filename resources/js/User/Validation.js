@@ -1,6 +1,6 @@
 export default class Validator {
     
-    StoreUserValidation(users) {
+    StoreUserValidation(users, action) {
         $.fn.form.settings.rules['checkEmailExists'] = function(value) {
             return (users.filter(el => el.email == value).length == 0);
         };
@@ -73,12 +73,13 @@ export default class Validator {
                 }
               ]
             }
-          }
+          },
+          onSuccess: action
         });
 
     }
 
-    UpdateUserValidation(users) {
+    UpdateUserValidation(users, action) {
       $.fn.form.settings.rules['checkEmailExists'] = function(value) {
         return (users.filter(el => el.email == value && localStorage.getItem('user') != el.id).length == 0);
       };
@@ -146,7 +147,8 @@ export default class Validator {
               }
             ]
           }
-        }
+        },
+        onSuccess: action
       });
     }
 }

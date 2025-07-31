@@ -23,6 +23,11 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::post('auth', [UserController::class, 'authenticate']);
+Route::prefix('login')->group(function() {
+    Route::post('forgot_password', [UserController::class, 'send_forgot_password_link']);
+    Route::post('reset_password', [UserController::class, 'reset_password']);
+});
+
 Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('users')->group(function() {
         Route::get('getpage', [UserController::class, 'fetchByPage']);

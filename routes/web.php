@@ -22,11 +22,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('divisions',[SettingController::class, 'divisionsView'])->name('manage.divisions');
 
+// Authentications
 Route::prefix('login')->group(function() {
     Route::get('/', [AuthController::class, 'loginView'])->name('login');
     Route::post('auth', [AuthController::class, 'authenticate']);
     Route::get('forgot_password', [AuthController::class, 'forgotPasswordView']);
 });
+Route::get('reset_password/{selector}/{token}', [AuthController::class, 'changePasswordView']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/', [ProfileController::class, 'homeView'])->name('main');

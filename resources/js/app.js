@@ -27,24 +27,27 @@ export class Message {
             </div>
         `
         document.getElementsByTagName('body')[0].appendChild(this.msgEl);
+        $(this.msgEl).modal({
+            allowMultiple: false
+        })
     }
 
     success(msg) {
         this.msgEl.innerHTML = `
-            <div class="ui icon header">
-                <i class="check green icon"></i>
-                ${msg}
-            </div>
-            <div class="actions">
-                <div class="ui red basic cancel inverted button">
-                    <i class="remove icon"></i>
-                    No
+                <div class="ui icon header">
+                    <i class="check green icon"></i>
+                    ${msg}
                 </div>
-                <div class="ui green ok inverted button confirm_warning_action" id="modalSuccessDoneBtn">
-                <i class="checkmark icon"></i>
-                    Yes
+                <div class="actions">
+                    <div class="ui red basic cancel inverted button">
+                        <i class="remove icon"></i>
+                        No
+                    </div>
+                    <div class="ui green ok inverted button confirm_warning_action" id="modalSuccessDoneBtn">
+                    <i class="checkmark icon"></i>
+                        Yes
+                    </div>
                 </div>
-            </div>
         `;
         $(this.msgEl).modal('show');
     }
@@ -70,7 +73,7 @@ export class Message {
     }
 
     hide() {
-        $(this.msgEl).modal('hide');
+        $(this.msgEl).modal('hide').modal('hide dimmer');
     }
 }
 
@@ -86,30 +89,16 @@ export class BtnLoader {
     }
 
     start(element) {
-        this.defbtn = element.innerHTML;
+        this.defbtn = element;
         element.disabled = true;
-        // element.innerHTML = this.ldbtn;
         element.innerHTML = `<i class="loading spinner icon"></i> Please wait...`;
     }
 
-    load(element = false, action) {
-        var self = this;
-        element.innerHTML = self.defbtn;
+    load(element = false, action, ht = false) {
+        let self = BtnLoaderMod;
+        element.innerHTML = (ht?ht:self.defbtn);
         element.disabled = false;
         action();
-        // let cnt = 1;
-
-        // let x = setInterval(() => {
-        //     console.log('Count', cnt);
-        //     if (cnt <= 0) {
-        //         clearInterval(x);
-        //         element.innerHTML = self.defbtn;
-        //         element.disabled = false;
-        //         action();
-        //     }
-        //     cnt--;
-        // }, 1000);
-
     }
 }
 
@@ -160,10 +149,19 @@ export class confModal {
         this.modal = document.createElement('div');
         this.modal.className = 'ui very tiny modal';
         this.modal.innerHTML = ht;
+        let self = this;
+        
         document.getElementById('main_event').appendChild(this.modal);
-        $('.confirm_warning_action').on('click', accept);
+        $(this.modal).modal({
+            allowMultiple: false
+        })
         $(this.modal).modal('show');
-
+        $('.confirm_warning_action').on('click', (e) => {
+            $(self.modal).modal('hide').modal('hide dimmer');
+            self.modal.remove();
+            accept(e);
+        });
+       
     }
 }
 
@@ -174,18 +172,7 @@ export const humanDate = new CustomDate();
 export const confirmMod = new confModal();
 
 document.addEventListener('DOMContentLoaded', () => {
-    $('.ui.dropdown').dropdown();
-
-    $('#modalSuccessDoneBtn').on('click', function() {
-        console.log('Hide');
-        MessageMod.hide();
-    })
-    
-    $('#modalFailDoneBtn').on('click', function() {
-        console.log('Hide');
-        MessageMod.hide();
-    })
-
+    $('.ui .dropdown').dropdown();
     $('#logout_user').on('click', () => {
         AuthClass.logout();
     });

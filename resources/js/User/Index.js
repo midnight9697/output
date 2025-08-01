@@ -1,16 +1,18 @@
 import {  usersClass } from "./User";
 import {  UserMod } from "./action";
 import { GValidator } from "./Validation";
-
+import { pageLoader } from "../app";
 document.addEventListener('DOMContentLoaded', () => {
   // Load all users for validation
+  const tableLoad = new pageLoader();
   usersClass.getAllUsers((users) => {
     GValidator.StoreUserValidation(users, UserMod.createUser);
-    // GValidator.Store
   });
+
   // Load paginated users
   usersClass.getByPage((paging) => {
-    UserMod.fetchUsersTable(paging)
+      UserMod.fetchUsersTable(paging);
+      tableLoad.destroy(document.getElementById('users_loader'));
   });
   $('#create_user_vbtn').on('click', UserMod.createUserAction)
   

@@ -71,10 +71,22 @@
             <div class="ui divider"></div>
         </div>
         <div class="ui segment" id="main_event">
-            @include('default.loader')
-            {{-- <div id=""> --}}
-                @yield('main_content')
-            {{-- </div> --}}
+                <div class="ui segment" style="overflow: hidden;display:none" id="pageLoaderDefault">
+                    <div class="ui active inverted dimmer">
+                      <div class="ui large text loader">Loading</div>
+                    </div>
+                    <p style="height:12px;background:grey;width:100%" class="disabled initia_loader"></p>
+                      <p style="height:12px;background:grey;width:100%" class="disabled initia_loader"></p>
+                      <p style="height:12px;background:grey;width:100%" class="disabled initia_loader"></p>
+                      <p style="height:12px;background:grey;width:100%" class="disabled initia_loader"></p>
+                      <p style="height:12px;background:grey;width:100%" class="disabled initia_loader"></p>
+                      <p style="height:12px;background:grey;width:100%" class="disabled initia_loader"></p>
+                </div>
+                <div id="body_content_default">
+                    @include('default.loader')
+                    @yield('main_content')
+                </div>
+            </div>
         </div>
     </div>
 </div>

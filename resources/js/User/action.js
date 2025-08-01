@@ -1,11 +1,10 @@
 import { SectionMod, MessageMod, BtnLoaderMod, humanDate  } from "../app";
+import { paginateMod } from "../login/pagination";
 import { usersClass } from "./User";
 import { GValidator } from "./Validation";
 
 var user_controller = null;
-const maxActivePage = 5;
-let lastEvenPage = 1;
-let pageNext = 'current';
+
 
 export class UserController {
 
@@ -112,7 +111,6 @@ export class UserController {
   
       let data = users;
       users = users.data;     
-      console.log(users);
       
       let ht = "";
       
@@ -153,66 +151,9 @@ export class UserController {
           </tr>
         `;
       });
-      
-      let prevBtn = document.createElement('a');
-      prevBtn.className = `icon item ${(data.current_page == 1?"":"prev-page")}`;
-      prevBtn.innerHTML = `<i class="left chevron icon"></i>`;
-      prevBtn.onclick =  function(e) {
-        pageNext = "prev";
-        if (data.current_page == 1) {
-          return 0;
-        }
-        usersClass.getByPage((paging) => {
-            user_controller.fetchUsersTable(paging)
-        },  data.current_page - 1);
-      }
-      
-      let nextBtn = document.createElement('a');
-      nextBtn.className = `icon item ${(data.current_page == data.last_page?"":"next-page")}`;
-      nextBtn.innerHTML = `<i class="right chevron icon"></i>`;
-      nextBtn.onclick =  function(e) {
-        pageNext = "next";
-        if (data.current_page == data.last_page) {
-          return 0;
-        }
-        usersClass.getByPage((paging) => {
-            user_controller.fetchUsersTable(paging)
-        },  data.current_page + 1);
-      }
-      
-      let div = document.createElement('div')
-      div.className = 'ui right floated pagination menu';
-      div.appendChild(prevBtn);
-      
-      let maxPage = (data.last_page < maxActivePage?data.last_page:(lastEvenPage+4));
-      if (data.current_page % (maxPage+1) == 0 && pageNext == "next") {
-        maxPage += 5;
-        lastEvenPage = data.current_page;
-      }
-
-      if ((data.current_page+1) % maxPage == 0 && pageNext == "prev") {
-        lastEvenPage = data.current_page - (maxActivePage - 1);
-      }
-      
-      let startPage = (data.current_page % (maxPage+1) == 0?data.current_page:lastEvenPage);
-
-      if (((data.current_page+1) % maxPage) == 0 && pageNext == "prev") {
-        startPage = startPage - (maxActivePage - 1);
-      }
-
-      console.log('Start', startPage);
-      for (let index = startPage; index <= maxPage; index++) {
-        let page = document.createElement('a');
-        page.className = `${(data.current_page == index?'active':'')} item`;
-        page.innerHTML = index;
-        div.appendChild(page);
-      }
-      
-      div.appendChild(nextBtn);
-      document.getElementById('page_content').innerHTML = "";
-      document.getElementById('page_content').appendChild(div);
+      paginateMod.load(document.getElementById('page_content'), data, user_controller.fetchUsersTable, './api/users/getpage');
       usersElement.innerHTML = ht;
-    }    
+    }
 }
 
 export const UserMod = new UserController();

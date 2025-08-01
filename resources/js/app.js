@@ -1,5 +1,5 @@
 import { AuthClass } from "./login/login";
-
+let pageLoaderGlobal;
 export class Section {
 
     getSection(division_id = false, action) {
@@ -157,13 +157,35 @@ export class confModal {
     }
 }
 
+export class pageLoader {
+
+    constructor(element) {
+        this.element = document.getElementById(element);
+        pageLoaderGlobal = element;
+    }
+
+    destroy(pageLoadClass) {
+        $(pageLoadClass).removeClass('active');
+        console.log(pageLoadClass);
+    }
+}
+
+function getRandomInteger(min, max) {
+    min = Math.ceil(min); // Ensures min is an integer
+    max = Math.floor(max); // Ensures max is an integer
+    // console.log(Math.floor(Math.random() * (max - min + 1)) + min);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
 export const SectionMod = new Section();
 export const MessageMod = new Message();
 export const BtnLoaderMod = new BtnLoader();
 export const humanDate = new CustomDate();
 export const confirmMod = new confModal();
+export const pageLoadMod = new pageLoader();
 
 document.addEventListener('DOMContentLoaded', () => {
+    // pageLoadMod.destroy();
     $('.ui .dropdown').dropdown();
     $('#logout_user').on('click', () => {
         AuthClass.logout();

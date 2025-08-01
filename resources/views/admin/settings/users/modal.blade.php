@@ -17,13 +17,13 @@
                         <input required type="text" name="firstname" id="firstname" placeholder="Firstname">
                     </div>
                     <div class="field">
-                        <input required type="text" name="middlename" id="middlename" placeholder="Middlename">
+                        <input type="text" name="middlename" id="middlename" placeholder="Middlename">
                     </div>
                     <div class="field">
                         <input required type="text" name="lastname" id="lastname" placeholder="Lastname">
                     </div>
                     <div class="field">
-                        <input required type="text" name="suffix" id="suffix" placeholder="Suffix">
+                        <input type="text" name="suffix" id="suffix" placeholder="Suffix">
                     </div>
                 </div>
             </div>
@@ -84,5 +84,4 @@
             </div>
         </form>
     </div>
-    
 </div>

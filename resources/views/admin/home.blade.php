@@ -34,7 +34,6 @@
             </div>
         </div>
     </div>
-
     <div class="four wide computer eight wide tablet sixteen wide mobile column">
         <div class="ui fluid card">
             <div class="content">
@@ -96,6 +95,6 @@
     </div>
 </div>
 @endsection
-@section('sub_content')
-    Yow
+@section('custom_js')
+    @vite(['resources/js/home.js'])
 @endsection

@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'PR No.', 'Fund Cluster', 'Office',
         'Entity Name', 'Date', 'Responsibility Code',
         'Purpose'
-    ], ['pr_number', 'fund_cluster', 'office', 'entity_name', 'date', 'responsibility_center_code', 'purpose']);
+    ], ['pr_number', 'fund_cluster', 'office', 'entity_name', 'created_at', 'responsibility_center_code', 'purpose']);
 
     PRClass.getByPage((data) => {
         prTable.load(data, prTable);

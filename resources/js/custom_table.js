@@ -8,7 +8,6 @@ export class CustomTable {
 
     load(data = [], tableMod) {
         tableMod.data = data;
-        console.log('column', tableMod);
 
         tableMod.table = document.createElement('table');
         tableMod.theadRow = document.createElement('tr');
@@ -23,12 +22,12 @@ export class CustomTable {
 
         tableMod.data.forEach(row => {
             let tbodyRow = document.createElement('tr');
-            tableMod.keys.forEach(key => {
-                let tbodyCol = document.createElement('td');
-                tbodyCol.innerHTML = row[key];
-                tbodyRow.appendChild(tbodyCol);
-            });
-            tableMod.table.appendChild(tbodyRow);
+            // tableMod.keys.forEach(key => {
+            //     let tbodyCol = document.createElement('td');
+            //     tbodyCol.innerHTML = row[key];
+            //     tbodyRow.appendChild(tbodyCol);
+            // });
+            // tableMod.table.appendChild(tbodyRow);
         });
         tableMod.table.className = "ui very basic collapsing celled table";
         tableMod.table.style = "width:100%";

@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Policies\PurchaseRequestPolicy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Yajra\DataTables\DataTables;
 
 class PurchaseRequestController extends Controller {
     
@@ -17,7 +18,7 @@ class PurchaseRequestController extends Controller {
         if (!Gate::allows('pr-user-view')) {
             abort(403, 'Unauthorized action.');
         }
-        $purchase_requests = PurchaseRequest::paginate(10);
+        $purchase_requests = DataTables::of(PurchaseRequest::query())->make(true);
         return $purchase_requests;
     }
 

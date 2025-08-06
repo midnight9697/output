@@ -8,6 +8,10 @@ document.addEventListener('DOMContentLoaded', () => {
     PRtable.load([
         'entity_name',
         'fund_cluster',
-        'office'
+        'office',
+        'pr_number',
+        'created_at',
+        'responsibility_center_code',
+        'purpose'
     ]);
 });

@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\Member;
 use App\Models\PurchaseRequest;
 use App\Models\User;
 use Illuminate\Auth\Access\Gate;
@@ -13,7 +14,8 @@ class PRPolicy {
     use HandlesAuthorization;
 
     public function userView(User $user) {
-        return PurchaseRequest::where('created_by', $user->id)->get();
+        // return Member::where('user_id', $user->id)->exists();
+        return true;
     }
 
     public function updateView(User $user, PurchaseRequest $pr) {

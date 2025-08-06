@@ -63,6 +63,4 @@ class PurchaseRequestController extends Controller {
         }
         return $pr->delete();
     }
-
-
 }

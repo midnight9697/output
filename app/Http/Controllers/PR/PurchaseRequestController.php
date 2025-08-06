@@ -10,4 +10,8 @@ class PurchaseRequestController extends Controller {
     public function prView(Request $request) {
         return view('admin.pr.purchase_request');
     }
+
+    public function createView() {
+        return view('admin.pr.create');
+    }
 }

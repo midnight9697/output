@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
             DivisionSeeder::class,
             UserSeeeder::class
         ]);
-        PurchaseRequest::factory(5000)->create();
+        // PurchaseRequest::factory(5000)->create();
         $users = User::factory(100)->create();
         Profile::factory(200)->recycle($users)->create();
     }

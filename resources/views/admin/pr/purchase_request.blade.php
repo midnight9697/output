@@ -11,9 +11,9 @@
 @section('main_content')
     <div class="ui right aligned grid">
         <div class="left floated left aligned six wide column">
-            <div class="ui small primary labeled icon button" id="create_user_vbtn">
-              <i class="user icon"></i> REGISTER
-            </div>
+            <a href="{{ url('pr/create') }}" class="ui tiny primary labeled icon button" id="create_user_vbtn">
+              <i class="plus icon"></i> NEW
+            </a>
         </div>
     </div>
     <table class="ui very basic collapsing celled table hidden" id="prTable">

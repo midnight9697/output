@@ -43,16 +43,9 @@ class PurchaseRequestController extends Controller {
         return $result;
     }
 
-    public function create_update_pr(CreatePrRequest $request, $id = null) {
-        $new = PurchaseRequest::find($id);
-        if ($new) {
-            if (!Gate::allows('pr-update-view', $new)) {
-                abort(403, 'Unauthorized action.');
-            }
-        }
-        $new = ($new?PurchaseRequest::find($id):new PurchaseRequest());
-        $new->fill($request->all());
-        $new->save();
+    public function create_pr(CreatePrRequest $request, $id = null) {
+        $new = new PurchaseRequest();
+        $new->create($request->all());
         return $new;
     }
 

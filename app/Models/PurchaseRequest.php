@@ -23,4 +23,8 @@ class PurchaseRequest extends Model
         'purpose',
         'created_by'
     ];
+
+    public function purchase_request_items() {
+        return $this->hasMany(PRItem::class, 'purchase_request_id');
+    }
 }

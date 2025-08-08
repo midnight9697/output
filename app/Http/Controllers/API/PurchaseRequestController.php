@@ -44,6 +44,7 @@ class PurchaseRequestController extends Controller {
     }
 
     public function create_pr(CreatePrRequest $request, $id = null) {
+        return $request;
         $new = new PurchaseRequest();
         $new->create($request->all());
         return $new;

@@ -24,10 +24,10 @@ class CreatePrRequest extends FormRequest
     public function rules()
     {
         return [
-            'entity_name' => 'required',
-            'fund_cluster' => 'required',
-            'office' => 'required',
-            'responsibility_center_code' => 'required',
+            // 'entity_name' => 'required',
+            // 'fund_cluster' => 'required',
+            // 'office' => 'required',
+            // 'responsibility_center_code' => 'required',
         ];
     }
 }

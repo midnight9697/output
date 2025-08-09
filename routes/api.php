@@ -37,13 +37,12 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('{id}/edit', [UserController::class, 'updateUser']);
     });
 
-    
+    Route::prefix('pr')->group(function() {
+        Route::get('list', [PurchaseRequestController::class, 'fetch_all'])->name('list.pr');// get all PR
+        Route::get('page', [PurchaseRequestController::class, 'fetch_by_page'])->name('page.pr'); //get PR by Page
+        Route::post('create', [PurchaseRequestController::class, 'create_pr'])->name('create.pr'); //Create Or Update Uri
+        Route::post('delete/{id}', [PurchaseRequest::class, 'delete_pr'])->name('delete.pr');    //Delete PR
+        Route::post('search', [PurchaseRequestController::class, 'search_pr'])->name('search.pr');  //search for PR
+    });
 });
 
-Route::prefix('pr')->group(function() {
-    Route::get('list', [PurchaseRequestController::class, 'fetch_all'])->name('list.pr');// get all PR
-    Route::get('page', [PurchaseRequestController::class, 'fetch_by_page'])->name('page.pr'); //get PR by Page
-    Route::post('create', [PurchaseRequestController::class, 'create_pr'])->name('create.pr'); //Create Or Update Uri
-    Route::post('delete/{id}', [PurchaseRequest::class, 'delete_pr'])->name('delete.pr');    //Delete PR
-    Route::post('search', [PurchaseRequestController::class, 'search_pr'])->name('search.pr');  //search for PR
-});

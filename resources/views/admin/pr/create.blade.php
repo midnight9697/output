@@ -1,6 +1,7 @@
 @extends('layout.app')
 
 @section('main_content')
+@include('admin.pr.create_item')
    <div class="ui grid">
         <div class="sixteen wide column">
             <form action="{{ url('api/pr/create') }}" class="ui form createpr" method="POST">
@@ -54,47 +55,22 @@
                     </div>
                     <div class="sixteen wide column">
                         <div class="ui top attached header">
-                            ITEMS
+                            <div class="ui top attached header">
+                                <div class="ui right aligned grid">
+                                    <div class="right floated left aligned eight wide column">
+                                        PEOPLE WHO CAN SEE YOUR WORTH
+                                    </div>
+                                    <div class="left floated right aligned eight wide column">
+                                        <button type="button" class="ui very tiny primary button">ADD</button>
+                                    </div>
+                                  </div>
+                            </div>
                         </div>
                         <div class="ui very tiny form attached segment">
-                            <div class="field">
-                                <div class="seven fields">
-                                    <div class="field">
-                                        <label>Stock/Property No.</label>
-                                        <input type="text" name="property_number[]" placeholder="Property No.">
-                                    </div>
-                                    <div class="field">
-                                        <label>Unit</label>
-                                        <input type="text" name="unit[]" placeholder="Unit">
-                                    </div>
-                                    <div class="field">
-                                        <label>Item Description</label>
-                                        <textarea type="text" name="item_description[]" placeholder="Item Description" rows="1"></textarea>
-                                    </div>
-                                    <div class="field">
-                                        <label>Quantity</label>
-                                        <input type="text" name="quantity[]" placeholder="Quantity">
-                                    </div>
-                                    <div class="field">
-                                        <label>Unit Cost</label>
-                                        <input type="text" name="unit_cost[]" placeholder="Unit Cost">
-                                    </div>
-                                    <div class="field">
-                                        <label>Total Cost</label>
-                                        <input type="text" name="total_cost[]" placeholder="Total Cost">
-                                    </div>
-                                    <div class="field">
-                                        <label>ACTION</label>
-                                        <button class="ui very tiny primary button">ADD</button>
-                                    </div>
-                                </div>
-                                
-                            </div>
+                            <div class="align center">Please wait...</div>
                         </div>
                     </div>
                 {{-- Items --}}
-                
-                
             </form>
         </div>
         <div class="eight wide column" style="display: none">

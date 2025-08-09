@@ -1,7 +1,7 @@
 export class Validator {
 
     constructor() {
-        this.items = ['test'];
+        this.items = [];
     }
     
     CreatePRValidation(action) {
@@ -11,20 +11,15 @@ export class Validator {
         };
 
         this.form = 
-        $('.ui.form')
+        $('.ui.form.createpr')
         .form({
           fields: {
             entity_name: this.fieldsRules('entity_name', 'empty'),
+            fund_cluster: this.fieldsRules('fund_cluster', 'empty'),
             office: this.fieldsRules('office', 'empty'),
-            // pr_number: this.fieldsRules('pr_number', 'empty'),
             date: this.fieldsRules('date', 'empty'),
             responsibility_center_code: this.fieldsRules('responsibility_center_code', 'empty'),
-            property_number: this.fieldsRules('property_number[]', 'checkItems', 'Please add atleast 1 item'),
-            // unit: this.fieldsRules('unit[]', 'empty'),
-            // item_description: this.fieldsRules('item_description[]', 'empty'),
-            // quantity: this.fieldsRules('quantity[]', 'empty'),
-            // unit_cost: this.fieldsRules('unit_cost[]', 'empty'),
-            // total_cost: this.fieldsRules('total_cost[]', 'empty'),
+            items: this.fieldsRules('items', 'checkItems', 'Please add atleast 1 item'),
           },
           onSuccess: action
         });
@@ -60,4 +55,29 @@ export class Validator {
     }
 }
 
+
+export class PRItemValidator {
+
+    CreatePRItemValidation(action) {
+        var self = this;
+        $.fn.form.settings.rules['checkItems'] = function(value) {
+            return self.items.length > 0;
+        };
+
+        this.form = 
+        $('.ui.form.formCreatePRItem')
+        .form({
+          fields: {
+            // property_number: PRValidator.fieldsRules('property_number', 'empty'),
+            unit: PRValidator.fieldsRules('unit', 'empty'),
+            item_description: PRValidator.fieldsRules('item_description', 'empty'),
+            quantity: PRValidator.fieldsRules('quantity', 'empty'),
+            unit_cost: PRValidator.fieldsRules('unit_cost', 'empty'),
+            total_cost: PRValidator.fieldsRules('total_cost', 'empty'),
+          },
+          onSuccess: action
+        });
+    }
+}
 export const PRValidator = new Validator();
+export const PRVItemalidator = new PRItemValidator();

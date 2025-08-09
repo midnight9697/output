@@ -26,6 +26,7 @@
                 <th>Date</th>
                 <th>Responsibility Code</th>
                 <th>Purpose</th>
+                <th>Member</th>
            </tr>
         </thead>
         <tbody>

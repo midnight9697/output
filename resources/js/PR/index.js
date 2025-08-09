@@ -15,6 +15,11 @@ document.addEventListener('DOMContentLoaded', () => {
         'pr_number',
         'created_at',
         'responsibility_center_code',
-        'purpose'
+        'purpose',
+        'member_count',
     ]);
+
+    $('.update_button').on('click', () => {
+        alert('Shit');
+    })
 });

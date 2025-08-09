@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('entity_name');
             $table->string('fund_cluster');
             $table->string('office');
-            $table->string('pr_number')->default(0);
+            $table->string('pr_number')->nullable();
             $table->string('responsibility_center_code');
-            $table->string('purpose')->default('waived');
+            $table->string('purpose')->default('waived')->nullable();
             $table->foreignId('created_by')->constrained('users')->default(1);
             $table->timestamps();
         });

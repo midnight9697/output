@@ -46,7 +46,16 @@ export default class Custom_table {
                 data: column
             });
         });
-        return new DataTable(element, {
+
+        TBColumns.push({
+            data: null,
+            render: function (data, type, row) {
+                // 'row' contains the data for the current row
+                return '<button class="ui very tiny green button update_button">Edit</button>' +
+                       '<button class="ui very tiny red button delete_button">Delete</button>';
+            }
+        });
+        var current_table = new DataTable(element, {
             ajax: {
                 url: self.url,
                 type: 'GET',
@@ -70,6 +79,8 @@ export default class Custom_table {
             info: info,
             responsive: true
         });
+        
+        return current_table
     }
 
     add_row(row) {

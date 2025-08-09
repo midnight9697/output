@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Database\Factories\PRFactory;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,5 +28,19 @@ class PurchaseRequest extends Model
 
     public function purchase_request_items() {
         return $this->hasMany(PRItem::class, 'purchase_request_id');
+    }
+
+    public function member() {
+        return $this->hasOne(Member::class);
+    }
+
+    protected function createdAtFormatted(): Attribute {
+        return Attribute::make(
+            get: fn ($value, $attributes) => Carbon::parse($attributes['created_at'])->format('H:i d, M Y'),
+        );
+    }
+
+    public function getCreatedAtFormattedAttribute() {
+        return $this->created_at->format('H:i d, M Y');
     }
 }

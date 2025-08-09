@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('p_r_items', function (Blueprint $table) {
             $table->id();
             $table->foreignId('purchase_request_id')->constrained();
-            $table->string('stock_number')->nullable();
+            $table->string('property_number')->nullable();
             $table->string('unit')->nullable();
             $table->string('item_description')->nullable();
             $table->string('quantity')->nullable();

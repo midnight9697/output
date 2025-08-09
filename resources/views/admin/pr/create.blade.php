@@ -50,24 +50,26 @@
                                     <label>Purpose</label>
                                     <textarea name="purpose" id="purpose" cols="30" rows="3" placeholder="Purpose" name="purpose"></textarea>
                                 </div>
+                                <div class="field" style="display:none">
+                                    <select name="items" multiple id="items"></select>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="sixteen wide column">
                         <div class="ui top attached header">
-                            <div class="ui top attached header">
-                                <div class="ui right aligned grid">
-                                    <div class="right floated left aligned eight wide column">
-                                        PEOPLE WHO CAN SEE YOUR WORTH
-                                    </div>
-                                    <div class="left floated right aligned eight wide column">
-                                        <button type="button" class="ui very tiny primary button">ADD</button>
-                                    </div>
-                                  </div>
+                            <div class="ui right aligned grid">
+                                <div class="right floated left aligned eight wide column">
+                                    ITEMS
+                                </div>
+                                <div class="left floated right aligned eight wide column">
+                                    <button type="button" class="ui very tiny primary button add_item_btn">ADD</button>
+                                </div>
                             </div>
                         </div>
-                        <div class="ui very tiny form attached segment">
-                            <div class="align center">Please wait...</div>
+                        <div class="ui very tiny form attached segment table-pr-items">
+                            <div style="text-align:center">Please wait...</div>
+                            {{-- Items Table --}}
                         </div>
                     </div>
                 {{-- Items --}}

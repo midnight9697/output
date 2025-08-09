@@ -9,6 +9,7 @@ use App\Models\PurchaseRequest;
 use App\Models\User;
 use App\Policies\PurchaseRequestPolicy;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Yajra\DataTables\DataTables;
 
@@ -18,7 +19,7 @@ class PurchaseRequestController extends Controller {
         if (!Gate::allows('pr-user-view')) {
             abort(403, 'Unauthorized action.');
         }
-        $purchase_requests = DataTables::of(PurchaseRequest::query())->make(true);
+        $purchase_requests = DataTables::of(PurchaseRequest::query()->withCount('member'))->make(true);
         return $purchase_requests;
     }
 
@@ -44,9 +45,14 @@ class PurchaseRequestController extends Controller {
     }
 
     public function create_pr(CreatePrRequest $request, $id = null) {
-        return $request;
-        $new = new PurchaseRequest();
-        $new->create($request->all());
+        $request->merge(['created_by' => Auth::user()->id]);
+        $new = PurchaseRequest::create($request->except('items'));
+        $new->purchase_request_items()->createMany($request->items);
+        $new->member()->create([
+            'user_id' => Auth::user()->id,
+            'role' => 'admin',
+            'added_by' => Auth::user()->id
+        ]);
         return $new;
     }
 

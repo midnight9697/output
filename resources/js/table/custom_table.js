@@ -25,8 +25,9 @@ export default class Custom_table {
         this.remove_row(element);
     }
 
-    load(columns = []) {
+    load(columns = [], editAction = () => {}, deleteAction = () => {}) {
         this.columns = columns;
+        this.editAction = editAction;
         this.initialize_table();
     }
 
@@ -51,8 +52,18 @@ export default class Custom_table {
             data: null,
             render: function (data, type, row) {
                 // 'row' contains the data for the current row
-                return '<button class="ui very tiny green button update_button">Edit</button>' +
-                       '<button class="ui very tiny red button delete_button">Delete</button>';
+                let edit_button = document.createElement('button');
+                let delete_button = document.createElement('button');
+
+                edit_button.innerText = "Edit";
+                edit_button.className = "ui very tiny green button";
+                edit_button.onclick = (e) => {
+                    data.element = e;
+                    self.editAction(data);
+                };
+                return edit_button;
+                // return '<button class="ui very tiny green button update_button">Edit</button>' +
+                //        '<button class="ui very tiny red button delete_button">Delete</button>';
             }
         });
         var current_table = new DataTable(element, {

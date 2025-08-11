@@ -17,9 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'responsibility_center_code',
         'purpose',
         'member_count',
-    ]);
-
-    $('.update_button').on('click', () => {
-        alert('Shit');
-    })
+    ], (data) => {
+        console.log('Data', data);
+    });
 });

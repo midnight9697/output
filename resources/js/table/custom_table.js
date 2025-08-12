@@ -67,6 +67,8 @@ export default class Custom_table {
             }
         });
         var current_table = new DataTable(element, {
+            processing: true,
+            serverSide: true,
             ajax: {
                 url: self.url,
                 type: 'GET',
@@ -74,6 +76,7 @@ export default class Custom_table {
                     xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem('bearer'));
                 }
             },
+            "ordering": false,
             "initComplete": function(settings, json) {
                 $('.dataTables_filter').addClass('mb-3');
             },

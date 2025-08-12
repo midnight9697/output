@@ -27,11 +27,11 @@ document.addEventListener('DOMContentLoaded', () => {
     itemsTable();
 });
 
-function itemsTable() {
+export function itemsTable() {
     let tableParent = $('.table-pr-items');
     let ht = "";
     let itemRows = "";
-
+    
     PRValidator.items.forEach(item => {
         itemRows += `
             <tr>

@@ -19,7 +19,7 @@ class PRPolicy {
     }
 
     public function updateView(User $user, PurchaseRequest $pr) {
-        return ($user->id == $pr->created_by);
+        return Member::where('user_id', $user->id)->where('role', 'admin')->exists();
     }
 
     public function delete_pr(User $user, PurchaseRequest $pr) {

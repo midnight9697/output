@@ -16,8 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
         'created_at',
         'responsibility_center_code',
         'purpose',
-        'member_count',
+        'members.length',
     ], (data) => {
-        console.log('Data', data);
+        window.location = window.location+'/'+data.id+'/edit';
     });
 });

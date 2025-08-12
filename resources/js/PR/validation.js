@@ -4,14 +4,14 @@ export class Validator {
         this.items = [];
     }
     
-    CreatePRValidation(action) {
+    CreatePRValidation(action, element = 'createpr') {
         var self = this;
         $.fn.form.settings.rules['checkItems'] = function(value) {
             return self.items.length > 0;
         };
 
         this.form = 
-        $('.ui.form.createpr')
+        $('.ui.form.'+element)
         .form({
           fields: {
             entity_name: this.fieldsRules('entity_name', 'empty'),

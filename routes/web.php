@@ -46,6 +46,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::prefix('pr')->group(function() {
         Route::get('/', [PurchaseRequestController::class, 'prView'])->name('purchase request');
         Route::get('create', [PurchaseRequestController::class, 'createView'])->name('create.purchase.request');
+        Route::get('{id}/edit', [PurchaseRequestController::class, 'updateView'])->name('edit.purchase.request');
     });
     
     // Authentication Routes

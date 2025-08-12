@@ -12,6 +12,17 @@ export class PurchaseRequests {
       } )
     }
 
+    getPrItems(pr_id, action) {
+      axios.get('./api/pr/'+pr_id+'/items', {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('bearer')}`
+        }
+      })
+      .then((e) => {
+        action(e.data);
+      } )
+    }
+
     creatPR(pr, items, action = () => {}, fail = () => {}) {
       var usersClone = this;
       pr['items'] = items;

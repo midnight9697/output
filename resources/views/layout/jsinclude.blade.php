@@ -8,4 +8,5 @@
 <script src="{{ url('/plugins/new/datatables/js/buttons.semanticui.js') }}"></script>
 <script src="{{ url('plugins/new/datatables/js/select.semanticui.js') }}"></script>
 <script src="{{ url('plugins/new/datatables/js/dataTables.dateTime.min.js') }}"></script>
+<script src="{{ url('plugins/cryptjs/crypto-js.min.js') }}"></script>
 <script src="{{url('plugins/axios/axios.min.js')}}"></script>

@@ -23,15 +23,16 @@ class PurchaseRequest extends Model
         'pr_number',
         'responsibility_center_code',
         'purpose',
-        'created_by'
+        'created_by',
+        'created_at'
     ];
 
     public function purchase_request_items() {
         return $this->hasMany(PRItem::class, 'purchase_request_id');
     }
 
-    public function member() {
-        return $this->hasOne(Member::class);
+    public function members() {
+        return $this->hasMany(Member::class);
     }
 
     protected function createdAtFormatted(): Attribute {
@@ -42,5 +43,9 @@ class PurchaseRequest extends Model
 
     public function getCreatedAtFormattedAttribute() {
         return $this->created_at->format('H:i d, M Y');
+    }
+
+    public function getPrIdAttribute() {
+        return encryptUrlSafe($this->id);
     }
 }

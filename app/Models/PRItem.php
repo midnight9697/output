@@ -15,6 +15,7 @@ class PRItem extends Model
         'item_description',
         'quantity',
         'unit_cost',
-        'total_cost'
+        'total_cost',
+        'purchase_request_id'
     ];
 }

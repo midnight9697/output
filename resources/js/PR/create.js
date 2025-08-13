@@ -69,3 +69,31 @@ export function itemsTable() {
 
     tableParent.html(ht);
 }
+
+export function membersTable(members) {
+    let tableParent = $('.members-form-section');
+    let ht = "";
+    let itemLists = "";
+
+    members.forEach(member => {
+        itemLists += `
+            <div class="item">
+              <div class="right floated content">
+                <div class="ui very tiny green button">EDIT</div>
+              </div>
+              <img class="ui avatar image" src="/files/images/user logo.png">
+              <div class="content">
+                ${member.user.profile.lastname+" "+member.user.profile.firstname}
+              </div>
+            </div>
+        `;
+    });
+
+    ht = `
+    <div class="ui middle aligned divided list">
+        ${itemLists}    
+    </div>
+    `;
+
+    tableParent.html(ht);
+}

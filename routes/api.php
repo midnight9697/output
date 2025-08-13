@@ -41,7 +41,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('list', [PurchaseRequestController::class, 'fetch_all'])->name('list.pr');// get all PR
         Route::get('page', [PurchaseRequestController::class, 'fetch_by_page'])->name('page.pr'); //get PR by Page
         Route::post('create', [PurchaseRequestController::class, 'create_pr'])->name('create.pr'); //Create Or Update Uri
-        Route::post('delete/{id}', [PurchaseRequest::class, 'delete_pr'])->name('delete.pr');    //Delete PR
+        Route::post('delete/{id}', [PurchaseRequestController::class, 'delete_pr'])->name('delete.pr');    //Delete PR
+        Route::post('{id}/edit', [PurchaseRequestController::class, 'edit_pr'])->name('edit.pr');    //Edit PR
         Route::post('search', [PurchaseRequestController::class, 'search_pr'])->name('search.pr');  //search for PR
         Route::get('{id}/items', [PurchaseRequestController::class, 'fetch_pr_items'])->name('pr.items');  //search for PR
     });

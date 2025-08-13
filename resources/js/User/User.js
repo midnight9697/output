@@ -41,6 +41,13 @@ export class Users {
         }
       })
         .then(function (response) {
+          usersClone.profiles = [];
+          response.data.forEach(user => {
+            let combine = user.profile;
+            combine.email = user.email;
+            combine.name = user.profile.firstname+" "+user.profile.lastname;
+            usersClone.profiles.push(combine);
+          });
           usersClone.users = response.data;
           action(response.data)
         });

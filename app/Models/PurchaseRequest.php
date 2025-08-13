@@ -7,6 +7,8 @@ use Database\Factories\PRFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 
 class PurchaseRequest extends Model
 {
@@ -26,19 +28,23 @@ class PurchaseRequest extends Model
         'created_by',
         'created_at'
     ];
+    
+    protected function createdAtFormatted(): Attribute {
+        return Attribute::make(
+            get: fn ($value, $attributes) => Carbon::parse($attributes['created_at'])->format('H:i d, M Y'),
+        );
+    }
 
     public function purchase_request_items() {
         return $this->hasMany(PRItem::class, 'purchase_request_id');
     }
 
     public function members() {
-        return $this->hasMany(Member::class);
+        return $this->hasMany(Member::class)->with('user');
     }
 
-    protected function createdAtFormatted(): Attribute {
-        return Attribute::make(
-            get: fn ($value, $attributes) => Carbon::parse($attributes['created_at'])->format('H:i d, M Y'),
-        );
+    public function createdBy() {
+        return $this->belongsTo(Profile::class, 'created_by', 'user_id');
     }
 
     public function getCreatedAtFormattedAttribute() {
@@ -48,4 +54,6 @@ class PurchaseRequest extends Model
     public function getPrIdAttribute() {
         return encryptUrlSafe($this->id);
     }
+
+    
 }

@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'fund_cluster',
         'office',
         'pr_number',
+        'created_by.lastname',
         'created_at',
         'responsibility_center_code',
         'purpose',

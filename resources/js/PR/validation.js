@@ -2,6 +2,7 @@ export class Validator {
 
     constructor() {
         this.items = [];
+        this.members = [];
     }
     
     CreatePRValidation(action, element = 'createpr') {
@@ -9,7 +10,6 @@ export class Validator {
         $.fn.form.settings.rules['checkItems'] = function(value) {
             return self.items.length > 0;
         };
-
         this.form = 
         $('.ui.form.'+element)
         .form({

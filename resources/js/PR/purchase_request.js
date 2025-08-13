@@ -36,6 +36,21 @@ export class PurchaseRequests {
         })
         .then(action).catch(fail)
     }
+
+    updatePR(pr, items, members, action = () => {}, fail = () => {}) {
+      var usersClone = this;
+      pr['items'] = items;
+      pr['members'] = members;
+      axios.post('./api/pr/'+localStorage.getItem('pr_id')+'/edit', pr, {
+          headers: {
+            'Content-Type': 'application/json; charset=utf-8',
+            'Accept': 'application/vnd.github+json',
+            'Authorization': `Bearer ${localStorage.getItem('bearer')}`
+            // 'responseType': 'application/json',
+          },
+        })
+        .then(action).catch(fail)
+    }
 }
 
 export var PRClass = new PurchaseRequests();

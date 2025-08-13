@@ -36,4 +36,36 @@
     </div>
     <div class="actions"><button class="ui very tiny primary button submit_item_to_list">NEW</button></div>
 </div>
+
+<div class="ui tiny modal" id="modalAddMember">
+    {{-- <div class="header">REGISTER NEW USER</div> --}}
+    <div class="content">
+        <div class="ui very tiny form formAddMember" id="formAddMember">
+            <h4 class="ui dividing header">ADD NEW MEMBER</h4>
+            <div class="ui error message">
+                {{--  --}}
+            </div>
+            <div class="field">
+                <div class="field">
+                    <label>PEOPLE</label>
+                    <div class="ui user search search-people">
+                        <div class="ui icon input">
+                          <input class="prompt" type="text" placeholder="Search...">
+                          <i class="search icon"></i>
+                        </div>
+                        <div class="results"></div>
+                      </div>
+                </div>
+                <div class="field">
+                    <label>ROLE</label>
+                    <select name="role" id="role" class="member-role">
+                        <option value="admin">ADMIN</option>
+                        <option value="member">MEMBER</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="actions"><button class="ui very tiny primary button submit_user_to_list">NEW</button></div>
+</div>
 {{-- <button class="ui very tiny primary button">ADD</button> --}}

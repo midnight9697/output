@@ -23,6 +23,7 @@
                 <th>Fund Cluster</th>
                 <th>Office</th>
                 <th>PR No.</th>
+                <th>Created By</th>
                 <th>Date</th>
                 <th>Responsibility Code</th>
                 <th>Purpose</th>

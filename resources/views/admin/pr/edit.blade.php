@@ -1,20 +1,27 @@
 @extends('layout.app')
 
 @section('main_content')
+@php
+    use App\Models\Member;
+@endphp
 @include('admin.pr.create_item')
+    
    <div class="ui grid">
         <div class="sixteen wide column">
-            <form action="{{ url('api/pr/create') }}" class="ui form updatepr" method="POST">
+            <form action="{{ url('api/pr/edit') }}" class="ui form updatepr" method="POST">
                 @csrf
+                <div class="ui success message">
+                    Changes Saved
+                </div>
+                <div class="ui error message">
+                    {{--  --}}
+                </div>
                 <div class="ui grid">
-                    <div class="sixteen wide column">
+                    <div class="eight wide column">
                         <div class="ui top attached header">
                             PURCHASE REQUEST UPDATE FORM
                         </div>
                         <div class="ui small form attached segment">
-                            <div class="ui error message">
-                                {{--  --}}
-                            </div>
                             <div class="field">
                                 <div class="two fields">
                                     <div class="field">
@@ -56,8 +63,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="sixteen wide column">
                         <div class="ui top attached header">
                             <div class="ui right aligned grid">
                                 <div class="right floated left aligned eight wide column">
@@ -73,30 +78,70 @@
                             {{-- Items Table --}}
                         </div>
                     </div>
+                    <div class="eight wide column">
+                        <div class="ui top attached header">
+                            INTERNAL REVIEW
+                        </div>
+                        <div class="ui very tiny form attached segment">
+                            <div class="ui segment">
+                                <div class="ui form">
+                                    <div class="field">
+                                      <textarea id="long-message" placeholder="Enter a message"></textarea>
+                                    </div>
+                                    <button type="button" class="ui very tiny primary button">COMMENT</button>
+                                </div>
+                                <div class="ui relaxed list">
+                                    <div class="item">
+                                        <img class="ui avatar image" src="{{ url('files/images/user logo.png') }}">
+                                      <div class="content">
+                                        <a class="header">Daniel Louise</a>
+                                        <div class="description">Last seen watching <a><b>Arrested Development</b></a> just now.</div>
+                                      </div>
+                                    </div>
+                                    <div class="item">
+                                        <img class="ui avatar image" src="{{ url('files/images/user logo.png') }}">
+                                      <div class="content">
+                                        <a class="header">Stevie Feliciano</a>
+                                        <div class="description">Last seen watching <a><b>Bob's Burgers</b></a> 10 hours ago.</div>
+                                      </div>
+                                    </div>
+                                    <div class="item">
+                                        <img class="ui avatar image" src="{{ url('files/images/user logo.png') }}">
+                                      <div class="content">
+                                        <a class="header">Elliot Fu</a>
+                                        <div class="description">Last seen watching <a><b>The Godfather Part 2</b></a> yesterday.</div>
+                                      </div>
+                                    </div>
+                                  </div>
+                            </div>
+                        </div>
+                        <div class="ui top attached header">
+                            <div class="ui right aligned grid">
+                                <div class="right floated left aligned eight wide column">
+                                    MEMBERS
+                                </div>
+                                <div class="left floated right aligned eight wide column">
+                                    <button type="button" class="ui very tiny primary button add_member_btn">ADD</button>
+                                </div>
+                               
+                              </div>
+                        </div>
+                        <div class="ui small form attached segment">
+                            <div class="members-form-section">
+                                <p style="text-align:center">Please wait...</p>
+                            </div>
+                        </div>
+                    </div>
                     <div class="ui very tiny bottom attached segment">
+                        @if (Member::where('user_id', Auth::user()->id)->first()->role == "admin")
+                            <button class="ui very tiny primary button" type="button">Initiate Approval Process</button>
+                        @endif
                         <button type="submit" class="ui very tiny green right floated button">SAVE CHANGES</button>
                     </div>
                 {{-- Items --}}
             </form>
         </div>
-        <div class="eight wide column" style="display: none">
-            <div class="eight wide column">
-                <div class="ui top attached header">
-                    <div class="ui right aligned grid">
-                        <div class="right floated left aligned eight wide column">
-                            PEOPLE WHO CAN SEE YOUR WORTH
-                        </div>
-                        <div class="left floated right aligned eight wide column">
-                            <button class="ui very tiny primary button">ADD</button>
-                        </div>
-                       
-                      </div>
-                </div>
-                <div class="ui attached segment" style="max-height: 473px;min-height:473px">
-                    <div>NOTHING</div>
-                </div>
-            </div>
-        </div>
+       
    </div>
 @endsection
 @section('custom_js')

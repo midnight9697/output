@@ -136,8 +136,8 @@ class UserController extends Controller {
             }
         })->get('user_id')->toArray();
         $userids = array_column($result, 'user_id');
-
-        $users = User::whereIn('id', $userids)->with('profile')->paginate(10);
+        
+        $users = User::whereIn('id', $userids)->with('profile')->get(10);
         return $users;
     }
 

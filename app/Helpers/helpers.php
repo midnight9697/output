@@ -17,11 +17,11 @@ function encryptIds($data) {
     return DataTables::of ($data)
         ->editColumn('id', function($res) {
             return encryptUrlSafe($res->id);
-        })->make(true)
+        })
         ->editColumn('created_at', function($res) {
-            return date('m-d-Y', strtotime($res->created_at));
-
-        });
+            return date('M d, Y', strtotime($res->created_at));
+        })
+        ->make(true);
 }
 
 function encryptSingle($data) {

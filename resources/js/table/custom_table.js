@@ -54,8 +54,7 @@ export default class Custom_table {
                 // 'row' contains the data for the current row
                 let edit_button = document.createElement('button');
                 let delete_button = document.createElement('button');
-
-                edit_button.innerText = "Edit";
+                edit_button.innerText = (localStorage.getItem('user') == data.created_by.user_id?"EDIT":'REVIEW');
                 edit_button.className = "ui very tiny green button";
                 edit_button.onclick = (e) => {
                     data.element = e;

@@ -9,6 +9,8 @@ use App\Http\Requests\PR\UpdatePrRequest;
 use App\Models\Member;
 use App\Models\PRItem;
 use App\Models\PurchaseRequest;
+use App\Models\Recepient;
+use App\Models\Transaction;
 use App\Models\User;
 use App\Policies\PurchaseRequestPolicy;
 use Illuminate\Http\Request;
@@ -22,9 +24,9 @@ class PurchaseRequestController extends Controller {
         if (!Gate::allows('pr-user-view')) {
             abort(403, 'Unauthorized action.');
         }
-        $prs = PurchaseRequest::query()->orderBy('created_at','asc')->with('createdBy')->with('members')->whereHas('members', function($query) {
-            return $query->where('user_id', Auth::user()->id);
-        });
+        $prs = PurchaseRequest::orderBy('id','desc')->with('createdBy')->whereHas('members', function($query) {
+            return $query->where('members.user_id', Auth::user()->id);
+        })->with('members');
         // PurchaseRequest::query()->orderBy('created_at','asc')->with('members')->whereHas('members')
         return encryptIds($prs);
     }
@@ -60,13 +62,26 @@ class PurchaseRequestController extends Controller {
             'role' => 'admin',
             'added_by' => Auth::user()->id,
         ]);
+
+        $transaction = $new->transactions()->create([
+            'body' => 'initiated the request',
+            'sender_id' => Auth::user()->id,
+        ]);
+
+        foreach (Member::where('purchase_request_id', $new->id)->get() as $member) {
+            Recepient::create([
+                'transaction_id' => $transaction->id,
+                'receiver_id' => $member->user_id
+            ]);
+        }
+        // John initiated the request
         return $new;
     }
 
     public function edit_pr(UpdatePrRequest $request, $pr_id = null) {
         $pr_id = decryptUrlSafe($pr_id);
         $pr = PurchaseRequest::find($pr_id);
-        $pr->update($request->except('items'));
+        $pr->fill($request->except('items'));
         foreach ($request->items as $item) {
             $item_id = (isset($item['id'])?decryptUrlSafe($item['id']):null);
             $itemInstance = PRItem::find($item_id);
@@ -78,9 +93,32 @@ class PurchaseRequestController extends Controller {
                 PRItem::create($item);
             }
         }
+        $updatedColumns = $pr->getDirty();
+        $member_count = Member::where('purchase_request_id', $pr_id)->count();
+        if (count($updatedColumns) > 0) {
+            $transaction = $pr->transactions()->create([
+                'body' => 'changed the details of the purchase request',
+                'sender_id' => Auth::user()->id,
+            ]);
+            if (count($updatedColumns) < 0 && ($member_count < count($request->members))) {
+                $transaction = $pr->transactions()->create([
+                    'body' => 'Modified the purchase request and added a new participant',
+                    'sender_id' => Auth::user()->id,
+                ]);
+            }
+        }
+        else {
+            if (($member_count < count($request->members))) {
+                $transaction = $pr->transactions()->create([
+                    'body' => 'Updated the purchase request with a new member',
+                    'sender_id' => Auth::user()->id,
+                ]);
+            }
+        }
 
         foreach ($request->members as $member) {
-            if (!Member::where('user_id', $member['user_id'])->where('purchase_request_id', $pr_id)->exists()) {
+            $mem = Member::where('user_id', $member['user_id'])->where('purchase_request_id', $pr_id);
+            if (!$mem->exists()) {
                 Member::create([
                     'user_id' => $member['user_id'],
                     'purchase_request_id' => $pr_id,
@@ -88,17 +126,40 @@ class PurchaseRequestController extends Controller {
                     'role' => $member['role']
                 ]);
             }
+            if (count($updatedColumns) > 0) {
+                Recepient::create([
+                    'transaction_id' => $transaction->id,
+                    'receiver_id' => $member['user_id']
+                ]);
+            }
         }
-        return $pr;
+        return $updatedColumns;
     }
 
     public function fetch_pr_items($pr_id) {
         $pr_id = decryptUrlSafe($pr_id);
         $pr = PurchaseRequest::with('members')->find($pr_id);
+        $transactions = Transaction::where('purchase_request_id', $pr->id)->with('sender')->with('act')->orderBy('id', 'desc')->get();
         if (!Gate::allows('pr-update-view', $pr)) {
             abort(403, 'Unauthorize action.');
         }
-        return ['pr' => encryptSingle($pr), 'items' => encryptMany(PRItem::where('purchase_request_id', $pr_id)->get())];
+        return ['pr' => encryptSingle($pr), 'transactions' => encryptMany($transactions), 'items' => encryptMany(PRItem::where('purchase_request_id', $pr_id)->get())];
+    }
+
+    public function make_transaction(Request $request) {
+        $pr_id = decryptUrlSafe($request->pr_id);
+        $pr = PurchaseRequest::with('members')->find($pr_id);
+        return $pr_id;
+        // $transaction = $new->transactions()->create([
+        //     'body' => 'initiated the request',
+        //     'sender_id' => Auth::user()->id,
+        // ]);
+        // foreach (Member::where('purchase_request_id', $new->id)->get() as $member) {
+        //         Recepient::create([
+        //             'transaction_id' => $transaction->id,
+        //             'receiver_id' => $member->user_id
+        //         ]);
+        //     }
     }
 
     public function delete_pr($id) {

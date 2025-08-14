@@ -2,7 +2,7 @@
     use Illuminate\Support\Facades\Gate;
     $routesplit = explode(".", Request::route()->getName());
 @endphp
-<div class="ui sidebar very wide inverted vertical menu sidebar-menu" id="sidebar">
+<div class="ui sidebar inverted vertical menu sidebar-menu" id="sidebar">
     <div class="item">
         <div class="header">General</div>
         <div class="menu">
@@ -31,7 +31,7 @@
 </div>
 
 {{-- Top Inverted Menu --}}
-<nav class="ui top fixed inverted menu">
+<nav class="ui big top fixed inverted menu">
     <div class="left menu">
         <a href="#" class="sidebar-menu-toggler item" data-target="#sidebar">
             <i class="sidebar icon"></i>

@@ -1,4 +1,5 @@
 import { usersClass } from "../User/User";
+import { MessageMod, confirmMod } from "../app";
 import { itemsTable, membersTable } from "./create";
 import { PRClass } from "./purchase_request";
 import { PRValidator } from "./validation";
@@ -17,20 +18,34 @@ document.addEventListener('DOMContentLoaded', () => {
             role: $('.member-role').val()
         });
     });
+
+    $('.commentFormBtn').on('click', () =>{
+        let data = {};
+        data['action'] = document.getElementById('alternative').value;
+        data['body'] = document.getElementById('long-message').value;
+        confirmMod.load((e) => {
+            PRClass.commentPR(data, (e) => {
+                MessageMod.success("Review Posted");
+            });
+        }, "Do you want to submit this review ?");
+        
+    });
     
     PRValidator.CreatePRValidation((e) => {
         e.preventDefault();
         PRClass.updatePR(PRValidator.serializeArrayToJson('.updatepr'), PRValidator.items, PRValidator.members, (e) => {
-            window.location.reload(true);
+            // window.location.reload(true);
         });
     }, 'updatepr');
 
     PRClass.getPrItems(localStorage.getItem('pr_id'), (data) => {
         PRValidator.items = data.items;
+        PRValidator.transactions = data.transactions;
         data.pr.members.forEach(member => {
             PRValidator.members.push({ user_id: member.user_id, role: member.role });
         });
-        console.log(data.pr.members);
+
+        transactionTable()
         itemsTable();
         membersTable(data.pr.members);
 
@@ -56,3 +71,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     });
 });
+
+
+
+function transactionTable() {
+    let parentElement = $('.transaction_preview');
+    let ht = "";
+
+    PRValidator.transactions.forEach(transaction => {
+        console.log(transaction.body);
+        ht += `
+        <div class="item">
+          <i class="location arrow icon"></i>
+          <div class="content">
+            <a class="header">${(transaction.sender_id==localStorage.getItem('user')?"You":transaction.sender.firstname+" "+transaction.sender.lastname)}</a>
+            ${(transaction.action == 1 && transaction.body != ""?"":`<small style="color:green">(${transaction.act.synonyms})</small>`)}
+            <div class="description"><b>${transaction.created_at}</b> ${transaction.body}</div>
+          </div>
+        </div>
+        `;
+    });
+
+    parentElement.html(ht);
+    
+}

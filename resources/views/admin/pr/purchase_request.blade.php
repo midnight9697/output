@@ -23,14 +23,14 @@
                 <th>Fund Cluster</th>
                 <th>Office</th>
                 <th>PR No.</th>
-                <th>Created By</th>
+                {{-- <th>Created By</th> --}}
                 <th>Date</th>
                 <th>Responsibility Code</th>
                 <th>Purpose</th>
                 <th>Member</th>
            </tr>
         </thead>
-        <tbody>
+        <tbody style="text-align: center">
             <tr>
                 <td colspan="7" class="center aligned">Loading...</td>
             </tr>

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('purchase_request_id')->constrained();
             $table->foreignId('sender_id')->constrained('users');
-            $table->string('action')->nullable();
+            $table->foreignId('action')->default('1')->constrained('alternatives');
             $table->string('body')->nullable();
             $table->timestamps();
         });

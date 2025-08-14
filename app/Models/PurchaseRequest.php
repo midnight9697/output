@@ -43,6 +43,10 @@ class PurchaseRequest extends Model
         return $this->hasMany(Member::class)->with('user');
     }
 
+    public function transactions() {
+        return $this->hasMany(Transaction::class);
+    }
+
     public function createdBy() {
         return $this->belongsTo(Profile::class, 'created_by', 'user_id');
     }

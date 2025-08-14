@@ -3,6 +3,7 @@
 @section('main_content')
 @php
     use App\Models\Member;
+    use App\Models\Alternative;
 @endphp
 @include('admin.pr.create_item')
     
@@ -84,35 +85,31 @@
                         </div>
                         <div class="ui very tiny form attached segment">
                             <div class="ui segment">
-                                <div class="ui form">
+                                <form class="ui form" id="commentForm" action="#" method="POST">
                                     <div class="field">
-                                      <textarea id="long-message" placeholder="Enter a message"></textarea>
+                                        <label>ACTION</label>
+                                        <select name="alternative" id="alternative">
+                                            @foreach (Alternative::get() as $action)
+                                                <option value="{{ $action->id }}">{{ strtoupper($action->id == 1?"--":$action->synonyms) }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
-                                    <button type="button" class="ui very tiny primary button">COMMENT</button>
+                                    <div class="field">
+                                        <label>Comment</label>
+                                      <textarea id="long-message" name="long-message" rows="3" placeholder="Enter a message"></textarea>
+                                    </div>
+                                    <div class="field" style="display: flex; justify-content: flex-end;">
+                                        <button type="button" class="ui very tiny primary button commentFormBtn">COMMENT</button>
+                                    </div>
+                                </form>
+                                <div class="ui divider"></div>
+                                <div class="item">
+                                    <label><b>TRANSACTIONS</b></label>
                                 </div>
-                                <div class="ui relaxed list">
-                                    <div class="item">
-                                        <img class="ui avatar image" src="{{ url('files/images/user logo.png') }}">
-                                      <div class="content">
-                                        <a class="header">Daniel Louise</a>
-                                        <div class="description">Last seen watching <a><b>Arrested Development</b></a> just now.</div>
-                                      </div>
-                                    </div>
-                                    <div class="item">
-                                        <img class="ui avatar image" src="{{ url('files/images/user logo.png') }}">
-                                      <div class="content">
-                                        <a class="header">Stevie Feliciano</a>
-                                        <div class="description">Last seen watching <a><b>Bob's Burgers</b></a> 10 hours ago.</div>
-                                      </div>
-                                    </div>
-                                    <div class="item">
-                                        <img class="ui avatar image" src="{{ url('files/images/user logo.png') }}">
-                                      <div class="content">
-                                        <a class="header">Elliot Fu</a>
-                                        <div class="description">Last seen watching <a><b>The Godfather Part 2</b></a> yesterday.</div>
-                                      </div>
-                                    </div>
-                                  </div>
+                                <div class="ui divided list transaction_preview">
+                                    <div style="text-align: center">Please wait...</div>
+                                </div>
+                                <a class="header">See More</a>
                             </div>
                         </div>
                         <div class="ui top attached header">
@@ -132,6 +129,7 @@
                             </div>
                         </div>
                     </div>
+                    
                     <div class="ui very tiny bottom attached segment">
                         @if (Member::where('user_id', Auth::user()->id)->first()->role == "admin")
                             <button class="ui very tiny primary button" type="button">Initiate Approval Process</button>

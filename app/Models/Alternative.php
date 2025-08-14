@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Recepient extends Model
+class Alternative extends Model
 {
     use HasFactory;
+    
+    protected $table = "alternatives";
 
     protected $fillable = [
-        'transaction_id',
-        'receiver_id',
-        'read_at'
+        'synonyms',
     ];
 }

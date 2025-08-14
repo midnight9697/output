@@ -20,5 +20,6 @@
 @include('layout.jsinclude')
 <script>
     axios.defaults.baseURL = "{{ url('/') }}";
+    localStorage.setItem('user', "{{ Auth::user()->id }}")
 </script>
 @yield('custom_js')

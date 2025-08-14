@@ -120,19 +120,19 @@ export class CustomDate {
 export class confModal {
     load(accept, message = false) {
         const ht = `
-            <div class="ui icon header">
-                <i class="warning yellow icon"></i>
+            <div class="ui small icon header">
+                <i class="warning small tiny yellow icon"></i>
                 Confirm Action
             </div>
             <div class="content">
-                <p>${message?message:"Are you sure you want to proceed with this action?"}</p>
+                <h5>${message?message:"Are you sure you want to proceed with this action?"}</h5>
             </div>
             <div class="actions">
-                <div class="ui red basic cancel inverted button">
+                <div class="ui red basic cancel button">
                     <i class="remove icon"></i>
                     No
                 </div>
-                <div class="ui green ok inverted button confirm_warning_action">
+                <div class="ui green ok button confirm_warning_action">
                 <i class="checkmark icon"></i>
                     Yes
                 </div>

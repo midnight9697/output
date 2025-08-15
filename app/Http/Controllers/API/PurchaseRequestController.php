@@ -67,13 +67,7 @@ class PurchaseRequestController extends Controller {
             'body' => 'initiated the request',
             'sender_id' => Auth::user()->id,
         ]);
-
-        foreach (Member::where('purchase_request_id', $new->id)->get() as $member) {
-            Recepient::create([
-                'transaction_id' => $transaction->id,
-                'receiver_id' => $member->user_id
-            ]);
-        }
+        $this->sendtoAll($new, $transaction);
         // John initiated the request
         return $new;
     }
@@ -139,7 +133,7 @@ class PurchaseRequestController extends Controller {
     public function fetch_pr_items($pr_id) {
         $pr_id = decryptUrlSafe($pr_id);
         $pr = PurchaseRequest::with('members')->find($pr_id);
-        $transactions = Transaction::where('purchase_request_id', $pr->id)->with('sender')->with('act')->orderBy('id', 'desc')->get();
+        $transactions = Transaction::where('purchase_request_id', $pr->id)->with('sender')->with('act')->orderBy('id', 'desc')->paginate(10);
         if (!Gate::allows('pr-update-view', $pr)) {
             abort(403, 'Unauthorize action.');
         }
@@ -149,17 +143,23 @@ class PurchaseRequestController extends Controller {
     public function make_transaction(Request $request) {
         $pr_id = decryptUrlSafe($request->pr_id);
         $pr = PurchaseRequest::with('members')->find($pr_id);
-        return $pr_id;
-        // $transaction = $new->transactions()->create([
-        //     'body' => 'initiated the request',
-        //     'sender_id' => Auth::user()->id,
-        // ]);
-        // foreach (Member::where('purchase_request_id', $new->id)->get() as $member) {
-        //         Recepient::create([
-        //             'transaction_id' => $transaction->id,
-        //             'receiver_id' => $member->user_id
-        //         ]);
-        //     }
+
+        $transaction = $pr->transactions()->create([
+            'body' => $request->body,
+            'sender_id' => Auth::user()->id,
+            'action' => $request->action
+        ]);
+        $this->sendtoAll($pr, $transaction);
+        return $transaction;
+    }
+
+    public function sendtoAll($pr, $transaction) {
+        foreach (Member::where('purchase_request_id', $pr->id)->get() as $member) {
+            Recepient::create([
+                'transaction_id' => $transaction->id,
+                'receiver_id' => $member->user_id
+            ]);
+        }
     }
 
     public function delete_pr($id) {

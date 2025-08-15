@@ -78,6 +78,22 @@
                             <div style="text-align:center">Please wait...</div>
                             {{-- Items Table --}}
                         </div>
+                        <div class="ui top attached header">
+                            <div class="ui right aligned grid">
+                                <div class="right floated left aligned eight wide column">
+                                    MEMBERS
+                                </div>
+                                <div class="left floated right aligned eight wide column">
+                                    <button type="button" class="ui very tiny primary button add_member_btn">ADD</button>
+                                </div>
+                               
+                              </div>
+                        </div>
+                        <div class="ui form attached segment">
+                            <div class="members-form-section">
+                                <p style="text-align:center">Please wait...</p>
+                            </div>
+                        </div>
                     </div>
                     <div class="eight wide column">
                         <div class="ui top attached header">
@@ -112,22 +128,7 @@
                                 <a class="header">See More</a>
                             </div>
                         </div>
-                        <div class="ui top attached header">
-                            <div class="ui right aligned grid">
-                                <div class="right floated left aligned eight wide column">
-                                    MEMBERS
-                                </div>
-                                <div class="left floated right aligned eight wide column">
-                                    <button type="button" class="ui very tiny primary button add_member_btn">ADD</button>
-                                </div>
-                               
-                              </div>
-                        </div>
-                        <div class="ui small form attached segment">
-                            <div class="members-form-section">
-                                <p style="text-align:center">Please wait...</p>
-                            </div>
-                        </div>
+                       
                     </div>
                     
                     <div class="ui very tiny bottom attached segment">

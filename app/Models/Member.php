@@ -21,5 +21,10 @@ class Member extends Model {
         $user = $this->hasOne(User::class, 'id', 'user_id')->with('profile');
         return $user;
     }
+
+    public function addedBy() {
+        $user = $this->hasOne(User::class, 'id', 'added_by')->with('profile');
+        return $user;
+    }
     
 }

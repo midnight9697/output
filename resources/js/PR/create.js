@@ -79,13 +79,14 @@ export function membersTable(members) {
         itemLists += `
             <div class="item">
               <div class="right floated content">
-                <div class="ui very tiny green button">EDIT</div>
+                ${member.created_by == localStorage.getItem('user')?"":`<div class="ui very tiny green button">EDIT</div>`}
               </div>
               <img class="ui avatar image" src="/files/images/user logo.png">
               <div class="content">
-                ${member.user.profile.lastname+" "+member.user.profile.firstname}
+                <div class="header">${member.user.profile.lastname+" "+member.user.profile.firstname}</div>
+                <small>${member.role}. ${(PRValidator.pr.created_by == member.user_id?"CREATOR":`ADDED BY: ${member.added_by.profile.firstname+" "+member.added_by.profile.lastname}`)}</small>
               </div>
-            </div>
+            </div> 
         `;
     });
 

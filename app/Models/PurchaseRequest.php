@@ -40,7 +40,7 @@ class PurchaseRequest extends Model
     }
 
     public function members() {
-        return $this->hasMany(Member::class)->with('user');
+        return $this->hasMany(Member::class)->with('user')->with('addedBy');
     }
 
     public function transactions() {

@@ -92,6 +92,7 @@ class UserController extends Controller {
             'division_id' => $request->division,
             'section_id' => $request->section,
             'position' => $request->position,
+            'unit_id' => $request->unit,
         ]);
         
         if ($request->password) {
@@ -130,15 +131,13 @@ class UserController extends Controller {
             'suffix', 
             'position',
         ];
-        $result =  Profile::orWhere(function($q) use ($columns, $keyword) {
-            foreach ($columns as $col) {
-                $q->orWhere($col, 'like', '%'. $keyword . '%');
+        $users = User::with('profile')->whereHas('profile', function($query) use($request, $columns) {
+            foreach ($columns as $column) {
+                $query->orWhere($column, 'LIKE', '%'. $request->q. '%');
             }
-        })->get('user_id')->toArray();
-        $userids = array_column($result, 'user_id');
-        
-        $users = User::whereIn('id', $userids)->with('profile')->get(10);
-        return $users;
+            return $query;
+        });
+        return $users->get();
     }
 
     public function send_forgot_password_link(Request $request) {

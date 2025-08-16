@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('pr_number')->nullable();
             $table->string('responsibility_center_code');
             $table->string('purpose')->default('waived')->nullable();
+            $table->timestamp('created_in')->nullable();
             $table->foreignId('created_by')->constrained('users')->default(1);
             $table->timestamps();
         });

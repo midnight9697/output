@@ -53,7 +53,7 @@ class DivisionSeeder extends Seeder
         // SECTION (FAD)
         $this->insertSection(2, "FINANCE UNIT", "FINANCE");
         $this->insertSection(2, "ADMINISTRATIVE UNIT", "ADMINISTRATIVE");
-
+        
         // SECTION (CPD)
         $this->insertSection(3, "TOXIC CHEMICALS AND HAZARDOUZ WASTE PERMITTING UNIT", "TCHWPU");
         $this->insertSection(3, "AIR AND WATER WASTE PERMETTING SECTION", "AWPS");
@@ -64,6 +64,8 @@ class DivisionSeeder extends Seeder
         $this->insertSection(4, "AMBIENT MONITORING SECTION", "AMS");
         $this->insertSection(4, "AIR AND WATER MONITORING SECTION", "AWMS");
         $this->insertSection(4, "TOXIC CHEMICALS AND HAZARDOUS MONITORING SECTION", "TCHMS");
+
+        $this->insertUnit(10, 'SUPPLY UNIT');
     }
 
     public function insertSection($division, $section, $acronym) {
@@ -71,6 +73,13 @@ class DivisionSeeder extends Seeder
             'division_id' => $division,
             'section' => $section,
             'acronym' => $acronym,
+        ]);
+    }
+
+    public function insertUnit($section, $acronym) {
+        DB::table("sections")->insert([
+            'section' => $section,
+            'unit_name' => $acronym,
         ]);
     }
 }

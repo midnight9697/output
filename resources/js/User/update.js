@@ -21,7 +21,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     BtnLoaderMod.load(document.getElementById('save_changes_button'), () => {
                             UserMod.failedAction('formUpdateUser');
                             setTimeout(() => {
-                                MessageMod.success("User Successfully Updated");
+                                MessageMod.success("User Successfully Updated", () => {
+                                    window.location.reload(true);
+                                });
+                                
                             }, 100);
                         }, "SAVE CHANGES");
                     }, (response) => {

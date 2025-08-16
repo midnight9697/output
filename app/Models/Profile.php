@@ -22,6 +22,7 @@ class Profile extends Model
         'position',
         'bac',
         'inspector',
+        'unit_id',
     ];
 
     public function user() {

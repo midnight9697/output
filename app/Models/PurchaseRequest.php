@@ -26,7 +26,7 @@ class PurchaseRequest extends Model
         'responsibility_center_code',
         'purpose',
         'created_by',
-        'created_at'
+        'created_in'
     ];
     
     protected function createdAtFormatted(): Attribute {

@@ -2,10 +2,12 @@
 
 @section('main_content')
 @php
+    use Carbon\Carbon;
     use App\Models\Member;
     use App\Models\Alternative;
 @endphp
 @include('admin.pr.create_item')
+@include('admin.pr.routing')
     
    <div class="ui grid">
         <div class="sixteen wide column">
@@ -46,9 +48,8 @@
                                 </div>
                                 <div class="two fields">
                                     <div class="field">
-                                        
                                         <label>Date</label>
-                                        <input type="date" name="date" value="{{ date('Y-m-d', strtotime($pr->created_at)) }}">
+                                        <input type="date" name="date" value="{{ date('Y-m-d', strtotime($pr->created_in))  }}">
                                     </div>
                                     <div class="field">
                                         <label>Responsibility Center Code</label>
@@ -111,7 +112,7 @@
                                         </select>
                                     </div>
                                     <div class="field">
-                                        <label>Comment</label>
+                                        <label>Remarks</label>
                                       <textarea id="long-message" name="long-message" rows="3" placeholder="Enter a message"></textarea>
                                     </div>
                                     <div class="field" style="display: flex; justify-content: flex-end;">
@@ -133,10 +134,11 @@
                     
                     <div class="ui very tiny bottom attached segment">
                         @if (Member::where('user_id', Auth::user()->id)->first()->role == "admin")
-                            <button class="ui very tiny primary button" type="button">Initiate Approval Process</button>
+                            <button class="ui very tiny primary button lunchRouteForm" type="button">Initiate Approval Process</button>
                         @endif
                         <button type="submit" class="ui very tiny green right floated button">SAVE CHANGES</button>
                     </div>
+                </div>
                 {{-- Items --}}
             </form>
         </div>

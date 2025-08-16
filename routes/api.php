@@ -32,7 +32,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('users')->group(function() {
         Route::get('getpage', [UserController::class, 'fetchByPage']);
         Route::get('all', [UserController::class, 'fetchAll']);
-        Route::post('search', [UserController::class, 'search_user']);
+        Route::get('search', [UserController::class, 'search_user']);
         Route::post('insert', [UserController::class, 'insertUser']);
         Route::post('{id}/edit', [UserController::class, 'updateUser']);
     });

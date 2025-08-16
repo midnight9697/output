@@ -54,7 +54,7 @@ class PurchaseRequestController extends Controller {
 
     public function create_pr(CreatePrRequest $request, $id = null) {
         $request->merge(['created_by' => Auth::user()->id]);
-        $request->merge(['created_at' => $request->date]);
+        $request->merge(['created_in' => $request->date]);
         $new = PurchaseRequest::create($request->except('items'));
         $new->purchase_request_items()->createMany($request->items);
         $new->members()->create([
@@ -64,7 +64,7 @@ class PurchaseRequestController extends Controller {
         ]);
 
         $transaction = $new->transactions()->create([
-            'body' => 'initiated the request',
+            'body' => transactionBodies()->initiate,
             'sender_id' => Auth::user()->id,
         ]);
         $this->sendtoAll($new, $transaction);
@@ -75,7 +75,9 @@ class PurchaseRequestController extends Controller {
     public function edit_pr(UpdatePrRequest $request, $pr_id = null) {
         $pr_id = decryptUrlSafe($pr_id);
         $pr = PurchaseRequest::find($pr_id);
-        $pr->fill($request->except('items'));
+        $request->merge(['created_in' => date('Y-m-d H:i:s', strtotime($request->date))]);
+       
+        $pr->fill($request->except(['items', 'date']));
         foreach ($request->items as $item) {
             $item_id = (isset($item['id'])?decryptUrlSafe($item['id']):null);
             $itemInstance = PRItem::find($item_id);
@@ -91,12 +93,12 @@ class PurchaseRequestController extends Controller {
         $member_count = Member::where('purchase_request_id', $pr_id)->count();
         if (count($updatedColumns) > 0) {
             $transaction = $pr->transactions()->create([
-                'body' => 'changed the details of the purchase request',
+                'body' => transactionBodies()->update,
                 'sender_id' => Auth::user()->id,
             ]);
             if (count($updatedColumns) < 0 && ($member_count < count($request->members))) {
                 $transaction = $pr->transactions()->create([
-                    'body' => 'Modified the purchase request and added a new participant',
+                    'body' => transactionBodies()->update_with_items,
                     'sender_id' => Auth::user()->id,
                 ]);
             }
@@ -127,6 +129,7 @@ class PurchaseRequestController extends Controller {
                 ]);
             }
         }
+        $pr->save();
         return $updatedColumns;
     }
 

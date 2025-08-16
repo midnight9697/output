@@ -4,6 +4,7 @@
     @php
         use App\Models\Division;
         use App\Models\Section;
+        use App\Models\Unit;
     @endphp
     <style>
         .custom-outline {
@@ -75,18 +76,31 @@
                         </select>
                     </div>
                     <div class="field">
-                        <label>Section/Unit</label>
-                        <select name="section" id="section" class="ui fluid dropdown">
-                            @foreach (Section::where('division_id', $user->profile->division->id)->get() as $section)
-                                <option {{ $section->id == $user->profile->section->id?"selected":"" }} value="{{ $section->id }}">{{ $section->section }}</option>
-                            @endforeach
-                        </select>
+                        <div class="two fields">
+                            <div class="field">
+                                <label>Section</label>
+                                <select name="section" id="section" class="ui fluid dropdown">
+                                    @foreach (Section::where('division_id', $user->profile->division->id)->get() as $section)
+                                        <option {{ $section->id == $user->profile->section->id?"selected":"" }} value="{{ $section->id }}">{{ $section->section }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="field">
+                                <label>Unit</label>
+                                <select name="unit" id="unit" class="ui fluid dropdown">
+                                    <option value="">--</option>
+                                    @foreach (Unit::where('section_id', $user->profile->section_id)->get() as $unit)
+                                        <option {{ $unit->id == $user->profile->unit_id?"selected":"" }} value="{{ $unit->id }}">{{ $unit->unit_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     <div class="field">
                         <label>Role</label>
                         <select name="role" id="role" class="ui fluid dropdown" required>
-                            <option {{ Auth::user()->role=="admin"?"selected":"" }} value="admin">ADMIN</option>
-                            <option {{ Auth::user()->role=="user"?"selected":"" }} value="user">USER</option> 
+                            <option {{$user->role=="admin"?"selected":"" }} value="admin">ADMIN</option>
+                            <option {{$user->role=="user"?"selected":"" }} value="user">USER</option> 
                         </select>
                     </div>
                     <div class="ui divider"></div>

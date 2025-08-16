@@ -6,6 +6,22 @@ import { PRValidator } from "./validation";
 
 document.addEventListener('DOMContentLoaded', () => {
 
+    $('.ui.search')
+      .search({
+        apiSettings: {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('bearer')}`
+            },
+            url: '/api/users/search?q={query}'
+          },
+        type: 'data',
+        
+      });
+
+    $('.lunchRouteForm').on('click', () => {
+        $('#modalRoutePR').modal('show');
+    });
+
     $('.add_member_btn').on('click', function() {
         $('#modalAddMember').modal('show');
     });
@@ -31,13 +47,12 @@ document.addEventListener('DOMContentLoaded', () => {
             // MessageMod.success("Review Posted");
             });
         }, "Do you want to submit this review ?");
-        
     });
     
     PRValidator.CreatePRValidation((e) => {
         e.preventDefault();
         PRClass.updatePR(PRValidator.serializeArrayToJson('.updatepr'), PRValidator.items, PRValidator.members, (e) => {
-            window.location.reload(true);
+            // window.location.reload(true);
         });
     }, 'updatepr');
     
@@ -91,7 +106,7 @@ function transactionTable() {
             <a class="header">${(transaction.sender_id==localStorage.getItem('user')?"You":transaction.sender.firstname+" "+transaction.sender.lastname)}</a>
             ${(transaction.action == 1 && transaction.body != ""?"":`<small style="color:green">(${transaction.act.synonyms})</small>`)}
             
-            <div class="description"><b>${transaction.created_at}</b> | ${transaction.body}</div>
+            <div class="description"><b>${transaction.created_for}</b> | ${transaction.body}</div>
           </div>
         </div>
         `;

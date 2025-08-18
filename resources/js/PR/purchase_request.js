@@ -65,6 +65,20 @@ export class PurchaseRequests {
         })
         .then(action).catch(fail)
     }
+
+    routePR(data, action = () => {}, fail = () => {}) {
+      var usersClone = this;
+      data['pr_id'] = localStorage.getItem('pr_id');
+      axios.post('./api/pr/route', data, {
+          headers: {
+            'Content-Type': 'application/json; charset=utf-8',
+            'Accept': 'application/vnd.github+json',
+            'Authorization': `Bearer ${localStorage.getItem('bearer')}`
+            // 'responseType': 'application/json',
+          },
+        })
+        .then(action).catch(fail)
+    }
 }
 
 export var PRClass = new PurchaseRequests();

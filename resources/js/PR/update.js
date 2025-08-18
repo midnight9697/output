@@ -6,18 +6,47 @@ import { PRValidator } from "./validation";
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  $('.submit_and_route').on('click', () => {
+    $('#modalRoutePR').trigger('submit');
+  });
+
+  $('#modalRoutePR').on('submit', (e) => {
+      e.preventDefault();
+      let data = PRValidator.serializeArrayToJson('.routingForm');
+      data['assigned_to'] = PRValidator.assigned;
+      PRClass.routePR(data, (respsons) => {
+        console.log('result', respsons);
+      })
+    });
+
     $('.ui.search')
       .search({
         apiSettings: {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('bearer')}`
             },
-            url: '/api/users/search?q={query}'
+            url: '/api/users/search?q={query}',
+            onResponse: function(response) {
+              let result = [];
+              response.data.forEach(user => {
+                result.push({
+                  title: user.profile.firstname+" "+user.profile.lastname,
+                  description: user.profile.position,
+                  id: user.id
+                });
+              });
+              return {
+                results : result
+              };
+            },
           },
         searchFields   : [
           'firstname'
-        ]
-      });
+        ],
+        onSelect: (result, response) => {
+          PRValidator.assigned = result.id
+      }
+    });
 
     $('.lunchRouteForm').on('click', () => {
         $('#modalRoutePR').modal('show');

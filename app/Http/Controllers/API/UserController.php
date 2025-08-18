@@ -132,12 +132,14 @@ class UserController extends Controller {
             'position',
         ];
         $users = User::with('profile')->whereHas('profile', function($query) use($request, $columns) {
-            foreach ($columns as $column) {
-                $query->orWhere($column, 'LIKE', '%'. $request->q. '%');
-            }
-            return $query;
+            $query->where('profiles.'.'firstname', 'LIKE', '%'. $request->q. '%')
+                    ->orwhere('profiles.'.'middlename', 'LIKE', '%'. $request->q. '%')
+                    ->orwhere('profiles.'.'lastname', 'LIKE', '%'. $request->q. '%')
+                    ->orwhere('profiles.'.'suffix', 'LIKE', '%'. $request->q. '%')
+                    ->orwhere('profiles.'.'position', 'LIKE', '%'. $request->q. '%');
+            
         });
-        return Profile::where('lastname', 'LIKE', '%'.$request->lastname.'%')->get();
+        return encryptIds($users);
     }
 
     public function send_forgot_password_link(Request $request) {
@@ -176,4 +178,5 @@ class UserController extends Controller {
         DB::delete('DELETE FROM password_resets WHERE email=?', [$request->email]);
         return response()->json(['message' => 'success']);
     }
+
 }

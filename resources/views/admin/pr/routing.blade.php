@@ -12,12 +12,12 @@
             <div class="ui error message">
                 {{--  --}}
             </div>
-            <form class="ui form" id="routingForm" action="#" method="POST">
+            <form class="ui form routingForm" id="routingForm" action="#" method="POST">
                 <div class="field">
                     <label>Action:</label>
-                    <select name="alternative">
+                    <select name="action">
                         @foreach (Alternative::get() as $action)
-                            <option value="{{ $action->id }}">{{ strtoupper($action->id == 1?"--":$action->synonyms) }}</option>
+                            <option value="{{ encryptUrlSafe($action->id) }}">{{ strtoupper($action->id == 1?"--":$action->synonyms) }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -33,10 +33,10 @@
                 </div>
                 <div class="field">
                     <label>Remarks</label>
-                  <textarea name="long-message" rows="3" placeholder="Enter a message"></textarea>
+                  <textarea name="body" rows="3" placeholder="Enter a message"></textarea>
                 </div>
             </form>
         </div>
     </div>
-    <div class="actions"><button class="ui very tiny primary button submit_user_to_list">NEW</button></div>
+    <div class="actions"><button class="ui very tiny primary button submit_and_route">NEW</button></div>
 </div>

@@ -51,6 +51,6 @@ function transactionBodies() {
         return (object)[
         'initiate' => 'initiated the request',
         'update' => 'changed the details of the purchase request',
-        'update_with_items' => 'Modified the purchase request and added a new participant'
+        'update_with_items' => 'Modified the purchase request and added a new participant',
     ];
 }

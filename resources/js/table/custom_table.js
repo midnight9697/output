@@ -7,6 +7,7 @@ export default class Custom_table {
         this.search = search;
         this.info = info;
         this.url = url;
+        this.custom_buttons = () => {}
         // this.setEditor();
         // this.table = this.initialize_table(element, this.download, this.pagination, this.search, this.info);
         console.log('shitye', document.getElementById(element));
@@ -25,9 +26,9 @@ export default class Custom_table {
         this.remove_row(element);
     }
 
-    load(columns = [], editAction = () => {}, deleteAction = () => {}) {
+    load(columns = []) {
         this.columns = columns;
-        this.editAction = editAction;
+        // this.editAction = editAction;
         this.initialize_table();
     }
 
@@ -50,20 +51,7 @@ export default class Custom_table {
 
         TBColumns.push({
             data: null,
-            render: function (data, type, row) {
-                // 'row' contains the data for the current row
-                let edit_button = document.createElement('button');
-                let delete_button = document.createElement('button');
-                edit_button.innerText = (localStorage.getItem('user') == data.created_by.user_id?"EDIT":'REVIEW');
-                edit_button.className = "ui very tiny "+(localStorage.getItem('user') == data.created_by.user_id?"green":"grey")+" button";
-                edit_button.onclick = (e) => {
-                    data.element = e;
-                    self.editAction(data);
-                };
-                return edit_button;
-                // return '<button class="ui very tiny green button update_button">Edit</button>' +
-                //        '<button class="ui very tiny red button delete_button">Delete</button>';
-            }
+            render: self.custom_buttons
         });
         var current_table = new DataTable(element, {
             processing: true,

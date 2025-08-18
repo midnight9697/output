@@ -145,14 +145,29 @@ class PurchaseRequestController extends Controller {
 
     public function make_transaction(Request $request) {
         $pr_id = decryptUrlSafe($request->pr_id);
+        $action = decryptUrlSafe($request->action);
+        // $action = decryptUrlSafe($request->action);
         $pr = PurchaseRequest::with('members')->find($pr_id);
 
         $transaction = $pr->transactions()->create([
             'body' => $request->body,
             'sender_id' => Auth::user()->id,
-            'action' => $request->action
+            'action' => $action
         ]);
-        $this->sendtoAll($pr, $transaction);
+
+        if (!isset($request->assigned_to)) {
+            $this->sendtoAll($pr, $transaction);
+        }
+        else {
+            PurchaseRequest::where('id', $pr_id)->update([
+                'approval' => 1
+            ]);
+
+            Recepient::create([
+                'transaction_id' => $transaction->id,
+                'receiver_id' => decryptUrlSafe($request->assigned_to)
+            ]);
+        }
         return $transaction;
     }
 
@@ -171,5 +186,9 @@ class PurchaseRequestController extends Controller {
             abort(403, 'Unauthorize action.');
         }
         return $pr->delete();
+    }
+
+    public function route_pr(Request $request) {
+        return $this->make_transaction($request);
     }
 }

@@ -107,7 +107,7 @@
                                         <label>ACTION</label>
                                         <select name="alternative" id="alternative">
                                             @foreach (Alternative::get() as $action)
-                                                <option value="{{ $action->id }}">{{ strtoupper($action->id == 1?"--":$action->synonyms) }}</option>
+                                                <option value="{{ encryptUrlSafe($action->id) }}">{{ strtoupper($action->id == 1?"--":$action->synonyms) }}</option>
                                             @endforeach
                                         </select>
                                     </div>

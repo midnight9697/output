@@ -23,4 +23,8 @@ class Transaction extends Model
     public function act() {
         return $this->hasOne(Alternative::class, 'id', 'action');
     }
+
+    public function recepient() {
+        return $this->hasOne(Recepient::class, 'transaction_id')->orderBy('id', 'desc');
+    }
 }

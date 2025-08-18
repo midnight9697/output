@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('purpose')->default('waived')->nullable();
             $table->timestamp('created_in')->nullable();
             $table->foreignId('created_by')->constrained('users')->default(1);
+            $table->bigInteger('approval')->nullable();
             $table->timestamps();
         });
     }

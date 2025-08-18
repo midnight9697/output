@@ -5,6 +5,7 @@ namespace App\Http\Controllers\PR;
 use App\Http\Controllers\Controller;
 use App\Models\Member;
 use App\Models\PurchaseRequest;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;

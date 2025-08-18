@@ -14,8 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             url: '/api/users/search?q={query}'
           },
-        type: 'data',
-        
+        searchFields   : [
+          'firstname'
+        ]
       });
 
     $('.lunchRouteForm').on('click', () => {

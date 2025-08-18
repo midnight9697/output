@@ -137,7 +137,7 @@ class UserController extends Controller {
             }
             return $query;
         });
-        return $users->get();
+        return Profile::where('lastname', 'LIKE', '%'.$request->lastname.'%')->get();
     }
 
     public function send_forgot_password_link(Request $request) {

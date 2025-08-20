@@ -83,7 +83,6 @@
                         <div class="left floated right aligned eight wide column">
                             <button class="ui very tiny primary button">ADD</button>
                         </div>
-                       
                       </div>
                 </div>
                 <div class="ui attached segment" style="max-height: 473px;min-height:473px">
@@ -95,4 +94,4 @@
 @endsection
 @section('custom_js')
     @vite(['resources/js/PR/create.js'])
-@endsection
+@endsection 

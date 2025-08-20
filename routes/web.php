@@ -41,12 +41,14 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('{id}/edit', [UserProfileController::class, 'userUpdateView'])->name("user.update");
         Route::get('list', [ProfileController::class, 'fetchUsers']);
     });
-
+    
     // Purchase Request Routes
     Route::prefix('pr')->group(function() {
         Route::get('/', [PurchaseRequestController::class, 'prView'])->name('purchase request');
         Route::get('create', [PurchaseRequestController::class, 'createView'])->name('create.purchase.request');
         Route::get('{id}/edit', [PurchaseRequestController::class, 'updateView'])->name('edit.purchase.request');
+        Route::get('{id}/track', [PurchaseRequestController::class, 'trackView'])->name('transaction.history');
+        Route::get('view/{id}', [PurchaseRequestController::class, 'viewPR'])->name('view.purchase request');
     });
     
     // Authentication Routes

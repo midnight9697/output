@@ -48,6 +48,10 @@ class PurchaseRequest extends Model
         return $this->hasMany(Transaction::class);
     }
 
+    public function lastTransaction() {
+        return $this->hasOne(Transaction::class)->orderBy('id', 'desc')->with('lastRecepient'); //GET THE LAST TRANSACTION FOR THE LAST RECEPIENT
+    }
+
     public function createdBy() {
         return $this->belongsTo(Profile::class, 'created_by', 'user_id');
     }

@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
       let data = PRValidator.serializeArrayToJson('.routingForm');
       data['assigned_to'] = PRValidator.assigned;
       PRClass.routePR(data, (respsons) => {
-        console.log('result', respsons);
+        window.location = '../'+localStorage.getItem('pr_id')+'/track';
       })
     });
 

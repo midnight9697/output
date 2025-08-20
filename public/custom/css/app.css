@@ -1,0 +1,25 @@
+.status_profiles {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid #e5e5e5;
+    background: #219653;
+    margin:auto;
+    /* position: absolute; */
+    /* bottom: 0; */
+    /* right: 0; */
+    /* top: auto; */
+}
+
+.status_profiles_not {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid #e5e5e5;
+    background: gray;
+    margin:auto;
+    /* position: absolute; */
+    /* bottom: 0; */
+    /* right: 0; */
+    /* top: auto; */
+}

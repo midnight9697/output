@@ -12,6 +12,6 @@ class Recepient extends Model
     protected $fillable = [
         'transaction_id',
         'receiver_id',
-        'read_at'
+        'received'
     ];
 }

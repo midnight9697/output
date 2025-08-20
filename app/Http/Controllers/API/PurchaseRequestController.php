@@ -26,7 +26,12 @@ class PurchaseRequestController extends Controller {
         }
         $prs = PurchaseRequest::orderBy('id','desc')->with('createdBy')->whereHas('members', function($query) {
             return $query->where('members.user_id', Auth::user()->id);
-        })->with('members');
+        })->orWhereHas('lastTransaction', function($query) {
+            return $query->whereHas('lastRecepient', function($q) {
+                return $q->where('receiver_id', Auth::user()->id);
+            });
+        })->with('members')->with('lastTransaction');
+        // return $prs->toSql();
         // PurchaseRequest::query()->orderBy('created_at','asc')->with('members')->whereHas('members')
         return encryptIds($prs);
     }
@@ -190,5 +195,14 @@ class PurchaseRequestController extends Controller {
 
     public function route_pr(Request $request) {
         return $this->make_transaction($request);
+    }
+
+    public function receive_pr(Request $request) {
+        $pr_id = decryptUrlSafe($request->pr_id);
+        $tr = Transaction::where('purchase_request_id', $pr_id)->orderBy('id', 'desc')->with('lastRecepient')->first();
+        $rc = Recepient::where('id', $tr->lastRecepient->id)->update([
+            'received' => '1'
+        ]);
+        return ['rc' => $rc, 'id' => $tr->lastRecepient->id];
     }
 }

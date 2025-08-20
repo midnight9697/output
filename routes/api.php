@@ -47,6 +47,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('{id}/items', [PurchaseRequestController::class, 'fetch_pr_items'])->name('pr.items');  //search for PR
         Route::post('comment', [PurchaseRequestController::class, 'make_transaction'])->name('pr.comment'); // submit comments and reviews
         Route::post('route', [PurchaseRequestController::class, 'route_pr'])->name('pr.comment'); //  route to assigned personnel
+        Route::post('{id}/receive', [PurchaseRequestController::class, 'receive_pr'])->name('pr.receive'); //  receive to assigned personnel
     });
 });
 

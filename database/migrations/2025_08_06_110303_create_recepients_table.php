@@ -17,7 +17,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('transaction_id')->constrained();
             $table->foreignId('receiver_id')->constrained('users');
-            $table->timestamp('read_at')->nullable();
+            $table->enum('received', [
+                0, 1
+            ])->default(0);
             $table->timestamps();
         });
     }

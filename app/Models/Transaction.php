@@ -27,4 +27,8 @@ class Transaction extends Model
     public function recepient() {
         return $this->hasOne(Recepient::class, 'transaction_id')->orderBy('id', 'desc');
     }
+
+    public function lastRecepient() {
+        return $this->hasOne(Recepient::class, 'transaction_id')->orderBy('id', 'desc');    //GET THE LAST TRANSACTION FOR THE LAST RECEPIENT
+    }
 }

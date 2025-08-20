@@ -1,3 +1,5 @@
+import { PRValidator } from "../PR/validation";
+
 export default class Custom_table {
         
     constructor(element, download, pagination, search, info, url = '') {
@@ -7,6 +9,8 @@ export default class Custom_table {
         this.search = search;
         this.info = info;
         this.url = url;
+        this.items = [];
+        this.getItems = (items) => {};
         this.custom_buttons = () => {}
         // this.setEditor();
         // this.table = this.initialize_table(element, this.download, this.pagination, this.search, this.info);
@@ -61,6 +65,10 @@ export default class Custom_table {
                 type: 'GET',
                 "beforeSend": function (xhr) {
                     xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem('bearer'));
+                },
+                dataSrc: function(json) {
+                    self.getItems(json);
+                    return json.data;
                 }
             },
             "ordering": false,
@@ -80,7 +88,7 @@ export default class Custom_table {
             info: info,
             responsive: true
         });
-        
+        this.table = current_table;
         return current_table
     }
 

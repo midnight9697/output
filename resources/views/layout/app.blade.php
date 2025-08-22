@@ -9,6 +9,15 @@
     @include('layout.cssinclude')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
+<style>
+    #visibleSidebar {
+        width: calc(100% - 260px);
+    }
+
+    #hiddenSidebar {
+        width: 100%;
+    }
+</style>
 @yield('custom_css')
 <body>
     @include('layout.head')
@@ -21,5 +30,24 @@
 <script>
     axios.defaults.baseURL = "{{ url('/') }}";
     localStorage.setItem('user', "{{ Auth::user()->id }}")
+    
+    if ($('.main-sidebar').sidebar('is visible')) {
+        document.getElementsByClassName('custom-content')[0].id = "visibleSidebar";
+        document.getElementsByClassName('custom-topbar')[0].id = "visibleSidebar";
+    }
+
+    $('.main-sidebar').sidebar({
+            dimPage: false,
+            closable: false,
+            onVisible: () => {
+                document.getElementsByClassName('custom-content')[0].id = "visibleSidebar";
+                document.getElementsByClassName('custom-topbar')[0].id = "visibleSidebar";
+            },
+            onHidden: () => {
+                document.getElementsByClassName('custom-content')[0].id = "hiddenSidebar";
+                document.getElementsByClassName('custom-topbar')[0].id = "hiddenSidebar";
+            }
+        }).sidebar('show');
+        $('.main-sidebar').sidebar('attach events', '.toggle');
 </script>
 @yield('custom_js')

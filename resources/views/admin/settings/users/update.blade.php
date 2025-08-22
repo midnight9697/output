@@ -13,7 +13,7 @@
     </style>
     <div class="ui aligned grid">
         <div class="eight wide column">
-            <div class="ui segment">
+            <div class="ui large segment">
                 <form class="ui form" action="#" id="formUpdateUser" method="post">
                     <h4 class="ui dividing header">UPDATE - {{ strtoupper($user->full_name) }}</h4>
                     <div class="ui error message">
@@ -115,9 +115,9 @@
         <div class="eight wide column">
             <div class="ui segment">
                 <h4 class="ui dividing header">{{ strtoupper($user->profile->section->section) }}</h4>
-                <div class="ui inverted segment">
+                <div class="ui large segment">
                     @foreach ($mates as $mate)
-                    <div class="ui inverted relaxed divided list">
+                    <div class="ui relaxed divided list">
                         <div class="item">
                           <div class="content">
                             <div class="header">{{ $mate->user->full_name}}</div>

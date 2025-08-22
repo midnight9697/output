@@ -22,7 +22,14 @@
                 <div class="ui grid">
                     <div class="eight wide column">
                         <div class="ui top attached header">
-                            PURCHASE REQUEST UPDATE FORM
+                            <div class="ui right aligned grid">
+                                <div class="right floated left aligned eight wide column">
+                                    <div class="button very tiny white button">PURCHASE REQUEST UPDATE FORM</div>
+                                </div>
+                                <div class="left floated right aligned eight wide column">
+                                    <a href="{{ url("pr/view") }}/{{ $pr->id }}" target="__blank" class="ui very tiny secondary button">PREVIEW</a>
+                                </div>
+                            </div>
                         </div>
                         <div class="ui small form attached segment">
                             <div class="field">

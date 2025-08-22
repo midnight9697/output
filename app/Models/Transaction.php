@@ -16,6 +16,10 @@ class Transaction extends Model
         'body',
     ];
 
+    public function recepients() {
+        return $this->hasMany(Recepient::class);
+    }
+
     public function sender() {
         return $this->belongsTo(Profile::class, 'sender_id', 'user_id');
     }
@@ -25,7 +29,11 @@ class Transaction extends Model
     }
 
     public function recepient() {
-        return $this->hasOne(Recepient::class, 'transaction_id')->orderBy('id', 'desc');
+        return $this->hasOne(Recepient::class, 'transaction_id')->orderBy('id', 'desc')->with('profile');
+    }
+
+    public function firstRecepient() {
+        return $this->hasOne(Recepient::class, 'transaction_id')->orderBy('id', 'asc');
     }
 
     public function lastRecepient() {

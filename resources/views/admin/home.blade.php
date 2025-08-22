@@ -14,7 +14,6 @@
     $remainingMinutes = floor(($expirationTimestamp - time()) / 60);
     echo "Remaining session time: " . $remainingMinutes . " minutes.";
 @endphp
-  <h1 class="ui header">Hello, {{ Auth::user()->full_name }}, this is the time to fuck up your life.</h1>
 <div class="ui grid stackable padded">
     <div class="four wide computer eight wide tablet sixteen wide mobile column">
         <div class="ui fluid card">

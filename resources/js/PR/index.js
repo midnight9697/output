@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (data.last_transaction.last_recepient.received == 1) {
                     title = 'PROCESS';
                     ui = "ui very tiny green button";
+                    url = window.location+'/process/'+data.id;
                 }
             }
         }
@@ -26,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         button.onclick = (e) => {
             data.element = e;
             if (data.approval == 1) {
-                if (data.last_transaction.last_recepient.receiver_id == localStorage.getItem('user')) {
+                if (data.last_transaction.last_recepient.receiver_id == localStorage.getItem('user') && data.last_transaction.last_recepient.received == 0) {
                     button.className = "ui very tiny primary loading button"
                     button.innerText = "...";
                     button.onclick = () => {};

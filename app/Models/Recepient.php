@@ -14,4 +14,8 @@ class Recepient extends Model
         'receiver_id',
         'received'
     ];
+
+    public function profile() {
+        return $this->hasOne(Profile::class,  'user_id', 'receiver_id');
+    }
 }

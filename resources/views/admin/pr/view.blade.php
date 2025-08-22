@@ -105,17 +105,6 @@
                     @endfor
                     <tr>
                         <td colspan="6">
-                            <div class="display:relative">
-                                <div class="display:flex;justify-content:space-between">
-                                    <div>Bro</div>
-                                    <div>Bro</div>
-                                    <div>Bro</div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="6">
                            <div style="min-height:80px">
                             <label>Purpose:</label>
                             <h6 style="text-align: center">
@@ -125,25 +114,24 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="6">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <p>Signature by:</p>
-                                    <p>Printed name</p>
-                                    <p>Designation</p>
-                                </div>
-                                <div class="col-md-4">
-                                    <p>Requested by:</p>
-                                    <p>ATTY. RODOLFO A. YODICO II</p>
-                                    <p><small>OIC-Chief, FAD and Concurrent Chief Legal Unit</small></p>
-                                </div>
-                                <div class="col-md-4">
-                                    <p>Approved by:</p>
-                                    <p>ENGR. ALEX D. JIMENEZ</p>
-                                    <p>Regional Director</p>
-                                </div>
-                            </div>
-                        </td>
+                        <td colspan="2" style="border: none;padding-bottom:30px;"></td>
+                        <td colspan="2" style="border: none;padding-bottom:30px">Requested by:</td>
+                        <td colspan="2" style="border: none;padding-bottom:30px">Approved by:</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="border: none;padding-left:10px">Signature:</td>
+                        <td colspan="2" style="text-align: center;border: none">______________________________</td>
+                        <td colspan="2" style="text-align: center;border: none">______________________________</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="border: none;padding-left:10px">Printed Name:</td>
+                        <td colspan="2" style="text-align:center;border: none;font-weight:bold">ATTY. RODOLFO A. YODICO II</td>
+                        <td colspan="2" style="text-align:center;border: none;font-weight:bold">ENGR. ALEX D. JIMENEZ</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="border: none;padding-left:10px">Designation:</td>
+                        <td colspan="2" style="text-align:center;border: none">OIC-Chief, FAD and Concurrent Chief Legal Unit</td>
+                        <td colspan="2" style="text-align:center;border: none">Regional Director</td>
                     </tr>
                     <tr>
                         <td colspan="6" style="height:19px"></td>

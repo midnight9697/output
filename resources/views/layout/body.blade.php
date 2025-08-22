@@ -2,11 +2,25 @@
     use Illuminate\Support\Facades\Gate;
     $routesplit = explode(".", Request::route()->getName());
 @endphp
-<div class="ui sidebar inverted vertical menu sidebar-menu" id="sidebar">
+<div class="ui sidebar vertical left inverted  menu main-sidebar" id="sidebar">
+    <div class="item">
+        <div class="sixteen wide column">
+          <img src="{{ url('files/images/emb.png') }}" class="ui very tiny circular image centered">
+        </div>
+        <div class="content" style="text-align: center">
+          <span class="header">{{ Auth::user()->full_name }}</span>
+          {{-- <div class="meta">
+            <span class="date">{{ Auth::user()->full_name }}</span>
+          </div> --}}
+          <div class="description">
+            {{ Auth::user()->profile->position }}
+          </div>
+        </div>
+    </div>
     <div class="item">
         <div class="header">General</div>
         <div class="menu">
-            {{ view('layout.menu', [ 'url' => url('main'), 'title' => 'Dashboard', 'routesplit' => $routesplit, 'permission' => true]) }}
+            {{ view('layout.menu', [ 'url' => route('home'), 'title' => 'Dashboard', 'routesplit' => $routesplit, 'permission' => true]) }}
             {{ view('layout.menu', [ 'url' => url('pr'), 'title' => 'Purchase Request', 'routesplit' => $routesplit, 'permission' => true]) }}
             {{ view('layout.menu', [ 'url' => url('#'), 'title' => 'APP', 'routesplit' => $routesplit, 'permission' => true]) }}
             {{ view('layout.menu', [ 'url' => url('#'), 'title' => 'PPMP', 'routesplit' => $routesplit, 'permission' => true]) }}
@@ -31,13 +45,17 @@
 </div>
 
 {{-- Top Inverted Menu --}}
-<nav class="ui big top fixed inverted menu">
+<nav class="ui basic icon top fixed menu custom-topbar">
+    <a class="item toggle button">
+        <i class="sidebar icon"></i>
+        Menu
+    </a>
     <div class="left menu">
-        <a href="#" class="sidebar-menu-toggler item" data-target="#sidebar">
-            <i class="sidebar icon"></i>
-        </a>
-        <a href="#" class="header item">
-            EMB 8 PROCUREMENT SYSTEM
+        <a href="" class="item">
+            @php
+                $name = str_replace(".", " ", strtoupper(Request::route()->getName()));
+                echo $name;
+            @endphp
         </a>
     </div>
     <div class="right menu">
@@ -59,16 +77,16 @@
 </nav>
 
 <div class="pusher">
-    <div class="main-content" style="padding:40px">
+    <div class="custom-content" id="custom-content" style="padding:40px;padding-top:80px;">
         <div class="content_header">
-            <h1 class="header">
+            {{-- <h1 class="header">
                 @php
                     $name = str_replace(".", " ", strtoupper(Request::route()->getName()));
                     echo $name;
                 @endphp
-            </h1>
+            </h1> --}}
             @yield('extra_content')
-            <div class="ui divider"></div>
+            {{-- <div class="ui divider"></div> --}}
         </div>
         <div class="ui segment" id="main_event">
                 <div class="ui segment" style="overflow: hidden;display:none" id="pageLoaderDefault">

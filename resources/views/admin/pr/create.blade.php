@@ -7,11 +7,11 @@
             <form action="{{ url('api/pr/create') }}" class="ui form createpr" method="POST">
                 @csrf
                 <div class="ui grid">
-                    <div class="sixteen wide column">
+                    <div class="eight wide column">
                         <div class="ui top attached header">
                             PURCHASE REQUEST CREATION FORM
                         </div>
-                        <div class="ui very tiny form attached segment">
+                        <div class="ui large form attached segment">
                             <div class="ui error message">
                                 {{--  --}}
                             </div>
@@ -56,7 +56,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="sixteen wide column">
+                    <div class="eight wide column">
                         <div class="ui top attached header">
                             <div class="ui right aligned grid">
                                 <div class="right floated left aligned eight wide column">
@@ -67,7 +67,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="ui very tiny form attached segment table-pr-items">
+                        <div class="ui large form attached segment table-pr-items">
                             <div style="text-align:center">Please wait...</div>
                             {{-- Items Table --}}
                         </div>
@@ -77,24 +77,6 @@
                     </div>
                 {{-- Items --}}
             </form>
-        </div>
-        <div class="eight wide column" style="display: none">
-            <div class="eight wide column">
-                <div class="ui top attached header">
-                    <div class="ui right aligned grid">
-                        <div class="right floated left aligned eight wide column">
-                            PEOPLE WHO CAN SEE YOUR WORTH
-                        </div>
-                        <div class="left floated right aligned eight wide column">
-                            <button class="ui very tiny primary button">ADD</button>
-                        </div>
-                       
-                      </div>
-                </div>
-                <div class="ui attached segment" style="max-height: 473px;min-height:473px">
-                    <div>NOTHING</div>
-                </div>
-            </div>
         </div>
    </div>
 @endsection

@@ -96,7 +96,7 @@ function dataFetcher(data) {
     data.pr.members.forEach(member => {
         PRValidator.members.push({ user_id: member.user_id, role: member.role });
     });
-
+    
     transactionTable()
     itemsTable();
     membersTable(data.pr.members);

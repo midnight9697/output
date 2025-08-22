@@ -1,6 +1,7 @@
 @if ($permission == true)
-    <a href="{{ $url }}" target="{{ (isset($target)?"__blank":"") }}" class="item {{ in_array("user"||"users", $routesplit)?"active":"" }}">
+    <a href="{{ $url }}" target="{{ (isset($target)?"__blank":"") }}" class="item {{ in_array("user"||"users", $routesplit)?"notactive":"" }}">
         {{-- <div><i class="icon users"></i>{{ $title }}</div> --}}
+        {{-- <i class="home icon"></i> --}}
         @php
             $icon = "";
 
@@ -32,8 +33,8 @@
                     break;
             }
         @endphp
-        <div>
-            <i class="icon {{ $icon }}"></i>{{ $title }}
-        </div>
+        {{-- <div> --}}
+            <i class="{{ $icon }} icon"></i>{{ $title }}
+        {{-- </div> --}}
     </a>
 @endif

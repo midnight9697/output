@@ -31,7 +31,7 @@ Route::prefix('login')->group(function() {
 Route::get('reset_password/{selector}/{token}', [AuthController::class, 'changePasswordView']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::get('/', [ProfileController::class, 'homeView'])->name('main');
+    Route::get('/', [ProfileController::class, 'homeView'])->name('home');
     // Route::get('logout', [AuthController::class, 'logout']);
     Route::get('dashboard', [ProfileController::class, 'homeView']);
 
@@ -49,6 +49,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('{id}/edit', [PurchaseRequestController::class, 'updateView'])->name('edit.purchase.request');
         Route::get('{id}/track', [PurchaseRequestController::class, 'trackView'])->name('transaction.history');
         Route::get('view/{id}', [PurchaseRequestController::class, 'viewPR'])->name('view.purchase request');
+        Route::get('process/{id}', [PurchaseRequestController::class, 'processView'])->name('process.purchase request');
     });
     
     // Authentication Routes

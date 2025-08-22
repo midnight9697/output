@@ -14,6 +14,23 @@ use Illuminate\Support\Facades\Gate;
 
 class PurchaseRequestController extends Controller {
     
+    public function processView($id) {
+        $id = decryptUrlSafe($id);
+        $pr = PurchaseRequest::where('id', $id)->with('purchase_request_items');
+
+        if (!Gate::allows('pr-process-view', $pr->first())) {
+            abort(403, 'Unauthorize action.');
+        }
+        
+        if (!$pr->exists()) {
+            abort(419, 'Unauthorized Access');
+        }
+
+        return view('admin.pr.process', [
+            'pr' => encryptSingle($pr->first())
+        ]);
+    }
+
     public function prView(Request $request) {
         return view('admin.pr.purchase_request');
     }
@@ -32,20 +49,31 @@ class PurchaseRequestController extends Controller {
             'pr' => encryptSingle($pr)
         ]);
     }
-
+    
     public function trackView($id) {
         $id = decryptUrlSafe($id);
         $pr = PurchaseRequest::where('id', $id)->with('purchase_request_items');
+
+        if (!Gate::allows('pr-update-view', $pr->first())) {
+            if (!Gate::allows('pr-file-view', $id)) {
+                abort(403, 'Unauthorize action.');  //for tracking of PR
+            }
+        }
+        
         if (!$pr->exists()) {
             abort(419, 'Unauthorized Access');
         }
-        return view('admin.pr.tracking');
+        return view('admin.pr.tracking', [
+            'pr' => encryptSingle($pr->first())
+        ]);
     }
 
     public function viewPR($id) {
         $id = decryptUrlSafe($id);
         $pr = PurchaseRequest::where('id', $id)->with('purchase_request_items')->first();
-
+        if (!Gate::allows('pr-file-view', $id)) {
+            abort(403, 'Unauthorize action.');
+        }
         $data = json_encode((object)['data' => public_path(''), 'id' => $id, 'request' => $pr]);
         $pdf = Pdf::loadView('admin.pr.view', [
             'data' => $data

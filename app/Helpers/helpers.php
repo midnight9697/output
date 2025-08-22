@@ -10,7 +10,13 @@ function encryptUrlSafe($value) {
 
 function decryptUrlSafe($value) {
     $encrypted = base64_decode(strtr($value, '-_', '+/'));
-    return Crypt::decryptString($encrypted);
+    $result = false;
+    try {
+        $result = Crypt::decryptString($encrypted);
+    } catch (\Illuminate\Contracts\Encryption\DecryptException) {
+        abort(403, 'Unauthorize action.');
+    }
+    return $result;
 }
 
 function encryptIds($data) {

@@ -137,13 +137,26 @@ class PurchaseRequestController extends Controller {
         $pr->save();
         return $updatedColumns;
     }
-
+    
     public function fetch_pr_items($pr_id) {
         $pr_id = decryptUrlSafe($pr_id);
         $pr = PurchaseRequest::with('members')->find($pr_id);
-        $transactions = Transaction::where('purchase_request_id', $pr->id)->with('sender')->with('act')->orderBy('id', 'desc')->paginate(10);
+        if (Member::where('purchase_request_id', $pr_id)->where('user_id', Auth::user()->id)->exists()) {
+            $transactions = Transaction::where('purchase_request_id', $pr->id)->with('sender')->with('act')->orderBy('id', 'desc')->with('recepient')->whereHas('recepient')->with('recepients')->paginate(10);
+        }
+        else {
+            $transactions = Transaction::where('purchase_request_id', $pr->id)->whereHas('recepient', function($query) use($pr_id) {
+                $first_received = Transaction::where('purchase_request_id', $pr_id)->orderBy('id', 'asc')->whereHas('firstRecepient', function($query) {
+                    return $query->where('receiver_id', Auth::user()->id);
+                })->with('firstRecepient')->first();
+                return $query->where('created_at', '>=',$first_received->firstRecepient->created_at);
+            })->with('sender')->with('act')->orderBy('id', 'desc')->with('recepient')->with('recepients')->paginate(10);
+        }
+        
         if (!Gate::allows('pr-update-view', $pr)) {
-            abort(403, 'Unauthorize action.');
+            if (!Gate::allows('pr-file-view', $pr_id)) {
+                abort(403, 'Unauthorize action.');  //for tracking of PR
+            }
         }
         return ['pr' => encryptSingle($pr), 'transactions' => encryptMany($transactions), 'items' => encryptMany(PRItem::where('purchase_request_id', $pr_id)->get())];
     }

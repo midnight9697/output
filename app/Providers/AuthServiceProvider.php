@@ -35,7 +35,8 @@ class AuthServiceProvider extends ServiceProvider
         // Purchase Request Permission
         Gate::define('pr-user-view', [PRPolicy::class, 'userView']);
         Gate::define('pr-update-view', [PRPolicy::class, 'updateView']);
-        Gate::define('pr-delete', [PRPolicy::class, 'delete_pr']);
+        Gate::define('pr-file-view', [PRPolicy::class, 'fileViewer']);
+        Gate::define('pr-process-view', [PRPolicy::class, 'processView']);
 
         // User Management Permissions
         // Gate::define('user-view', [UserPolicy::class, 'viewAny']);

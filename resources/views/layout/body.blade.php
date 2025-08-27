@@ -2,7 +2,7 @@
     use Illuminate\Support\Facades\Gate;
     $routesplit = explode(".", Request::route()->getName());
 @endphp
-<div class="ui sidebar vertical left inverted  menu main-sidebar" id="sidebar">
+<div class="ui visible sidebar vertical left inverted  menu main-sidebar" id="sidebar">
     <div class="item">
         <div class="sixteen wide column">
           <img src="{{ url('files/images/emb.png') }}" class="ui very tiny circular image centered">

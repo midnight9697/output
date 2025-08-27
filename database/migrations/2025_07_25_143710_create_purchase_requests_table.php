@@ -24,6 +24,9 @@ return new class extends Migration
             $table->timestamp('created_in')->nullable();
             $table->foreignId('created_by')->constrained('users')->default(1);
             $table->bigInteger('approval')->nullable();
+            $table->enum('signed', [
+                0, 1
+            ])->default(0);
             $table->timestamps();
         });
     }

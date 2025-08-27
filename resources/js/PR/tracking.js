@@ -41,7 +41,7 @@ function transactionTable() {
         ht += `
         <div class="item">
         <div class="right floated content">
-            <small>Assigned to: ${(member_count == PRValidator.members.length?"Members":transaction.recepient.profile.firstname+" "+transaction.recepient.profile.lastname)}</small>
+            <small>Assigned: ${(member_count == PRValidator.members.length?"Members":transaction.recepient.profile.firstname+" "+transaction.recepient.profile.lastname)}</small>
         </div>
           <i class="location arrow icon"></i>
           <div class="content">

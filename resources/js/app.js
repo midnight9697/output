@@ -181,7 +181,7 @@ function getRandomInteger(min, max) {
     max = Math.floor(max); // Ensures max is an integer
     // console.log(Math.floor(Math.random() * (max - min + 1)) + min);
     return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
+}
 
 export const SectionMod = new Section();
 export const MessageMod = new Message();

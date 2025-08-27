@@ -17,6 +17,10 @@
     #hiddenSidebar {
         width: 100%;
     }
+
+    #custom-content {
+        width: calc(100% - 260px);
+    }
 </style>
 @yield('custom_css')
 <body>

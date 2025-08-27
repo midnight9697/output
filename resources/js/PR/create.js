@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
         PRValidator.items.push(PRValidator.serializeArrayToJson('.formCreatePRItem'));
         itemsTable();
     });
-
+    
     itemsTable();
 });
 

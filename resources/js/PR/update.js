@@ -82,6 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
     PRValidator.CreatePRValidation((e) => {
         e.preventDefault();
         PRClass.updatePR(PRValidator.serializeArrayToJson('.updatepr'), PRValidator.items, PRValidator.members, (e) => {
+            PRClass.getPrItems(localStorage.getItem('pr_id'), dataFetcher);
             // window.location.reload(true);
         });
     }, 'updatepr');

@@ -64,7 +64,8 @@ class PurchaseRequestController extends Controller {
             abort(419, 'Unauthorized Access');
         }
         return view('admin.pr.tracking', [
-            'pr' => encryptSingle($pr->first())
+            'pr' => encryptSingle($pr->first()),
+            'amember' => Member::where('purchase_request_id', $id)->where('user_id', Auth::user()->id)->exists()
         ]);
     }
 

@@ -3,12 +3,8 @@
 @section('main_content')
     <div class="ui grid">
         <div class="eight wide column">
-            <div class="ui top attached header">
-                <p>MEMBERS</p>
-            </div>
-            <div class="ui large form attached header">
-                
-            </div>
+           
+            
             <div class="ui top attached header">
                 <p>TRANSACTIONS</p>
             </div>
@@ -17,6 +13,24 @@
                     <div style="text-align: center">Please wait...</div>
                 </div>
             </div>
+            @if($amember)
+                <div class="ui top attached header">
+                    <div class="ui right aligned grid">
+                        <div class="right floated left aligned eight wide column">
+                            MEMBERS
+                        </div>
+                        <div class="left floated right aligned eight wide column">
+                            <button type="button" class="ui very tiny primary button add_member_btn">ADD</button>
+                        </div>
+                    
+                      </div>
+                </div>
+                <div class="ui form attached segment">
+                    <div class="members-form-section">
+                        <p style="text-align:center">Please wait...</p>
+                    </div>
+                </div>
+            @endif
         </div>
         <div class="eight wide column">
             <div class="ui top attached header">
@@ -38,6 +52,7 @@
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('pr_id', "{{ $pr->id }}");
+        localStorage.setItem('amember', "{{ ($amember?1:0) }}");
     });
 </script>
 @vite(['resources/js/PR/tracking.js'])

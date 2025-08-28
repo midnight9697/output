@@ -1,3 +1,4 @@
+import { membersTable } from "./create";
 import { PRClass } from "./purchase_request";
 import { PRValidator } from "./validation";
 
@@ -18,12 +19,17 @@ document.addEventListener('DOMContentLoaded', () => {
 function dataFetcher(data) {
     PRValidator.transactions = data.transactions;
     PRValidator.members = data.pr.members;
+    PRValidator.pr = data.pr;
     PRValidator.memebr_ids = [];
+
     data.pr.members.forEach(member => {
         PRValidator.memebr_ids.push(member.user_id);
     });
-    transactionTable()
     
+    if (localStorage.getItem('amember') == 1) {
+        membersTable(PRValidator.members);
+    }
+    transactionTable()
 }
 
 function transactionTable() {
@@ -41,7 +47,7 @@ function transactionTable() {
         ht += `
         <div class="item">
         <div class="right floated content">
-            <small>Assigned: ${(member_count == PRValidator.members.length?"Members":transaction.recepient.profile.firstname+" "+transaction.recepient.profile.lastname)}</small>
+            <small>Assigned: ${((member_count == PRValidator.members.length)?"Members":transaction.recepient.profile.firstname+" "+transaction.recepient.profile.lastname)}</small>
         </div>
           <i class="location arrow icon"></i>
           <div class="content">

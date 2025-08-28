@@ -24,12 +24,12 @@
                     </div>
                     <div class="field">
                         <label>Assigned to:</label>
-                        <div class="ui right aligned search search_people">
+                        <div class="ui fluid search search_people">
                             <div class="ui icon input">
                               <input class="prompt assigned_to" name="assigned_to" type="text" placeholder="Search People...">
                               <i class="search icon"></i>
                             </div>
-                            <div class="results"></div>
+                            <div class="results" style=""></div>
                           </div>
                     </div>
                     <div class="field">

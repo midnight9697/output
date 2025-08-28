@@ -10,8 +10,15 @@ export default class Custom_table {
         this.info = info;
         this.url = url;
         this.items = [];
+        this.target_date = 3;
         this.getItems = (items) => {};
         this.custom_buttons = () => {}
+        self = this;
+        this.dataSrc = function(json) {
+            self.getItems(json);
+            console.log(json);
+            return json.data;
+        }
         // this.setEditor();
         // this.table = this.initialize_table(element, this.download, this.pagination, this.search, this.info);
         console.log('shitye', document.getElementById(element));
@@ -66,10 +73,7 @@ export default class Custom_table {
                 "beforeSend": function (xhr) {
                     xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem('bearer'));
                 },
-                dataSrc: function(json) {
-                    self.getItems(json);
-                    return json.data;
-                }
+                dataSrc: self.dataSrc
             },
             "ordering": false,
             "initComplete": function(settings, json) {
@@ -78,6 +82,7 @@ export default class Custom_table {
             "order": [
 				[0, "desc"]
 			],
+            
             columns: TBColumns,/*[
                 { data: 'entity_name' },
             ],*/

@@ -30,9 +30,8 @@ class PurchaseRequestController extends Controller {
             return $query->whereHas('lastRecepient', function($q) {
                 return $q->where('receiver_id', Auth::user()->id);
             });
-        })->with('members')->with('lastTransaction');
+        })->with('members')->with('lastTransaction')->withAggregate('lastTransaction', 'created_at as latest_date')->orderByDesc('last_transaction_created_at_as_latest_date');
         // return $prs->toSql();
-        // PurchaseRequest::query()->orderBy('created_at','asc')->with('members')->whereHas('members')
         return encryptIds($prs);
     }
 
@@ -127,12 +126,12 @@ class PurchaseRequestController extends Controller {
                     'role' => $member['role']
                 ]);
             }
-            if (count($updatedColumns) > 0) {
+            // if ((count($updatedColumns) > 0 || $pr->transactions()->getDirty())) {
                 Recepient::create([
                     'transaction_id' => $transaction->id,
                     'receiver_id' => $member['user_id']
                 ]);
-            }
+            // }
         }
         $pr->save();
         return $updatedColumns;
@@ -141,6 +140,7 @@ class PurchaseRequestController extends Controller {
     public function fetch_pr_items($pr_id) {
         $pr_id = decryptUrlSafe($pr_id);
         $pr = PurchaseRequest::with('members')->find($pr_id);
+        
         if (Member::where('purchase_request_id', $pr_id)->where('user_id', Auth::user()->id)->exists()) {
             $transactions = Transaction::where('purchase_request_id', $pr->id)->with('sender')->with('act')->orderBy('id', 'desc')->with('recepient')->whereHas('recepient')->with('recepients')->paginate(10);
         }

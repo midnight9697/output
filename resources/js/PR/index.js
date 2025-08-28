@@ -2,9 +2,32 @@ import Custom_table from "../table/custom_table";
 import { PRClass } from "./purchase_request";
 
 document.addEventListener('DOMContentLoaded', () => {
-    const PRtable = new Custom_table('#prTable', false, true, true, false, './api/pr/page');
+    $('.menu .item').tab();
+    CTable(new Custom_table('#inbox', false, true, false, false, './api/pr/page'), 'inbox');
+    CTable(new Custom_table('#outbox', false, true, false, false, './api/pr/page'), 'outbox');
+    CTable(new Custom_table('#personal', false, true, false, false, './api/pr/page'), 'personal');
+});
 
-    PRtable.custom_buttons = (data) => {
+function CTable(CTBL, tab = 'inbox') {
+    switch (tab) {
+        case 'inbox':
+            CTBL.dataSrc = (json) => {
+                return json.data.filter(el => el.last_transaction.last_recepient.receiver_id == localStorage.getItem('user'));
+            }
+            break;
+        case 'outbox':
+            CTBL.dataSrc = (json) => {
+                return json.data.filter(el => el.approval == 1 && el.last_transaction.last_recepient.receiver_id != localStorage.getItem('user'));
+            }
+            break;
+    
+        default:
+            CTBL.dataSrc = (json) => {
+                return json.data.filter(el => el.approval == 1 && el.last_transaction.last_recepient.receiver_id != localStorage.getItem('user'));
+            }
+            break;
+    }
+    CTBL.custom_buttons = (data) => {
         let button = document.createElement('button');
         let title = (localStorage.getItem('user') == data.created_by.user_id?"EDIT":'REVIEW');
         let url = window.location+'/'+data.id+'/edit';
@@ -51,15 +74,18 @@ document.addEventListener('DOMContentLoaded', () => {
         return div;
     }
 
-    PRtable.load([
+    CTBL.target_date = 9;
+    
+    CTBL.load([
         'entity_name',
         'fund_cluster',
         'office',
         'pr_number',
         // 'created_by.lastname',
-        'created_at',
         'responsibility_center_code',
         'purpose',
         'members.length',
+        'created_at',
+        'last_transaction_created_at_as_latest_date',
     ]);
-});
+}

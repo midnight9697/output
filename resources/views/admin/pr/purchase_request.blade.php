@@ -2,7 +2,7 @@
 
 @section('custom_css')
     <style>
-        #prTable {
+        .prTable {
             width:100%;
         }
     </style>
@@ -16,26 +16,21 @@
             </a>
         </div>
     </div>
-    <table class="ui very basic collapsing celled table hidden" id="prTable">
-        <thead>
-           <tr>
-                <th>Entity Name</th>
-                <th>Fund Cluster</th>
-                <th>Office</th>
-                <th>PR No.</th>
-                {{-- <th>Created By</th> --}}
-                <th>Date</th>
-                <th>Responsibility Code</th>
-                <th>Purpose</th>
-                <th>Member</th>
-           </tr>
-        </thead>
-        <tbody style="text-align: center">
-            <tr>
-                <td colspan="7" class="center aligned">Loading...</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="ui top attached tabular menu">
+        <div class="active item" data-tab="inbox">INBOX</div>
+        <div class="item" data-tab="outbox">OUTBOX</div>
+        <div class="item" data-tab="personal">PERSONAL</div>
+    </div>
+    <div class="ui bottom attached active tab segment" data-tab="inbox">
+        @include('admin.pr.pr_table', ['name' => 'inbox'])
+    </div>
+    <div class="ui bottom attached tab segment" data-tab="outbox">
+        @include('admin.pr.pr_table', ['name' => 'outbox'])
+    </div>
+    <div class="ui bottom attached tab segment" data-tab="personal">
+        @include('admin.pr.pr_table', ['name' => 'personal'])
+    </div>
+    
 @endsection
 
 @section('custom_js')

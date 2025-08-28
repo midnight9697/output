@@ -30,7 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 result.push({
                   title: user.profile.firstname+" "+user.profile.lastname,
                   description: user.profile.position,
-                  id: user.id
+                  id: user.id,
+                  image: { avatar: true, src: '../files/images/user logo.png' }
                 });
               });
               return {

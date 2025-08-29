@@ -5,6 +5,7 @@
     use Carbon\Carbon;
     use App\Models\Member;
     use App\Models\Alternative;
+    use App\Models\Supplementary;
 @endphp
     <div class="ui grid">
         <div class="eight wide column">
@@ -32,6 +33,17 @@
                             <div class="results" style=""></div>
                           </div>
                     </div>
+                    @if ($pr->last_transaction->action == 9)
+                        <div class="field">
+                            <label>Supplemental</label>
+                            <select multiple="" class="ui dropdown" name="supplemental">
+                                @foreach (Supplementary::get() as $sup)
+                                    <option value="{{ $sup->id }}">{{ $sup->title }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    @endif
+                    
                     <div class="field">
                         <label>Remarks</label>
                       <textarea name="body" rows="3" placeholder="Enter a message"></textarea>

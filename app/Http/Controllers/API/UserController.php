@@ -83,7 +83,7 @@ class UserController extends Controller {
             'email' => $request->email,
             'role' => $request->role,
         ]);
-
+        
         Profile::where('user_id', $id)->update([
             'firstname' => $request->firstname,
             'middlename' => ($request->middlename==""?'waived':$request->middlename),

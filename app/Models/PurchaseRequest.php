@@ -53,7 +53,8 @@ class PurchaseRequest extends Model
     }
 
     public function createdBy() {
-        return $this->belongsTo(Profile::class, 'created_by', 'user_id');
+        $profile = $this->belongsTo(Profile::class, 'created_by', 'user_id');
+        return $profile;
     }
 
     public function getCreatedAtFormattedAttribute() {

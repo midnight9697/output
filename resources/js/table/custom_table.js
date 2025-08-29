@@ -11,6 +11,7 @@ export default class Custom_table {
         this.url = url;
         this.items = [];
         this.target_date = 3;
+        this.targets = [];
         this.getItems = (items) => {};
         this.custom_buttons = () => {}
         self = this;
@@ -86,6 +87,12 @@ export default class Custom_table {
             columns: TBColumns,/*[
                 { data: 'entity_name' },
             ],*/
+            columnDefs: [
+                {
+                    targets: self.targets, // Index of firstName and lastName columns
+                    visible: false
+                }
+            ],
             lengthChange: false,
             select: false,
             paging: pagination,

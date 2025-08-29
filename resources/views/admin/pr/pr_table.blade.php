@@ -10,9 +10,9 @@
             <th>Fund Cluster</th>
             <th>Office</th>
             <th>PR No.</th>
-            {{-- <th>Created By</th> --}}
             <th>Responsibility Code</th>
             <th>Purpose</th>
+            <th>Creator</th>
             <th>Member</th>
             <th>Date Created</th>
             <th>Latest Update</th>
@@ -20,7 +20,7 @@
     </thead>
     <tbody style="text-align: center">
         <tr>
-            <td colspan="9" class="center aligned">Loading...</td>
+            <td colspan="10" class="center aligned">Loading...</td>
         </tr>
     </tbody>
 </table>

@@ -24,7 +24,7 @@
             {{ view('layout.menu', [ 'url' => url('pr'), 'title' => 'Purchase Request', 'routesplit' => $routesplit, 'permission' => true]) }}
             {{ view('layout.menu', [ 'url' => url('#'), 'title' => 'APP', 'routesplit' => $routesplit, 'permission' => true]) }}
             {{ view('layout.menu', [ 'url' => url('#'), 'title' => 'PPMP', 'routesplit' => $routesplit, 'permission' => true]) }}
-            {{ view('layout.menu', [ 'url' => url('#'), 'title' => 'Supplemental', 'routesplit' => $routesplit, 'permission' => true]) }}
+            {{ view('layout.menu', [ 'url' => url('supplemental'), 'title' => 'Supplemental', 'routesplit' => $routesplit, 'permission' => true]) }}
             {{ view('layout.menu', [ 'url' => url('#'), 'title' => 'RFQ', 'routesplit' => $routesplit, 'permission' => true]) }}
             {{ view('layout.menu', [ 'url' => url('#'), 'title' => 'Purchase Order', 'routesplit' => $routesplit, 'permission' => true]) }}
             {{ view('layout.menu', [ 'url' => url('#'), 'title' => 'Abstract', 'routesplit' => $routesplit, 'permission' => true]) }}
@@ -77,7 +77,7 @@
 </nav>
 
 <div class="pusher">
-    <div class="custom-content" id="custom-content" style="padding:40px;padding-top:80px;">
+    <div class="custom-content" id="custom-content" style="padding:40px;">
         <div class="content_header">
             {{-- <h1 class="header">
                 @php

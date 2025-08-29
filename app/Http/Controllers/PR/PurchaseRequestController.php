@@ -16,7 +16,7 @@ class PurchaseRequestController extends Controller {
     
     public function processView($id) {
         $id = decryptUrlSafe($id);
-        $pr = PurchaseRequest::where('id', $id)->with('purchase_request_items');
+        $pr = PurchaseRequest::where('id', $id)->with('purchase_request_items')->with('lastTransaction');
 
         if (!Gate::allows('pr-process-view', $pr->first())) {
             abort(403, 'Unauthorize action.');

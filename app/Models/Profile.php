@@ -43,4 +43,10 @@ class Profile extends Model
         $section = $this->belongsTo(Section::class, 'section_id');
         return $section;
     }
+
+    public function getFullNameAttribute() {
+        $profile = $this;
+        $fullname = ($profile->firstname." "?$profile->firstname:"").($profile->middlename == "waived"?"":strtoupper($profile->middlename).".").($profile->lastname?" ".$profile->lastname:"");
+        return $fullname;
+    }
 }

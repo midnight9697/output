@@ -4,9 +4,11 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PR\PurchaseRequestController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\Supplemental\SupplementalController;
 use App\Http\Controllers\SystemController;
 use App\Http\Controllers\User\ProfileController as UserProfileController;
 use App\Models\Division;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -51,6 +53,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('view/{id}', [PurchaseRequestController::class, 'viewPR'])->name('view.purchase request');
         Route::get('process/{id}', [PurchaseRequestController::class, 'processView'])->name('process.purchase request');
     });
+
+    Route::prefix('supplemental')->group(function() {
+        Route::get('/', [SupplementalController::class, 'supplementalView'])->name('supplemental');
+    });
     
     // Authentication Routes
     Route::prefix('login')->group(function() {
@@ -68,4 +74,8 @@ Route::get('/token', function () {
 
 Route::get('testing', function() {
     return view('admin.test');
+});
+
+Route::get('upload/temporary', function(Request $request) {
+    return decryptUrlSafe("ZXlKcGRpSTZJa3g2TlhwNVdsWldZV0V4VTB0NmFVaG5ORXAzUm1jOVBTSXNJblpoYkhWbElqb2lLMU52VFVzd01XWm9SaXRTWTI1SVkwcFVOVkkzUVQwOUlpd2liV0ZqSWpvaVlUQXdNRFZoTldSa05URXpPV0V5WVRZeU56aGlZek5oWldFd05tVTVOR0kyTTJFeU1EUXlPR0U1TURZd016VXdNVEU1TVRVellXRTJZVEprTm1JNFpTSXNJblJoWnlJNklpSjk");
 });

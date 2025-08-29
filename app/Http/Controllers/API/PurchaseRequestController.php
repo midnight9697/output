@@ -30,7 +30,7 @@ class PurchaseRequestController extends Controller {
             return $query->whereHas('lastRecepient', function($q) {
                 return $q->where('receiver_id', Auth::user()->id);
             });
-        })->with('members')->with('lastTransaction')->withAggregate('lastTransaction', 'created_at as latest_date')->orderByDesc('last_transaction_created_at_as_latest_date');
+        })->with('members')->with('lastTransaction')->withAggregate('lastTransaction', 'created_at as latest_date')->orderByDesc('last_transaction_created_at_as_latest_date')->withAggregate('createdBy','CONCAT(firstname, " ", lastname) as fullname');
         // return $prs->toSql();
         return encryptIds($prs);
     }

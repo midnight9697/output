@@ -6,24 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     $('#supplemental').on('change', () => {
       const supplementalFile = document.getElementById('supplemental');
-      const supplementalPreview = document.getElementById('files-preview');
-      supplementalPreview.innerHTML = "";
-      let ui_list = document.createElement('div');
-      ui_list.className = "ui list";
-      let ht = ``;
-      supplementalFile.files.forEach(file => {
-        ht += `
-          <div class="item">
-            <i class="file icon"></i>
-            <div class="content">
-              <div class="description">${file.name}</div>
-            </div>
-          </div>
-        `;
-      });
-
-      ui_list.innerHTML = ht;
-      supplementalPreview.appendChild(ui_list);
+      filePreview(supplementalFile.files);
     })
 
     $('#upload-file-button').on('click', () => {
@@ -36,20 +19,41 @@ document.addEventListener('DOMContentLoaded', () => {
     });// onclick event upload-file-button
 });// DOMContentLoaded Endpoint
 
+function filePreview(files) {
+  const supplementalPreview = document.getElementById('files-preview');
+  supplementalPreview.innerHTML = "";
+  let ui_list = document.createElement('div');
+  ui_list.className = "ui list";
+  let ht = "";
+  files.forEach(file => {
+    ht += `
+      <div class="item">
+        <i class="file icon"></i>
+        <div class="content">
+          <a ${file.url?"href='"+file.url+"'":""} class="description">${file.name}</a>
+        </div>
+      </div>
+    `;
+  });
+  ui_list.innerHTML = ht;
+  supplementalPreview.appendChild(ui_list);
+}
+
 function uploadFile(supplementalFile, fcount) {
-  uploadControl.upload('./api/supplemental/upload/temporary', supplementalFile.files[fcount], () => {
-    console.log(fcount);
-    
+  uploadControl.upload('./api/supplemental/upload', supplementalFile.files[fcount], (response) => {
+    console.log('Ha', response);
     fcount += 1;
     if (fcount < supplementalFile.files.length) {
       progressControl.make('progress-section');
-      uploadFile(supplementalFile, fcount)
+      progressControl.progress(0, (fcount+1)+' of '+supplementalFile.files.length);
+      setTimeout(() => {
+        uploadFile(supplementalFile, fcount);
+      }, 2000);
     }
   }, (progress) => {
     progressControl.progress(progress, (fcount+1)+' of '+supplementalFile.files.length);
     if (progress >= 100) {
       progressControl.success();
-      
     }// If Statement
   }, () => {
     progressControl.fail();

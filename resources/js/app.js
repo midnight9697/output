@@ -235,14 +235,14 @@ export class progressBar {
 
 
 export class Uploader {
-    upload(uri, data, action, progress, fail = () => {}) {
+    upload(uri, data, action = () => {}, progress, fail = () => {}) {
         var usersClone = this;
-        axios.post(uri, data, {
+        let fd = new FormData();
+        fd.append('sup_file', data, data.name);
+        fd.append('filename', data.name);
+        axios.post(uri, fd, {
             headers: {
-              'Content-Type': 'application/json; charset=utf-8',
-              'Accept': 'application/vnd.github+json',
-              'Authorization': `Bearer ${localStorage.getItem('bearer')}`
-              // 'responseType': 'application/json',
+              'Authorization': `Bearer ${localStorage.getItem('bearer')}`,
             },
             onUploadProgress: (progressEvent) => {
               const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);

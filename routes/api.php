@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\PurchaseRequestController;
+use App\Http\Controllers\API\SupplementalController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\AuthController;
 use App\Models\PurchaseRequest;
@@ -51,9 +52,7 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::prefix('supplemental')->group(function() {
-        Route::post('upload/temporary', function(Request $request) {
-            return $request;//decryptUrlSafe("ZXlKcGRpSTZJa3g2TlhwNVdsWldZV0V4VTB0NmFVaG5ORXAzUm1jOVBTSXNJblpoYkhWbElqb2lLMU52VFVzd01XWm9SaXRTWTI1SVkwcFVOVkkzUVQwOUlpd2liV0ZqSWpvaVlUQXdNRFZoTldSa05URXpPV0V5WVRZeU56aGlZek5oWldFd05tVTVOR0kyTTJFeU1EUXlPR0U1TURZd016VXdNVEU1TVRVellXRTJZVEprTm1JNFpTSXNJblJoWnlJNklpSjk");
-        });
+        Route::post('upload', [SupplementalController::class, 'upload_file']);
     });
 });
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\SupplementalController as APISupplementalController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PR\PurchaseRequestController;
 use App\Http\Controllers\ProfileController;
@@ -72,9 +73,7 @@ Route::get('/token', function () {
     return csrf_token();
 });
 
-Route::get('testing', function() {
-    return view('admin.test');
-});
+Route::get('testing', [APISupplementalController::class, 'show']);
 
 Route::get('upload/temporary', function(Request $request) {
     return decryptUrlSafe("ZXlKcGRpSTZJa3g2TlhwNVdsWldZV0V4VTB0NmFVaG5ORXAzUm1jOVBTSXNJblpoYkhWbElqb2lLMU52VFVzd01XWm9SaXRTWTI1SVkwcFVOVkkzUVQwOUlpd2liV0ZqSWpvaVlUQXdNRFZoTldSa05URXpPV0V5WVRZeU56aGlZek5oWldFd05tVTVOR0kyTTJFeU1EUXlPR0U1TURZd016VXdNVEU1TVRVellXRTJZVEprTm1JNFpTSXNJblJoWnlJNklpSjk");

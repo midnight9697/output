@@ -49,5 +49,11 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('route', [PurchaseRequestController::class, 'route_pr'])->name('pr.comment'); //  route to assigned personnel
         Route::post('{id}/receive', [PurchaseRequestController::class, 'receive_pr'])->name('pr.receive'); //  receive to assigned personnel
     });
+
+    Route::prefix('supplemental')->group(function() {
+        Route::post('upload/temporary', function(Request $request) {
+            return $request;//decryptUrlSafe("ZXlKcGRpSTZJa3g2TlhwNVdsWldZV0V4VTB0NmFVaG5ORXAzUm1jOVBTSXNJblpoYkhWbElqb2lLMU52VFVzd01XWm9SaXRTWTI1SVkwcFVOVkkzUVQwOUlpd2liV0ZqSWpvaVlUQXdNRFZoTldSa05URXpPV0V5WVRZeU56aGlZek5oWldFd05tVTVOR0kyTTJFeU1EUXlPR0U1TURZd016VXdNVEU1TVRVellXRTJZVEprTm1JNFpTSXNJblJoWnlJNklpSjk");
+        });
+    });
 });
 

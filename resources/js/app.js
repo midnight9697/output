@@ -176,6 +176,83 @@ export class pageLoader {
     }
 }
 
+export class progressBar {
+
+    constructor() {
+        this.progress_bar = null;
+        this.valid = false;
+    }
+
+    make(element) {
+        this.parent = document.querySelector('#'+element);
+        this.parent.innerHTML = '';
+
+        this.ui_progress = document.createElement('div');
+        this.bar = document.createElement('div');
+        this.label = document.createElement('div');
+
+        this.ui_progress.className = "ui indicating progress";
+        this.bar.className = 'bar';
+        this.label.className = 'label';
+
+        this.label.innerHTML = "Uploading Files";
+        
+        this.ui_progress.appendChild(this.bar);
+        this.ui_progress.appendChild(this.label);
+
+        $(this.ui_progress).progress({
+            label: 'ratio', // Or 'value' for a numeric percentage
+            text: 'Uploading Files' // Set initial text
+        });
+
+        this.valid = false;
+    }
+
+    progress(prog, name = false) {
+        if (this.valid == false) {
+            this.valid = true;
+            this.parent.appendChild(this.ui_progress);
+        }
+        $(this.ui_progress).progress('set progress', prog);
+        this.label.innerHTML = (name=false?"":name+" ")+prog+'% Completed';
+    }
+
+    success() {
+        $(this.ui_progress).progress('set success', '100% Upload Complete');
+    }
+
+    fail() {
+        this.parent.innerHTML = `
+            <div class="ui progress error">
+                <div class="bar">
+                    <div class="progress"></div>
+                </div>
+                <div class="label">There was an error.</div>
+            </div>
+        `;
+    }
+}
+
+
+export class Uploader {
+    upload(uri, data, action, progress, fail = () => {}) {
+        var usersClone = this;
+        axios.post(uri, data, {
+            headers: {
+              'Content-Type': 'application/json; charset=utf-8',
+              'Accept': 'application/vnd.github+json',
+              'Authorization': `Bearer ${localStorage.getItem('bearer')}`
+              // 'responseType': 'application/json',
+            },
+            onUploadProgress: (progressEvent) => {
+              const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+              progress(percentCompleted);
+            }
+        })
+        .then(action).catch(fail);
+    }
+}
+
 function getRandomInteger(min, max) {
     min = Math.ceil(min); // Ensures min is an integer
     max = Math.floor(max); // Ensures max is an integer
@@ -189,6 +266,8 @@ export const BtnLoaderMod = new BtnLoader();
 export const humanDate = new CustomDate();
 export const confirmMod = new confModal();
 export const pageLoadMod = new pageLoader();
+export const progressControl = new progressBar();
+export const uploadControl = new Uploader();
 
 document.addEventListener('DOMContentLoaded', () => {
     // pageLoadMod.destroy();

@@ -9,13 +9,12 @@
 @endsection
 
 @section('main_content')
-    <div class="ui right aligned grid">
-        <div class="left floated left aligned six wide column">
-            <a href="{{ url('pr/create') }}" class="ui tiny primary labeled icon button" id="create_user_vbtn">
-              <i class="plus icon"></i> NEW
-            </a>
-        </div>
-    </div>
+    @include('default.create-button', [
+      'name' => 'create_user_vbtn',
+      'text' => 'NEW',
+      'icon' => 'plus',
+      'link' => url('pr/create')
+    ])
     <div class="ui top attached tabular menu">
         <div class="active item" data-tab="inbox">INBOX</div>
         <div class="item" data-tab="outbox">OUTBOX</div>

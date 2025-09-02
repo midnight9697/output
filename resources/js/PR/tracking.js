@@ -4,6 +4,8 @@ import { PRValidator } from "./validation";
 
 document.addEventListener('DOMContentLoaded', () => {
 
+    $('.ui.accordion').accordion();
+
     $('#modalRoutePR').on('submit', (e) => {
         e.preventDefault();
         let data = PRValidator.serializeArrayToJson('.routingForm');

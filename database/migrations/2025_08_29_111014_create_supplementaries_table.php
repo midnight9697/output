@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('title')->nullable();
             $table->string('filename');
             $table->string('origin');
+            $table->string('filetype')->nullable();
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });

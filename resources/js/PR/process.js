@@ -2,6 +2,7 @@ import { PRClass } from "./purchase_request";
 import { PRValidator } from "./validation";
 
 document.addEventListener('DOMContentLoaded', () => {
+    $('.ui.accordion').accordion();
 
     $('.submit_and_route').on('click', () => {
         console.log('yow');
@@ -11,9 +12,10 @@ document.addEventListener('DOMContentLoaded', () => {
     $('#routingForm').on('submit', (e) => {
         e.preventDefault();
         let data = PRValidator.serializeArrayToJson('.routingForm');
+        data['supplementary'] = $('#supplemental').dropdown('get value');
         data['assigned_to'] = PRValidator.assigned;
         PRClass.routePR(data, (respsons) => {
-          window.location = '../'+localStorage.getItem('pr_id')+'/track';
+          // window.location = '../'+localStorage.getItem('pr_id')+'/track';
         })
     });
 
@@ -50,7 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
     PRClass.getPrItems(localStorage.getItem('pr_id'), dataFetcher);
 });
 
-
 function dataFetcher(data) {
     PRValidator.transactions = data.transactions;
     PRValidator.members = data.pr.members;
@@ -78,13 +79,20 @@ function transactionTable() {
         <div class="item">
         <div class="right floated content">
             <small>Assigned: ${(member_count == PRValidator.members.length?"Members":transaction.recepient.profile.firstname+" "+transaction.recepient.profile.lastname)}</small>
+            <br>
+            <div style="width:100%;text-align:right;">
+              <small>${(transaction.spl?"<a href='#'>Download</a>":"")}</small>
+            </div>
         </div>
           <i class="location arrow icon"></i>
           <div class="content">
             <a class="header">${(transaction.sender_id==localStorage.getItem('user')?"You":transaction.sender.firstname+" "+transaction.sender.lastname)}</a>
             ${(transaction.action == 1 && transaction.body != ""?"":`<small style="color:green">(${transaction.act.synonyms})${transaction.recepient.received == 1?" | Received":""}</small>`)}
+           
+            <div class="description">
+              <b>${transaction.created_for}</b> | ${transaction.body} 
+            </div>
             
-            <div class="description"><b>${transaction.created_for}</b> | ${transaction.body}</div>
           </div>
         </div>
         `;

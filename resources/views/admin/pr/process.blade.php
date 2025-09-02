@@ -36,7 +36,7 @@
                     @if ($pr->last_transaction->action == 9)
                         <div class="field">
                             <label>Supplemental</label>
-                            <select multiple="" class="ui dropdown" name="supplemental">
+                            <select multiple class="ui dropdown supplemental" name="supplemental" id="supplemental">
                                 @foreach (Supplementary::get() as $sup)
                                     <option value="{{ $sup->id }}">{{ $sup->title }}</option>
                                 @endforeach
@@ -64,11 +64,16 @@
             </div>
         </div>
         <div class="eight wide column">
-            <div class="ui top attached header">
-                <p>PURCHASE REQUEST</p>
-            </div>
-            <div class="ui small form attached segment">
-                <iframe src="{{ url('pr/view') }}/{{ $pr->id }}#toolbar=0&navpanes=0&scrollbar=0&zoom=80" frameborder="0" id="preview" style="position: relative;width:100%;height:100vh;"></iframe>
+            <div class="ui styled fluid accordion" style="width:100%">
+                <div class="title">
+                  <i class="dropdown icon"></i>
+                  PURCHASE REQUEST
+                </div>
+                <div class="content">
+                    <div class="ui small form attached segment">
+                        <iframe src="{{ url('pr/view') }}/{{ $pr->id }}#toolbar=0&navpanes=0&scrollbar=0&zoom=80" frameborder="0" id="preview" style="position: relative;width:100%;height:100vh;"></iframe>
+                    </div>
+                </div>
             </div>
         </div>
         

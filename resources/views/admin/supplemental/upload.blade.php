@@ -12,9 +12,7 @@
                   <button type="button" class="ui grey button" id="upload-file-button">UPLOAD</button>
                 </div>
                 <div class="ui divider"></div>
-                <div id="progress-section">
-                  {{-- Progress Bar --}}
-                </div>
+                
                 <div id="files-preview">
                     
                 </div>

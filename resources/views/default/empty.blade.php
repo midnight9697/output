@@ -11,7 +11,7 @@
       {{ $description }}
     </div>
     @if (isset($uri)) {
-        <a href="{{ url('supplemental/upload') }}" class="ui tiny primary icon button" id="create_user_vbtn">
+        <a href="{{ url('supplemental/upload') }}" class="ui tiny primary icon button">
             {{ $name }}
         </a>
     }

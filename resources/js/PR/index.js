@@ -29,7 +29,7 @@ function CTable(CTBL, tab = 'inbox') {
             }
             break;
     }
-
+    
     CTBL.custom_buttons = (data) => {
         let button = document.createElement('button');
         let title = (localStorage.getItem('user') == data.created_by.user_id?"EDIT":'REVIEW');

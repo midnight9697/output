@@ -184,6 +184,7 @@ export class progressBar {
     }
 
     make(element) {
+        console.log('Elemnt', element);
         this.parent = document.querySelector('#'+element);
         this.parent.innerHTML = '';
 
@@ -237,9 +238,8 @@ export class progressBar {
 export class Uploader {
     upload(uri, data, action = () => {}, progress, fail = () => {}) {
         var usersClone = this;
-        let fd = new FormData();
-        fd.append('sup_file', data, data.name);
-        fd.append('filename', data.name);
+        let fd = data;
+        
         axios.post(uri, fd, {
             headers: {
               'Authorization': `Bearer ${localStorage.getItem('bearer')}`,
@@ -251,6 +251,14 @@ export class Uploader {
         })
         .then(action).catch(fail);
     }
+}
+
+export function createElement(className = "", text = "", type = "div", action = () => {}) {
+    let new_element = document.createElement(type);
+    new_element.className = className;
+    new_element.innerText = text;
+    new_element.onclick = action;
+    return new_element;
 }
 
 function getRandomInteger(min, max) {

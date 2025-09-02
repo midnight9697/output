@@ -22,7 +22,6 @@ export default class Custom_table {
         }
         // this.setEditor();
         // this.table = this.initialize_table(element, this.download, this.pagination, this.search, this.info);
-        console.log('shitye', document.getElementById(element));
         $(element).removeClass("hidden");
     }
 
@@ -65,6 +64,7 @@ export default class Custom_table {
             data: null,
             render: self.custom_buttons
         });
+
         var current_table = new DataTable(element, {
             processing: true,
             serverSide: true,
@@ -89,8 +89,9 @@ export default class Custom_table {
             ],*/
             columnDefs: [
                 {
-                    targets: self.targets, // Index of firstName and lastName columns
-                    visible: false
+                    targets: "_all", // Index of firstName and lastName columns
+                    // visible: false,
+                    className: 'text-center'
                 }
             ],
             lengthChange: false,

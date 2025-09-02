@@ -33,12 +33,18 @@
             @endif
         </div>
         <div class="eight wide column">
-            <div class="ui top attached header">
-                <p>PURCHASE REQUEST</p>
+            <div class="ui styled fluid accordion" style="width:100%">
+                <div class="title">
+                  <i class="dropdown icon"></i>
+                  PURCHASE REQUEST
+                </div>
+                <div class="content">
+                    <div class="ui small form attached segment">
+                        <iframe src="{{ url('pr/view') }}/{{ $pr->id }}#toolbar=0&navpanes=0&scrollbar=0&zoom=80" frameborder="0" id="preview" style="position: relative;width:100%;height:100vh;"></iframe>
+                    </div>
+                </div>
             </div>
-            <div class="ui small form attached segment">
-                <iframe src="{{ url('pr/view') }}/{{ $pr->id }}#toolbar=0&navpanes=0&scrollbar=0&zoom=80" frameborder="0" id="preview" style="position: relative;width:100%;height:100vh;"></iframe>
-            </div>
+            
         </div>
         
     </div>

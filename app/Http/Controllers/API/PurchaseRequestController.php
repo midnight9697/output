@@ -8,6 +8,7 @@ use App\Http\Requests\PR\SearchPrRequest;
 use App\Http\Requests\PR\UpdatePrRequest;
 use App\Models\Member;
 use App\Models\PRItem;
+use App\Models\PRSupplemental;
 use App\Models\PurchaseRequest;
 use App\Models\Recepient;
 use App\Models\Transaction;
@@ -142,7 +143,7 @@ class PurchaseRequestController extends Controller {
         $pr = PurchaseRequest::with('members')->find($pr_id);
         
         if (Member::where('purchase_request_id', $pr_id)->where('user_id', Auth::user()->id)->exists()) {
-            $transactions = Transaction::where('purchase_request_id', $pr->id)->with('sender')->with('act')->orderBy('id', 'desc')->with('recepient')->whereHas('recepient')->with('recepients')->paginate(10);
+            $transactions = Transaction::where('purchase_request_id', $pr->id)->with('sender')->with('act')->orderBy('id', 'desc')->with('recepient')->whereHas('recepient')->with('recepients')->with('spl')->paginate(10);
         }
         else {
             $transactions = Transaction::where('purchase_request_id', $pr->id)->whereHas('recepient', function($query) use($pr_id) {
@@ -150,7 +151,7 @@ class PurchaseRequestController extends Controller {
                     return $query->where('receiver_id', Auth::user()->id);
                 })->with('firstRecepient')->first();
                 return $query->where('created_at', '>=',$first_received->firstRecepient->created_at);
-            })->with('sender')->with('act')->orderBy('id', 'desc')->with('recepient')->with('recepients')->paginate(10);
+            })->with('sender')->with('act')->orderBy('id', 'desc')->with('recepient')->with('recepients')->with('spl')->paginate(10);
         }
         
         if (!Gate::allows('pr-update-view', $pr)) {
@@ -164,7 +165,6 @@ class PurchaseRequestController extends Controller {
     public function make_transaction(Request $request) {
         $pr_id = decryptUrlSafe($request->pr_id);
         $action = decryptUrlSafe($request->action);
-        // $action = decryptUrlSafe($request->action);
         $pr = PurchaseRequest::with('members')->find($pr_id);
 
         $transaction = $pr->transactions()->create([
@@ -172,6 +172,19 @@ class PurchaseRequestController extends Controller {
             'sender_id' => Auth::user()->id,
             'action' => $action
         ]);
+
+        if (isset($request->supplemental)) {
+             $saveData = [];
+             foreach ($request->supplementary as $spl) {
+                 $saveData[] = [
+                     'supplemental_id' => $spl,
+                     'purchase_request_id' => $pr_id,
+                     'transaction_id' => $transaction->id
+                 ];
+            }
+
+            PRSupplemental::insert($saveData);
+        }
 
         if (!isset($request->assigned_to)) {
             $this->sendtoAll($pr, $transaction);

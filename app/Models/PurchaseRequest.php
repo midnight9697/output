@@ -65,8 +65,6 @@ class PurchaseRequest extends Model
         return encryptUrlSafe($this->id);
     }
 
-    public function spl() {
-        return $this->hasMany(PRSupplemental::class, 'id')->orderBy('transaction_id', 'desc');
-    }
+    
     
 }

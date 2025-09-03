@@ -8,6 +8,7 @@ use App\Models\PurchaseRequest;
 use App\Models\User;
 use App\Policies\PRPolicy;
 use App\Policies\PurchaseRequestPolicy;
+use App\Policies\SupplementalPolicy;
 use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
@@ -42,5 +43,9 @@ class AuthServiceProvider extends ServiceProvider
         // Gate::define('user-view', [UserPolicy::class, 'viewAny']);
         Gate::define('user-view-page', [UserPolicy::class, 'view']);
         Gate::define('user-update-view', [UserPolicy::class, 'update']);
+
+        // Supplemental
+        Gate::define('spl-download-file', [SupplementalPolicy::class, 'supplementalDownload']);
+
     }
 }

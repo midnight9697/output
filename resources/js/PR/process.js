@@ -81,7 +81,7 @@ function transactionTable() {
             <small>Assigned: ${(member_count == PRValidator.members.length?"Members":transaction.recepient.profile.firstname+" "+transaction.recepient.profile.lastname)}</small>
             <br>
             <div style="width:100%;text-align:right;">
-              <small>${(transaction.spl?"<a href='#'>Download</a>":"")}</small>
+              <small>${(transaction.spl?"<a href='"+transaction.spl[0].id+"'>Download</a>":"")}</small>
             </div>
         </div>
           <i class="location arrow icon"></i>

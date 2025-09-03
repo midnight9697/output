@@ -143,7 +143,7 @@ class PurchaseRequestController extends Controller {
         $pr = PurchaseRequest::with('members')->find($pr_id);
         
         if (Member::where('purchase_request_id', $pr_id)->where('user_id', Auth::user()->id)->exists()) {
-            $transactions = Transaction::where('purchase_request_id', $pr->id)->with('sender')->with('act')->orderBy('id', 'desc')->with('recepient')->whereHas('recepient')->with('recepients')->with('spl')->paginate(10);
+            $transactions = Transaction::where('purchase_request_id', $pr->id)->with('sender')->with('act')->orderBy('id', 'desc')->with('recepient')->whereHas('recepient')->with('recepients')->with('spl');
         }
         else {
             $transactions = Transaction::where('purchase_request_id', $pr->id)->whereHas('recepient', function($query) use($pr_id) {
@@ -151,7 +151,7 @@ class PurchaseRequestController extends Controller {
                     return $query->where('receiver_id', Auth::user()->id);
                 })->with('firstRecepient')->first();
                 return $query->where('created_at', '>=',$first_received->firstRecepient->created_at);
-            })->with('sender')->with('act')->orderBy('id', 'desc')->with('recepient')->with('recepients')->with('spl')->paginate(10);
+            })->with('sender')->with('act')->orderBy('id', 'desc')->with('recepient')->with('recepients')->with('spl');
         }
         
         if (!Gate::allows('pr-update-view', $pr)) {
@@ -159,9 +159,11 @@ class PurchaseRequestController extends Controller {
                 abort(403, 'Unauthorize action.');  //for tracking of PR
             }
         }
-        return ['pr' => encryptSingle($pr), 'transactions' => encryptMany($transactions), 'items' => encryptMany(PRItem::where('purchase_request_id', $pr_id)->get())];
+        return encryptMany($transactions->paginate(10));
+        // return ;
+        return ['pr' => encryptSingle($pr), 'transactions' => encryptMany($transactions->paginate(10)), 'items' => encryptMany(PRItem::where('purchase_request_id', $pr_id)->get())];
     }
-
+    
     public function make_transaction(Request $request) {
         $pr_id = decryptUrlSafe($request->pr_id);
         $action = decryptUrlSafe($request->action);

@@ -25,7 +25,6 @@ class PurchaseRequestController extends Controller {
         if (!$pr->exists()) {
             abort(419, 'Unauthorized Access');
         }
-
         return view('admin.pr.process', [
             'pr' => encryptSingle($pr->first())
         ]);
@@ -34,7 +33,7 @@ class PurchaseRequestController extends Controller {
     public function prView(Request $request) {
         return view('admin.pr.purchase_request');
     }
-
+    
     public function createView() {
         return view('admin.pr.create');
     }

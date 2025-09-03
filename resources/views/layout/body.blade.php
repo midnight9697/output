@@ -86,8 +86,6 @@
                 @endphp
             </h1> --}}
             @yield('extra_content')
-            @yield('top-content')
-
             {{-- <div class="ui divider"></div> --}}
         </div>
         <div class="ui segment" id="main_event">

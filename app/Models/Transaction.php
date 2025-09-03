@@ -43,4 +43,8 @@ class Transaction extends Model
     public function spl() {
         return $this->hasMany(PRSupplemental::class, 'transaction_id')->with('supplemental')->orderBy('transaction_id', 'desc');
     }
+
+    public function getReplaceAttribute() {
+        return $this->spl->id = encryptUrlSafe($this->spl->id);
+    }
 }

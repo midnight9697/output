@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Schema;
 use Yajra\DataTables\Facades\DataTables;
+
+use function PHPUnit\Framework\isNull;
 
 function encryptUrlSafe($value) {
     $encrypted = Crypt::encryptString($value);
@@ -36,12 +39,60 @@ function encryptSingle($data) {
     $converted = (object)[];
     foreach ($keys as $key => $value) {
         $value = ($value == null?"":$value);
-        // $value = ($key == "created_at"?date('m-d-Y', strtotime($value)):$value);
         if ($key == "created_at") {
             $converted->{'created_for'} = date('m-d-Y h:i a', strtotime($value));
         }
+        $merge = $key;
+        $reflect = new ReflectionClass($data->getModel());
+        $methods = $reflect->getMethods();
+        $method_names = [];
+        foreach ($methods as $k => $method) {
+            $method_names[] = $method->getName();
+        }
+
+        $spt = explode("_", $key);
+        $i = 0;
+        foreach ($spt as $sp) {
+            if ($i > 0) {
+                $spt[$i] = ucfirst($sp);
+            }
+            $i++;
+        }
+        $merge = implode("", $spt);
+        if (!in_array($merge, $method_names)) {
+           $merge = $key;
+        }
+        
+        if (!in_array($key, $method_names)) {
+            $merge = $key;
+        }
+        if (is_object($data->{$merge}) || is_object($data->{$key})) {
+            if (is_object($data->{$key})) {
+                $merge = $key;
+            }
+            
+            if (isset($value->id)) {
+                $value = encryptSingle($data->{$merge}->getModel());
+            }
+            
+            $type = (is_string($value)?true:(is_int($value)?true:false));
+            if ($type == false) {
+                echo "Null daw => ". $value;
+                $value = encryptMany((object)$value);
+            }
+        }
+        
+        // echo $merge."<br>";
+        if (is_array($data->{$merge}) || is_array($data->{$key})) {
+            if (is_array($data->{$key})) {
+                $merge = $key;
+            }
+            
+            $value = encryptMany($data->{$merge});
+        }
         $converted->{$key} = ($key == 'id'?encryptUrlSafe($value):$value);
     }
+    // echo json_encode($converted);
     return (object)$converted;
 }
 

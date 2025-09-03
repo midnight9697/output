@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\FileController;
 use App\Http\Controllers\API\SupplementalController as APISupplementalController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PR\PurchaseRequestController;
@@ -54,9 +55,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('view/{id}', [PurchaseRequestController::class, 'viewPR'])->name('view.purchase request');
         Route::get('process/{id}', [PurchaseRequestController::class, 'processView'])->name('process.purchase request');
     });
-
+    
     Route::prefix('supplemental')->group(function() {
         Route::get('/', [SupplementalController::class, 'supplementalView'])->name('supplemental');
+        Route::get('download/{splid}', [FileController::class, 'supplemental'])->name('supplemental.download');
     });
     
     // Authentication Routes

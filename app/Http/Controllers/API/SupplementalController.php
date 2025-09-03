@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class SupplementalController extends Controller {
+    protected $path = "public/supplemental";
     
     public function fetch_by_page(Request $request) {
         $spls = Supplementary::with('uploader')->orderBy('created_at', 'desc');
@@ -22,14 +23,14 @@ class SupplementalController extends Controller {
         $fakename = "SPL-".date('Y')."-".date('m')."-".str_pad(($cnt + 1), 5, '0',STR_PAD_LEFT);
         $file = $request->file('sup_file');
         $extension = $file->getClientOriginalExtension();
-        $path = $request->file('sup_file')->storeAs('supplemental', $fakename.".".$extension);
+        $path = $request->file('sup_file')->storeAs($this->path, $fakename.".".$extension);
         $uploadedFile = $request->file('sup_file');
         $filenameWithoutExtension = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
         $new_file_data = [
             'title' => $filenameWithoutExtension,
             'filename' => $fakename,
             'origin' => $request->filename,
-            'filetype' => $request->filetype,
+            'filetype' => $extension,
             'user_id' => Auth::user()->id
         ];
         Supplementary::create($new_file_data);
@@ -48,9 +49,8 @@ class SupplementalController extends Controller {
     }
 
     public function show() {
-        $path = "supplemental/AUGUST 19 CA.pdf";
+        $path = "supplemental/SPL-2025-09-00006.pdf";
         $filename = "AUGUST 19 CA.pdf";
-        $dompdf = new Dompdf();
-        return $dompdf->stream($path);
+        return Storage::disk('public')->download('supplemental/SPL-2025-09-00006.pdf');
     }
 }

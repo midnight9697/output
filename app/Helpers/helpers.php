@@ -67,6 +67,7 @@ function encryptSingle($data) {
             $merge = $key;
         }
         if (is_object($data->{$merge}) || is_object($data->{$key})) {
+
             if (is_object($data->{$key})) {
                 $merge = $key;
             }
@@ -76,9 +77,9 @@ function encryptSingle($data) {
             }
             
             $type = (is_string($value)?true:(is_int($value)?true:false));
-            if ($type == false) {
-                echo "Null daw => ". $value;
-                $value = encryptMany((object)$value);
+
+            if ($type == false && (!isset($value->id))) {
+                $value = encryptMany($data->{$key});
             }
         }
         

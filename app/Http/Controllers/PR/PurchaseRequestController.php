@@ -71,7 +71,7 @@ class PurchaseRequestController extends Controller {
     public function viewPR($id) {
         $id = decryptUrlSafe($id);
         $pr = PurchaseRequest::where('id', $id)->with('purchase_request_items')->first();
-        if (!Gate::allows('pr-file-view', $id)) {
+        if (!Gate::allows('spl-download-file', $pr)) {
             abort(403, 'Unauthorize action.');
         }
         $data = json_encode((object)['data' => public_path(''), 'id' => $id, 'request' => $pr]);

@@ -159,8 +159,6 @@ class PurchaseRequestController extends Controller {
                 abort(403, 'Unauthorize action.');  //for tracking of PR
             }
         }
-        return encryptMany($transactions->paginate(10));
-        // return ;
         return ['pr' => encryptSingle($pr), 'transactions' => encryptMany($transactions->paginate(10)), 'items' => encryptMany(PRItem::where('purchase_request_id', $pr_id)->get())];
     }
     

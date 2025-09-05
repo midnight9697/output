@@ -33,6 +33,11 @@
     "isEntry": true,
     "src": "resources/css/app.css"
   },
+  "resources/css/supplemental.css": {
+    "file": "assets/supplemental-52fff079.css",
+    "isEntry": true,
+    "src": "resources/css/supplemental.css"
+  },
   "resources/js/PR/create.js": {
     "file": "assets/create-c18b0af1.js",
     "imports": [

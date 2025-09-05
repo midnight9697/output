@@ -1,6 +1,6 @@
 {
-  "_login-ed917797.js": {
-    "file": "assets/login-ed917797.js"
+  "_login-f8b5a664.js": {
+    "file": "assets/login-f8b5a664.js"
   },
   "resources/css/app.css": {
     "file": "assets/app-58454144.css",
@@ -8,17 +8,25 @@
     "src": "resources/css/app.css"
   },
   "resources/js/app.js": {
-    "file": "assets/app-1d8e0cd4.js",
+    "file": "assets/app-b9adae30.js",
     "imports": [
-      "_login-ed917797.js"
+      "_login-f8b5a664.js"
     ],
     "isEntry": true,
     "src": "resources/js/app.js"
   },
-  "resources/js/login/index.js": {
-    "file": "assets/index-5c15f022.js",
+  "resources/js/home.js": {
+    "file": "assets/home-5c5d24e6.js",
     "imports": [
-      "_login-ed917797.js"
+      "_login-f8b5a664.js"
+    ],
+    "isEntry": true,
+    "src": "resources/js/home.js"
+  },
+  "resources/js/login/index.js": {
+    "file": "assets/index-5e61a2ee.js",
+    "imports": [
+      "_login-f8b5a664.js"
     ],
     "isEntry": true,
     "src": "resources/js/login/index.js"

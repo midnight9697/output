@@ -14,11 +14,10 @@ class FileController extends Controller {
     public function supplemental($pr_spl_id) {
         $pr_spl_id = decryptUrlSafe($pr_spl_id);
         $pr_spl = PRSupplemental::where('id', $pr_spl_id)->first();
-        $supplemental = Supplementary::where('id', $spl_id)->first();
-        return $supplemental;
-        if (!Gate::allows('pr-download-file', $supplemental)); {
-            abort(403, 'Unauthorize action.');  //for tracking of PR
-        }
-        return Storage::disk('public')->download('supplemental/'.$supplemental);
+        Gate::allows('spl-download-file', $pr_spl);
+        
+        $supplemental = Supplementary::where('id', $pr_spl->supplemental_id)->first();
+        $file = $supplemental->filename.".".$supplemental->filetype;
+        return Storage::disk('public')->download('supplemental/'.$file);
     }
 }

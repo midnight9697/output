@@ -24,16 +24,15 @@ class PRPolicy {
     }
     
     public function fileViewer(User $user, $id) {
-        $pr = PurchaseRequest::orderBy('id','desc')->whereHas('members', function($query) use($id) {
-
-            return $query->where('members.user_id', Auth::user()->id)
+        $pr = PurchaseRequest::orderBy('id','desc')->whereHas('members', function($query) use($id, $user) {
+            return $query->where('members.user_id', $user->id)
                         ->where('purchase_request_id', $id);
-        })->orWhereHas('lastTransaction', function($query) use($id) {
-            return $query->whereHas('lastRecepient', function($q) use($id) {
-                return $q->where('receiver_id', Auth::user()->id)->where('purchase_request_id', $id);
+        })->orWhereHas('lastTransaction', function($query) use($id, $user) {
+            return $query->whereHas('lastRecepient', function($q) use($id, $user) {
+                return $q->where('receiver_id', $user->id)->where('purchase_request_id', $id);
             });
         });
-        return $pr->exists();
+        return $pr->get();//$pr->exists();
     }
 
     public function userView(User $user) {

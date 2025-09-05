@@ -1,3 +1,4 @@
+import { createElement } from "../app";
 import { PRClass } from "./purchase_request";
 import { PRValidator } from "./validation";
 
@@ -81,9 +82,9 @@ function transactionTable() {
             <small>Assigned: ${(member_count == PRValidator.members.length?"Members":transaction.recepient.profile.firstname+" "+transaction.recepient.profile.lastname)}</small>
             <br>
             <div style="width:100%;text-align:right;">
-              <small>${(transaction.spl?"<a href='../../supplemental/download/"+transaction.spl[0].id+"'>Download</a>":"")}</small>
+              <small>${(transaction.spl?"<a data-id='"+transaction.id+"' class='show_files' href='#'>Files</a>":"")}</small>
             </div>
-        </div>
+          </div>
           <i class="location arrow icon"></i>
           <div class="content">
             <a class="header">${(transaction.sender_id==localStorage.getItem('user')?"You":transaction.sender.firstname+" "+transaction.sender.lastname)}</a>
@@ -92,10 +93,38 @@ function transactionTable() {
             <div class="description">
               <b>${transaction.created_for}</b> | ${transaction.body} 
             </div>
-            
           </div>
         </div>
         `;
     });
     parentElement.html(ht);
+    $('.show_files').on('click', (event) => {
+      let modal =  createElement("ui tiny modal top-aligned");
+      let files = PRValidator.transactions.find(el => el.id == event.target.dataset.id);
+      modal.innerHTML = `
+        <div class="header">
+          Supplemental
+        </div>
+        <div class="scrolling  content">
+          <div class="ui relaxed divided list" style="etxt-align:center">
+            ${(files?files.spl.map(file => {
+              let supplemental = file.supplemental;
+              return `
+              <div class="item">
+                <i class="large file middle aligned icon"></i>
+                <div class="content">
+                  <a class="header" target="__blank" href="/supplemental/download/${file.id}">${supplemental.origin}</a>
+                </div>
+              </div>
+              `;
+            }):"")}
+          </div>
+        </div>
+      `;
+      let body = document.getElementsByTagName('body')[0];
+      body.appendChild(modal);
+
+      $(modal).modal('show');
+      
+    })
 }

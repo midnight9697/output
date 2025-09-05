@@ -7,6 +7,12 @@
     use App\Models\Alternative;
     use App\Models\Supplementary;
 @endphp
+    <style>
+        .ui.modal.top-aligned {
+          top: 5% !important;   /* distance from top */
+          margin: 0 auto !important; /* keep it centered horizontally */
+        }
+    </style>
     <div class="ui grid">
         <div class="eight wide column">
             {{-- PROCESS FORM SEGMENT --}}

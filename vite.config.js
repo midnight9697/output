@@ -14,6 +14,7 @@ export default defineConfig({
                 'resources/css/app.css', 
                 'resources/js/app.js',
                 'resources/js/login/index.js',
+                'resources/js/home.js',
                 // 'resources/js/User/User.js',
             ],
             refresh: true,

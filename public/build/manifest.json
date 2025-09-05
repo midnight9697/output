@@ -1,34 +1,138 @@
 {
-  "_login-f8b5a664.js": {
-    "file": "assets/login-f8b5a664.js"
+  "_User-18220aaa.js": {
+    "file": "assets/User-18220aaa.js"
+  },
+  "_action-2b728f70.js": {
+    "file": "assets/action-2b728f70.js",
+    "imports": [
+      "_login-5c7dd7c4.js",
+      "_User-18220aaa.js"
+    ]
+  },
+  "_create-5848b868.js": {
+    "file": "assets/create-5848b868.js",
+    "imports": [
+      "_purchase_request-654254a2.js",
+      "_validation-a1bd98b3.js"
+    ]
+  },
+  "_custom_table-1ce7f0e3.js": {
+    "file": "assets/custom_table-1ce7f0e3.js"
+  },
+  "_login-5c7dd7c4.js": {
+    "file": "assets/login-5c7dd7c4.js"
+  },
+  "_purchase_request-654254a2.js": {
+    "file": "assets/purchase_request-654254a2.js"
+  },
+  "_validation-a1bd98b3.js": {
+    "file": "assets/validation-a1bd98b3.js"
   },
   "resources/css/app.css": {
     "file": "assets/app-58454144.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
-  "resources/js/app.js": {
-    "file": "assets/app-b9adae30.js",
+  "resources/js/PR/create.js": {
+    "file": "assets/create-c18b0af1.js",
     "imports": [
-      "_login-f8b5a664.js"
+      "_purchase_request-654254a2.js",
+      "_validation-a1bd98b3.js"
+    ],
+    "isEntry": true,
+    "src": "resources/js/PR/create.js"
+  },
+  "resources/js/PR/index.js": {
+    "file": "assets/index-db449cc6.js",
+    "imports": [
+      "_custom_table-1ce7f0e3.js",
+      "_purchase_request-654254a2.js"
+    ],
+    "isEntry": true,
+    "src": "resources/js/PR/index.js"
+  },
+  "resources/js/PR/process.js": {
+    "file": "assets/process-d369c0c1.js",
+    "imports": [
+      "_purchase_request-654254a2.js",
+      "_validation-a1bd98b3.js"
+    ],
+    "isEntry": true,
+    "src": "resources/js/PR/process.js"
+  },
+  "resources/js/PR/tracking.js": {
+    "file": "assets/tracking-1f2ae6bd.js",
+    "imports": [
+      "_create-5848b868.js",
+      "_purchase_request-654254a2.js",
+      "_validation-a1bd98b3.js"
+    ],
+    "isEntry": true,
+    "src": "resources/js/PR/tracking.js"
+  },
+  "resources/js/PR/update.js": {
+    "file": "assets/update-eadd8230.js",
+    "imports": [
+      "_User-18220aaa.js",
+      "_login-5c7dd7c4.js",
+      "_create-5848b868.js",
+      "_purchase_request-654254a2.js",
+      "_validation-a1bd98b3.js"
+    ],
+    "isEntry": true,
+    "src": "resources/js/PR/update.js"
+  },
+  "resources/js/User/Index.js": {
+    "file": "assets/Index-e46b96f6.js",
+    "imports": [
+      "_User-18220aaa.js",
+      "_action-2b728f70.js",
+      "_login-5c7dd7c4.js"
+    ],
+    "isEntry": true,
+    "src": "resources/js/User/Index.js"
+  },
+  "resources/js/User/update.js": {
+    "file": "assets/update-d7d2914e.js",
+    "imports": [
+      "_login-5c7dd7c4.js",
+      "_User-18220aaa.js",
+      "_action-2b728f70.js"
+    ],
+    "isEntry": true,
+    "src": "resources/js/User/update.js"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-d63da892.js",
+    "imports": [
+      "_login-5c7dd7c4.js"
     ],
     "isEntry": true,
     "src": "resources/js/app.js"
   },
   "resources/js/home.js": {
-    "file": "assets/home-5c5d24e6.js",
+    "file": "assets/home-1f65b6bb.js",
     "imports": [
-      "_login-f8b5a664.js"
+      "_login-5c7dd7c4.js"
     ],
     "isEntry": true,
     "src": "resources/js/home.js"
   },
   "resources/js/login/index.js": {
-    "file": "assets/index-5e61a2ee.js",
+    "file": "assets/index-fbeddc8d.js",
     "imports": [
-      "_login-f8b5a664.js"
+      "_login-5c7dd7c4.js"
     ],
     "isEntry": true,
     "src": "resources/js/login/index.js"
+  },
+  "resources/js/supplemental/index.js": {
+    "file": "assets/index-c0f083d4.js",
+    "imports": [
+      "_login-5c7dd7c4.js",
+      "_custom_table-1ce7f0e3.js"
+    ],
+    "isEntry": true,
+    "src": "resources/js/supplemental/index.js"
   }
 }

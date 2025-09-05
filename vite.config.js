@@ -14,7 +14,19 @@ export default defineConfig({
                 'resources/css/app.css', 
                 'resources/js/app.js',
                 'resources/js/login/index.js',
+                // Dashboard
                 'resources/js/home.js',
+                // PR
+                'resources/js/PR/index.js',
+                'resources/js/PR/create.js',
+                'resources/js/PR/update.js',
+                'resources/js/PR/process.js',
+                'resources/js/PR/tracking.js',
+                // Users
+                'resources/js/User/Index.js',
+                'resources/js/User/update.js',
+                // Supplemental
+                'resources/js/supplemental/index.js',
                 // 'resources/js/User/User.js',
             ],
             refresh: true,

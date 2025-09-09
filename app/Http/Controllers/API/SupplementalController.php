@@ -7,6 +7,7 @@ use App\Models\Supplementary;
 use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class SupplementalController extends Controller {
@@ -35,22 +36,28 @@ class SupplementalController extends Controller {
         ];
         Supplementary::create($new_file_data);
         return $new_file_data;
-        return response()->streamDownload(function () use ($path) {
-            $stream = fopen($path, 'r');
-            while (!feof($stream)) {
-                echo fread($stream, 1024 * 8); // Read in chunks (e.g., 8KB)
-                flush(); // Flush output buffer
-            }
-            fclose($stream);
-        }, $request->filename, [
-            'Content-Type' => Storage::mimeType($path), // Get correct MIME type
-            'Content-Length' => Storage::size($path), // Optional, for progress bars
-        ]);
+    }
+
+    public function rmvFile(Request $request) {
+        $supplemental = Supplementary::where('id', decryptUrlSafe($request->id));
+        if (!$supplemental->exists()) {
+            return abort('404', 'Not Found');
+        }
+        if (!Gate::allows('spl-view-file', $supplemental->first())) {
+            return abort('404', 'Unauthorized Access');
+        }
+        
+        $file = $supplemental->first()->filename.".".$supplemental->first()->filetype;
+        $supplemental->delete();
+        if (Storage::disk('public')->exists('supplemental/'.$file)) {
+            Storage::delete('public/supplemental/'.$file);
+        }
+        return ['success'];
     }
 
     public function show() {
         $path = "supplemental/SPL-2025-09-00006.pdf";
         $filename = "AUGUST 19 CA.pdf";
-        return Storage::disk('public')->download('supplemental/SPL-2025-09-00006.pdf');
+        return Storage::disk('public')->download('supplemental/SPL-2025-09-00006.pdf', );
     }
 }

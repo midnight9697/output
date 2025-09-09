@@ -1,8 +1,28 @@
-import { createElement } from "../app";
+import { MessageMod, confirmMod, createElement, progressControl, uploadControl } from "../app";
+import { filePreview } from "../supplemental";
 import { PRClass } from "./purchase_request";
 import { PRValidator } from "./validation";
-
+let uploaded_attachments = [];
 document.addEventListener('DOMContentLoaded', () => {
+
+  $('#upload_attachment').on('click', (e) => {
+    e.preventDefault();
+    confirmMod.load(() => {
+      const attFile = document.getElementById('att_file');
+        var fcount = 0;
+        if (attFile.files.length > 0) {
+          progressControl.make('progress-section');
+          uploadFile(attFile, fcount);
+        }
+      PRClass.uploadAtt(attFile.file)
+    }, "Do you want to upload attachments ?");
+  });
+
+    $('#att_file').on('change', () => {
+      const attFile = document.getElementById('att_file');
+      filePreview(attFile.files);
+    });
+    
     $('.ui.accordion').accordion();
 
     $('.submit_and_route').on('click', () => {
@@ -16,10 +36,10 @@ document.addEventListener('DOMContentLoaded', () => {
         data['supplementary'] = $('#supplemental').dropdown('get value');
         data['assigned_to'] = PRValidator.assigned;
         PRClass.routePR(data, (respsons) => {
-          // window.location = '../'+localStorage.getItem('pr_id')+'/track';
+          window.location = '../'+localStorage.getItem('pr_id')+'/track';
         })
     });
-
+    
     $('.ui.search')
       .search({
         apiSettings: {
@@ -106,8 +126,8 @@ function transactionTable() {
           Supplemental
         </div>
         <div class="scrolling  content">
-          <div class="ui relaxed divided list" style="etxt-align:center">
-            ${(files?files.spl.map(file => {
+          <div class="ui relaxed divided list" style="text-align:center">
+            ${(files?files.spl.filter(spl => spl.supplemental).map(file => {
               let supplemental = file.supplemental;
               return `
               <div class="item">
@@ -118,6 +138,9 @@ function transactionTable() {
               </div>
               `;
             }):"")}
+            ${
+              files.spl.filter(spl => spl.supplemental).length == 0?"<smal>Files Deleted</small>":""
+            }
           </div>
         </div>
       `;
@@ -127,4 +150,39 @@ function transactionTable() {
       $(modal).modal('show');
       
     })
+}
+
+function uploadFile(attachmentFile, fcount) {
+  let current_file = attachmentFile.files[fcount];
+  let fd = new FormData();
+  fd.append('att_file', current_file, current_file.name);
+  fd.append('filename', current_file.name);
+  fd.append('filetype', current_file.type);
+  uploadControl.upload('./api/pr/attachment/upload', fd, (response) => {
+    fcount += 1;
+    uploaded_attachments.push(response.data);
+    console.log('uploaded', uploaded_attachments);
+    if (fcount < attachmentFile.files.length) {
+      progressControl.make('progress-section');
+      progressControl.progress(0, (fcount+1)+' of '+attachmentFile.files.length);
+      SPLTBL.table.ajax.reload(function() {
+        setTimeout(() => {
+          uploadFile(attachmentFile, fcount);
+        }, 1000);
+      });
+    }
+    else {
+      MessageMod.success("All files have been uploaded successfully.");
+      progressControl.make('progress-section');
+    }
+  }, (progress) => {
+    progressControl.progress(progress, (fcount+1)+' of '+attachmentFile.files.length);
+    if (progress >= 100) {
+      progressControl.success();
+    }// If Statement
+  }, () => {
+    MessageMod.fail("File too large.");
+    progressControl.make('progress-section');
+    progressControl.fail();
+  });// UploadControl Endpoint
 }

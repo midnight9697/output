@@ -59,6 +59,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::prefix('supplemental')->group(function() {
         Route::get('/', [SupplementalController::class, 'supplementalView'])->name('supplemental');
         Route::get('download/{splid}', [FileController::class, 'supplemental'])->name('supplemental.download');
+        Route::get('view/{splid}', [FileController::class, 'viewSupplemental'])->name('supplemental.view');
     });
     
     // Authentication Routes

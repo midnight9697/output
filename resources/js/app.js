@@ -236,7 +236,7 @@ export class progressBar {
 
 
 export class Uploader {
-    upload(uri, data, action = () => {}, progress, fail = () => {}) {
+    upload(uri, data, action = () => {}, progress = () => {}, fail = () => {}) {
         var usersClone = this;
         let fd = data;
         

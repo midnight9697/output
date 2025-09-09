@@ -1,5 +1,6 @@
-import { MessageMod, createElement, progressControl, uploadControl } from "../app";
+import { MessageMod, confirmMod, createElement, progressControl, uploadControl } from "../app";
 import Custom_table from "../table/custom_table";
+import { SupplementalControl } from "./supplemental";
 let SPLTBL = {};
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -7,10 +8,22 @@ document.addEventListener('DOMContentLoaded', () => {
     
   SPLTBL.custom_buttons = function(data) {
     let div = createElement("", "", "div");
-    let button = createElement("ui very small red button", "REMOVE", "button", function() {
-      console.log('Clicked', data);
-    });
+    let button = createElement("ui very tiny primary button", "DOWNLOAD", "a");
+    let rmvBtn = createElement("ui very tiny red button", "REMOVE", "button");
+    button.href = "supplemental/view/"+data.id;
+    rmvBtn.dataset.id = data.id;
+    rmvBtn.onclick = (e) => {
+      confirmMod.load(() => {
+        let spl_id = e.target.dataset.id;
+        SupplementalControl.remove(spl_id, (e) => {
+          SPLTBL.table.ajax.reload();
+        });
+      }, "Do you want to delete this supplemental file ?");
+      
+    }
+    button.target = "__blank";
     div.appendChild(button);
+    div.appendChild(rmvBtn);
     return div;
   };
   
@@ -42,8 +55,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });// onclick event upload-file-button
 });// DOMContentLoaded Endpoint
 
-function filePreview(files) {
-  const supplementalPreview = document.getElementById('files-preview');
+export function filePreview(files, parent = document.getElementById('files-preview')) {
+  const supplementalPreview = parent;
   supplementalPreview.innerHTML = "";
   let ui_list = document.createElement('div');
   ui_list.className = "ui list";

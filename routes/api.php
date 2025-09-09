@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\FileController;
 use App\Http\Controllers\API\PurchaseRequestController;
 use App\Http\Controllers\API\SupplementalController;
 use App\Http\Controllers\API\UserController;
@@ -49,11 +50,13 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('comment', [PurchaseRequestController::class, 'make_transaction'])->name('pr.comment'); // submit comments and reviews
         Route::post('route', [PurchaseRequestController::class, 'route_pr'])->name('pr.comment'); //  route to assigned personnel
         Route::post('{id}/receive', [PurchaseRequestController::class, 'receive_pr'])->name('pr.receive'); //  receive to assigned personnel
+        Route::post('attachment/upload', [FileController::class, 'uploadAttachment'])->name('attachment.upload'); //  receive to assigned personnel
     });
 
     Route::prefix('supplemental')->group(function() {
         Route::post('upload', [SupplementalController::class, 'upload_file']);
         Route::get('page', [SupplementalController::class, 'fetch_by_page']);
+        Route::post('remove', [SupplementalController::class, 'rmvFile'])->name('supplemental.remove');
     });
 });
 

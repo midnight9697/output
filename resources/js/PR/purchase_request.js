@@ -92,6 +92,18 @@ export class PurchaseRequests {
         })
         .then(action).catch(fail)
     }
+
+    uploadAtt(file, action = () => {}, fail = () => {}) {
+      axios.post('./api/pr/attachment/upload', file, {
+          headers: {
+            'Content-Type': 'application/json; charset=utf-8',
+            'Accept': 'application/vnd.github+json',
+            'Authorization': `Bearer ${localStorage.getItem('bearer')}`
+            // 'responseType': 'application/json',
+          },
+        })
+        .then(action).catch(fail)
+    }
 }
 
 export var PRClass = new PurchaseRequests();

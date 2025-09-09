@@ -5,9 +5,11 @@
             <i class="{{ $icon }} icon"></i> {{ $text }}
           </a>
       @else
-          <button type="button" class="ui tiny primary labeled icon button" id="{{ $name }}">
-              <i class="{{ $icon }} icon"></i> {{ $text }}
-          </button>
+          @if (isset($name))
+            <button type="button" class="ui tiny primary labeled icon button" id="{{ $name }}">
+                <i class="{{ $icon }} icon"></i> {{ $text }}
+            </button>
+          @endif
       @endif
     </div>
     @if (isset($view))
@@ -17,5 +19,4 @@
             </div>
         </div>
     @endif
-
 </div>

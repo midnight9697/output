@@ -46,6 +46,7 @@ class AuthServiceProvider extends ServiceProvider
 
         // Supplemental
         Gate::define('spl-download-file', [SupplementalPolicy::class, 'supplementalDownload']);
+        Gate::define('spl-view-file', [SupplementalPolicy::class, 'supplementalCreatorView']);
 
     }
 }

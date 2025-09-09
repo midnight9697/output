@@ -22,6 +22,23 @@
             <div class="ui large form attached header">
                 <form class="ui form routingForm" id="routingForm" action="#" method="POST">
                     <div class="field">
+                        <label>Attchment</label>
+                        <div class="ui icon input">
+                            <input type="file" multiple name="att_file" id="att_file" multiple>
+                            <button type="button" class="ui very tiny green button" id="upload_attachment">UPLOAD</button>
+                        </div>
+                        
+                        <div>
+                            @include('default.progress', [
+                              'view' => "progress-upload"
+                            ])
+                        </div>
+                        <div class="ui divider"></div>
+                        <div id="files-preview">
+                            
+                        </div>
+                    </div>
+                    <div class="field">
                         <label>Action:</label>
                         <select name="action">
                             @foreach (Alternative::get() as $action)

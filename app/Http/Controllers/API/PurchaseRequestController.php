@@ -186,6 +186,10 @@ class PurchaseRequestController extends Controller {
             PRSupplemental::insert($saveData);
         }
 
+        if (isset($request->att_file)) {
+            
+        }
+
         if (!isset($request->assigned_to)) {
             $this->sendtoAll($pr, $transaction);
         }

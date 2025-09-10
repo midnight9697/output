@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PR\CreatePrRequest;
 use App\Http\Requests\PR\SearchPrRequest;
 use App\Http\Requests\PR\UpdatePrRequest;
+use App\Models\Attachment;
 use App\Models\Member;
 use App\Models\PRItem;
 use App\Models\PRSupplemental;
@@ -159,7 +160,7 @@ class PurchaseRequestController extends Controller {
                 abort(403, 'Unauthorize action.');  //for tracking of PR
             }
         }
-        return ['pr' => encryptSingle($pr), 'transactions' => encryptMany($transactions->paginate(10)), 'items' => encryptMany(PRItem::where('purchase_request_id', $pr_id)->get())];
+        return ['pr' => encryptSingle($pr), 'transactions' => encryptMany($transactions->with('attachments')->paginate(10)), 'items' => encryptMany(PRItem::where('purchase_request_id', $pr_id)->get())];
     }
     
     public function make_transaction(Request $request) {
@@ -172,7 +173,7 @@ class PurchaseRequestController extends Controller {
             'sender_id' => Auth::user()->id,
             'action' => $action
         ]);
-
+        
         if (isset($request->supplemental)) {
              $saveData = [];
              foreach ($request->supplementary as $spl) {
@@ -186,8 +187,13 @@ class PurchaseRequestController extends Controller {
             PRSupplemental::insert($saveData);
         }
 
-        if (isset($request->att_file)) {
-            
+        if (isset($request->attachments)) {
+            foreach ($request->attachments as $attachment) {
+                $att_id = decryptUrlSafe($attachment['id']);
+                Attachment::where('id', $att_id)->update([
+                    'transaction_id' => $transaction->id
+                ]);
+            }
         }
 
         if (!isset($request->assigned_to)) {

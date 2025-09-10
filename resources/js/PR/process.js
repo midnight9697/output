@@ -9,12 +9,13 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
     confirmMod.load(() => {
       const attFile = document.getElementById('att_file');
-        var fcount = 0;
-        if (attFile.files.length > 0) {
-          progressControl.make('progress-section');
-          uploadFile(attFile, fcount);
-        }
-      PRClass.uploadAtt(attFile.file)
+      var fcount = 0;
+      uploaded_attachments = [];
+      if (attFile.files.length > 0) {
+        progressControl.make('progress-section');
+        uploadFile(attFile, fcount);
+      }
+      // PRClass.uploadAtt(attFile.file)
     }, "Do you want to upload attachments ?");
   });
 
@@ -35,9 +36,10 @@ document.addEventListener('DOMContentLoaded', () => {
         let data = PRValidator.serializeArrayToJson('.routingForm');
         data['supplementary'] = $('#supplemental').dropdown('get value');
         data['assigned_to'] = PRValidator.assigned;
+        data['attachments'] = uploaded_attachments;
         PRClass.routePR(data, (respsons) => {
           window.location = '../'+localStorage.getItem('pr_id')+'/track';
-        })
+        });
     });
     
     $('.ui.search')
@@ -102,7 +104,7 @@ function transactionTable() {
             <small>Assigned: ${(member_count == PRValidator.members.length?"Members":transaction.recepient.profile.firstname+" "+transaction.recepient.profile.lastname)}</small>
             <br>
             <div style="width:100%;text-align:right;">
-              <small>${(transaction.spl?"<a data-id='"+transaction.id+"' class='show_files' href='#'>Files</a>":"")}</small>
+              <small>${(transaction.attachments.length > 0?"<a data-id='"+transaction.id+"' class='show_files' href='#'>Files</a>":"")}</small>
             </div>
           </div>
           <i class="location arrow icon"></i>
@@ -127,19 +129,18 @@ function transactionTable() {
         </div>
         <div class="scrolling  content">
           <div class="ui relaxed divided list" style="text-align:center">
-            ${(files?files.spl.filter(spl => spl.supplemental).map(file => {
-              let supplemental = file.supplemental;
+            ${(files.attachments?files.attachments.map(attachment => {
               return `
               <div class="item">
                 <i class="large file middle aligned icon"></i>
                 <div class="content">
-                  <a class="header" target="__blank" href="/supplemental/download/${file.id}">${supplemental.origin}</a>
+                  <a class="header" target="__blank" href="../../attachment/${attachment.id}">${attachment.origin}</a>
                 </div>
               </div>
               `;
             }):"")}
             ${
-              files.spl.filter(spl => spl.supplemental).length == 0?"<smal>Files Deleted</small>":""
+              files.attachments.length == 0?"<smal>No Attachments Available</small>":""
             }
           </div>
         </div>
@@ -165,13 +166,12 @@ function uploadFile(attachmentFile, fcount) {
     if (fcount < attachmentFile.files.length) {
       progressControl.make('progress-section');
       progressControl.progress(0, (fcount+1)+' of '+attachmentFile.files.length);
-      SPLTBL.table.ajax.reload(function() {
-        setTimeout(() => {
-          uploadFile(attachmentFile, fcount);
-        }, 1000);
-      });
+      setTimeout(() => {
+        uploadFile(attachmentFile, fcount);
+      }, 1000);
     }
     else {
+      document.getElementById('routingForm').reset();
       MessageMod.success("All files have been uploaded successfully.");
       progressControl.make('progress-section');
     }
@@ -180,7 +180,8 @@ function uploadFile(attachmentFile, fcount) {
     if (progress >= 100) {
       progressControl.success();
     }// If Statement
-  }, () => {
+  }, (fail) => {
+    console.log('fail', fail);
     MessageMod.fail("File too large.");
     progressControl.make('progress-section');
     progressControl.fail();

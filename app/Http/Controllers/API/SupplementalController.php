@@ -34,6 +34,7 @@ class SupplementalController extends Controller {
             'filetype' => $extension,
             'user_id' => Auth::user()->id
         ];
+        
         Supplementary::create($new_file_data);
         return $new_file_data;
     }

@@ -21,6 +21,9 @@ return new class extends Migration
             $table->string('filetype')->nullable();
             $table->foreignId('user_id')->constrained();
             $table->string('transaction_id')->nullable();
+            $table->enum('for', [
+                'pr', 'po'
+            ])->default('pr');
             $table->timestamps();
         });
     }

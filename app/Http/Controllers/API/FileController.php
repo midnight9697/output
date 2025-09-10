@@ -31,6 +31,23 @@ class FileController extends Controller {
         return Storage::disk('public')->download('supplemental/'.$file, $supplemental->origin);
     }
 
+    public function attachment($pr_spl_id) {
+        $pr_spl_id = decryptUrlSafe($pr_spl_id);
+        $pr_spl = PRSupplemental::where('id', $pr_spl_id);
+        if (!$pr_spl->exists()) {
+            return abort('404', 'Not Found');
+        }
+        $pr_spl = $pr_spl->first();
+        Gate::allows('spl-download-file', $pr_spl);
+        
+        $supplemental = Supplementary::where('id', $pr_spl->supplemental_id)->first();
+        $file = $supplemental->filename.".".$supplemental->filetype;
+        if (!Storage::disk('public')->exists('attachments/'.$file)) {
+            return abort('404', 'File Not Found');
+        }
+        return Storage::disk('public')->download('attachments/'.$file, $supplemental->origin);
+    }
+
     public function viewSupplemental($spl_id) {
         $spl_id = decryptUrlSafe($spl_id);
         $supplemental = Supplementary::where('id', $spl_id);
@@ -52,7 +69,7 @@ class FileController extends Controller {
         $fakename = "ATT-".date('Y')."-".date('m')."-".str_pad(($cnt + 1), 5, '0',STR_PAD_LEFT);
         $file = $request->file('att_file');
         $extension = $file->getClientOriginalExtension();
-        $path = $request->file('att_file')->storeAs($this->attachment_path, $fakename.".".$extension);
+        $request->file('att_file')->storeAs($this->attachment_path, $fakename.".".$extension, 'local');
         $uploadedFile = $request->file('att_file');
         $filenameWithoutExtension = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
         $new_file_data = [
@@ -63,6 +80,6 @@ class FileController extends Controller {
             'user_id' => Auth::user()->id,
             // 'transaction_id' => $transaction->id
         ];
-        return Attachment::create($new_file_data);
+        return encryptSingle(Attachment::create($new_file_data));
     }
 }

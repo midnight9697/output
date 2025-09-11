@@ -48,6 +48,10 @@ class Transaction extends Model
         return $this->hasMany(Attachment::class, 'transaction_id')->orderBy('created_at', 'desc');
     }
 
+    public function purchase_request() {
+        return $this->hasOne(PurchaseRequest::class, 'purchase_request_id');
+    }
+
     public function getReplaceAttribute() {
         return $this->spl->id = encryptUrlSafe($this->spl->id);
     }

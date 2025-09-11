@@ -82,10 +82,10 @@ function CTable(CTBL, tab = 'inbox') {
     CTBL.target_date = 9;
     // CTBL.targets = [4, 5];
     CTBL.load([
+        'pr_number',
         'entity_name',
         'fund_cluster',
         'office',
-        'pr_number',
         'responsibility_center_code',
         'purpose',
         'created_by_c_o_n_c_a_tfirstname_lastname_as_fullname',

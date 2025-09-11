@@ -26,14 +26,18 @@ class PurchaseRequestController extends Controller {
         if (!Gate::allows('pr-user-view')) {
             abort(403, 'Unauthorized action.');
         }
-        $prs = PurchaseRequest::orderBy('id','desc')->with('createdBy')->whereHas('members', function($query) {
+        // orderBy(
+            // Transaction::select('body')->whereColumn('purchase_requests.id', 'transactions.purchase_request_id')->latest()->take(1)
+        // )->
+        $prs = PurchaseRequest::with('createdBy')->whereHas('members', function($query) {
             return $query->where('members.user_id', Auth::user()->id);
         })->orWhereHas('lastTransaction', function($query) {
             return $query->whereHas('lastRecepient', function($q) {
                 return $q->where('receiver_id', Auth::user()->id);
             });
-        })->with('members')->with('lastTransaction')->withAggregate('lastTransaction', 'created_at as latest_date')->orderByDesc('last_transaction_created_at_as_latest_date')->withAggregate('createdBy','CONCAT(firstname, " ", lastname) as fullname');
+        })->with('members')->with('lastTransaction')->withAggregate('lastTransaction', 'created_at as latest_date')->withAggregate('createdBy','CONCAT(firstname, " ", lastname) as fullname');
         // return $prs->toSql();
+        // ->orderByDesc('last_transaction_created_at_as_latest_date')
         return encryptIds($prs);
     }
 
@@ -227,6 +231,15 @@ class PurchaseRequestController extends Controller {
             abort(403, 'Unauthorize action.');
         }
         return $pr->delete();
+    }
+
+    public function generate_pr_number(Request $request) {
+        $pr_id = decryptUrlSafe($request->id);
+        $cnt = PurchaseRequest::whereMonth('created_at', date('m'))->whereNotNull('pr_number')->count();
+
+        PurchaseRequest::where('id', $pr_id)->update([
+           'pr_number' =>  "PR-".date('Y')."-".date('m')."-".str_pad(($cnt + 1), 3, '0',STR_PAD_LEFT)
+        ]);
     }
 
     public function route_pr(Request $request) {

@@ -6,6 +6,7 @@ namespace App\Providers;
 
 use App\Models\PurchaseRequest;
 use App\Models\User;
+use App\Policies\AttachmentPolicy;
 use App\Policies\PRPolicy;
 use App\Policies\PurchaseRequestPolicy;
 use App\Policies\SupplementalPolicy;
@@ -47,6 +48,9 @@ class AuthServiceProvider extends ServiceProvider
         // Supplemental
         Gate::define('spl-download-file', [SupplementalPolicy::class, 'supplementalDownload']);
         Gate::define('spl-view-file', [SupplementalPolicy::class, 'supplementalCreatorView']);
+
+        // Attachment
+        Gate::define('attachment-file-view', [AttachmentPolicy::class, 'creatorView']);
 
     }
 }

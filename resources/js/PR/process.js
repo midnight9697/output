@@ -5,6 +5,16 @@ import { PRValidator } from "./validation";
 let uploaded_attachments = [];
 document.addEventListener('DOMContentLoaded', () => {
 
+  $('#generate_pr_number').on('click', () => {
+    confirmMod.load(() => {
+      PRClass.generatePR(localStorage.getItem('pr_id'), () => {
+        MessageMod.success("Success.!", () => {
+          window.location.reload();
+        });
+      });
+    }, "Do you want to generate PR. No.");
+  });
+
   $('#upload_attachment').on('click', (e) => {
     e.preventDefault();
     confirmMod.load(() => {

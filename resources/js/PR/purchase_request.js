@@ -104,6 +104,20 @@ export class PurchaseRequests {
         })
         .then(action).catch(fail)
     }
+
+    generatePR(id, action = () => {}, fail = () => {}) {
+      let fd = new FormData();
+      fd.append('id', id);
+      axios.post('./api/pr/generate_pr_number', fd, {
+          headers: {
+            'Content-Type': 'application/json; charset=utf-8',
+            'Accept': 'application/vnd.github+json',
+            'Authorization': `Bearer ${localStorage.getItem('bearer')}`
+            // 'responseType': 'application/json',
+          },
+        })
+        .then(action).catch(fail)
+    }
 }
 
 export var PRClass = new PurchaseRequests();

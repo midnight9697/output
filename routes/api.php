@@ -51,6 +51,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('route', [PurchaseRequestController::class, 'route_pr'])->name('pr.comment'); //  route to assigned personnel
         Route::post('{id}/receive', [PurchaseRequestController::class, 'receive_pr'])->name('pr.receive'); //  receive to assigned personnel
         Route::post('attachment/upload', [FileController::class, 'uploadAttachment'])->name('attachment.upload'); //  receive to assigned personnel
+        Route::post('generate_pr_number', [PurchaseRequestController::class, 'generate_pr_number'])->name('pr.generate');
     });
 
     Route::prefix('supplemental')->group(function() {

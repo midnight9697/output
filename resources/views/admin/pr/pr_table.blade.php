@@ -6,10 +6,10 @@
 
 @include('default.create-table', [ 'name' => $name,
   'columns' => [
+    'PR No.',
     'Entity Name',
     'Fund Cluster',
     'Office',
-    'PR No.',
     'Responsibility Code',
     'Purpose',
     'Creator',

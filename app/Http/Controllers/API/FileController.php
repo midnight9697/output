@@ -5,7 +5,9 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Attachment;
 use App\Models\PRSupplemental;
+use App\Models\PurchaseRequest;
 use App\Models\Supplementary;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -33,19 +35,20 @@ class FileController extends Controller {
 
     public function attachment($pr_spl_id) {
         $pr_spl_id = decryptUrlSafe($pr_spl_id);
-        $pr_spl = PRSupplemental::where('id', $pr_spl_id);
+        $pr_spl = Attachment::where('id', $pr_spl_id);
+        
         if (!$pr_spl->exists()) {
             return abort('404', 'Not Found');
         }
-        $pr_spl = $pr_spl->first();
-        Gate::allows('spl-download-file', $pr_spl);
         
-        $supplemental = Supplementary::where('id', $pr_spl->supplemental_id)->first();
-        $file = $supplemental->filename.".".$supplemental->filetype;
+        $pr_spl = $pr_spl->first();
+        $transaction = Transaction::where('id', $pr_spl->transaction_id)->first();
+        Gate::allows('attachment-file-view', $pr_spl);
+        $file = $pr_spl->filename.".".$pr_spl->filetype;
         if (!Storage::disk('public')->exists('attachments/'.$file)) {
             return abort('404', 'File Not Found');
         }
-        return Storage::disk('public')->download('attachments/'.$file, $supplemental->origin);
+        return Storage::disk('public')->download('attachments/'.$file, $pr_spl->origin);
     }
 
     public function viewSupplemental($spl_id) {

@@ -28,6 +28,10 @@ return new class extends Migration
             ['id' => 5, 'synonyms' => 'for approval'],
             ['id' => 6, 'synonyms' => 'approved for excecution'],
             ['id' => 7, 'synonyms' => 'Dismissed and not to be followed through'],
+            ['id' => 8, 'synonyms' => 'Incomplete attachment'],
+            ['id' => 9, 'synonyms' => 'Incomplete attachment'],
+            ['id' => 10, 'synonyms' => 'For immediate action'],
+            ['id' => 11, 'synonyms' => 'Signed'],
         ];
         
         DB::table('alternatives')->insert($productsToInsert);

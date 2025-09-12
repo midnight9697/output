@@ -74,6 +74,9 @@
             </div>
         </div>
     </div>
+    <div id="holloween">
+        <img src="{{ url('files/can.gif') }}" alt="" width="100" height="100" id="image_holoween">
+    </div>
 </nav>
 
 <div class="pusher">
@@ -101,10 +104,92 @@
                       <p style="height:12px;background:grey;width:100%" class="disabled initia_loader"></p>
                 </div>
                 <div id="body_content_default">
+                    
                     @include('default.loader')
                     @yield('main_content')
                 </div>
             </div>
         </div>
     </div>
+
 </div>
+
+
+
+<style>
+    #holloween {
+        position: fixed;
+        z-index: 10;
+        right:0px;
+        /* display: none; */
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        var holloween = document.getElementById('holloween');
+        var custom_topbar = document.getElementsByClassName('custom-topbar')[0];
+        var image_holoween = document.getElementById('image_holoween');
+        let start = (custom_topbar.offsetWidth - 100);
+        let vertical_start = 0;
+        let max_travel = (custom_topbar.offsetWidth - 100);
+        let max_height = (window.innerHeight - 100);
+        let movement = "left";
+
+        setInterval(() => {
+            movement = (start == max_travel?"left":movement);
+            movement = (start == 0?"down":movement);
+            movement = (start == 0 && vertical_start == max_height?"right":movement);
+            // movement = (start == max_travel && maxvertical_start ?"up":movement);
+            console.log('start - vertical', start, vertical_start, movement);
+            switch (movement) {
+                case "left":
+                        image_holoween.style.transform = "";
+                        start -= 1;
+                    break;
+                case "down":
+                        image_holoween.style.transform = "";
+                        vertical_start += 1;
+                    break;
+                 case "up":
+                        image_holoween.style.transform = "";
+                        vertical_start -= 1;
+                    break;
+                default:
+                        image_holoween.style.transform = "scaleX(-1)";
+                        image_holoween.style.transform = "-webkit-transform: scaleX(-1)";
+                        start += 1;
+                    break;
+            }
+            holloween.style.left= start+"px";
+            holloween.style.top = vertical_start+"px";
+        }, 1);
+    });
+
+    function original() {
+        var holloween = document.getElementById('holloween');
+        var custom_topbar = document.getElementsByClassName('custom-topbar')[0];
+        var image_holoween = document.getElementById('image_holoween');
+        let start = (custom_topbar.offsetWidth - 100);
+        let max_travel = (custom_topbar.offsetWidth - 100);
+        let max_height = screen.height;
+        let movement = "left";
+        console.log('height', max_height);
+        setInterval(() => {
+            movement = (start == max_travel?"left":movement);
+            movement = (start == 0?"right":movement);
+            switch (movement) {
+                case "left":
+                        image_holoween.style.transform = "";
+                        start -= 1;
+                    break;
+                default:
+                        image_holoween.style.transform = "scaleX(-1)";
+                        image_holoween.style.transform = "-webkit-transform: scaleX(-1)";
+                        start += 1;
+                    break;
+            }
+            holloween.style.left= start+"px";
+        }, 10);
+    }
+</script>

@@ -207,7 +207,7 @@ class PurchaseRequestController extends Controller {
             PurchaseRequest::where('id', $pr_id)->update([
                 'approval' => 1
             ]);
-
+            
             Recepient::create([
                 'transaction_id' => $transaction->id,
                 'receiver_id' => decryptUrlSafe($request->assigned_to)

@@ -123,7 +123,11 @@ function transactionTable() {
         ht += `
         <div class="item">
         <div class="right floated content">
-            <small>Assigned to: <b><i>${((member_count > 1)?"Members":transaction.recepient.profile.firstname+" "+transaction.recepient.profile.lastname)}</b></i></small>
+            ${
+              (transaction.action == 12?"<span class='ui red text bold'><small><b>FILE CLOSED</b></small></span>":
+                  `<small>Assigned to: <b><i>${((member_count > 1)?"Members":transaction.recepient.profile.firstname+" "+transaction.recepient.profile.lastname)}</b></i></small>`
+              )
+            }
             <br>
             <div style="width:100%;text-align:right;">
               <small>${(transaction.attachments.length > 0?"<a data-id='"+transaction.id+"' class='show_files' href='#'>Files</a>":"")}</small>

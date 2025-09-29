@@ -140,7 +140,7 @@
             movement = (start == max_travel?"left":movement);
             movement = (start == 0?"down":movement);
             movement = (start == 0 && vertical_start == max_height?"right":movement);
-            // movement = (start == max_travel && maxvertical_start ?"up":movement);
+            movement = (start == max_travel && vertical_start >=   ?"up":movement);
             console.log('start - vertical', start, vertical_start, movement);
             switch (movement) {
                 case "left":

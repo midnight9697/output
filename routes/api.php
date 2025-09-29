@@ -52,6 +52,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('{id}/receive', [PurchaseRequestController::class, 'receive_pr'])->name('pr.receive'); //  receive to assigned personnel
         Route::post('attachment/upload', [FileController::class, 'uploadAttachment'])->name('attachment.upload'); //  receive to assigned personnel
         Route::post('generate_pr_number', [PurchaseRequestController::class, 'generate_pr_number'])->name('pr.generate');
+        Route::post('decrypt_action', [PurchaseRequestController::class, 'decrypt_action'])->name('process.decrypt_action');
+
     });
 
     Route::prefix('supplemental')->group(function() {

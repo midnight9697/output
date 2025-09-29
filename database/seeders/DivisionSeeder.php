@@ -77,8 +77,8 @@ class DivisionSeeder extends Seeder
     }
 
     public function insertUnit($section, $acronym) {
-        DB::table("sections")->insert([
-            'section' => $section,
+        DB::table("units")->insert([
+            'section_id' => $section,
             'unit_name' => $acronym,
         ]);
     }

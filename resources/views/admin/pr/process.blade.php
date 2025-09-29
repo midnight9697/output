@@ -51,9 +51,9 @@
                     </div>
                     <div class="field">
                         <label>Action:</label>
-                        <select name="action">
+                        <select name="action" id="action_process"> 
                             @foreach (Alternative::get() as $action)
-                                @if ($action->id < 11)
+                                @if ($action->id != 11)
                                     <option value="{{ encryptUrlSafe($action->id) }}">{{ strtoupper($action->id == 1?"--":$action->synonyms) }}</option>
                                 @endif
                                 @if ($action->id == 11 && $prof->first()->unit_id == 1)
@@ -62,7 +62,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="field">
+                    <div class="field" id="assigned_to_pr">
                         <label>Assigned to:</label>
                         <div class="ui fluid search search_people">
                             <div class="ui icon input">

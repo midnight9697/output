@@ -3,7 +3,19 @@ import { filePreview } from "../supplemental";
 import { PRClass } from "./purchase_request";
 import { PRValidator } from "./validation";
 let uploaded_attachments = [];
+console.log('hello');
 document.addEventListener('DOMContentLoaded', () => {
+  const select_action = document.getElementById('action_process')
+  const assigned_to_pr = document.getElementById('assigned_to_pr')
+  action_process.onchange = () =>{
+    PRClass.getDecryptAction(select_action.value,(result) => {
+      if (result == 12) {
+        assigned_to_pr.style.display = 'none';
+      }else{
+        assigned_to_pr.style.display = 'block';
+      }
+    } )
+  }
 
   $('#generate_pr_number').on('click', () => {
     confirmMod.load(() => {
@@ -111,21 +123,21 @@ function transactionTable() {
         ht += `
         <div class="item">
         <div class="right floated content">
-            <small>Assigned: ${(member_count == PRValidator.members.length?"Members":transaction.recepient.profile.firstname+" "+transaction.recepient.profile.lastname)}</small>
+            <small>Assigned to: <b><i>${((member_count > 1)?"Members":transaction.recepient.profile.firstname+" "+transaction.recepient.profile.lastname)}</b></i></small>
             <br>
             <div style="width:100%;text-align:right;">
               <small>${(transaction.attachments.length > 0?"<a data-id='"+transaction.id+"' class='show_files' href='#'>Files</a>":"")}</small>
             </div>
           </div>
-          <i class="location arrow icon"></i>
-          <div class="content">
-            <a class="header">${(transaction.sender_id==localStorage.getItem('user')?"You":transaction.sender.firstname+" "+transaction.sender.lastname)}</a>
-            ${(transaction.action == 1 && transaction.body != ""?"":`<small style="color:green">(${transaction.act.synonyms})${transaction.recepient.received == 1?" | Received":""}</small>`)}
-           
-            <div class="description">
-              <b>${transaction.created_for}</b> | ${transaction.body} 
-            </div>
-          </div>
+          <i class="${
+            (transaction.sender_id==localStorage.getItem('user')?"upload icon color green":(transaction.recepient.receiver_id == localStorage.getItem('user')?'download icon color blue':"window minimize icon color dark"))
+        }"></i>
+        <div class="content">
+        <a class="header">${(transaction.sender_id==localStorage.getItem('user')?"You":transaction.sender.firstname+" "+transaction.sender.lastname)}</a>
+        ${(transaction.action == 1 && transaction.body != ""?"":`<small style="color:green">(${transaction.act.synonyms})${transaction.recepient.received == 1?" | Received":""}</small>`)}
+        <div class="description"><b>${transaction.created_for}</b></div>
+        <div class="remarks_menu">Remarks: ${transaction.body}</div>
+      </div>
         </div>
         `;
     });
@@ -197,3 +209,4 @@ function uploadFile(attachmentFile, fcount) {
     progressControl.fail();
   });// UploadControl Endpoint
 }
+

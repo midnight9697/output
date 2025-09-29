@@ -23,6 +23,21 @@ export class PurchaseRequests {
       } )
     }
 
+    getDecryptAction(action_id, action) {
+      axios.post('./api/pr/decrypt_action',{action:action_id,}, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('bearer')}`,
+          'Content-Type': 'application/json; charset=utf-8',
+          'Accept': 'application/vnd.github+json',
+        }
+      })
+      .then((e) => {
+        action(e.data);
+      } )
+    }
+
+
+
     creatPR(pr, items, action = () => {}, fail = () => {}) {
       var usersClone = this;
       pr['items'] = items;

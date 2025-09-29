@@ -22,15 +22,15 @@
         <div class="menu">
             {{ view('layout.menu', [ 'url' => route('home'), 'title' => 'Dashboard', 'routesplit' => $routesplit, 'permission' => true]) }}
             {{ view('layout.menu', [ 'url' => url('pr'), 'title' => 'Purchase Request', 'routesplit' => $routesplit, 'permission' => true]) }}
-            {{ view('layout.menu', [ 'url' => url('#'), 'title' => 'APP', 'routesplit' => $routesplit, 'permission' => true]) }}
+            {{ view('layout.menu', [ 'url' => url('#'), 'title' => 'APP', 'routesplit' => $routesplit, 'permission' => (Auth::user()->profile->unit_id == 1)]) }}
             {{ view('layout.menu', [ 'url' => url('#'), 'title' => 'PPMP', 'routesplit' => $routesplit, 'permission' => true]) }}
             {{ view('layout.menu', [ 'url' => url('supplemental'), 'title' => 'Supplemental', 'routesplit' => $routesplit, 'permission' => true]) }}
-            {{ view('layout.menu', [ 'url' => url('#'), 'title' => 'RFQ', 'routesplit' => $routesplit, 'permission' => true]) }}
+            {{ view('layout.menu', [ 'url' => url('rfq'), 'title' => 'RFQ', 'routesplit' => $routesplit, 'permission' => true]) }}
             {{ view('layout.menu', [ 'url' => url('#'), 'title' => 'Purchase Order', 'routesplit' => $routesplit, 'permission' => true]) }}
             {{ view('layout.menu', [ 'url' => url('#'), 'title' => 'Abstract', 'routesplit' => $routesplit, 'permission' => true]) }}
         </div>
     </div>
-
+    
     <div class="item ">
         <div class="header">Administration</div>
         <div class="menu">

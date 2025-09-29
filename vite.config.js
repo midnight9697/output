@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
+import react from '@vitejs/plugin-react';
 
 export default defineConfig({
     server: {
@@ -17,6 +18,7 @@ export default defineConfig({
             ],
             refresh: true,
         }),
+        react()
     ],
     // server: {
     //     host: '172.16.6.103',

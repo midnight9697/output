@@ -1,5 +1,10 @@
+import DraftEditor from "./components/draftEditor";
 import { AuthClass } from "./login/login";
+import { createRoot } from 'react-dom/client';
 let pageLoaderGlobal;
+
+
+
 export class Section {
 
     getSection(division_id = false, action) {
@@ -279,6 +284,11 @@ export const uploadControl = new Uploader();
 
 document.addEventListener('DOMContentLoaded', () => {
     // pageLoadMod.destroy();
+    const editorElement = document.getElementById('draft-editor-container');
+    if (editorElement) {
+        createRoot(editorElement).render(<DraftEditor />);
+    }
+    
     $('.ui .dropdown').dropdown();
     $('#logout_user').on('click', () => {
         AuthClass.logout();

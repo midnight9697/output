@@ -74,9 +74,9 @@
             </div>
         </div>
     </div>
-    <div id="holloween">
+    {{-- <div id="holloween">
         <img src="{{ url('files/can.gif') }}" alt="" width="100" height="100" id="image_holoween">
-    </div>
+    </div> --}}
 </nav>
 
 <div class="pusher">

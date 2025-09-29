@@ -254,4 +254,8 @@ class PurchaseRequestController extends Controller {
         ]);
         return ['rc' => $rc, 'id' => $tr->lastRecepient->id];
     }
+
+    public function decrypt_action(Request $request){
+        return decryptUrlSafe($request->action);
+    }
 }

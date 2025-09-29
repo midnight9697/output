@@ -26,14 +26,10 @@
                                         <input type="text" placeholder="Fund Cluster" name="fund_cluster">
                                     </div>
                                 </div>
-                                <div class="two fields">
+                                <div class="field">
                                     <div class="field">
                                         <label>Office/Section</label>
                                         <input type="text" placeholder="Office/Section" name="office">
-                                    </div>
-                                    <div class="field">
-                                        <label>PR No.</label>
-                                        <input type="text" placeholder="PR No." name="pr_number">
                                     </div>
                                 </div>
                                 <div class="two fields">

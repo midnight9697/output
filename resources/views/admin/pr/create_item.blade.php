@@ -13,7 +13,7 @@
                 </div>
                 <div class="field">
                     <label>Unit</label>
-                    <input type="text" name="unit" placeholder="Unit">
+                    <input type="text" name="unit" placeholder="Unit" pattern="[A-Za-z]*">
                 </div>
                 <div class="field">
                     <label>Item Description</label>
@@ -29,7 +29,7 @@
                 </div>
                 <div class="field">
                     <label>Total Cost</label>
-                    <input type="text" name="total_cost" placeholder="Total Cost">
+                    <input type="text" name="total_cost" placeholder="Total Cost" disabled>
                 </div>
             </div>
         </form>

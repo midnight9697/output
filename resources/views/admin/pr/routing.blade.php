@@ -14,9 +14,9 @@
             </div>
             <form class="ui form routingForm" id="routingForm" action="#" method="POST">
                 <div class="field">
-                    <label>Action:</label>
-                    <select name="action">
-                        @foreach (Alternative::get() as $action)
+                    <label>Action</label>
+                    <select id="action_routing" name="action" >
+                        @foreach (Alternative::where('synonyms', '!=', 'close')->get() as $action)
                             <option value="{{ encryptUrlSafe($action->id) }}">{{ strtoupper($action->id == 1?"--":$action->synonyms) }}</option>
                         @endforeach
                     </select>

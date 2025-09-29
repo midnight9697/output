@@ -55,6 +55,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('{id}/track', [PurchaseRequestController::class, 'trackView'])->name('transaction.history');
         Route::get('view/{id}', [PurchaseRequestController::class, 'viewPR'])->name('view.purchase request');
         Route::get('process/{id}', [PurchaseRequestController::class, 'processView'])->name('process.purchase request');
+        Route::post('decrypt_action', [PurchaseRequestController::class, 'decrypt_action'])->name('process.decrypt_action');
     });
     
     Route::prefix('supplemental')->group(function() {

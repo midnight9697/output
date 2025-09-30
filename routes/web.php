@@ -5,6 +5,7 @@ use App\Http\Controllers\API\SupplementalController as APISupplementalController
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PR\PurchaseRequestController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RFQController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\Supplemental\SupplementalController;
 use App\Http\Controllers\SystemController;
@@ -61,6 +62,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/', [SupplementalController::class, 'supplementalView'])->name('supplemental');
         Route::get('download/{splid}', [FileController::class, 'supplemental'])->name('supplemental.download');
         Route::get('view/{splid}', [FileController::class, 'viewSupplemental'])->name('supplemental.view');
+    });
+
+    Route::prefix('rfq')->group(function() {
+        Route::get('/', [RFQController::class, 'rfqView'])->name('Request for Quotation');
     });
 
     Route::get('attachment/{id}', [FileController::class, 'attachment'])->name('attachment.download');

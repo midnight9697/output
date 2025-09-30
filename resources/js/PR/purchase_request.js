@@ -36,8 +36,6 @@ export class PurchaseRequests {
       } )
     }
 
-
-
     creatPR(pr, items, action = () => {}, fail = () => {}) {
       var usersClone = this;
       pr['items'] = items;
@@ -133,6 +131,19 @@ export class PurchaseRequests {
         })
         .then(action).catch(fail)
     }
+
+    closed_pr(action) {
+      axios.get('./api/pr/closed_pr', {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('bearer')}`
+        }
+      })
+      .then((e) => {
+        action(e.data);
+      } )
+    }
+
+    
 }
 
 export var PRClass = new PurchaseRequests();

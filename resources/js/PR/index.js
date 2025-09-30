@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     CTable(new Custom_table('#inbox', false, true, false, false, './api/pr/page'), 'inbox');
     CTable(new Custom_table('#outbox', false, true, false, false, './api/pr/page'), 'outbox');
     CTable(new Custom_table('#personal', false, true, false, false, './api/pr/page'), 'track');
+    CTable(new Custom_table('#close', false, true, false, false, './api/pr/closed_pr'), 'close');
 });
 
 function CTable(CTBL, tab = 'inbox') {
@@ -22,6 +23,13 @@ function CTable(CTBL, tab = 'inbox') {
                 return json.data.filter(el => el.approval == 1 && el.last_transaction.last_recepient.receiver_id != localStorage.getItem('user'));
             }
             break;
+        case 'close':
+            PRClass.closed_pr = (res) => {
+                CTBL.dataSrc = (json) => {
+                    return res
+                }
+            }
+        break;
     
         default:
             CTBL.dataSrc = (json) => {

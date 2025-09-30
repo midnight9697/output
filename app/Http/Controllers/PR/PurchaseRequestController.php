@@ -80,4 +80,6 @@ class PurchaseRequestController extends Controller {
         ]);
         return $pdf->stream();
     }
+
+    
 }

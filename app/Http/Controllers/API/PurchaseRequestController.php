@@ -258,4 +258,12 @@ class PurchaseRequestController extends Controller {
     public function decrypt_action(Request $request){
         return decryptUrlSafe($request->action);
     }
+
+    public function fetch_close_pr_by_page(){
+        $close_pr =  PurchaseRequest::with('close_pr')->whereHas('transactions', function($query) {
+            return $query->where('sender_id', Auth::user()->id)
+                    ->where('action' , 12);
+        });
+        return encryptIds($close_pr);
+    }
 }

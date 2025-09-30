@@ -65,6 +65,8 @@ class PurchaseRequest extends Model
         return encryptUrlSafe($this->id);
     }
 
-    
+    public function close_pr(){
+        return $this->belongsTo(Transaction::class, 'purchase_request_id', 'id');
+    }
     
 }

@@ -19,6 +19,7 @@
         <div class="active item" data-tab="inbox">INBOX</div>
         <div class="item" data-tab="outbox">OUTBOX</div>
         <div class="item" data-tab="personal">TRACK</div>
+        <div class="item" data-tab="close">CLOSED</div>
     </div>
     <div class="ui bottom attached active tab segment" data-tab="inbox">
         @include('admin.pr.pr_table', ['name' => 'inbox'])
@@ -28,6 +29,9 @@
     </div>
     <div class="ui bottom attached tab segment" data-tab="personal">
         @include('admin.pr.pr_table', ['name' => 'personal'])
+    </div>
+    <div class="ui bottom attached tab segment" data-tab="close">
+        @include('admin.pr.pr_table', ['name' => 'close'])
     </div>
     
 @endsection

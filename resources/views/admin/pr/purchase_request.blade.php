@@ -11,7 +11,7 @@
 @section('main_content')
     @include('default.create-button', [
       'name' => 'create_user_vbtn',
-      'text' => 'NEW',
+      'text' => 'PURCHASE REQUEST',
       'icon' => 'plus',
       'link' => url('pr/create')
     ])

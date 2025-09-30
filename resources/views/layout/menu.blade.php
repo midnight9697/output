@@ -1,5 +1,5 @@
 @if ($permission == true)
-    <a href="{{ $url }}" target="{{ (isset($target)?"__blank":"") }}" class="item {{ in_array("user"||"users", $routesplit)?"notactive":"" }}">
+    <a href="{{ $url }}" target="{{ (isset($target)?"__blank":"") }}" class="item {{ request()->url() == $url ? 'active': '' }}">
         {{-- <div><i class="icon users"></i>{{ $title }}</div> --}}
         {{-- <i class="home icon"></i> --}}
         @php

@@ -4,7 +4,7 @@
     @include('admin.rfq.create')
     @include('default.create-button', [
       'name' => 'create_rfq_btn',
-      'text' => 'CREATE RFQ',
+      'text' => 'RFQ',
       'icon' => 'plus',
     ])
     <div class="ui top attached tabular menu">

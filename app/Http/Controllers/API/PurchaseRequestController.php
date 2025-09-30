@@ -208,10 +208,13 @@ class PurchaseRequestController extends Controller {
                 'approval' => 1
             ]);
 
-            Recepient::create([
-                'transaction_id' => $transaction->id,
-                'receiver_id' => decryptUrlSafe($request->assigned_to)
-            ]);
+            if ($request->action != 12) {
+                Recepient::create([
+                    'transaction_id' => $transaction->id,
+                    'receiver_id' => decryptUrlSafe($request->assigned_to)
+                ]);
+            }
+
         }
         return $transaction;
     }

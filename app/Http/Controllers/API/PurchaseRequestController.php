@@ -282,12 +282,14 @@ class PurchaseRequestController extends Controller {
     }
 
     public function fetch_inbox_pr_by_page(){
-        $pr =  PurchaseRequest::whereHas('lastTransaction', function($query) {
-            return $query->whereHas('lastRecepient', function($q) {
+        $pr =  PurchaseRequest::whereHas('transactions', function($query) {
+            return $query->whereNot('action', 12)
+                ->latest()
+                ->whereHas('lastRecepient', function($q) {
                 return $q->where('receiver_id', Auth::user()->id);
             });
         });
-
+        
         $pr->orderByDesc(
             Transaction::select('created_at')
                 ->whereColumn('transactions.purchase_request_id', 'purchase_requests.id')

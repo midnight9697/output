@@ -3,7 +3,7 @@ import { PRClass } from "./purchase_request";
 
 document.addEventListener('DOMContentLoaded', () => {
     $('.menu .item').tab();
-    CTable(new Custom_table('#inbox', false, true, false, false, './api/pr/page'), 'inbox');
+    CTable(new Custom_table('#inbox', false, true, false, false, './api/pr/inbox_pr'), 'inbox');
     CTable(new Custom_table('#outbox', false, true, false, false, './api/pr/outbox_pr'), 'outbox');
     CTable(new Custom_table('#personal', false, true, false, false, './api/pr/track_pr'), 'track');
     CTable(new Custom_table('#close', false, true, false, false, './api/pr/closed_pr'), 'close');
@@ -13,9 +13,10 @@ function CTable(CTBL, tab = 'inbox') {
     
     switch (tab) {
         case 'inbox':
-            CTBL.dataSrc = (json) => {
-                let transactions = json.data.filter(el => el.last_transaction);
-                return transactions.filter(el => el.last_transaction.last_recepient.receiver_id == localStorage.getItem('user') && el.approval == 1);
+            PRClass.inbox_pr = (res) => {
+                CTBL.dataSrc = (json) => {
+                    return res
+                }
             }
             break;
         case 'outbox':
@@ -42,7 +43,7 @@ function CTable(CTBL, tab = 'inbox') {
     
     CTBL.custom_buttons = (data) => {
         let button = document.createElement('button');
-        console.log('CREATED BY', tab, data.created_by.user_id, localStorage.getItem('user'));
+        console.log('CREATED BY', data.approval);
         let title = (localStorage.getItem('user') == data.created_by.user_id?"EDIT":'REVIEW');
         let url = window.location+'/'+data.id+'/edit';
         let ui = "ui very tiny "+(localStorage.getItem('user') == data.created_by.user_id?"green":"grey")+" button";
@@ -51,12 +52,14 @@ function CTable(CTBL, tab = 'inbox') {
             url = window.location+'/'+data.id+'/track';
             ui = "ui very tiny primary button";
             if (tab == 'inbox') {
-                if ((data.last_transaction.last_recepient.receiver_id == localStorage.getItem('user'))) {
-                    title = "RECEIVE";
-                    if (data.last_transaction.last_recepient.received == 1) {
-                        title = 'PROCESS';
-                        ui = "ui very tiny green button";
-                        url = window.location+'/process/'+data.id;
+                if (data.last_transaction.last_recepient) {
+                    if ((data.last_transaction.last_recepient.receiver_id == localStorage.getItem('user'))) {
+                        title = "RECEIVE";
+                        if (data.last_transaction.last_recepient.received == 1) {
+                            title = 'PROCESS';
+                            ui = "ui very tiny green button";
+                            url = window.location+'/process/'+data.id;
+                        }
                     }
                 }
             }

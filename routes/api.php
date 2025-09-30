@@ -56,6 +56,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('closed_pr', [PurchaseRequestController::class, 'fetch_close_pr_by_page'])->name('fetch_close_pr_by_page');
         Route::get('outbox_pr', [PurchaseRequestController::class, 'fetch_outbox_pr_by_page'])->name('fetch_outbox_pr_by_page');
         Route::get('track_pr', [PurchaseRequestController::class, 'fetch_track_pr_by_page'])->name('fetch_track_pr_by_page');
+        Route::get('inbox_pr', [PurchaseRequestController::class, 'fetch_inbox_pr_by_page'])->name('fetch_inbox_pr_by_page');
+
 
     });
 

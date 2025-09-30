@@ -8,6 +8,8 @@
     <title>PROCUREMENT SYSTEM</title>
     @include('layout.cssinclude')
     <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+    <link href="{{ url('plugins/quill/quill.snow.css') }}" rel="stylesheet">
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <style>
@@ -33,6 +35,7 @@
 </html>
 @include('layout.jsinclude')
 <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+<script src="{{ url('plugins/quill/quill.js') }}"></script>
 <script>
     axios.defaults.baseURL = "{{ url('/') }}";
     localStorage.setItem('user', "{{ Auth::user()->id }}")

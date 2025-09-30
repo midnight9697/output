@@ -26,19 +26,16 @@ class PurchaseRequestController extends Controller {
         if (!Gate::allows('pr-user-view')) {
             abort(403, 'Unauthorized action.');
         }
-        // orderBy(
-            // Transaction::select('body')->whereColumn('purchase_requests.id', 'transactions.purchase_request_id')->latest()->take(1)
-        // )->
-        $prs = PurchaseRequest::with('createdBy')->whereHas('members', function($query) {
+        
+        $prs = PurchaseRequest::whereHas('members', function($query) {
             return $query->where('members.user_id', Auth::user()->id);
         })->orWhereHas('lastTransaction', function($query) {
             return $query->whereHas('lastRecepient', function($q) {
                 return $q->where('receiver_id', Auth::user()->id);
             });
-        })->with('members')->with('lastTransaction')->withAggregate('lastTransaction', 'created_at as latest_date')->withAggregate('createdBy','CONCAT(firstname, " ", lastname) as fullname');
-        // return $prs->toSql();
-        // ->orderByDesc('last_transaction_created_at_as_latest_date')
-        return encryptIds($prs);
+        });
+        
+        return encryptIds($this->pr_data_fetcher($prs));
     }
 
     public function fetch_all() {
@@ -264,6 +261,48 @@ class PurchaseRequestController extends Controller {
             return $query->where('sender_id', Auth::user()->id)
                     ->where('action' , 12);
         });
-        return encryptIds($close_pr);
+        return encryptIds($this->pr_data_fetcher($close_pr));
+    }
+
+    public function fetch_track_pr_by_page(){
+        $pr =  PurchaseRequest::whereHas('member', function($query) {
+            return $query->where('members.user_id', Auth::user()->id);
+        });
+        return encryptIds($this->pr_data_fetcher($pr));
+    }
+    
+    public function fetch_outbox_pr_by_page(){
+        $pr =  PurchaseRequest::where('approval', '1')->whereHas('transactions', function($query) {
+            return $query->where('sender_id', Auth::user()->id)
+                    ->orWhereHas('recepients', function($q) {
+                return $q->where('receiver_id', Auth::user()->id);
+            });
+        });
+        return encryptIds($this->pr_data_fetcher($pr));
+    }
+
+    public function fetch_inbox_pr_by_page(){
+        $pr =  PurchaseRequest::whereHas('lastTransaction', function($query) {
+            return $query->whereHas('lastRecepient', function($q) {
+                return $q->where('receiver_id', Auth::user()->id);
+            });
+        });
+
+        $pr->orderByDesc(
+            Transaction::select('created_at')
+                ->whereColumn('transactions.purchase_request_id', 'purchase_requests.id')
+                ->latest()
+                ->take(1)
+        );
+        return encryptIds($this->pr_data_fetcher($pr));
+    }
+
+    public function pr_data_fetcher($query) {
+        return $query->withAggregate('lastTransaction', 'created_at as latest_date')
+        ->withAggregate('createdBy','CONCAT(firstname, " ", lastname) as fullname')
+        ->with('members')
+        ->with('lastTransaction')
+        ->with('createdBy');
+        // ->orderBy('desc', 'last_transaction_created_at_as_latest_date');
     }
 }

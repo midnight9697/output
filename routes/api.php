@@ -53,7 +53,9 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('attachment/upload', [FileController::class, 'uploadAttachment'])->name('attachment.upload'); //  receive to assigned personnel
         Route::post('generate_pr_number', [PurchaseRequestController::class, 'generate_pr_number'])->name('pr.generate');
         Route::post('decrypt_action', [PurchaseRequestController::class, 'decrypt_action'])->name('process.decrypt_action');
-        Route::get('closed_pr', [PurchaseRequestController::class, 'fetch_close_pr_by_page'])->name('process.fetch_close_pr_by_page');
+        Route::get('closed_pr', [PurchaseRequestController::class, 'fetch_close_pr_by_page'])->name('fetch_close_pr_by_page');
+        Route::get('outbox_pr', [PurchaseRequestController::class, 'fetch_outbox_pr_by_page'])->name('fetch_outbox_pr_by_page');
+        Route::get('track_pr', [PurchaseRequestController::class, 'fetch_track_pr_by_page'])->name('fetch_track_pr_by_page');
 
     });
 

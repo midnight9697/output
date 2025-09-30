@@ -4,8 +4,8 @@ import { PRClass } from "./purchase_request";
 document.addEventListener('DOMContentLoaded', () => {
     $('.menu .item').tab();
     CTable(new Custom_table('#inbox', false, true, false, false, './api/pr/page'), 'inbox');
-    CTable(new Custom_table('#outbox', false, true, false, false, './api/pr/page'), 'outbox');
-    CTable(new Custom_table('#personal', false, true, false, false, './api/pr/page'), 'track');
+    CTable(new Custom_table('#outbox', false, true, false, false, './api/pr/outbox_pr'), 'outbox');
+    CTable(new Custom_table('#personal', false, true, false, false, './api/pr/track_pr'), 'track');
     CTable(new Custom_table('#close', false, true, false, false, './api/pr/closed_pr'), 'close');
 });
 
@@ -19,8 +19,10 @@ function CTable(CTBL, tab = 'inbox') {
             }
             break;
         case 'outbox':
-            CTBL.dataSrc = (json) => {
-                return json.data.filter(el => el.approval == 1 && el.last_transaction.last_recepient.receiver_id != localStorage.getItem('user'));
+            PRClass.outbox_pr = (res) => {
+                CTBL.dataSrc = (json) => {
+                    return res
+                }
             }
             break;
         case 'close':
@@ -40,6 +42,7 @@ function CTable(CTBL, tab = 'inbox') {
     
     CTBL.custom_buttons = (data) => {
         let button = document.createElement('button');
+        console.log('CREATED BY', tab, data.created_by.user_id, localStorage.getItem('user'));
         let title = (localStorage.getItem('user') == data.created_by.user_id?"EDIT":'REVIEW');
         let url = window.location+'/'+data.id+'/edit';
         let ui = "ui very tiny "+(localStorage.getItem('user') == data.created_by.user_id?"green":"grey")+" button";

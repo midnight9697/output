@@ -143,6 +143,17 @@ export class PurchaseRequests {
       } )
     }
 
+    outbox_pr(action) {
+      axios.get('./api/pr/outbox_pr', {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('bearer')}`
+        }
+      })
+      .then((e) => {
+        action(e.data);
+      } )
+    }
+
     
 }
 

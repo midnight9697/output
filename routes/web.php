@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\AbstractController;
 use App\Http\Controllers\API\FileController;
 use App\Http\Controllers\API\SupplementalController as APISupplementalController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PPMPController;
 use App\Http\Controllers\PR\PurchaseRequestController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\RFQController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\Supplemental\SupplementalController;
@@ -57,6 +60,19 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('process/{id}', [PurchaseRequestController::class, 'processView'])->name('process.purchase request');
         Route::post('decrypt_action', [PurchaseRequestController::class, 'decrypt_action'])->name('process.decrypt_action');
     });
+
+    Route::prefix('ppmp')->group(function() {
+        Route::get('/', [PPMPController::class, 'index'])->name('ppmp request');
+    });
+
+    Route::prefix('purchase_order')->group(function() {
+        Route::get('/', [PurchaseOrderController::class, 'index'])->name('purchase order request');
+    });
+
+    Route::prefix('abstract')->group(function() {
+        Route::get('/', [AbstractController::class, 'index'])->name('abstract request');
+    });
+
     
     Route::prefix('supplemental')->group(function() {
         Route::get('/', [SupplementalController::class, 'supplementalView'])->name('supplemental');

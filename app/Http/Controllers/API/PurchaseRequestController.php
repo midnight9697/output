@@ -265,7 +265,7 @@ class PurchaseRequestController extends Controller {
     }
 
     public function fetch_track_pr_by_page(){
-        $pr =  PurchaseRequest::whereHas('member', function($query) {
+        $pr =  PurchaseRequest::whereHas('members', function($query) {
             return $query->where('members.user_id', Auth::user()->id);
         });
         return encryptIds($this->pr_data_fetcher($pr));

@@ -11,7 +11,7 @@
 @section('main_content')
     @include('default.create-button', [
       'name' => 'create_user_vbtn',
-      'text' => 'ABSTRACT',
+      'text' => 'BAC',
       'icon' => 'plus',
       'link' => url('pr/create')
     ])

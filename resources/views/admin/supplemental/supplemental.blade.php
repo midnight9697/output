@@ -14,7 +14,7 @@
 </style>
 @include('default.create-button', [
   'name' => 'create-supplemental',
-  'text' => 'UPLOAD SUPPLEMENTAL',
+  'text' => 'SUPPLEMENTAL',
   'icon' => 'upload',
   'view' => "progress-upload"
 ])

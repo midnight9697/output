@@ -4,6 +4,9 @@ use App\Http\Controllers\AbstractController;
 use App\Http\Controllers\API\FileController;
 use App\Http\Controllers\API\SupplementalController as APISupplementalController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BACController;
+use App\Http\Controllers\DivisionController;
+use App\Http\Controllers\InspectorController;
 use App\Http\Controllers\PPMPController;
 use App\Http\Controllers\PR\PurchaseRequestController;
 use App\Http\Controllers\ProfileController;
@@ -72,6 +75,21 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::prefix('abstract')->group(function() {
         Route::get('/', [AbstractController::class, 'index'])->name('abstract request');
     });
+
+    Route::prefix('division')->group(function() {
+        Route::get('/', [DivisionController::class, 'index'])->name('division request');
+    });
+
+    Route::prefix('bac')->group(function() {
+        Route::get('/', [BACController::class, 'index'])->name('bac request');
+    });
+
+    Route::prefix('inspector')->group(function() {
+        Route::get('/', [InspectorController::class, 'index'])->name('inspector request');
+    });
+
+
+
 
     
     Route::prefix('supplemental')->group(function() {

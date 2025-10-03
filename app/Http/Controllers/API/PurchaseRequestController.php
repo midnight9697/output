@@ -282,21 +282,24 @@ class PurchaseRequestController extends Controller {
     }
 
     public function fetch_inbox_pr_by_page(){
-        $pr =  PurchaseRequest::join('transactions', 'purchase_requests.id', '=', 'transactions.purchase_request_id')
-        ->join('recepients', 'transactions.id', '=', 'recepients.transaction_id')
-        ->select('transactions.*')
-        ->whereNot('transactions.action', 12)
-        ->where('approval', 1)
-        ->where('recepients.receiver_id', Auth::user()->id)
-        ->with('lastTransaction');
-
+        $transactions = new Transaction();
+        $trans = $transactions->has('lastRecepient')->with('lastRecepient')->get();
+        return ['user' => Auth::user(), 'trans' =>$trans];;
+        $prequest = new PurchaseRequest();
+        $pr = $prequest->where('approval', 1)
+            ->where(function($query) use($trans) {
+            foreach ($trans as $transaction) {
+                $query->orWhere('id', $transaction->purchase_request_id);
+            }
+        });
+        
         $pr->orderByDesc(
             Transaction::select('created_at')
                 ->whereColumn('transactions.purchase_request_id', 'purchase_requests.id')
                 ->latest()
                 ->take(1)
         );
-        // return $pr->get();
+        // return ['user' => Auth::user(), 'pr' =>($pr->get())];
         return encryptIds($this->pr_data_fetcher($pr));
     }
 

@@ -66,18 +66,26 @@ function CTable(CTBL, tab = 'inbox') {
         }
         button.innerText = title;
         button.className = ui;
+        console.log(url);
+        
         button.onclick = (e) => {
             data.element = e;
             if (data.approval == 1) {
-                if (data.last_transaction.last_recepient.receiver_id == localStorage.getItem('user') && data.last_transaction.last_recepient.received == 0) {
-                    button.className = "ui very tiny primary loading button"
-                    button.innerText = "...";
-                    button.onclick = () => {};
-                    PRClass.receivePR({
-                        pr_id: data.id,
-                    }, () => {
-                        CTBL.table.ajax.reload();
-                    });
+                if (data.last_transaction.last_recepient) {
+                    if (data.last_transaction.last_recepient.receiver_id == localStorage.getItem('user') && data.last_transaction.last_recepient.received == 0) {
+                        button.className = "ui very tiny primary loading button"
+                        button.innerText = "...";
+                        button.onclick = () => {};
+                        PRClass.receivePR({
+                            pr_id: data.id,
+                        }, () => {
+                            CTBL.table.ajax.reload();
+                        });
+                    }
+
+                    else {
+                        window.location = url;
+                    }
                 }
                 else {
                     window.location = url;
@@ -103,7 +111,7 @@ function CTable(CTBL, tab = 'inbox') {
         'responsibility_center_code',
         'purpose',
         'created_by_c_o_n_c_a_tfirstname_lastname_as_fullname',
-        'members.length',
+        // 'members.length',
         'created_at',
         'last_transaction_created_at_as_latest_date',
     ]);

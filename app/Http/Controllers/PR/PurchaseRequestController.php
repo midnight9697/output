@@ -17,7 +17,7 @@ class PurchaseRequestController extends Controller {
     public function processView($id) {
         $id = decryptUrlSafe($id);
         $pr = PurchaseRequest::where('id', $id)->with('purchase_request_items')->with('lastTransaction');
-
+        
         if (!Gate::allows('pr-process-view', $pr->first())) {
             abort(403, 'Unauthorize action.');
         }
@@ -53,10 +53,8 @@ class PurchaseRequestController extends Controller {
         $id = decryptUrlSafe($id);
         $pr = PurchaseRequest::where('id', $id)->with('purchase_request_items');
 
-        if (!Gate::allows('pr-update-view', $pr->first())) {
-            if (!Gate::allows('pr-file-view', $id)) {
-                abort(403, 'Unauthorize action.');  //for tracking of PR
-            }
+        if (!Gate::allows('pr-track-view', $pr->first()->id)) {
+            abort(403, 'Unauthorize action.');  //for tracking of PR
         }
         
         if (!$pr->exists()) {

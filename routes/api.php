@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\FileController;
 use App\Http\Controllers\API\PurchaseRequestController;
+use App\Http\Controllers\API\RFQController;
 use App\Http\Controllers\API\SupplementalController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\AuthController;
@@ -59,6 +60,12 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('inbox_pr', [PurchaseRequestController::class, 'fetch_inbox_pr_by_page'])->name('fetch_inbox_pr_by_page');
 
 
+    });
+
+    Route::prefix('rfq')->group(function() {
+        Route::get('page', [RFQController:: class, 'fetch_by_page']);
+        Route::post('one', [RFQController:: class, 'fetch_rfq']);
+        Route::post('create', [RFQController:: class, 'create_rfq']);
     });
 
     Route::prefix('supplemental')->group(function() {

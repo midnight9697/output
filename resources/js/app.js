@@ -1,6 +1,4 @@
-import DraftEditor from "./components/draftEditor";
 import { AuthClass } from "./login/login";
-import { createRoot } from 'react-dom/client';
 let pageLoaderGlobal;
 
 

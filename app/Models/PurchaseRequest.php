@@ -49,7 +49,7 @@ class PurchaseRequest extends Model
     }
 
     public function lastTransaction() {
-        return $this->hasOne(Transaction::class)->orderBy('id', 'desc')->with('lastRecepient')->latest(); //GET THE LAST TRANSACTION FOR THE LAST RECEPIENT
+        return $this->hasOne(Transaction::class)->orderBy('id', 'desc')->with('lastRecepient')->latestOfMany(); //GET THE LAST TRANSACTION FOR THE LAST RECEPIENT
     }
 
     public function createdBy() {

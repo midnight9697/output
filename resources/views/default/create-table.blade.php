@@ -1,4 +1,5 @@
 <table class="ui very basic collapsing celled table hidden {{ $name }}" id="{{ $name }}" style="width: 100%">
+{{-- <table class="ui very basic collapsing celled table hidden {{ $name }}" id="{{ $name }}"> --}}
   <thead>
       <tr>
           @foreach ($columns as $column)
@@ -12,3 +13,4 @@
       </tr>
   </tbody>
 </table>
+

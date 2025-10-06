@@ -15,7 +15,22 @@ return new class extends Migration
     {
         Schema::create('request_for_quotations', function (Blueprint $table) {
             $table->id();
-            $table->json('contents')->nullable();
+            $table->string('project_purpose')->nullable();
+            $table->string('rfq_number')->nullable();
+            $table->string('attachment_one')->nullable();
+            $table->string('aproved_budget')->nullable();
+            $table->string('standard_unit')->nullable();
+            $table->string('target_delivery_date')->nullable();
+            $table->enum('classification', [
+                'Goods',
+                'Infrastructure Projects',
+                'Consulting Services',
+                'NP-53.10 Lease of Real Property and Venue',
+                'Common-Use Supplies (CSE)',
+                'NP-53.9 Small Value Procurement',
+                'ICT Projects',
+                'Framework Agreement',
+            ])->nullable();
             $table->foreignId('creator')->constrained('users')->default(1);
             $table->json('remarks')->nullable();
             $table->timestamps();

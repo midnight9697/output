@@ -9,6 +9,14 @@ class RFQ extends Model {
     use HasFactory;
     protected $table = 'request_for_quotations';
     protected $fillable = [
-        'contents'
+        'project_purpose',
+        'rfq_number',
+        'attachment_one',
+        'aproved_budget',
+        'standard_unit',
+        'target_delivery_date',
+        'classification',
+        'creator',
+        'remarks',
     ];
 }

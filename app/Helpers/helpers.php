@@ -112,3 +112,16 @@ function transactionBodies() {
         'update_with_items' => 'Modified the purchase request and added a new participant',
     ];
 }
+
+function classify() {
+    return [
+        'Goods',
+        'Infrastructure Projects',
+        'Consulting Services',
+        'Lease of Real Property and Venue',
+        'Common-Use Supplies (CSE)',
+        'Small Value Procurement',
+        'ICT Projects',
+        'Framework Agreement',
+    ];
+}

@@ -88,10 +88,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/', [InspectorController::class, 'index'])->name('inspector request');
     });
 
-
-
-
-    
     Route::prefix('supplemental')->group(function() {
         Route::get('/', [SupplementalController::class, 'supplementalView'])->name('supplemental');
         Route::get('download/{splid}', [FileController::class, 'supplemental'])->name('supplemental.download');
@@ -100,6 +96,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::prefix('rfq')->group(function() {
         Route::get('/', [RFQController::class, 'rfqView'])->name('Request for Quotation');
+        Route::get('/form-create', [RFQController::class, 'rfqFormCreate'])->name('RFQ FORM CREATE');
     });
 
     Route::get('attachment/{id}', [FileController::class, 'attachment'])->name('attachment.download');

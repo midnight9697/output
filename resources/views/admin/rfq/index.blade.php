@@ -6,6 +6,7 @@
       'name' => 'create_rfq_btn',
       'text' => 'CREATE RFQ',
       'icon' => 'plus',
+      'link' => url('rfq/form-create')
     ])
     <div class="ui top attached tabular menu">
         <div class="active item" data-tab="rfq-inbox">RFQ</div>
@@ -21,5 +22,6 @@
     
 @endsection
 @section('custom_js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
     @vite(['resources/js/rfq/index.js'])
 @endsection

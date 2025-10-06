@@ -8,9 +8,9 @@ export class RFQ {
         this.customGetRequest('./api/rfq/page'+(page?"?page="+page:""), action);
     }
     
-    creatRFQ(data, action = () => {}, fail = () => {}) {
+    creatRFQTemplate(data, action = () => {}, fail = () => {}) {
         var usersClone = this;
-        this.customPostRequest('./api/rfq/create', data, action, fail);
+        this.customPostRequest('./api/rfq/create_template', data, action, fail);
     }
 
     customPostRequest(url, data, action, fail = () => {}) {

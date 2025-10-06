@@ -3,24 +3,21 @@ import { TBLButton } from "../table/buttons";
 import Custom_table from "../table/custom_table";
 import { rfqClass } from "./rfq";
 var update_quill;
+var quill;
 
 document.addEventListener('DOMContentLoaded', () => {
-    let create_option = quillClass.options;
-    create_option.placeholder =  'Compose a message'; 
-    const quill = new Quill('#editor', create_option);
     update_quill = new Quill('#update_editor', quillClass.options);
     $('.menu .item').tab();
-
     const inbox = CTable(new Custom_table('#rfq-inbox', false, true, false, false, './api/rfq/page'), 'inbox');
     const outbox = CTable(new Custom_table('#rfq-outbox', false, true, false, false, './api/rfq/page'), 'inbox');
     
     document.getElementById('modalCreateRFQ').onsubmit = (e) => {
       e.preventDefault();
-      rfqClass.creatRFQ({
+      rfqClass.creatRFQTemplate({
         contents: JSON.stringify(quill.getContents())
       }, (e) => {
         inbox.table.ajax.reload();
-      }); 
+      });
     }
   
     $('.approve_button').on('click', () => {
@@ -31,9 +28,9 @@ document.addEventListener('DOMContentLoaded', () => {
       closable: false
     })
 
-    $('#create_rfq_btn').on('click', () => {
-        $('#modalCreateRFQ').modal('show');
-    });
+    // $('#create_rfq_btn').on('click', () => {
+    //     $('#modalCreateRFQ').modal('show');
+    // });
     
 });
 

@@ -65,9 +65,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('rfq')->group(function() {
         Route::get('page', [RFQController:: class, 'fetch_by_page']);
         Route::post('one', [RFQController:: class, 'fetch_rfq']);
-        Route::post('create', [RFQController:: class, 'create_rfq']);
+        Route::post('templates', [RFQController:: class, 'fetch_template']);
+        Route::post('create_template', [RFQController:: class, 'create_rfq_template']);
     });
-
+    
     Route::prefix('supplemental')->group(function() {
         Route::post('upload', [SupplementalController::class, 'upload_file']);
         Route::get('page', [SupplementalController::class, 'fetch_by_page']);

@@ -1,16 +1,23 @@
+<style>
+    .ql-editor {
+        text-transform: none;
+    }
+</style>
 <div class="ui top aligned modal" id="modalCreateRFQ">
     <i class="close icon"></i>
     <div class="header">
-        <h3 class="modal-title">REQUEST FOR QUOTATION FORM</h3>
+        <h3 class="modal-title">ADD RFQ SPECIFICATION</h3>
     </div>
     <div class="content">
         <div class="ui form attached segment">
-            <form class="ui form" action="#" id="formCreateRFQ" method="post">
-                <div id="toolbar">
-    
+            <form action="#" class="ui form">
+                <div class="field">
+                    <label>SPECIFICATIONS</label>
+                    <textarea type="text" name="specification" placeholder="SPECIFICATION"></textarea>
                 </div>
-                <div id="editor">
-
+                <div class="field">
+                    <label>BIDDER'S SPECIFICATIONS</label>
+                    <textarea type="text" name="bidders_specification" placeholder="BIDDER'S SPECIFICATION"></textarea>
                 </div>
             </form>
         </div>

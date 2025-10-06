@@ -20,7 +20,7 @@ export class CustomQuill {
 
           ['clean']                                         // remove formatting button
         ];
-
+        
         this.options = {
         debug: 'info',
         modules: {

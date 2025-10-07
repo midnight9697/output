@@ -53,6 +53,28 @@ export class Message {
         $(this.msgEl).modal('show');
     }
 
+    warning(msg, action = () => {}) {
+        this.buttonY = document.createElement('div');
+        this.buttonY.className = "ui red ok inverted button confirm_warning_action";
+        this.buttonY.onclick = action;
+        this.buttonY.innerHTML = `
+            <i class="checkmark icon"></i>
+            Ok
+        `;
+        this.div = document.createElement('div');
+        this.div.className = 'actions';
+        this.div.appendChild(this.buttonY);
+        this.msgEl.innerHTML = `
+                <div class="ui icon header">
+                    <i class="warning yellow icon"></i>
+                    ${msg}
+                </div>
+        `;
+
+        this.msgEl.appendChild(this.div);
+        $(this.msgEl).modal('show');
+    }
+
     fail(msg) {
         this.msgEl.innerHTML = `
             <div class="ui icon header">

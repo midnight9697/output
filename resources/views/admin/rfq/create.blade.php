@@ -3,27 +3,42 @@
         text-transform: none;
     }
 </style>
-<div class="ui top aligned modal" id="modalCreateRFQ">
+<div class="ui top aligned modal" id="modalCreateRFQSpec">
     <i class="close icon"></i>
     <div class="header">
         <h3 class="modal-title">ADD RFQ SPECIFICATION</h3>
     </div>
     <div class="content">
         <div class="ui form attached segment">
-            <form action="#" class="ui form">
-                <div class="field">
-                    <label>SPECIFICATIONS</label>
-                    <textarea type="text" name="specification" placeholder="SPECIFICATION"></textarea>
+            <form action="#" class="ui form formCreateRFQSpec">
+                <div class="ui error message">
+                    {{--  --}}
                 </div>
                 <div class="field">
-                    <label>BIDDER'S SPECIFICATIONS</label>
-                    <textarea type="text" name="bidders_specification" placeholder="BIDDER'S SPECIFICATION"></textarea>
+                    <label>SPECIFICATIONS</label>
+                    <textarea type="text" name="specification" placeholder="SPECIFICATION" required></textarea>
+                </div>
+                <div class="field">
+                    <label>BIDDER'S SPECIFICATIONS (Optional)</label>
+                    <textarea type="text" name="bidder_specs" placeholder="BIDDER'S SPECIFICATION"></textarea>
+                </div>
+                <div class="field">
+                    <label>QUANTITY</label>
+                    <input type="text" name="quantity_unit" placeholder="QUANTITY" required>
+                </div>
+                <div class="field">
+                    <label>UNIT PRICE (Optional)</label>
+                    <input type="text" name="unit_price" placeholder="UNIT PRICE">
+                </div>
+                <div class="field">
+                    <label>TOTAL_PRICE</label>
+                    <input type="text" name="total_price" placeholder="TOTAL_PRICE" required>
                 </div>
             </form>
         </div>
     </div>
     <div class="actions">
-        <button class="ui approve very tiny button approve_button">PROCEED</button>
+        <button class="ui primary very tiny button add_rfq_item_button">PROCEED</button>
     </div>
 </div>
 

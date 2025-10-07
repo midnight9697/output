@@ -8,7 +8,7 @@
             <button class="ui grey very tiny button">REQUEST FOR QUOTATION FORM</button>
         </div>
         <div class="column" style="text-align: right">
-            <button class="ui primary very tiny button submit_rfq_form_button">PROCEED</button>
+            <button class="ui green very tiny button submit_rfq_form_button">SAVE CHANGES</button>
         </div>
     </div>
 </div>
@@ -21,7 +21,7 @@
             <div  class="two fields">
                 <div class="field">
                     <label>PROCUREMENT CLASSIFICATION</label>
-                    <div class="ui selection dropdown">
+                    <div class="ui selection dropdown" id="classification_dropdown">
                         <input type="hidden" name="classification">
                         <i class="dropdown icon"></i>
                         <div class="default text">Procurement Classification</div>
@@ -101,5 +101,10 @@
 @endsection
 @section('custom_js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
-    @vite(['resources/js/rfq/create.js'])
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            localStorage.setItem('rfq_id', "{{ $rfq->id }}");
+        })
+    </script>
+    @vite(['resources/js/rfq/update.js'])
 @endsection

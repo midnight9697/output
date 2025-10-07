@@ -1,12 +1,14 @@
 class tableButtons {
 
     constructor() {
-        this.updateAction = () => {} 
-        this.viewAction = () => {} 
-        this.deleteAction = () => {}
+        this.updateAction =  false 
+        this.viewAction =  false 
+        this.deleteAction =  false
         this.udpateName = "Update";
         this.viewName = "View";
         this.deleteName = "Delete";
+        this.deleteClassName = "";
+        this.data = {};
     }
 
     loadButtons(parent) {
@@ -17,6 +19,11 @@ class tableButtons {
         let popup = document.createElement('div');
         let menu = document.createElement('div'); 
         let options_button = document.createElement("div");
+        Object.keys(this.data).forEach(key => {
+          button.dataset[key] = this.data[key];
+          vbutton.dataset[key] = this.data[key];
+          dbutton.dataset[key] = this.data[key];
+        });
         
         options_button.innerHTML = `
           <i class="ellipsis vertical icon"></i>
@@ -36,10 +43,10 @@ class tableButtons {
 
         button.className = 'item link';
         vbutton.className = 'item link';
-        dbutton.className = 'item link';
+        dbutton.className = 'item link'+ " "+this.deleteClassName;
         options_button.className = "ui icon button options-button";
         popup.className = 'ui popup';
-        menu.className = 'ui vertical menu';
+        menu.className = 'ui vertical very tiny menu';
         
         button.onclick = this.updateAction
 
@@ -48,9 +55,15 @@ class tableButtons {
         dbutton.onclick = this.deleteAction
 
         parent.appendChild(options_button);
-        menu.appendChild(button);
-        menu.appendChild(vbutton);
-        menu.appendChild(dbutton);
+        if (this.updateAction) {
+          menu.appendChild(button);
+        }
+        if (this.viewAction) {
+          menu.appendChild(vbutton);
+        }
+        if (this.deleteAction) {
+          menu.appendChild(dbutton);
+        }
         popup.appendChild(menu);
         parent.appendChild(popup);
 
@@ -61,6 +74,16 @@ class tableButtons {
           hoverable: true,
           closable: true
         });
+    }
+
+    relinitialize() {
+      $('.options-button').popup({
+        popup: $('.ui.popup'),
+        on: 'click',
+        position: 'bottom right',
+        hoverable: true,
+        closable: true
+      });
     }
 }
 

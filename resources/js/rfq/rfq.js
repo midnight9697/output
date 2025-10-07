@@ -1,5 +1,5 @@
 export class RFQ {
-    fetch_rfq(data, action, page = false) {
+    fetch_rfq(data, action) {
         this.customPostRequest('./api/rfq/one', data, action, () => {});
     }
     
@@ -8,6 +8,16 @@ export class RFQ {
         this.customGetRequest('./api/rfq/page'+(page?"?page="+page:""), action);
     }
     
+    creatRFQ(data, action = () => {}, fail = () => {}) {
+        var usersClone = this;
+        this.customPostRequest('./api/rfq/create', data, action, fail);
+    }
+
+    updateRFQ(data, action = () => {}, fail = () => {}) {
+      var usersClone = this;
+      this.customPostRequest('./api/rfq/update', data, action, fail);
+    }
+
     creatRFQTemplate(data, action = () => {}, fail = () => {}) {
         var usersClone = this;
         this.customPostRequest('./api/rfq/create_template', data, action, fail);

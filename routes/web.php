@@ -96,7 +96,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::prefix('rfq')->group(function() {
         Route::get('/', [RFQController::class, 'rfqView'])->name('Request for Quotation');
-        Route::get('/form-create', [RFQController::class, 'rfqFormCreate'])->name('RFQ FORM CREATE');
+        Route::get('form-create', [RFQController::class, 'rfqFormCreate'])->name('RFQ FORM CREATE');
+        Route::get('form-update/{id}', [RFQController::class, 'rfqFormUpdateView'])->name('RFQ FORM UPDATE');
     });
 
     Route::get('attachment/{id}', [FileController::class, 'attachment'])->name('attachment.download');

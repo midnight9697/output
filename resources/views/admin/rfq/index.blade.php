@@ -1,7 +1,6 @@
 @extends('layout.app')
 
 @section('main_content')
-    @include('admin.rfq.create')
     @include('default.create-button', [
       'name' => 'create_rfq_btn',
       'text' => 'CREATE RFQ',

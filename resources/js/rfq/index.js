@@ -6,7 +6,6 @@ var update_quill;
 var quill;
 
 document.addEventListener('DOMContentLoaded', () => {
-    update_quill = new Quill('#update_editor', quillClass.options);
     $('.menu .item').tab();
     const inbox = CTable(new Custom_table('#rfq-inbox', false, true, false, false, './api/rfq/page'), 'inbox');
     const outbox = CTable(new Custom_table('#rfq-outbox', false, true, false, false, './api/rfq/page'), 'inbox');
@@ -69,29 +68,18 @@ function CTable(CTBL, tab = 'inbox') {
       
       let div = document.createElement('div');
       TBLButton.updateAction = () => {
-        rfqClass.fetch_rfq({id: data.id}, (res) => {
-          update_quill.setContents(JSON.parse(res.data.contents));
-        });
-        $('#modalUpdatteRFQ').modal('show');
+        window.location = "./rfq/form-update/"+data.id;        
       }
       
-      TBLButton.viewAction = () => {
-        rfqClass.fetch_rfq({id: data.id}, (res) => {
-          update_quill.setContents(JSON.parse(res.data.contents));
-          let preview_rfq = document.getElementById('preview_rfq');
-          preview_rfq.innerHTML = update_quill.root.innerHTML
-        });
-        $('#modalViewRFQ').modal('show');
-      }
-
       TBLButton.loadButtons(div);
       return div;
   }
 
     CTBL.load([
-        'updated_at',
-        'contents',
-        'created_at',
+        'rfq_number',
+        'project_purpose',
+        'aproved_budget',
+        'classification'
     ]);
 
     

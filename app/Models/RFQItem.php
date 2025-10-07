@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class RFQItem extends Model {
     use HasFactory;
-
+    protected $table = "quotation_items";
     protected $fillable = [
         'rfq_id',
         'specification',

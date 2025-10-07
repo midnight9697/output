@@ -19,4 +19,8 @@ class RFQ extends Model {
         'creator',
         'remarks',
     ];
+
+    public function items() {
+        return $this->hasMany(RFQItem::class, 'rfq_id');
+    }
 }

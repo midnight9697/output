@@ -21,10 +21,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-
 Route::post('auth', [UserController::class, 'authenticate']);
 Route::prefix('login')->group(function() {
     Route::post('forgot_password', [UserController::class, 'send_forgot_password_link']);
@@ -67,8 +63,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('one', [RFQController:: class, 'fetch_rfq']);
         Route::post('templates', [RFQController:: class, 'fetch_template']);
         Route::post('create_template', [RFQController:: class, 'create_rfq_template']);
+        Route::post('create', [RFQController:: class, 'create_rfq']);
+        Route::post('update', [RFQController:: class, 'update_rfq']);
     });
-    
+
     Route::prefix('supplemental')->group(function() {
         Route::post('upload', [SupplementalController::class, 'upload_file']);
         Route::get('page', [SupplementalController::class, 'fetch_by_page']);

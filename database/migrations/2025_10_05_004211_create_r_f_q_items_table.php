@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('quotation_items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('rfq_id')->constrained('request_for_quotations');
+            $table->foreignId('rfq_id')->constrained('request_for_quotations')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('specification')->nullable();
             $table->json('bidder_specs')->nullable();
             $table->string('quantity_unit')->nullable();

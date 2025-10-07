@@ -6,6 +6,7 @@ export default class Custom_table {
         this.element = element;
         this.download = download;
         this.pagination = pagination;
+        this.serverSide = true;
         this.search = search;
         this.info = info;
         this.url = url;
@@ -67,7 +68,7 @@ export default class Custom_table {
 
         var current_table = new DataTable(element, {
             processing: true,
-            serverSide: true,
+            serverSide: self.serverSide,
             ajax: {
                 url: self.url,
                 type: 'GET',

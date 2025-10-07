@@ -1,10 +1,12 @@
 import { PRValidator } from "../PR/validation";
+import { MessageMod } from "../app";
 import { TBLButton } from "../table/buttons";
 import Custom_table from "../table/custom_table";
 import { rfqClass } from "./rfq";
 import { RFQSpecsValidation, RFQValidator } from "./validation";
 document.addEventListener('DOMContentLoaded', () => {
     let form = document.getElementsByClassName('formCreateRFQSpec')[0];
+    rfqClass.fetch_rfq({id: localStorage.getItem('rfq_id')}, fetchRFQ);
     $('.add_item_button').on('click', function() {
         $('#modalCreateRFQSpec').modal('show');
     });
@@ -16,13 +18,26 @@ document.addEventListener('DOMContentLoaded', () => {
     $('.submit_rfq_form_button').on('click', function() {
         $('#formCreateRFQ').trigger('submit');
     });
-    
 });
+
+function fetchRFQ(rfq) {
+    rfq = rfq.data;
+    $('#classification_dropdown').dropdown('set selected', rfq.classification);
+    document.getElementsByName('project_purpose')[0].value = rfq.project_purpose;
+    document.getElementsByName('rfq_number')[0].value = rfq.rfq_number;
+    document.getElementsByName('attachment_one')[0].value = rfq.attachment_one;
+    document.getElementsByName('approved_budget')[0].value = rfq.aproved_budget;
+    document.getElementsByName('standard_unit')[0].value = rfq.standard_unit;
+    document.getElementsByName('target_deliver_date')[0].value = rfq.target_delivery_date;
+
+    RFQValidator.items = rfq.items;
+    specsTable(rfq.items);
+}
 
 RFQValidator.CreateRFQValidation((e) => {
     e.preventDefault();
-    console.log(RFQValidator.serializeArrayToJson('#formCreateRFQ'));
     let data = {
+        'id': localStorage.getItem('rfq_id'),
         'project_purpose': PRValidator.serializeArrayToJson('.formCreateRFQ').project_purpose,
         'rfq_number': PRValidator.serializeArrayToJson('.formCreateRFQ').rfq_number,
         'attachment_one': PRValidator.serializeArrayToJson('.formCreateRFQ').attachment_one,
@@ -32,18 +47,24 @@ RFQValidator.CreateRFQValidation((e) => {
         'classification': PRValidator.serializeArrayToJson('.formCreateRFQ').classification,
         'items': RFQValidator.items
     }
-    rfqClass.creatRFQ(data, (e) => {
-        // window.location.reload(true);
+    rfqClass.updateRFQ(data, (e) => {
+        MessageMod.success("Changes Saved.!", () => {
+            window.location.reload(true);
+        });
     });
 });
 
 RFQSpecsValidation.CreateRFQItemValidation((e) => {
     e.preventDefault();
-    let new_item = RFQValidator.serializeArrayToJson('.formCreateRFQSpec');
-    new_item['id'] = Math.floor(Math.random() * 1000);
-    RFQValidator.items.push(new_item);
+    RFQValidator.items = (RFQValidator.items?RFQValidator.items:[]);
+    RFQValidator.items.push(RFQValidator.serializeArrayToJson('.formCreateRFQSpec'));
+    console.log('Serialze', RFQValidator.items);
     $('.formCreateRFQSpec').form('reset');
     $('#modalCreateRFQSpec').modal('hide');
+    console.log(RFQValidator.items);
+    MessageMod.warning('Save changes to take effect',() => {
+        MessageMod.hide();
+    })
     specsTable(RFQValidator.items);
 });
 

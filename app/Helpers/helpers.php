@@ -125,3 +125,18 @@ function classify() {
         'Framework Agreement',
     ];
 }
+
+function pdfjsToFpdiCoords($x_pdfjs, $y_pdfjs, $pageHeightPoints) {
+    // Convert PDF units (points) to mm (1 pt ≈ 0.3528 mm)
+    $x_mm = $x_pdfjs * 0.3528;
+
+    // Flip Y axis from bottom-left to top-left
+    $y_mm = ($pageHeightPoints - $y_pdfjs) * 0.3528;
+
+    return [$x_mm, $y_mm];
+}
+
+function pdfjsToMm($points) {
+    return $points * 1.3 ;
+}
+

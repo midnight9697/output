@@ -19,6 +19,8 @@ use App\Http\Controllers\User\ProfileController as UserProfileController;
 use App\Models\Division;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use mikehaertl\pdftk\Pdf;
+use setasign\Fpdi\Fpdi;
 
 /*
 |--------------------------------------------------------------------------
@@ -121,3 +123,35 @@ Route::get('testing', [APISupplementalController::class, 'show']);
 Route::get('upload/temporary', function(Request $request) {
     return decryptUrlSafe("ZXlKcGRpSTZJa3g2TlhwNVdsWldZV0V4VTB0NmFVaG5ORXAzUm1jOVBTSXNJblpoYkhWbElqb2lLMU52VFVzd01XWm9SaXRTWTI1SVkwcFVOVkkzUVQwOUlpd2liV0ZqSWpvaVlUQXdNRFZoTldSa05URXpPV0V5WVRZeU56aGlZek5oWldFd05tVTVOR0kyTTJFeU1EUXlPR0U1TURZd016VXdNVEU1TVRVellXRTJZVEprTm1JNFpTSXNJblJoWnlJNklpSjk");
 });
+
+
+Route::get('pdf-view', function() {
+
+// Load existing PDF
+    $pdf = new Fpdi();
+
+    // Add a page from existing PDF
+    $pdf->AddPage();
+    $pdf->setSourceFile('files/testing.pdf');
+    $templateId = $pdf->importPage(1);
+    $pdf->useTemplate($templateId);
+    $width_mm = pdfjsToMm(187.36199999999982); // width of the text
+    $font_size = pdfjsToMm(9); // approx font size
+    $height_mm = pdfjsToMm(9); // if available
+
+    [$x, $y] = pdfjsToFpdiCoords(215.81, 696.82, 830);
+    // Set font and position
+    $pdf->SetFont('Helvetica', '', $font_size);
+    // $pdf->SetTextColor(0, 0, 0);
+    $pdf->SetXY($x, $y);
+    $pdf->Cell($width_mm, $height_mm, "Sample Text"); // draw border
+
+    // Insert new text
+    // $pdf->Write(5, 'This is inserted text.');
+
+    // Output the modified PDF
+    $pdf->Output('I', 'modified.pdf');
+
+});
+
+

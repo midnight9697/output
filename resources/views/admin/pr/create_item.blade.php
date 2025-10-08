@@ -29,7 +29,7 @@
                 </div>
                 <div class="field">
                     <label>Total Cost</label>
-                    <input type="text" name="total_cost" placeholder="Total Cost" disabled id="total_cost">
+                    <input type="text" name="total_cost" placeholder="Total Cost" class="disabled" id="total_cost">
                 </div>
             </div>
         </form>

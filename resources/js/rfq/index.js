@@ -10,14 +10,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const inbox = CTable(new Custom_table('#rfq-inbox', false, true, false, false, './api/rfq/page'), 'inbox');
     const outbox = CTable(new Custom_table('#rfq-outbox', false, true, false, false, './api/rfq/page'), 'inbox');
     
-    document.getElementById('modalCreateRFQ').onsubmit = (e) => {
-      e.preventDefault();
-      rfqClass.creatRFQTemplate({
-        contents: JSON.stringify(quill.getContents())
-      }, (e) => {
-        inbox.table.ajax.reload();
-      });
-    }
+    // document.getElementById('modalCreateRFQ').onsubmit = (e) => {
+    //   e.preventDefault();
+    //   rfqClass.creatRFQTemplate({
+    //     contents: JSON.stringify(quill.getContents())
+    //   }, (e) => {
+    //     inbox.table.ajax.reload();
+    //   });
+    // }
   
     $('.approve_button').on('click', () => {
       $('#formCreateRFQ').trigger('submit');

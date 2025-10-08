@@ -1,29 +1,29 @@
 import { MessageMod, confirmMod, createElement, progressControl, uploadControl } from "../app";
+import { TBLButton } from "../table/buttons";
 import Custom_table from "../table/custom_table";
 import { SupplementalControl } from "./supplemental";
 let SPLTBL = {};
 document.addEventListener('DOMContentLoaded', () => {
 
   SPLTBL = new Custom_table('#splTable', false, true, false, false, './api/supplemental/page');
-    
-  SPLTBL.custom_buttons = function(data) {
-    let div = createElement("", "", "div");
-    let button = createElement("ui very tiny primary button", "DOWNLOAD", "a");
-    let rmvBtn = createElement("ui very tiny red button", "REMOVE", "button");
-    button.href = "supplemental/view/"+data.id;
-    rmvBtn.dataset.id = data.id;
-    rmvBtn.onclick = (e) => {
+  SPLTBL.dataSrc = (json) => {
+      return json.data;
+  }
+
+  SPLTBL.custom_buttons = (data) => {
+    let div = document.createElement('div');
+    TBLButton.data = data;
+    TBLButton.downAction = "./supplemental/view/"+data.id;
+
+    TBLButton.deleteAction = (e) => {
       confirmMod.load(() => {
         let spl_id = e.target.dataset.id;
         SupplementalControl.remove(spl_id, (e) => {
           SPLTBL.table.ajax.reload();
         });
-      }, "Do you want to delete this supplemental file ?");
-      
+      }, "Do you want to delete this file ?");
     }
-    button.target = "__blank";
-    div.appendChild(button);
-    div.appendChild(rmvBtn);
+    TBLButton.loadButtons(div);
     return div;
   };
   
@@ -34,7 +34,9 @@ document.addEventListener('DOMContentLoaded', () => {
       'user_id',
       'created_at',
   ]);
-  
+
+  // SPLTBL.table
+
   $('#create-supplemental').on('click', () => {
     $('#modalUploadSupplemental').modal('show');
   });

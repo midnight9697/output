@@ -1,5 +1,5 @@
 import { PRValidator } from "../PR/validation";
-import { MessageMod } from "../app";
+import { MessageMod, confirmMod } from "../app";
 import { TBLButton } from "../table/buttons";
 import Custom_table from "../table/custom_table";
 import { rfqClass } from "./rfq";
@@ -47,11 +47,13 @@ RFQValidator.CreateRFQValidation((e) => {
         'classification': PRValidator.serializeArrayToJson('.formCreateRFQ').classification,
         'items': RFQValidator.items
     }
-    rfqClass.updateRFQ(data, (e) => {
-        MessageMod.success("Changes Saved.!", () => {
-            window.location.reload(true);
+    confirmMod.load(() => {
+        rfqClass.updateRFQ(data, (e) => {
+            MessageMod.success("Changes Saved.!", () => {
+                window.location.reload(true);
+            });
         });
-    });
+    },"Save changes ?");
 });
 
 RFQSpecsValidation.CreateRFQItemValidation((e) => {
@@ -62,7 +64,7 @@ RFQSpecsValidation.CreateRFQItemValidation((e) => {
     $('.formCreateRFQSpec').form('reset');
     $('#modalCreateRFQSpec').modal('hide');
     console.log(RFQValidator.items);
-    MessageMod.warning('Save changes to take effect',() => {
+    MessageMod.warning('Save changes to take reflect.',() => {
         MessageMod.hide();
     })
     specsTable(RFQValidator.items);
@@ -101,7 +103,11 @@ function specsTable(specs) {
     document.getElementById('quotation_table_body').innerHTML = specsrow;
     $('.removeItem').on('click', (e) => {
         console.log(e.target.dataset.id);
+        
         RFQValidator.items = RFQValidator.items.filter(el => el.id != e.target.dataset.id);
+        MessageMod.warning('Please save changes to reflect.', () => {
+           MessageMod.hide();
+        });
         specsTable(RFQValidator.items);
     });
     TBLButton.relinitialize();

@@ -1,4 +1,5 @@
 import { PRValidator } from "../PR/validation";
+import { TBLButton } from "./buttons";
 
 export default class Custom_table {
         
@@ -101,7 +102,9 @@ export default class Custom_table {
             searching: search,
             info: info,
             responsive: true
-        });
+        }).on('draw', function () {
+            TBLButton.relinitialize(); // <-- re-bind popup
+          });
         this.table = current_table;
         return current_table
     }

@@ -7,10 +7,10 @@
       'icon' => 'plus',
       'link' => url('rfq/form-create')
     ])
-    <input type="file" id="fileInput" />
+    {{-- <input type="file" id="fileInput" />
     <pre id="output"></pre>
     
-    <button id="fillPdfBtn">Download</button>
+    <button id="fillPdfBtn">Download</button> --}}
     {{-- <canvas id="pdf-canvas"></canvas> --}}
     <div class="ui top attached tabular menu">
         <div class="active item" data-tab="rfq-inbox">RFQ</div>
@@ -26,12 +26,12 @@
     
 @endsection
 @section('custom_js')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"></script>
-    <script src="https://unpkg.com/pdfjs-dist/build/pdf.js"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script> --}}
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"></script> --}}
+    {{-- <script src="https://unpkg.com/pdfjs-dist/build/pdf.js"></script> --}}
     @vite(['resources/js/rfq/index.js'])
     @vite(['resources/js/table/pdf.js'])
-    @vite(['resources/js/table/pdf-1.js'])
+    {{-- @vite(['resources/js/table/pdf-1.js']) --}}
     <script>
         const url = './files/rfq.pdf';
         // const loadingTask = pdfjsLib.getDocument(url);

@@ -14,4 +14,8 @@ class SupplementalController extends Controller {
             'sup' => Supplementary::where('user_id', Auth::user()->id)
         ]);
     }
+
+    public function createView() {
+        return view('admin.supplemental.create');
+    }
 }

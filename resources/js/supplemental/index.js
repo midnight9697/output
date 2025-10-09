@@ -28,10 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   
   SPLTBL.load([
-      'filename',
-      'origin',
+      'ref',
       'title',
-      'user_id',
       'created_at',
   ]);
 

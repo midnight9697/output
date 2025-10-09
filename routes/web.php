@@ -17,6 +17,7 @@ use App\Http\Controllers\Supplemental\SupplementalController;
 use App\Http\Controllers\SystemController;
 use App\Http\Controllers\User\ProfileController as UserProfileController;
 use App\Models\Division;
+use App\Models\Supplementary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use mikehaertl\pdftk\Pdf;
@@ -94,6 +95,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/', [SupplementalController::class, 'supplementalView'])->name('supplemental');
         Route::get('download/{splid}', [FileController::class, 'supplemental'])->name('supplemental.download');
         Route::get('view/{splid}', [FileController::class, 'viewSupplemental'])->name('supplemental.view');
+        Route::get('create', [SupplementalController::class, 'createView'])->name('supplemental.create');
     });
 
     Route::prefix('rfq')->group(function() {

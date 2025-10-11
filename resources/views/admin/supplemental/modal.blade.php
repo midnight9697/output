@@ -5,7 +5,7 @@
     </div>
     <div class="content">
         <div class="ui form attached segment">
-            <form action="#" class="ui form formCreateSupplementalSpec">
+            <form action="#" class="ui form formCreateSupplementalSpec" method="POST">
                 <div class="ui error message">
                     {{--  --}}
                 </div>
@@ -15,7 +15,7 @@
                 </div>
                 <div class="field">
                     <label>PROCUREMENT PROJECT</label>
-                    <textarea type="text" name="procurement_projects" placeholder="PROCUREMENT PROJECT"></textarea>
+                    <textarea type="text" name="procurement_project" placeholder="PROCUREMENT PROJECT"></textarea>
                 </div>
                 <div class="field">
                     <label>END-USER</label>

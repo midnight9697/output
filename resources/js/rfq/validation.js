@@ -10,7 +10,7 @@ export class Validator {
         $.fn.form.settings.rules['checkItems'] = function(value) {
             return self.items.length > 0;
         };
-        this.form = 
+        this.form =    
         $('.ui.form.'+element)
         .form({
           fields: {

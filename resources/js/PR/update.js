@@ -13,9 +13,13 @@ document.addEventListener('DOMContentLoaded', () => {
   $('#modalRoutePR').on('submit', (e) => {
       e.preventDefault();
       let data = PRValidator.serializeArrayToJson('.routingForm');
+      console.log(PRValidator.assigned);
+      
       data['assigned_to'] = PRValidator.assigned;
       PRClass.routePR(data, (respsons) => {
-        window.location = '../'+localStorage.getItem('pr_id')+'/track';
+        console.log(respsons);
+        
+        // window.location = '../'+localStorage.getItem('pr_id')+'/track';
       })
     });
 

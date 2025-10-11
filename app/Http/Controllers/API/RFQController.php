@@ -121,7 +121,7 @@ class RFQController extends Controller {
     }
 
     public function fetch_by_page() {
-        $rfqs = RFQ::where('creator', Auth::user()->id)->get();
+        $rfqs = RFQ::where('creator', Auth::user()->id)->orderByDesc('created_at')->get();
         return encryptIds($rfqs);
     }
 }

@@ -168,7 +168,7 @@ class PurchaseRequestController extends Controller {
         $pr_id = decryptUrlSafe($request->pr_id);
         $action = decryptUrlSafe($request->action);
         $pr = PurchaseRequest::with('members')->find($pr_id);
-
+        $assigned = (isset($request->assigned_to)?decryptUrlSafe($request->assigned_to):false);
         $transaction = $pr->transactions()->create([
             'body' => $request->body,
             'sender_id' => Auth::user()->id,
@@ -197,7 +197,7 @@ class PurchaseRequestController extends Controller {
             }
         }
 
-        if ($action != 12) {
+        if (!isset($request->assigned_to)) {
             $this->sendtoAll($pr, $transaction);
         }
         else {
@@ -207,7 +207,7 @@ class PurchaseRequestController extends Controller {
             
             Recepient::create([
                 'transaction_id' => $transaction->id,
-                'receiver_id' => decryptUrlSafe($request->assigned_to)
+                'receiver_id' => $assigned
             ]);
         }
         return $transaction;

@@ -33,7 +33,7 @@ RFQValidator.CreateRFQValidation((e) => {
         'items': RFQValidator.items
     }
     rfqClass.creatRFQ(data, (e) => {
-        // window.location.reload(true);
+        window.location.reload(true);
     });
 });
 

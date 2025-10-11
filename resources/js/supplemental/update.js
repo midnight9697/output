@@ -8,6 +8,11 @@ let formClass = ".formCreateSupplementalSpec";
 let formArray = RFQValidator.serializeArrayToJson(formClass);
 document.addEventListener('DOMContentLoaded', () => {
 
+    SupplementalControl.fetchSupplemental(localStorage.getItem('supplemental_id'), function(supplemental) {
+        SupplementalValidator.items = supplemental.projects;
+        specsTable(supplemental.projects);
+    });
+
     $('.submit_supplemental_form_button').on('click', () => {
         $('.formCreateSupplemental').trigger('submit');
     })
@@ -23,9 +28,10 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         let data = RFQValidator.serializeArrayToJson('.formCreateSupplemental');
         data['projects'] = SupplementalValidator.items;
-        SupplementalControl.createSupplemental(data, () => {
-            MessageMod.success("Supplemental successfully created.", () => {
-                window.location = "/supplemental";
+        data['id'] = localStorage.getItem('supplemental_id');
+        SupplementalControl.updateSupplemental(data, () => {
+            MessageMod.success("Saved Changes.", () => {
+                // window.location = "/supplemental";
             });
         });
     });
@@ -33,8 +39,10 @@ document.addEventListener('DOMContentLoaded', () => {
     SupplementalPojectControl.CreateSupplementalProjectValidation((e) => {
         e.preventDefault();
         formArray = RFQValidator.serializeArrayToJson(formClass);
+        formArray['notice_of_award'] = formArray.notice_of_awards;
         SupplementalValidator.items.push(formArray);
         MessageMod.success("Supplemental Project successfully added.");
+
         specsTable(SupplementalValidator.items);
     });
     
@@ -60,7 +68,7 @@ function specsTable(projects) {
                 <td>${proj.mode_of_procurement}</td>
                 <td>${proj.advertisement}</td>
                 <td>${proj.submission}</td>
-                <td>${proj.notice_of_awards}</td>
+                <td>${(proj.notice_of_awards?proj.notice_of_awards:proj.notice_of_award)}</td>
                 <td>${proj.contract_signing}</td>
                 <td>${proj.total}</td>
                 <td>${proj.mooe}</td>

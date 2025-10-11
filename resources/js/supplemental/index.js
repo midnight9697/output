@@ -13,13 +13,16 @@ document.addEventListener('DOMContentLoaded', () => {
   SPLTBL.custom_buttons = (data) => {
     let div = document.createElement('div');
     TBLButton.data = data;
-    TBLButton.downAction = "./supplemental/view/"+data.id;
+    TBLButton.updateAction =  () => {
+      window.location = "./supplemental/update/"+data.id;
+    }
 
     TBLButton.deleteAction = (e) => {
       confirmMod.load(() => {
         let spl_id = e.target.dataset.id;
         SupplementalControl.remove(spl_id, (e) => {
           SPLTBL.table.ajax.reload();
+          MessageMod.success("Successfully Deleted.");
         });
       }, "Do you want to delete this file ?");
     }

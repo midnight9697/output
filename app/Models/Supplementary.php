@@ -17,4 +17,8 @@ class Supplementary extends Model
     public function uploader() {
         return $this->hasOne(Profile::class,  'user_id', 'user_id');
     }
+
+    public function projects() {
+        return $this->hasMany(SupplementalProject::class, 'supplemental_id');
+    }
 }

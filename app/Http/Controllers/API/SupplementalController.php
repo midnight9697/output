@@ -13,6 +13,68 @@ use Illuminate\Support\Facades\Storage;
 
 class SupplementalController extends Controller {
     protected $path = "public/supplemental";
+
+    public function update(Request $request) {
+        return $request;
+        $id = decryptUrlSafe($request->id);
+        $new_supplemental = Supplementary::where('id', $id)->update(['title' => $request->title]);
+        $items = $request->projects;
+
+        $new_item_ids = [];
+        $projects = [];
+        foreach ($request->projects as $project) {
+            $project = (object)$project;
+            if (!isset($item['id'])) {
+                $project = SupplementalProject::create( [
+                    'supplemental_id' => $new_supplemental->id,
+                    'code' => $project->code,
+                    'procurement_project' => $project->procurement_project,
+                    'end_user' => $project->end_user,
+                    'early_procurement' => $project->early_procurement,
+                    'mode_of_procurement' => $project->mode_of_procurement,
+                    'advertisement' => $project->advertisement,
+                    'submission' => $project->submission,
+                    'notice_of_award' => $project->notice_of_awards,
+                    'contract_signing' => $project->contract_signing,
+                    'source_of_funds' => $project->source_of_funds,
+                    'total' => $project->total,
+                    'mooe' => $project->mooe,
+                    'co' => $project->co,
+                ]);
+
+                $projects[] = $project;
+                $new_item_ids[] = $project->id;
+            }
+            else {
+                $projects[] = SupplementalProject::where('id', $item['id'])->update( [
+                    'code' => $project->code,
+                    'procurement_project' => $project->procurement_project,
+                    'end_user' => $project->end_user,
+                    'early_procurement' => $project->early_procurement,
+                    'mode_of_procurement' => $project->mode_of_procurement,
+                    'advertisement' => $project->advertisement,
+                    'submission' => $project->submission,
+                    'notice_of_award' => $project->notice_of_awards,
+                    'contract_signing' => $project->contract_signing,
+                    'source_of_funds' => $project->source_of_funds,
+                    'total' => $project->total,
+                    'mooe' => $project->mooe,
+                    'co' => $project->co,
+                ]);
+                $new_item_ids[] = $item['id'];
+            }
+        }
+
+        SupplementalProject::whereNotIn('id', $new_item_ids)->where('supplemental_id', $id)->delete();
+
+        return ['supplemental' => $new_supplemental, 'projects' => $projects];
+    }
+
+    public function fetch_supplemental($eid) {
+        $id = decryptUrlSafe($eid);
+        $supplemental = Supplementary::where('id', $id)->with('projects')->first();
+        return encryptSingle($supplemental);
+    }
     
     public function fetch_by_page(Request $request) {
         $spls = Supplementary::with('uploader')->orderBy('created_at', 'desc');

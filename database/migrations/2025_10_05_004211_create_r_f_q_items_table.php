@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('rfq_id')->constrained('request_for_quotations')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('specification')->nullable();
-            $table->json('bidder_specs')->nullable();
+            $table->string('bidder_specs')->nullable();
             $table->string('quantity_unit')->nullable();
             $table->string('unit_price')->nullable();
             $table->string('total_price')->nullable();

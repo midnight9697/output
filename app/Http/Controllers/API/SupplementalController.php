@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\SupplementalProject;
 use App\Models\Supplementary;
 use Dompdf\Dompdf;
 use Illuminate\Http\Request;
@@ -16,6 +17,32 @@ class SupplementalController extends Controller {
     public function fetch_by_page(Request $request) {
         $spls = Supplementary::with('uploader')->orderBy('created_at', 'desc');
         return encryptIds($spls);
+    }
+
+    public function create(Request $request) {
+        $new_supplemental = Supplementary::create(['title' => $request->title, 'user_id' => Auth::user()->id]);
+        $projects = [];
+        foreach ($request->projects as $project) {
+            $project = (object)$project;
+            $projects[] = SupplementalProject::create( [
+                'supplemental_id' => $new_supplemental->id,
+                'code' => $project->code,
+                'procurement_project' => $project->procurement_project,
+                'end_user' => $project->end_user,
+                'early_procurement' => $project->early_procurement,
+                'mode_of_procurement' => $project->mode_of_procurement,
+                'advertisement' => $project->advertisement,
+                'submission' => $project->submission,
+                'notice_of_award' => $project->notice_of_awards,
+                'contract_signing' => $project->contract_signing,
+                'source_of_funds' => $project->source_of_funds,
+                'total' => $project->total,
+                'mooe' => $project->mooe,
+                'co' => $project->co,
+            ]);
+        }
+
+        return ['supplemental' => $new_supplemental, 'projects' => $projects];
     }
 
     public function upload_file(Request $request) {

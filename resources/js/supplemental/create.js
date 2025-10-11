@@ -1,9 +1,11 @@
 import { MessageMod } from "../app";
 import { RFQValidator } from "../rfq/validation";
 import { TBLButton } from "../table/buttons";
+import { SupplementalControl } from "./supplemental";
 import { SupplementalPojectControl, SupplementalValidator } from "./validation";
 
 let formClass = ".formCreateSupplementalSpec";
+let formArray = RFQValidator.serializeArrayToJson(formClass);
 document.addEventListener('DOMContentLoaded', () => {
 
     $('.submit_supplemental_form_button').on('click', () => {
@@ -19,12 +21,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     SupplementalValidator.CreateSupplementalValidation((e) => {
         e.preventDefault();
-        MessageMod.success("Supplemental successfully created.");
+        let data = RFQValidator.serializeArrayToJson('.formCreateSupplemental');
+        data['projects'] = SupplementalValidator.items;
+        SupplementalControl.createSupplemental(data, () => {
+            MessageMod.success("Supplemental successfully created.");
+        });
     });
 
     SupplementalPojectControl.CreateSupplementalProjectValidation((e) => {
         e.preventDefault();
-        let formArray = RFQValidator.serializeArrayToJson(formClass);
+        formArray = RFQValidator.serializeArrayToJson(formClass);
         SupplementalValidator.items.push(formArray);
         MessageMod.success("Supplemental Project successfully added.");
         specsTable(SupplementalValidator.items);

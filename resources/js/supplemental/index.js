@@ -33,12 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
       'created_at',
   ]);
 
-  // SPLTBL.table
-
-  $('#create-supplemental').on('click', () => {
-    $('#modalUploadSupplemental').modal('show');
-  });
-
   $('#supplemental').on('change', () => {
     const supplementalFile = document.getElementById('supplemental');
     filePreview(supplementalFile.files);

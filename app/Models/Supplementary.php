@@ -11,10 +11,7 @@ class Supplementary extends Model
 
     protected $fillable = [
         'title',
-        'filename',
-        'origin',
-        'filetype',
-        'user_id'
+        'user_id',
     ];
 
     public function uploader() {

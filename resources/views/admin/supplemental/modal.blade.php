@@ -11,15 +11,17 @@
                 </div>
                 <div class="field">
                     <label>CODE (PAP)</label>
-                    <input type="text" name="code" placeholder="CODE">
+                    <input type="text" name="code" placeholder="CODE" value="104040101	">
                 </div>
                 <div class="field">
                     <label>PROCUREMENT PROJECT</label>
-                    <textarea type="text" name="procurement_project" placeholder="PROCUREMENT PROJECT"></textarea>
+                    <textarea type="text" name="procurement_project" placeholder="PROCUREMENT PROJECT">
+                        Education Dept., Engineering Dept., Technology, Dept,-Extension Office, and Quality Assirance Center (QAC)
+                    </textarea>
                 </div>
                 <div class="field">
                     <label>END-USER</label>
-                    <input type="text" name="end_user" placeholder="END-USER" required>
+                    <input type="text" name="end_user" placeholder="END-USER" value="PISMU" required>
                 </div>
                 <div class="field">
                     <div class="two fields">
@@ -62,7 +64,7 @@
                 </div>
                 <div class="field">
                     <label>SOURCE OF FUNDS</label>
-                    <input type="text" name="source_of_funds" placeholder="SOURCE OF FUNDS">
+                    <input type="text" name="source_of_funds" placeholder="SOURCE OF FUNDS" value="PLANNING">
                 </div>
                 <div class="field">
                     <label>ESTIMATED BUDGET (PhP)</label>
@@ -70,15 +72,15 @@
                     <div class="three fields">
                         <div class="field">
                             <label>TOTAL</label>
-                            <input type="text" name="total" placeholder="TOTAL">
+                            <input type="text" name="total" placeholder="TOTAL" value="10">
                         </div>
                         <div class="field">
                             <label>MOOE</label>
-                            <input type="text" name="mooe" placeholder="MOOE">
+                            <input type="text" name="mooe" placeholder="MOOE" value="10">
                         </div>
                         <div class="field">
                             <label>CO</label>
-                            <input type="text" name="co" placeholder="CO">
+                            <input type="text" name="co" placeholder="CO" value="10">
                         </div>
                     </div>
                 </div>

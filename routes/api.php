@@ -70,6 +70,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('supplemental')->group(function() {
         Route::post('upload', [SupplementalController::class, 'upload_file']);
         Route::get('page', [SupplementalController::class, 'fetch_by_page']);
+        Route::post('create', [SupplementalController::class, 'create']);
         Route::post('remove', [SupplementalController::class, 'rmvFile'])->name('supplemental.remove');
     });
 });

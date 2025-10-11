@@ -21,7 +21,7 @@
             <div  class="two fields">
                 <div class="field">
                     <label>TITLE</label>
-                    <input type="text" name="title" placeholder="TITLE">
+                    <input type="text" name="title" placeholder="TITLE" value="{{ date('Y-m')." SUPPLEMENTAL" }}">
                 </div>
                 <div class="field" style="display: none">
                     <input type="text" name="projects" placeholder="Projects">
@@ -36,7 +36,7 @@
             <b class="modal-title">PRCUREMENT PROJECTS</b>
         </div>
         <div class="column" style="text-align:right">
-            <button class="ui primary very tiny button add_item_button">ADD ITEM</button>
+            <button class="ui primary very tiny button add_item_button">ADD PROJECT ITEM</button>
         </div>
     </div>
 </div>

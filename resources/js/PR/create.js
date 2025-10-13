@@ -27,7 +27,12 @@ document.addEventListener('DOMContentLoaded', () => {
     PRVItemalidator.CreatePRItemValidation((e) => {
         e.preventDefault();
         $('#modalCreaeItem').modal('hide');
+        let total_cost_element = document.getElementById('total_cost');
+        if (total_cost_element.hasAttribute('disabled')) {
+            total_cost_element.removeAttribute('disabled');
+        }
         PRValidator.items.push(PRValidator.serializeArrayToJson('.formCreatePRItem'));
+        total_cost_element.disabled = true;
         itemsTable();
     });
     

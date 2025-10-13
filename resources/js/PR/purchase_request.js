@@ -154,6 +154,17 @@ export class PurchaseRequests {
       } )
     }
 
+    inbox_pr(action) {
+      axios.get('./api/pr/inbox_pr', {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('bearer')}`
+        }
+      })
+      .then((e) => {
+        action(e.data);
+      } )
+    }
+
     
 }
 

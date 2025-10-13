@@ -18,7 +18,7 @@
     <div class="ui top attached tabular menu">
         <div class="active item" data-tab="inbox">INBOX</div>
         <div class="item" data-tab="outbox">OUTBOX</div>
-        <div class="item" data-tab="personal">TRACK</div>
+        <div class="item" data-tab="personal">GROUP TRANSACTIONS</div>
         <div class="item" data-tab="close">CLOSED</div>
     </div>
     <div class="ui bottom attached active tab segment" data-tab="inbox">

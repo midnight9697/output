@@ -30,7 +30,6 @@
 <body>
     @include('layout.head')
     @include('layout.body')
-    
     @include('layout.foot')
 </body>
 </html>

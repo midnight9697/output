@@ -156,10 +156,10 @@ class PurchaseRequestController extends Controller {
             })->with('sender')->with('act')->orderBy('id', 'desc')->with('recepient')->with('recepients')->with('spl');
         }
         
-        if (!Gate::allows('pr-update-view', $pr)) {
-            if (!Gate::allows('pr-file-view', $pr_id)) {
+        if (!Gate::allows('pr-track-view', $pr)) {
+            // if (!Gate::allows('pr-file-view', $pr_id)) { 
                 abort(403, 'Unauthorize action.');  //for tracking of PR
-            }
+            // }
         }
         return ['pr' => encryptSingle($pr), 'transactions' => encryptMany($transactions->with('attachments')->paginate(10)), 'items' => encryptMany(PRItem::where('purchase_request_id', $pr_id)->get())];
     }
@@ -168,7 +168,7 @@ class PurchaseRequestController extends Controller {
         $pr_id = decryptUrlSafe($request->pr_id);
         $action = decryptUrlSafe($request->action);
         $pr = PurchaseRequest::with('members')->find($pr_id);
-
+        $assigned = (isset($request->assigned_to)?decryptUrlSafe($request->assigned_to):false);
         $transaction = $pr->transactions()->create([
             'body' => $request->body,
             'sender_id' => Auth::user()->id,
@@ -207,7 +207,7 @@ class PurchaseRequestController extends Controller {
             
             Recepient::create([
                 'transaction_id' => $transaction->id,
-                'receiver_id' => decryptUrlSafe($request->assigned_to)
+                'receiver_id' => $assigned
             ]);
         }
         return $transaction;
@@ -265,29 +265,37 @@ class PurchaseRequestController extends Controller {
     }
 
     public function fetch_track_pr_by_page(){
-        $pr =  PurchaseRequest::whereHas('members', function($query) {
+        $pr =  PurchaseRequest::where('approval', NULL)->whereHas('members', function($query) {
             return $query->where('members.user_id', Auth::user()->id);
-        });
+        })->orderBy('created_at', 'desc');
         return encryptIds($this->pr_data_fetcher($pr));
     }
     
     public function fetch_outbox_pr_by_page(){
-        $pr =  PurchaseRequest::where('approval', '1')->whereHas('transactions', function($query) {
+        $pr =  PurchaseRequest::where('approval', '1')->whereHas('lastTransaction', function($query) {
+            return $query->whereHas('recepient', function($q) {
+                return $q->where('receiver_id', '!=', Auth::user()->id);
+            });
+        })->whereHas('transactions', function($query) {
             return $query->where('sender_id', Auth::user()->id)
-                    ->orWhereHas('recepients', function($q) {
+                    ->orWhereHas('recepient', function($q) {
                 return $q->where('receiver_id', Auth::user()->id);
             });
         });
+        // return ['user' => Auth::user(), 'pr' => $pr->get()];
         return encryptIds($this->pr_data_fetcher($pr));
     }
 
     public function fetch_inbox_pr_by_page(){
-        $pr =  PurchaseRequest::whereHas('lastTransaction', function($query) {
-            return $query->whereHas('lastRecepient', function($q) {
+
+        $prequest = new PurchaseRequest();
+        $pr = $prequest->where('approval', 1)
+            ->whereHas('lastTransaction', function($query) {
+            return $query->whereHas('recepient', function($q) {
                 return $q->where('receiver_id', Auth::user()->id);
             });
         });
-
+        
         $pr->orderByDesc(
             Transaction::select('created_at')
                 ->whereColumn('transactions.purchase_request_id', 'purchase_requests.id')

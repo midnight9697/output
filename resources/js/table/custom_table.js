@@ -1,4 +1,5 @@
 import { PRValidator } from "../PR/validation";
+import { TBLButton } from "./buttons";
 
 export default class Custom_table {
         
@@ -6,6 +7,7 @@ export default class Custom_table {
         this.element = element;
         this.download = download;
         this.pagination = pagination;
+        this.serverSide = true;
         this.search = search;
         this.info = info;
         this.url = url;
@@ -67,7 +69,7 @@ export default class Custom_table {
 
         var current_table = new DataTable(element, {
             processing: true,
-            serverSide: true,
+            serverSide: self.serverSide,
             ajax: {
                 url: self.url,
                 type: 'GET',
@@ -100,7 +102,9 @@ export default class Custom_table {
             searching: search,
             info: info,
             responsive: true
-        });
+        }).on('draw', function () {
+            TBLButton.relinitialize(); // <-- re-bind popup
+          });
         this.table = current_table;
         return current_table
     }

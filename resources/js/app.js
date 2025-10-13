@@ -1,6 +1,4 @@
-import DraftEditor from "./components/draftEditor";
 import { AuthClass } from "./login/login";
-import { createRoot } from 'react-dom/client';
 let pageLoaderGlobal;
 
 
@@ -47,6 +45,28 @@ export class Message {
         this.msgEl.innerHTML = `
                 <div class="ui icon header">
                     <i class="check green icon"></i>
+                    ${msg}
+                </div>
+        `;
+
+        this.msgEl.appendChild(this.div);
+        $(this.msgEl).modal('show');
+    }
+
+    warning(msg, action = () => {}) {
+        this.buttonY = document.createElement('div');
+        this.buttonY.className = "ui red ok inverted button confirm_warning_action";
+        this.buttonY.onclick = action;
+        this.buttonY.innerHTML = `
+            <i class="checkmark icon"></i>
+            Ok
+        `;
+        this.div = document.createElement('div');
+        this.div.className = 'actions';
+        this.div.appendChild(this.buttonY);
+        this.msgEl.innerHTML = `
+                <div class="ui icon header">
+                    <i class="warning yellow icon"></i>
                     ${msg}
                 </div>
         `;
@@ -131,12 +151,9 @@ export class CustomDate {
 export class confModal {
     load(accept, message = false) {
         const ht = `
-            <div class="ui small icon header">
-                <i class="warning small tiny yellow icon"></i>
-                Confirm Action
-            </div>
-            <div class="content">
-                <h5>${message?message:"Are you sure you want to proceed with this action?"}</h5>
+            <div class="ui icon header">
+                <i class="warning yellow icon"></i>
+                ${message?message:"Are you sure you want to proceed with this action?"}
             </div>
             <div class="actions">
                 <div class="ui red basic cancel button">

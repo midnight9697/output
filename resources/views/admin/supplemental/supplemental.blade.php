@@ -16,15 +16,14 @@
   'name' => 'create-supplemental',
   'text' => 'SUPPLEMENTAL',
   'icon' => 'upload',
-  'view' => "progress-upload"
+  'view' => "progress-upload",
+  'link' => url('supplemental/create')
 ])
 
 @include('default.create-table', [ 'name' => 'splTable',
   'columns' => [
     'CODE',
-    'FILE',
-    'FILENAME',
-    'UPLOADED BY',
+    'TITLE',
     'UPLOADED AT'
   ]
 ])

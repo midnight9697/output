@@ -1,40 +1,87 @@
+import { quillClass } from "../quil";
+import { TBLButton } from "../table/buttons";
+import Custom_table from "../table/custom_table";
+import { rfqClass } from "./rfq";
+var update_quill;
+var quill;
+
 document.addEventListener('DOMContentLoaded', () => {
-    $('#create_rfq_btn').on('click', () => {
-        $('#modalCreateRFQ').modal('show');
+    $('.menu .item').tab();
+    const inbox = CTable(new Custom_table('#rfq-inbox', false, true, false, false, './api/rfq/page'), 'inbox');
+    const outbox = CTable(new Custom_table('#rfq-outbox', false, true, false, false, './api/rfq/page'), 'inbox');
+    
+    // document.getElementById('modalCreateRFQ').onsubmit = (e) => {
+    //   e.preventDefault();
+    //   rfqClass.creatRFQTemplate({
+    //     contents: JSON.stringify(quill.getContents())
+    //   }, (e) => {
+    //     inbox.table.ajax.reload();
+    //   });
+    // }
+  
+    $('.approve_button').on('click', () => {
+      $('#formCreateRFQ').trigger('submit');
     });
+    
+    $('.ui.modal').modal({
+      closable: false
+    })
 
-    const toolbarOptions = [
-        ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-        ['blockquote', 'code-block'],
-        // ['link', 'image', 'video', 'formula'],
-
-        [{ 'header': 1 }, { 'header': 2 }],               // custom button values
-        [{ 'list': 'ordered'}, { 'list': 'bullet' }, { 'list': 'check' }],
-        [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
-        [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
-        [{ 'direction': 'rtl' }],                         // text direction
-
-        [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-
-        [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-        [{ 'font': [] }],
-        [{ 'align': [] }],
-
-        ['clean']                                         // remove formatting button
-      ];
-
-      const options = {
-        debug: 'info',
-        modules: {
-          toolbar: toolbarOptions,
-        },
-        placeholder: 'Compose an epic...',
-        theme: 'snow'
-      };
-
-      const quill = new Quill('#editor', options);
-
-
-      console.log('Content', quill.getContents());
+    // $('#create_rfq_btn').on('click', () => {
+    //     $('#modalCreateRFQ').modal('show');
+    // });
+    
 });
+
+function CTable(CTBL, tab = 'inbox') {
+    switch (tab) {
+        case 'inbox':
+            rfqClass.inbox_rfq = (res) => {
+                CTBL.dataSrc = (json) => {
+                    return res
+                }
+            }
+            break;
+        case 'outbox':
+            rfqClass.outbox_pr = (res) => {
+                CTBL.dataSrc = (json) => {
+                    return res
+                }
+            }
+            break;
+        case 'close': 
+            rfqClass.closed_pr = (res) => {
+                CTBL.dataSrc = (json) => {
+                    return res
+                }
+            }
+        break;
+    
+        default:
+            CTBL.dataSrc = (json) => {
+                return json.data.filter(el => el.members.filter(member => member.user_id ==localStorage.getItem('user')).length > 0);
+            }
+            break;
+    }
+    
+    CTBL.custom_buttons = (data) => {
+      
+      let div = document.createElement('div');
+      TBLButton.updateAction = () => {
+        window.location = "./rfq/form-update/"+data.id;        
+      }
+      
+      TBLButton.loadButtons(div);
+      return div;
+  }
+
+    CTBL.load([
+        'rfq_number',
+        'project_purpose',
+        'aproved_budget',
+        'classification'
+    ]);
+
+    
+    return CTBL;
+}

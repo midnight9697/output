@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Policies\AttachmentPolicy;
 use App\Policies\PRPolicy;
 use App\Policies\PurchaseRequestPolicy;
+use App\Policies\RFQPolicy;
 use App\Policies\SupplementalPolicy;
 use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -39,6 +40,7 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('pr-update-view', [PRPolicy::class, 'updateView']);
         Gate::define('pr-file-view', [PRPolicy::class, 'fileViewer']);
         Gate::define('pr-process-view', [PRPolicy::class, 'processView']);
+        Gate::define('pr-track-view', [PRPolicy::class, 'trackView']);
 
         // User Management Permissions
         // Gate::define('user-view', [UserPolicy::class, 'viewAny']);
@@ -51,6 +53,9 @@ class AuthServiceProvider extends ServiceProvider
 
         // Attachment
         Gate::define('attachment-file-view', [AttachmentPolicy::class, 'creatorView']);
+
+        // 
+        Gate::define('rfq-update-view', [RFQPolicy::class, 'updateView']);
 
     }
 }

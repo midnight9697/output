@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\API\FileController;
+use App\Http\Controllers\API\PPMPController;
 use App\Http\Controllers\API\PurchaseRequestController;
+use App\Http\Controllers\API\RFQController;
 use App\Http\Controllers\API\SupplementalController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\AuthController;
@@ -19,10 +21,6 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
 
 Route::post('auth', [UserController::class, 'authenticate']);
 Route::prefix('login')->group(function() {
@@ -56,13 +54,30 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('closed_pr', [PurchaseRequestController::class, 'fetch_close_pr_by_page'])->name('fetch_close_pr_by_page');
         Route::get('outbox_pr', [PurchaseRequestController::class, 'fetch_outbox_pr_by_page'])->name('fetch_outbox_pr_by_page');
         Route::get('track_pr', [PurchaseRequestController::class, 'fetch_track_pr_by_page'])->name('fetch_track_pr_by_page');
+        Route::get('inbox_pr', [PurchaseRequestController::class, 'fetch_inbox_pr_by_page'])->name('fetch_inbox_pr_by_page');
 
+
+    });
+
+    Route::prefix('rfq')->group(function() {
+        Route::get('page', [RFQController:: class, 'fetch_by_page']);
+        Route::post('one', [RFQController:: class, 'fetch_rfq']);
+        Route::post('templates', [RFQController:: class, 'fetch_template']);
+        Route::post('create_template', [RFQController:: class, 'create_rfq_template']);
+        Route::post('create', [RFQController:: class, 'create_rfq']);
+        Route::post('update', [RFQController:: class, 'update_rfq']);
     });
 
     Route::prefix('supplemental')->group(function() {
         Route::post('upload', [SupplementalController::class, 'upload_file']);
         Route::get('page', [SupplementalController::class, 'fetch_by_page']);
+        Route::get('{id}', [SupplementalController::class, 'fetch_supplemental']);
+        Route::post('create', [SupplementalController::class, 'create']);
+        Route::post('update', [SupplementalController::class, 'update']);
         Route::post('remove', [SupplementalController::class, 'rmvFile'])->name('supplemental.remove');
     });
-});
 
+    Route::prefix('ppmp')->group(function() {
+        Route::get('page',  [PPMPController::class, 'fetch_by_page']);
+    });
+});

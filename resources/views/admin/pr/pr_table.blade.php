@@ -13,7 +13,7 @@
     'Responsibility Code',
     'Purpose',
     'Creator',
-    'Member',
+    // 'Member',
     'Date Created',
     'Latest Update',
 

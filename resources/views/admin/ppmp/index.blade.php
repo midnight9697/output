@@ -9,9 +9,7 @@
 @endsection
 
 @section('main_content')
-    @include('layout.custom-modal', ['view' => 'admin.ppmp.create', 'name' => 'uploadPPMPModal', 'title' => 'UPLOAD PROJECT PROCUREMENT MANAGEMENT PLAN', 'actions_button' => 'submit_upload_button']);
-    @include('layout.custom-modal', ['view' => 'admin.ppmp.create', 'name' => 'uploadUpdatePPMPModal', 'title' => 'UPDATE PROJECT PROCUREMENT MANAGEMENT PLAN', 'actions_button' => 'submit_update_upload_button']);
-
+    @include('layout.custom-modal', ['view' => 'admin.ppmp.create', 'name' => 'uploadPPMPModal', 'title' => 'UPLOAD PROJECT PROCUREMENT MANAGEMENT PLAN', 'actions_button' => 'submit_upload_button'])
     @include('default.create-button', [
       'name' => 'create_ppmp_vbtn',
       'text' => 'UPLOAD PPMP',

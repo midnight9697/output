@@ -9,24 +9,32 @@
 @endsection
 
 @section('main_content')
+    @include('layout.custom-modal', ['view' => 'admin.ppmp.create', 'name' => 'uploadPPMPModal', 'title' => 'UPLOAD PROJECT PROCUREMENT MANAGEMENT PLAN', 'actions_button' => 'submit_upload_button']);
+    @include('layout.custom-modal', ['view' => 'admin.ppmp.create', 'name' => 'uploadUpdatePPMPModal', 'title' => 'UPDATE PROJECT PROCUREMENT MANAGEMENT PLAN', 'actions_button' => 'submit_update_upload_button']);
+
     @include('default.create-button', [
-      'name' => 'create_user_vbtn',
-      'text' => 'PPMP',
+      'name' => 'create_ppmp_vbtn',
+      'text' => 'UPLOAD PPMP',
       'icon' => 'plus',
-      'link' => url('pr/create')
     ])
+
     <div class="ui top attached tabular menu">
-        <div class="active item" data-tab="head1">Header 1</div>
-        <div class="item" data-tab="head2">Header 2</div>
+        <div class="active item" data-tab="head1">ACTIVE</div>
+        <div class="item" data-tab="head2">ARCHIVE</div>
     </div>
     <div class="ui bottom attached active tab segment" data-tab="head1">
+        @include('default.create-table', [ 'name' => 'ppmp-table',
+          'columns' => [
+            'REF NO.',
+            'TITLE',
+            'UPLOADED AT'
+          ]
+        ])
     </div>
     <div class="ui bottom attached tab segment" data-tab="head2">
     </div>
-
-    
 @endsection
 
 @section('custom_js')
-    @vite(['resources/js/PR/index.js'])
+    @vite(['resources/js/ppmp/index.js'])
 @endsection

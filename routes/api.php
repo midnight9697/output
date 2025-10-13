@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\FileController;
+use App\Http\Controllers\API\PPMPController;
 use App\Http\Controllers\API\PurchaseRequestController;
 use App\Http\Controllers\API\RFQController;
 use App\Http\Controllers\API\SupplementalController;
@@ -75,5 +76,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('update', [SupplementalController::class, 'update']);
         Route::post('remove', [SupplementalController::class, 'rmvFile'])->name('supplemental.remove');
     });
-});
 
+    Route::prefix('ppmp')->group(function() {
+        Route::get('page',  [PPMPController::class, 'fetch_by_page']);
+    });
+});

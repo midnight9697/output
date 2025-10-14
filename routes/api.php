@@ -68,7 +68,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('create', [RFQController:: class, 'create_rfq']);
         Route::post('update', [RFQController:: class, 'update_rfq']);
     });
-    
+
     Route::prefix('supplemental')->group(function() {
         Route::post('upload', [SupplementalController::class, 'upload_file']);
         Route::get('page', [SupplementalController::class, 'fetch_by_page']);
@@ -85,6 +85,12 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::prefix('app')->group(function() {
+        Route::get('page',  [APPController::class, 'fetch_by_page']);
+        Route::post('remove',  [APPController::class, 'remove']);
+        Route::post('create', [APPController::class, 'uploadAttachment']);
+    });
+
+    Route::prefix('abstract')->group(function() {
         Route::get('page',  [APPController::class, 'fetch_by_page']);
         Route::post('remove',  [APPController::class, 'remove']);
         Route::post('create', [APPController::class, 'uploadAttachment']);

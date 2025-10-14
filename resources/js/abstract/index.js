@@ -1,3 +1,4 @@
+import { TBLButton } from "../table/buttons";
 import Custom_table from "../table/custom_table";
 
 var active_table;
@@ -14,21 +15,23 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('shit');
     })
 
+    items_table.custom_buttons = (data) => {
+        let div = document.createElement('div');
+        TBLButton.loadButtons(div);
+        return div;
+    };
+
     active_table.load([
         'title',
         'purpose',
         'created_at',
     ]);
-
+    
     items_table.load([
         'ref',
         'purpose',
         'created_at',
     ]);
 
-    items_table.add_row({
-        "ref": "New Name",
-        "purpose": "New Position",
-        "created_at": "New Office",
-    });
+    items_table.add_row([]);
 });

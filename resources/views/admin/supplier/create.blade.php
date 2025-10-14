@@ -5,20 +5,24 @@
 <div class="ui top attached segment">
     <div class="ui two column grid">
         <div class="column">
-            <button class="ui grey very tiny button">REQUEST FOR QUOTATION FORM</button>
+            {{-- <button class="ui grey very tiny button">REQUEST FOR QUOTATION FORM</button> --}}
         </div>
         <div class="column" style="text-align: right">
-            <button class="ui primary very tiny button submit_rfq_form_button">PROCEED</button>
+            <button class="ui primary very tiny button submit_supplier_form_button">PROCEED</button>
         </div>
     </div>
 </div>
 <div class="ui form attached segment">
-    <form class="ui form formCreateRFQ" action="#" id="formCreateRFQ" method="post">
+    <form class="ui form formCreateSupplier" action="#" id="formCreateSupplier" method="post">
         <div class="ui error message">
             {{--  --}}
         </div>
         <div class="field">
             <div  class="two fields">
+                <div class="field">
+                    <label>SUPPLIER NAME</label>
+                    <input type="text" name="supplier_name" placeholder="SUPPLIER NAME">
+                </div>
                 <div class="field">
                     <label>PROVINCE</label>
                     <div class="ui selection dropdown" id="supplier_province">
@@ -30,21 +34,21 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="field">
+            <div  class="two fields">
                 <div class="field">
-                    <label>municipality</label>
+                    <label>MUNICIPALITY</label>
                     <div class="ui selection dropdown" id="supplier_municipality">
                         <input type="hidden" name="classification">
                         <i class="dropdown icon"></i>
-                        <div class="default text">municipality</div>
+                        <div class="default text">MUNICIPALITY</div>
                         <div class="menu">
                           
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="field">
-            <div  class="two fields">
                 <div class="field">
                     <label>BARANGAY</label>
                     <div class="ui selection dropdown" id="supplier_brgy">

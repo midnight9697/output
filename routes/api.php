@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\APPController;
 use App\Http\Controllers\API\FileController;
 use App\Http\Controllers\API\PPMPController;
 use App\Http\Controllers\API\PurchaseRequestController;
@@ -67,7 +68,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('create', [RFQController:: class, 'create_rfq']);
         Route::post('update', [RFQController:: class, 'update_rfq']);
     });
-
+    
     Route::prefix('supplemental')->group(function() {
         Route::post('upload', [SupplementalController::class, 'upload_file']);
         Route::get('page', [SupplementalController::class, 'fetch_by_page']);
@@ -81,5 +82,11 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('page',  [PPMPController::class, 'fetch_by_page']);
         Route::post('remove',  [PPMPController::class, 'remove']);
         Route::post('create', [PPMPController::class, 'uploadAttachment']);
+    });
+
+    Route::prefix('app')->group(function() {
+        Route::get('page',  [APPController::class, 'fetch_by_page']);
+        Route::post('remove',  [APPController::class, 'remove']);
+        Route::post('create', [APPController::class, 'uploadAttachment']);
     });
 });

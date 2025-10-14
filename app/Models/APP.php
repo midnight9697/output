@@ -5,7 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class APP extends Model
-{
+class APP extends Model {
     use HasFactory;
+    
+    protected $fillable = [
+        'ref',
+        'title',
+        'filename',
+        'origin',
+        'filetype',
+        'creator',
+    ];
 }

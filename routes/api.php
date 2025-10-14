@@ -7,6 +7,8 @@ use App\Http\Controllers\API\RFQController;
 use App\Http\Controllers\API\SupplementalController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Supplier;
+use App\Http\Controllers\api\SupplierController;
 use App\Models\PurchaseRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -75,6 +77,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('create', [SupplementalController::class, 'create']);
         Route::post('update', [SupplementalController::class, 'update']);
         Route::post('remove', [SupplementalController::class, 'rmvFile'])->name('supplemental.remove');
+    });
+
+    Route::prefix('supplier')->group(function() {
+        Route::get('/get_all_supplier', [SupplierController::class, 'get_all_supplier']);
     });
 
     Route::prefix('ppmp')->group(function() {

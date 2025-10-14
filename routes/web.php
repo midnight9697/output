@@ -14,6 +14,7 @@ use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\RFQController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\Supplemental\SupplementalController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\SystemController;
 use App\Http\Controllers\User\ProfileController as UserProfileController;
 use App\Models\Division;
@@ -103,6 +104,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/', [RFQController::class, 'rfqView'])->name('Request for Quotation');
         Route::get('form-create', [RFQController::class, 'rfqFormCreate'])->name('RFQ FORM CREATE');
         Route::get('form-update/{id}', [RFQController::class, 'rfqFormUpdateView'])->name('RFQ FORM UPDATE');
+    });
+
+    Route::prefix('supplier')->group(function() {
+        Route::get('/', [SupplierController::class, 'index'])->name('supplier');
+        Route::get('form-create', [SupplierController::class, 'create'])->name('create supplier');
     });
 
     Route::get('attachment/{id}', [FileController::class, 'attachment'])->name('attachment.download');

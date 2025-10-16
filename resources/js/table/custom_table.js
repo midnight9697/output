@@ -94,7 +94,7 @@ export default class Custom_table {
         for (let m = 0; m < (cnt-1); m++) {
             ar.push(m);
         }
-
+        console.log('array', ar);
         let TBColumns = [];
 
         this.columns.forEach(column => {

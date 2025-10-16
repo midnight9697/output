@@ -15,9 +15,7 @@
         </tr>
   </thead>
   <tbody style="text-align: center" id="{{ (isset($body)?$body:"") }}">
-      <tr>
-          <td colspan="{{ count($columns) }}" class="center aligned">No Record Found</td>
-      </tr>
+      
   </tbody>
 </table>
 

@@ -11,7 +11,7 @@
         <input type="text" placeholder="PURPOSE" name="purpose">
     </div>
     <div class="ui bottom attached segment">
-        @include('default.create-table', [ 'name' => 'abstract-items-table',
+        @include('default.create-table', [ 'name' => 'abstract-items-table', 'body' => 'abstract-items-body',
         'columns' => [
           'REF NO.',
           'PURPOSE',

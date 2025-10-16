@@ -9,8 +9,6 @@
 @endsection
 
 @section('main_content')
-    @include('layout.custom-modal', ['view' => 'admin.abstract.create', 'name' => 'uploadABSTRACTModal', 'title' => 'ABSTRACT FORM', 'actions_button' => 'submit_upload_button'])
-
     @include('default.create-button', [
       'name' => 'create_abstract_vbtn',
       'text' => 'CREATE ABSTRACT',

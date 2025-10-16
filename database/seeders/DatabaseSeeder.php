@@ -6,6 +6,8 @@ namespace Database\Seeders;
 
 use App\Models\Profile;
 use App\Models\PurchaseRequest;
+use App\Models\RFQ;
+use App\Models\RFQItem;
 use App\Models\User;
 use Database\Factories\PRFactory;
 use Illuminate\Database\Seeder;
@@ -20,11 +22,13 @@ class DatabaseSeeder extends Seeder
     public function run() {
        
         $this->call([
-            DivisionSeeder::class,
-            UserSeeeder::class
+            // DivisionSeeder::class,
+            // UserSeeeder::class
         ]);
         // PurchaseRequest::factory(5000)->create();
-        $users = User::factory(100)->create();
-        Profile::factory(200)->recycle($users)->create();
+        // $users = User::factory(100)->create();
+        // Profile::factory(200)->recycle($users)->create();
+        $rfq = RFQ::factory(100)->create();
+        RFQItem::factory(500)->recycle($rfq)->create();
     }
 }

@@ -1,7 +1,7 @@
 import { MessageMod, confirmMod, createElement, progressControl, uploadControl } from "../app";
 import { TBLButton } from "../table/buttons";
 import Custom_table from "../table/custom_table";
-import { SupplierControl } from "./supplier";
+import { SupplierClass } from "./supplier";
 let SPLTBL = {};
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     TBLButton.deleteAction = (e) => {
       confirmMod.load(() => {
         let spl_id = e.target.dataset.id;
-        SupplierControl.remove(spl_id, (e) => {
+        SupplierClass.remove(spl_id, (e) => {
           SPLTBL.table.ajax.reload();
           MessageMod.success("Successfully Deleted.");
         });

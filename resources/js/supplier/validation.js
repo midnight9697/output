@@ -14,9 +14,9 @@ export class Validator {
         $('.ui.form.'+element)
         .form({
           fields: {
-            province: this.fieldsRules('province', 'empty'),
-            municipality: this.fieldsRules('municipality', 'empty'),
-            barangay: this.fieldsRules('barangay', 'empty'),
+            province: this.fieldsRules('supplier_province', 'empty'),
+            municipality: this.fieldsRules('supplier_municipality', 'empty'),
+            barangay: this.fieldsRules('supplier_barangay', 'empty'),
             supplier_name: this.fieldsRules('supplier_name', 'empty'),
           },
           onSuccess: action

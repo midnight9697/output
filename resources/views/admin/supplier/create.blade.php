@@ -26,7 +26,7 @@
                 <div class="field">
                     <label>PROVINCE</label>
                     <div class="ui selection dropdown" id="supplier_province">
-                        <input type="hidden" name="classification">
+                        <input type="hidden" name="supplier_province">
                         <i class="dropdown icon"></i>
                         <div class="default text">PROVINCE</div>
                         <div class="menu">
@@ -41,7 +41,7 @@
                 <div class="field">
                     <label>MUNICIPALITY</label>
                     <div class="ui selection dropdown" id="supplier_municipality">
-                        <input type="hidden" name="classification">
+                        <input type="hidden" name="supplier_municipality">
                         <i class="dropdown icon"></i>
                         <div class="default text">MUNICIPALITY</div>
                         <div class="menu">
@@ -51,8 +51,8 @@
                 </div>
                 <div class="field">
                     <label>BARANGAY</label>
-                    <div class="ui selection dropdown" id="supplier_brgy">
-                        <input type="hidden" name="classification">
+                    <div class="ui selection dropdown" id="supplier_barangay">
+                        <input type="hidden" name="supplier_barangay">
                         <i class="dropdown icon"></i>
                         <div class="default text">BARANGAY</div>
                         <div class="menu">

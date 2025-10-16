@@ -1,13 +1,13 @@
 import places from './places.json' with { type: 'json' };
-import { MessageMod } from "../app";
-import { SupplierValidation } from "../supplier/validation";
-import { TBLButton } from "../table/buttons";
-import { SupplementalControl } from "./supplemental";
+// import { MessageMod } from "../app";
+// import { SupplierValidation } from "../supplier/validation";
+// import { TBLButton } from "../table/buttons";
+// import { SupplierControl } from "./supplier";
+import { SupplierClass } from "./supplier";
 import { SupplierSpecsValidation, SupplierValidator } from "./validation";
 
 document.addEventListener('DOMContentLoaded', () => {
   let provinces = places['08']['province_list'];
-
   // select province
   $('#supplier_province')
   .dropdown({
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let tmp_municipality = municipalities.find(municipality => Object.keys(municipality)[0] == value);
             let brgys = tmp_municipality[value]['barangay_list'];
  
-            $('#supplier_brgy').dropdown({
+            $('#supplier_barangay').dropdown({
               values: brgys.map(function(brgy) {
                 return {
                   name: brgy,
@@ -51,21 +51,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  let formClass = ".formCreateSupplementalSpec";
-  let formArray = SupplierValidation.serializeArrayToJson(formClass);
 
     $('.submit_supplier_form_button').on('click', function() {
         $('#formCreateSupplier').trigger('submit');
     });
 
+   
+
     SupplierValidator.CreateSupplierValidation((e) => {
-      e.preventDefault();
-      let data = SupplierValidation.serializeArrayToJson('.formCreateSupplier');
-      data['projects'] = SupplierValidator.items;
-      SupplierControl.createSupplier(data, () => {
-          MessageMod.success("Supplier successfully created.", () => {
-              window.location = "/Supplier";
-          });
-      });
-  });
+    e.preventDefault();
+    console.log(SupplierValidator.serializeArrayToJson('#formCreateSupplier'));
+    let data = {
+        'supplier_name': SupplierValidator.serializeArrayToJson('.formCreateSupplier').supplier_name,
+        'supplier_province': SupplierValidator.serializeArrayToJson('.formCreateSupplier').supplier_province,
+        'supplier_municipality': SupplierValidator.serializeArrayToJson('.formCreateSupplier').supplier_municipality,
+        'supplier_barangay': SupplierValidator.serializeArrayToJson('.formCreateSupplier').supplier_barangay,
+    }
+    SupplierClass.createSupplier(data, (e) => {
+        window.location.reload(true);
+    });
+});
 })

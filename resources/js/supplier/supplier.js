@@ -55,4 +55,4 @@ customGetRequest(url, action, fail = () => {}) {
 }
 }
 
-export const SupplierControl = new Supplier();
+export const SupplierClass = new Supplier();

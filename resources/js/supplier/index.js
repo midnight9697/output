@@ -32,7 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
   
   SPLTBL.load([
       'name',
-      'address',
+      'municipality',
+      // 'barangay, municipality, province',
       'created_at',
   ]);
 

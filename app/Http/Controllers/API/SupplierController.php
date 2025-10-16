@@ -13,8 +13,15 @@ class SupplierController extends Controller {
         return encryptIds($supplier);
     }
 
-    public function store_supplier(Request $request) {
-        return $request;
+    public function create(Request $request) {
+        $supplier = Supplier::create([
+            'name' => $request->supplier_name,
+            'province' => $request->supplier_province,
+            'municipality' => $request->supplier_municipality,
+            'barangay' => $request->supplier_barangay,
+        ]);
+
+        return ['success', $supplier];
     }
 
 }

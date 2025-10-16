@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let div = document.createElement('div');
     TBLButton.data = data;
     TBLButton.updateAction =  () => {
-      window.location = "./supplier/update/"+data.id;
+      window.location = "./supplier/form-update/"+data.id;
     }
 
     TBLButton.deleteAction = (e) => {

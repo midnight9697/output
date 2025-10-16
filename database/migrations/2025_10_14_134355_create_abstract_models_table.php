@@ -11,11 +11,12 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up() {
-        Schema::create('a_p_p_s', function (Blueprint $table) {
+    public function up()
+    {
+        Schema::create('abstract_models', function (Blueprint $table) {
             $table->id();
             $table->string('ref')->nullable();
-            $table->string('title')->nullable();
+            $table->string('purpose')->nullable();
             $table->string('filename')->nullable();
             $table->string('origin')->nullable();
             $table->string('filetype')->nullable();
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('a_p_p_s');
+        Schema::dropIfExists('abstract_models');
     }
 };

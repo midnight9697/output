@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class PPMPController extends Controller {
+class APPController extends Controller {
+    
     public function index(){
-        return view('admin.ppmp.index');
+        return view('admin.app.index');
     }
 }

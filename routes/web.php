@@ -3,6 +3,7 @@
 use App\Http\Controllers\AbstractController;
 use App\Http\Controllers\API\FileController;
 use App\Http\Controllers\API\SupplementalController as APISupplementalController;
+use App\Http\Controllers\APPController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BACController;
 use App\Http\Controllers\DivisionController;
@@ -70,6 +71,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::prefix('ppmp')->group(function() {
         Route::get('/', [PPMPController::class, 'index'])->name('ppmp request');
+    });
+
+    Route::prefix('app')->group(function() {
+        Route::get('/', [APPController::class, 'index'])->name('app request');
     });
 
     Route::prefix('purchase_order')->group(function() {

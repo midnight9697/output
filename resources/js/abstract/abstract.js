@@ -1,21 +1,20 @@
-class PPMP {
+class AbstractModel {
     fetch_by_page(action, fail) {
         var usersClone = this;
-        this.customGetRequest('./api/ppmp', action, fail);
-    } 
+        this.customGetRequest('./api/abstract', action, fail);
+    }
 
     remove(ppmpid, action, fail) {
         var usersClone = this;
-        this.customPostRequest('./api/ppmp/remove', {id: ppmpid}, action, fail);
+        this.customPostRequest('./api/abstract/remove', {id: ppmpid}, action, fail);
     } 
 
     create(data, action, fail) {
         var usersClone = this;
         let fd = new FormData();
-        console.log(data);
         fd.append('att_file', data, data.name);
         fd.append('filename', data.name);
-        this.customPostURequest('./api/ppmp/create', fd, action, fail);
+        this.customPostURequest('./api/abstract/create', fd, action, fail);
     }
 
     customGetRequest(url, action, fail = () => {}) {
@@ -52,4 +51,4 @@ class PPMP {
     }
 }
 
-export const ppmpController = new PPMP();
+export const abstractController = new AbstractModel();

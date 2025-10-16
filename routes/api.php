@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\APPController;
 use App\Http\Controllers\API\FileController;
 use App\Http\Controllers\API\PPMPController;
 use App\Http\Controllers\API\PurchaseRequestController;
@@ -88,5 +89,19 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('ppmp')->group(function() {
         Route::get('page',  [PPMPController::class, 'fetch_by_page']);
+        Route::post('remove',  [PPMPController::class, 'remove']);
+        Route::post('create', [PPMPController::class, 'uploadAttachment']);
+    });
+
+    Route::prefix('app')->group(function() {
+        Route::get('page',  [APPController::class, 'fetch_by_page']);
+        Route::post('remove',  [APPController::class, 'remove']);
+        Route::post('create', [APPController::class, 'uploadAttachment']);
+    });
+
+    Route::prefix('abstract')->group(function() {
+        Route::get('page',  [APPController::class, 'fetch_by_page']);
+        Route::post('remove',  [APPController::class, 'remove']);
+        Route::post('create', [APPController::class, 'uploadAttachment']);
     });
 });

@@ -1,4 +1,4 @@
-<form action="#" class="form ui form-upload-ppmp">
+<form action="#" class="form ui form-upload-app">
     <div class="ui error message">
         {{--  --}}
     </div>

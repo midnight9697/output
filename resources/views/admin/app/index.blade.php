@@ -9,10 +9,10 @@
 @endsection
 
 @section('main_content')
-    @include('layout.custom-modal', ['view' => 'admin.ppmp.create', 'name' => 'uploadPPMPModal', 'title' => 'UPLOAD PROJECT PROCUREMENT MANAGEMENT PLAN', 'actions_button' => 'submit_upload_button'])
+    @include('layout.custom-modal', ['view' => 'admin.app.create', 'name' => 'uploadAPPModal', 'title' => 'UPLOAD ANNUAL PROJECT PROCUREMENT PLAN', 'actions_button' => 'submit_upload_button'])
     @include('default.create-button', [
-      'name' => 'create_ppmp_vbtn',
-      'text' => 'UPLOAD PPMP',
+      'name' => 'create_app_vbtn',
+      'text' => 'UPLOAD APP',
       'icon' => 'plus',
     ])
 
@@ -21,7 +21,7 @@
         <div class="item" data-tab="head2">ARCHIVE</div>
     </div>
     <div class="ui bottom attached active tab segment" data-tab="head1">
-        @include('default.create-table', [ 'name' => 'ppmp-table',
+        @include('default.create-table', [ 'name' => 'app-table',
           'columns' => [
             'REF NO.',
             'TITLE',
@@ -34,5 +34,5 @@
 @endsection
 
 @section('custom_js')
-    @vite(['resources/js/ppmp/index.js'])
+    @vite(['resources/js/app/index.js'])
 @endsection

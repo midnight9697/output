@@ -23,7 +23,7 @@ class RFQItemFactory extends Factory
             "TP-Link Archer AX50 supports Wi-Fi 6, dual-band (2.4GHz/5GHz), 3000 Mbps max speed, 4 LAN ports, 1 WAN, 1 USB, and WPA3 security.",
             "Logitech H390 is a wired USB headset with a noise-canceling microphone, 20Hz–20kHz frequency response, 2.3m cable, and compatibility with Windows/macOS."
         ];
-
+        
         $rfq = RFQ::inRandomOrder()->first();
         $rfq_id = $rfq->id;
         $specs = $this->faker->randomElement($ictSpecsSentences);

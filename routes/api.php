@@ -83,6 +83,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('supplier')->group(function() {
         Route::get('/get_all_supplier', [SupplierController::class, 'get_all_supplier']);
         Route::post('/create', [SupplierController::class, 'create']);
+        Route::post('/remove', [SupplierController::class, 'remove']);
+        Route::post('/update', [SupplierController::class, 'update']);
     });
 
     Route::prefix('ppmp')->group(function() {

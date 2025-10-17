@@ -1,3 +1,4 @@
+import places from './places.json' with { type: 'json' };
 import { AuthClass } from "./login/login";
 let pageLoaderGlobal;
 
@@ -288,6 +289,71 @@ function getRandomInteger(min, max) {
     max = Math.floor(max); // Ensures max is an integer
     // console.log(Math.floor(Math.random() * (max - min + 1)) + min);
     return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+export function global_place(supplier_province,supplier_municipality,supplier_barangay){
+    let provinces = places['08']['province_list'];
+    let municipalities = [];
+    let brgys = [];
+    // select province
+    $('#'+supplier_province)
+    .dropdown({
+      values: Object.keys(provinces).map(function(prov) {
+        return {
+          name: prov,
+          value: prov,
+        }
+      }),
+      onChange: function(value, text, selectedItem) {
+            municipalities = provinces[value]['municipality_list'];
+            console.log('trigger');
+            $('#'+supplier_municipality).form('clear', true);
+            $('#'+supplier_barangay).form('clear', true);
+            // select municipality
+            $('#'+supplier_municipality).dropdown('change values', Object.keys(municipalities).map(function(mun) {
+                return {
+                  name: Object.keys(municipalities[mun])[0],
+                  value: Object.keys(municipalities[mun])[0],
+                };
+            }));
+
+            supplierMunicipalControl();
+      },
+      clearable: true
+    });
+
+    function supplierMunicipalControl() {
+        $('#'+supplier_municipality).dropdown({
+            onChange: function(value,text, selectedItem){
+                $('#'+supplier_barangay).form('clear', true);
+                let tmp_municipality = municipalities.find(municipality => Object.keys(municipality)[0] == value);
+                brgys = value?tmp_municipality[value]['barangay_list']:[];
+
+                $('#'+supplier_barangay).dropdown('change values',  brgys.map(function(brgy) {
+                    return {
+                      name: brgy,
+                      value: brgy,
+                    };
+                }));
+                
+                $('#'+supplier_barangay).dropdown();
+            },
+            clearable: true
+        });
+    }
+
+    function supplierBarangayControl() {
+        $('#'+supplier_barangay).dropdown({
+            clearable: true,
+            onChange: function(value,text, selectedItem){
+    
+            }
+        });
+    }
+    
+    supplierMunicipalControl();
+    supplierBarangayControl();
+    
 }
 
 export const SectionMod = new Section();

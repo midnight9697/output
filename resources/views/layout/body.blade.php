@@ -41,7 +41,7 @@
             {{ view('layout.menu', [ 'url' => "bac", 'title' => 'BAC', 'routesplit' => $routesplit, 'permission' => true]) }}
             {{ view('layout.menu', [ 'url' => "inspector", 'title' => 'Inspector', 'routesplit' => $routesplit, 'permission' => true]) }}
             {{ view('layout.menu', [ 'url' => "https://r8.emb.gov.ph/wp-content/uploads/2025/02/EMB8-Citizens-Charter-External-Internal-Service-2025-Edition-portrait-1.pdf", 'title' => 'RA 9184', 'routesplit' => $routesplit, 'permission' => true]) }}
-            {{ view('layout.menu', [ 'url' => "supplier", 'title' => 'Supplier', 'routesplit' => $routesplit, 'permission' => true]) }}
+            {{ view('layout.menu', [ 'url' => url("supplier"), 'title' => 'Supplier', 'routesplit' => $routesplit, 'permission' => Gate::allows('supplier-view-view')]) }}
         </div>
     </div>
 </div>

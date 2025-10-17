@@ -60,11 +60,11 @@ h1 { text-align: center; }
                     <div class="file alternate icon"></div>
                 </div>
                 <div class="header">
-                    <div class="red header">1,000</div>
+                    <div class="red header">{{$count_user}}</div>
                 </div>
                 <div class="meta">Files</div>
                 <div class="description">
-                    Purchase Request
+                    Total No. of Users
                 </div>
             </div>
             <div class="extra content">
@@ -79,11 +79,11 @@ h1 { text-align: center; }
                     <div class="file alternate icon"></div>
                 </div>
                 <div class="header">
-                    <div class="red header">1,000</div>
+                    <div class="red header">{{$count_supplier}}</div>
                 </div>
                 <div class="meta">Files</div>
                 <div class="description">
-                    Purchase Order
+                    Total Suppliers
                 </div>
             </div>
             <div class="extra content">
@@ -99,11 +99,11 @@ h1 { text-align: center; }
                     <div class="file alternate icon"></div>
                 </div>
                 <div class="header">
-                    <div class="red header">1,000</div>
+                    <div class="red header">{{$count_pr}}</div>
                 </div>
                 <div class="meta">Files</div>
                 <div class="description">
-                    Members
+                    Total Purchase Request
                 </div>
             </div>
             <div class="extra content">
@@ -119,11 +119,11 @@ h1 { text-align: center; }
                     <div class="file alternate icon"></div>
                 </div>
                 <div class="header">
-                    <div class="red header">1,000</div>
+                    <div class="red header">{{$count_rfq}}</div>
                 </div>
                 <div class="meta">Files</div>
                 <div class="description">
-                    BAC
+                    Total Request for Quotation
                 </div>
             </div>
             <div class="extra content">

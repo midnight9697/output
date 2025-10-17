@@ -6,6 +6,7 @@ use App\Http\Controllers\API\SupplementalController as APISupplementalController
 use App\Http\Controllers\APPController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BACController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\InspectorController;
 use App\Http\Controllers\PPMPController;
@@ -124,6 +125,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::prefix('login')->group(function() {
         Route::post('logout', [AuthController::class, 'logout']);
     });
+
+
 });
 
 Route::prefix('system')->group(function () {

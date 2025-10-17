@@ -7,7 +7,7 @@ var quill;
 
 document.addEventListener('DOMContentLoaded', () => {
     $('.menu .item').tab();
-    const inbox = CTable(new Custom_table('#rfq-inbox', false, true, false, false, './api/rfq/page'), 'inbox');
+    const inbox = CTable(new Custom_table('#rfq-inbox', false, true, true, false, './api/rfq/page'), 'inbox');
     const outbox = CTable(new Custom_table('#rfq-outbox', false, true, false, false, './api/rfq/page'), 'inbox');
     
     // document.getElementById('modalCreateRFQ').onsubmit = (e) => {

@@ -14,7 +14,7 @@
     {{-- <canvas id="pdf-canvas"></canvas> --}}
     <div class="ui top attached tabular menu">
         <div class="active item" data-tab="rfq-inbox">RFQ</div>
-        <div class="item" data-tab="rfq-outbox">ARCHIVED</div>
+        {{-- <div class="item" data-tab="rfq-outbox">ARCHIVED</div> --}}
     </div>
     
     <div class="ui bottom attached active tab segment" data-tab="rfq-inbox">

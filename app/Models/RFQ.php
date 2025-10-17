@@ -23,4 +23,8 @@ class RFQ extends Model {
     public function items() {
         return $this->hasMany(RFQItem::class, 'rfq_id');
     }
+
+    public function rfqItems() {
+        return $this->hasMany(RFQItem::class, 'rfq_id');
+    }
 }

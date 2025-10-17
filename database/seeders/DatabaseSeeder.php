@@ -35,9 +35,11 @@ class DatabaseSeeder extends Seeder
         $users->each(function ($user) use($count) {
             $count = $count + 1;
             // Item::factory(100)->create(['user_id' => $user->id]);
-            $rfq = RFQ::factory(rand(10, 200))->create(['creator' => $user->id]);
-            RFQItem::factory(rand(5, 20))->recycle($rfq)->create();
-        }); 
+            $rfq = RFQ::factory(rand(10, 200))
+            ->has(RFQItem::factory()->count(rand(5, 10)))
+            ->create(['creator' => $user->id]);
+            // RFQItem::factory(rand(5, 20))->recycle($rfq)->create();
+        });
         
     }
 }

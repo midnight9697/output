@@ -14,7 +14,15 @@ export default defineConfig({
             input: [
                 'resources/css/app.css', 
                 'resources/js/app.js',
+                
+                // Login
                 'resources/js/login/index.js',
+                'resources/js/login/forgot_password.js',
+                'resources/js/login/login.js',
+                'resources/js/login/pagination.js',
+                'resources/js/login/reset_password.js',
+                'resources/js/login/validation.js',
+
                 // Dashboard
                 'resources/js/home.js',
                 // PR
@@ -23,26 +31,61 @@ export default defineConfig({
                 'resources/js/PR/update.js',
                 'resources/js/PR/process.js',
                 'resources/js/PR/tracking.js',
+                'resources/js/PR/validation.js',
+                'resources/js/PR/purchase_request.js',
+
                 // Users
                 'resources/js/User/Index.js',
+                'resources/js/User/action_original.js',
                 'resources/js/User/update.js',
+                'resources/js/User/action.js',
+                'resources/js/User/update.js',
+                'resources/js/User/User.js',
+                'resources/js/User/Validation.js',
+
                 // Supplemental
                 'resources/js/supplemental/index.js',
+                'resources/js/supplemental/create.js',
+                'resources/js/supplemental/supplemental.js',
+                'resources/js/supplemental/update.js',
+                'resources/js/supplemental/validation.js',
                 'resources/css/supplemental.css',
 
                  // PPMP
                  'resources/js/ppmp/index.js',
+                 'resources/js/ppmp/ppmp.js',
+                 'resources/js/ppmp/validation.js',
 
                   // APP
                   'resources/js/app/index.js',
+                  'resources/js/app/app.js',
+                  'resources/js/app/validation.js',
 
                   // ABSTRACT
                   'resources/js/abstract/index.js',
-                  'resources/js/supplier/index.js',
-                // 'resources/js/User/User.js',
-                 // Supplemental
-                 'resources/js/rfq/index.js',
-            ],
+                  'resources/js/abstract/create.js',
+                  'resources/js/abstract/abstract.js',
+
+                    //   SUPPLIER
+                    'resources/js/supplier/index.js',
+                    'resources/js/supplier/supplier.js',
+                    'resources/js/supplier/create.js',
+                    'resources/js/supplier/validation.js',
+                    
+                    // RFQ
+                    'resources/js/rfq/index.js',
+                    'resources/js/rfq/rfq.js',
+                    'resources/js/rfq/create.js',
+                    'resources/js/rfq/update.js',
+
+                    // table
+                    'resources/js/table/buttons.js',
+                    'resources/js/table/custom_table.js',
+                    // 'resources/js/table/pdf-1.js',
+                    // 'resources/js/table/pdf.js',
+                    // 'resources/js/table/table-normal.js',
+
+                ],
             refresh: true,
         }),
         // react()

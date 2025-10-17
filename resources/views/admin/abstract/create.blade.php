@@ -34,8 +34,8 @@
             </div>
             <div class="field">
                 <label for="quotation">RFQ</label>
-                <select name="quotation" multiple="" class="ui fluid multiple search selection dropdown">
-                    @foreach (encryptMany(RFQ::orderBy('created_at', 'desc')->get()) as $item)
+                <select name="quotation" multiple id="quotation" class="ui fluid multiple search selection dropdown">
+                    @foreach (encryptMany(RFQ::where('creator', auth()->user()->id)->orderBy('created_at', 'desc')->get()) as $item)
                         <option value="{{ $item->id }}">{{ $item->project_purpose }}</option>
                     @endforeach
                 </select>

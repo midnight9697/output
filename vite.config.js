@@ -28,8 +28,10 @@ export default defineConfig({
                 'resources/js/User/update.js',
                 // Supplemental
                 'resources/js/supplemental/index.js',
-                'resources/css/supplemental.css'
+                'resources/css/supplemental.css',
                 // 'resources/js/User/User.js',
+                 // Supplemental
+                 'resources/js/rfq/index.js',
             ],
             refresh: true,
         }),

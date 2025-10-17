@@ -2,6 +2,10 @@ export class RFQ {
     fetch_rfq(data, action) {
         this.customPostRequest('./api/rfq/one', data, action, () => {});
     }
+
+    counter(action) {
+        this.customGetRequest('./api/rfq/counter', action, () => {});
+    }
     
     inbox_rfq(action, page = false) {
         console.log('local', localStorage.getItem('bearer'));

@@ -119,7 +119,7 @@ h1 { text-align: center; }
                     <div class="file alternate icon"></div>
                 </div>
                 <div class="header">
-                    <div class="red header">{{$count_rfq}}</div>
+                    <div class="red header rfq_counter">{{$count_rfq}}</div>
                 </div>
                 <div class="meta">Files</div>
                 <div class="description">

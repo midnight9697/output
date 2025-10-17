@@ -69,6 +69,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('create_template', [RFQController:: class, 'create_rfq_template']);
         Route::post('create', [RFQController:: class, 'create_rfq']);
         Route::post('update', [RFQController:: class, 'update_rfq']);
+        Route::get('counter', [RFQController:: class, 'countRFQ']);
     });
 
     Route::prefix('supplemental')->group(function() {

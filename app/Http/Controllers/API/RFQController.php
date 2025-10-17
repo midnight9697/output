@@ -114,6 +114,10 @@ class RFQController extends Controller {
         return encryptSingle($rfq);
     }
 
+    public function countRFQ() {
+        return response()->json(['data' => RFQ::orderByDesc('created_at')->count()]);;
+    }
+
     public function fetch_rfq(Request $request) {
         $id = decryptUrlSafe($request->id);
         $rfq = RFQ::where('id', $id)->with('items')->first();

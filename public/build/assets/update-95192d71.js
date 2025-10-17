@@ -1,0 +1,15 @@
+import{P as o}from"./validation-a1bd98b3.js";import{c as l,M as n}from"./login-ab27f3ad.js";import{T as i}from"./buttons-0cb8bf8c.js";import{r as m}from"./rfq-dec22fc4.js";import{R as t,a as c}from"./validation-e9260cf5.js";document.addEventListener("DOMContentLoaded",()=>{document.getElementsByClassName("formCreateRFQSpec")[0],m.fetch_rfq({id:localStorage.getItem("rfq_id")},u),$(".add_item_button").on("click",function(){$("#modalCreateRFQSpec").modal("show")}),$(".add_rfq_item_button").on("click",()=>{$(".formCreateRFQSpec").trigger("submit")}),$(".submit_rfq_form_button").on("click",function(){$("#formCreateRFQ").trigger("submit")})});function u(e){e=e.data,$("#classification_dropdown").dropdown("set selected",e.classification),document.getElementsByName("project_purpose")[0].value=e.project_purpose,document.getElementsByName("rfq_number")[0].value=e.rfq_number,document.getElementsByName("attachment_one")[0].value=e.attachment_one,document.getElementsByName("approved_budget")[0].value=e.aproved_budget,document.getElementsByName("standard_unit")[0].value=e.standard_unit,document.getElementsByName("target_deliver_date")[0].value=e.target_delivery_date,t.items=e.items,s(e.items)}t.CreateRFQValidation(e=>{e.preventDefault();let r={id:localStorage.getItem("rfq_id"),project_purpose:o.serializeArrayToJson(".formCreateRFQ").project_purpose,rfq_number:o.serializeArrayToJson(".formCreateRFQ").rfq_number,attachment_one:o.serializeArrayToJson(".formCreateRFQ").attachment_one,aproved_budget:o.serializeArrayToJson(".formCreateRFQ").approved_budget,standard_unit:o.serializeArrayToJson(".formCreateRFQ").standard_unit,target_delivery_date:o.serializeArrayToJson(".formCreateRFQ").target_deliver_date,classification:o.serializeArrayToJson(".formCreateRFQ").classification,items:t.items};l.load(()=>{m.updateRFQ(r,a=>{n.success("Changes Saved.!",()=>{window.location.reload(!0)})})},"Save changes ?")});c.CreateRFQItemValidation(e=>{e.preventDefault(),t.items=t.items?t.items:[],t.items.push(t.serializeArrayToJson(".formCreateRFQSpec")),console.log("Serialze",t.items),$(".formCreateRFQSpec").form("reset"),$("#modalCreateRFQSpec").modal("hide"),console.log(t.items),n.warning("Save changes to take reflect.",()=>{n.hide()}),s(t.items)});function s(e){let r="";e.forEach(a=>{let d=document.createElement("div");i.data=a,i.deleteAction=!0,i.deleteClassName="removeItem",i.loadButtons(d),r+=`
+            <tr>
+                <td>${a.specification}</td>
+                <td>${a.bidder_specs}</td>
+                <td>TBA</td>
+                <td>${a.quantity_unit}</td>
+                <td>${a.unit_price}</td>
+                <td>${a.total_price}</td>
+                <td>${d.innerHTML}</td>
+            </tr>
+        `}),e.length==0&&(r+=`
+            <tr>
+                <td colspan="7">No Record Found</td>
+            </tr>
+        `),document.getElementById("quotation_table_body").innerHTML=r,$(".removeItem").on("click",a=>{console.log(a.target.dataset.id),t.items=t.items.filter(d=>d.id!=a.target.dataset.id),n.warning("Please save changes to reflect.",()=>{n.hide()}),s(t.items)}),i.relinitialize()}

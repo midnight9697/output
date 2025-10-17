@@ -84,8 +84,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::prefix('abstract')->group(function() {
         Route::get('/', [AbstractController::class, 'index'])->name('abstract request');
-        Route::get('create', [AbstractController::class, 'create'])->name('abstract request');
-        Route::get('update', [AbstractController::class, 'create'])->name('abstract request');
+        Route::get('create', [AbstractController::class, 'create'])->name('abstract create');
+        Route::get('update', [AbstractController::class, 'create'])->name('abstract update');
     });
 
     Route::prefix('division')->group(function() {

@@ -29,6 +29,16 @@ export default defineConfig({
                 // Supplemental
                 'resources/js/supplemental/index.js',
                 'resources/css/supplemental.css',
+
+                 // PPMP
+                 'resources/js/ppmp/index.js',
+
+                  // APP
+                  'resources/js/app/index.js',
+
+                  // ABSTRACT
+                  'resources/js/abstract/index.js',
+                  'resources/js/supplier/index.js',
                 // 'resources/js/User/User.js',
                  // Supplemental
                  'resources/js/rfq/index.js',

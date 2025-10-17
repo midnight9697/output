@@ -39,9 +39,17 @@ class Transaction extends Model
     public function lastRecepient() {
         return $this->hasOne(Recepient::class, 'transaction_id')->orderBy('id', 'desc');    //GET THE LAST TRANSACTION FOR THE LAST RECEPIENT
     }
-
+    
     public function spl() {
         return $this->hasMany(PRSupplemental::class, 'transaction_id')->with('supplemental')->orderBy('transaction_id', 'desc');
+    }
+
+    public function attachments() {
+        return $this->hasMany(Attachment::class, 'transaction_id')->orderBy('created_at', 'desc');
+    }
+
+    public function purchase_request() {
+        return $this->hasOne(PurchaseRequest::class, 'purchase_request_id');
     }
 
     public function getReplaceAttribute() {

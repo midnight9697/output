@@ -15,24 +15,24 @@ class PRPolicy {
     use HandlesAuthorization;
 
     public function processView(User $user, $pr) {
-        $pr = PurchaseRequest::orderBy('id','desc')->whereHas('lastTransaction', function($query) use($pr) {
-            return $query->whereHas('lastRecepient', function($q) use($pr) {
-                return $q->where('purchase_request_id', $pr->id);
+        $pr = PurchaseRequest::orderBy('id','desc')->whereHas('lastTransaction', function($query) use($user) {
+            return $query->whereHas('recepient', function($q) use($user) {
+                return $q->where('receiver_id', $user->id);
             });
         });
-        return $pr->first()->lastTransaction->lastRecepient->receiver_id == $user->id;
+        return $pr->exists();
     }
     
     public function fileViewer(User $user, $id) {
-        $pr = PurchaseRequest::orderBy('id','desc')->whereHas('members', function($query) use($id, $user) {
+        $pr = PurchaseRequest::where('id', $id)->orderBy('id','desc')->whereHas('members', function($query) use($id, $user) {
             return $query->where('members.user_id', $user->id)
                         ->where('purchase_request_id', $id);
-        })->orWhereHas('lastTransaction', function($query) use($id, $user) {
-            return $query->whereHas('lastRecepient', function($q) use($id, $user) {
-                return $q->where('receiver_id', $user->id)->where('purchase_request_id', $id);
+        })->orWhereHas('transactions', function($query) use($id, $user) {
+            return $query->whereHas('recepient', function($q) use($id, $user) {
+                return $q->where('receiver_id', $user->id);
             });
         });
-        return $pr->get();//$pr->exists();
+        return $pr->exists();
     }
 
     public function userView(User $user) {
@@ -40,6 +40,18 @@ class PRPolicy {
         return true;
     }
     
+    public function trackView(User $user, $id) {
+        $pr = PurchaseRequest::where('id', $id)->orderBy('id','desc')->whereHas('members', function($query) use($id, $user) {
+            return $query->where('members.user_id', $user->id)
+                        ->where('purchase_request_id', $id);
+        })->orWhereHas('transactions', function($query) use($id, $user) {
+            return $query->whereHas('recepient', function($q) use($id, $user) {
+                return $q->where('receiver_id', $user->id);
+            });
+        });
+        return $pr->exists();
+    }
+
     public function updateView(User $user, PurchaseRequest $pr) {
         $members = Member::where('user_id', Auth::user()->id)->where('purchase_request_id', $pr->id)->exists();
         $transactions = Transaction::orderBy('id', 'desc')->with('recepient')->first();

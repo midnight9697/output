@@ -1,4 +1,5 @@
 import { PRValidator } from "../PR/validation";
+import { TBLButton } from "./buttons";
 
 export default class Custom_table {
         
@@ -6,12 +7,14 @@ export default class Custom_table {
         this.element = element;
         this.download = download;
         this.pagination = pagination;
+        this.serverSide = true;
         this.search = search;
         this.info = info;
         this.url = url;
         this.items = [];
         this.target_date = 3;
         this.targets = [];
+        this.config = null;
         this.getItems = (items) => {};
         this.custom_buttons = () => {}
         self = this;
@@ -24,7 +27,47 @@ export default class Custom_table {
         // this.table = this.initialize_table(element, this.download, this.pagination, this.search, this.info);
         $(element).removeClass("hidden");
     }
+    configurations = (TBColumns) => {
+        self = this;
+        let settings =  {
+            processing: true,
+            "ordering": false,
+            "initComplete": function(settings, json) {
+                $('.dataTables_filter').addClass('mb-3');
+            },
+            "order": [
+				[0, "desc"]
+			],
+            
+            columns: TBColumns,/*[
+                { data: 'entity_name' },
+            ],*/
+            columnDefs: [
+                {
+                    targets: "_all", // Index of firstName and lastName columns
+                    // visible: false,
+                    className: 'text-center'
+                }
+            ],
+            lengthChange: false,
+            select: false,
+            paging: self.pagination,
+            searching: self.search,
+            info: self.info,
+            responsive: true
+        }
 
+        settings.serverSide = self.serverSide,
+        settings.ajax = {
+            url: self.url,
+            type: 'GET',
+            "beforeSend": function (xhr) {
+                xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem('bearer'));
+            },
+            dataSrc: self.dataSrc
+        };
+        return settings;
+    }
     set add_row(row) {
         this.add_row(row);
     }
@@ -51,7 +94,7 @@ export default class Custom_table {
         for (let m = 0; m < (cnt-1); m++) {
             ar.push(m);
         }
-
+        console.log('array', ar);
         let TBColumns = [];
 
         this.columns.forEach(column => {
@@ -65,42 +108,11 @@ export default class Custom_table {
             render: self.custom_buttons
         });
 
-        var current_table = new DataTable(element, {
-            processing: true,
-            serverSide: true,
-            ajax: {
-                url: self.url,
-                type: 'GET',
-                "beforeSend": function (xhr) {
-                    xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem('bearer'));
-                },
-                dataSrc: self.dataSrc
-            },
-            "ordering": false,
-            "initComplete": function(settings, json) {
-                $('.dataTables_filter').addClass('mb-3');
-            },
-            "order": [
-				[0, "desc"]
-			],
-            
-            columns: TBColumns,/*[
-                { data: 'entity_name' },
-            ],*/
-            columnDefs: [
-                {
-                    targets: "_all", // Index of firstName and lastName columns
-                    // visible: false,
-                    className: 'text-center'
-                }
-            ],
-            lengthChange: false,
-            select: false,
-            paging: pagination,
-            searching: search,
-            info: info,
-            responsive: true
-        });
+        this.config = this.configurations(TBColumns);
+
+        var current_table = new DataTable(element, self.config).on('draw', function () {
+            TBLButton.relinitialize(); // <-- re-bind popup
+          });
         this.table = current_table;
         return current_table
     }

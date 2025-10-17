@@ -45,11 +45,11 @@ class PurchaseRequest extends Model
     }
 
     public function transactions() {
-        return $this->hasMany(Transaction::class);
+        return $this->hasMany(Transaction::class)->with('recepients');
     }
 
     public function lastTransaction() {
-        return $this->hasOne(Transaction::class)->orderBy('id', 'desc')->with('lastRecepient'); //GET THE LAST TRANSACTION FOR THE LAST RECEPIENT
+        return $this->hasOne(Transaction::class)->orderBy('id', 'desc')->with('lastRecepient')->latestOfMany(); //GET THE LAST TRANSACTION FOR THE LAST RECEPIENT
     }
 
     public function createdBy() {
@@ -65,6 +65,8 @@ class PurchaseRequest extends Model
         return encryptUrlSafe($this->id);
     }
 
-    
+    public function close_pr(){
+        return $this->belongsTo(Transaction::class, 'purchase_request_id', 'id');
+    }
     
 }

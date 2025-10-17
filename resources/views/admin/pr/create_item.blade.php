@@ -13,7 +13,7 @@
                 </div>
                 <div class="field">
                     <label>Unit</label>
-                    <input type="text" name="unit" placeholder="Unit">
+                    <input type="text" name="unit" placeholder="Unit" pattern="[A-Za-z]*">
                 </div>
                 <div class="field">
                     <label>Item Description</label>
@@ -21,15 +21,15 @@
                 </div>
                 <div class="field">
                     <label>Quantity</label>
-                    <input type="text" name="quantity" placeholder="Quantity">
+                    <input type="text" name="quantity" placeholder="Quantity" class="total_cost">
                 </div>
                 <div class="field">
                     <label>Unit Cost</label>
-                    <input type="text" name="unit_cost" placeholder="Unit Cost">
+                    <input type="text" name="unit_cost" placeholder="Unit Cost" class="total_cost">
                 </div>
                 <div class="field">
                     <label>Total Cost</label>
-                    <input type="text" name="total_cost" placeholder="Total Cost">
+                    <input type="text" name="total_cost" placeholder="Total Cost" class="disabled" id="total_cost">
                 </div>
             </div>
         </form>

@@ -6,9 +6,12 @@ namespace App\Providers;
 
 use App\Models\PurchaseRequest;
 use App\Models\User;
+use App\Policies\AttachmentPolicy;
 use App\Policies\PRPolicy;
 use App\Policies\PurchaseRequestPolicy;
+use App\Policies\RFQPolicy;
 use App\Policies\SupplementalPolicy;
+use App\Policies\SupplierPolicy;
 use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
@@ -38,6 +41,7 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('pr-update-view', [PRPolicy::class, 'updateView']);
         Gate::define('pr-file-view', [PRPolicy::class, 'fileViewer']);
         Gate::define('pr-process-view', [PRPolicy::class, 'processView']);
+        Gate::define('pr-track-view', [PRPolicy::class, 'trackView']);
 
         // User Management Permissions
         // Gate::define('user-view', [UserPolicy::class, 'viewAny']);
@@ -46,6 +50,15 @@ class AuthServiceProvider extends ServiceProvider
 
         // Supplemental
         Gate::define('spl-download-file', [SupplementalPolicy::class, 'supplementalDownload']);
+        Gate::define('spl-view-file', [SupplementalPolicy::class, 'supplementalCreatorView']);
+
+        // Attachment
+        Gate::define('attachment-file-view', [AttachmentPolicy::class, 'creatorView']);
+
+        // 
+        Gate::define('rfq-update-view', [RFQPolicy::class, 'updateView']);
+        Gate::define('supplier-update-view', [SupplierPolicy::class, 'updateView']);
+        Gate::define('supplier-view-view', [SupplierPolicy::class, 'supplierView']);
 
     }
 }

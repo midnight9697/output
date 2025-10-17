@@ -6,6 +6,8 @@
     use App\Models\Member;
     use App\Models\Alternative;
     use App\Models\Supplementary;
+    use App\Models\Profile;
+    $prof = Profile::where('user_id', auth()->user()->id);
 @endphp
     <style>
         .ui.modal.top-aligned {
@@ -17,19 +19,50 @@
         <div class="eight wide column">
             {{-- PROCESS FORM SEGMENT --}}
             <div class="ui top attached header">
-                <p>PROCESS PURCHASE REQUEST</p>
+                <div class="ui grid">
+                    <div class="eight wide column">
+                        <p>PROCESS PURCHASE REQUEST</p>
+                    </div>
+                    <div class="eight wide column" style="text-align:end">
+                        {{ $pr->pr_number?$pr->pr_number:""}}
+                        @if ($prof->exists() && $prof->first()->unit_id == 1 && (!$pr->pr_number))
+                            <button type="button" class="ui very tiny primary button" id="generate_pr_number">GENERATE PR NO.</button>
+                        @endif
+                    </div>
+                </div>
             </div>
             <div class="ui large form attached header">
                 <form class="ui form routingForm" id="routingForm" action="#" method="POST">
                     <div class="field">
+                        <label>Attchment</label>
+                        <div class="ui icon input">
+                            <input type="file" multiple name="att_file" id="att_file" multiple>
+                            <button type="button" class="ui very tiny green button" id="upload_attachment">UPLOAD</button>
+                        </div>
+                        <div>
+                            @include('default.progress', [
+                              'view' => "progress-upload"
+                            ])
+                        </div>
+                        <div class="ui divider"></div>
+                        <div id="files-preview">
+                            
+                        </div>
+                    </div>
+                    <div class="field">
                         <label>Action:</label>
-                        <select name="action">
+                        <select name="action" id="action_process"> 
                             @foreach (Alternative::get() as $action)
-                                <option value="{{ encryptUrlSafe($action->id) }}">{{ strtoupper($action->id == 1?"--":$action->synonyms) }}</option>
+                                @if ($action->id != 11)
+                                    <option value="{{ encryptUrlSafe($action->id) }}">{{ strtoupper($action->id == 1?"--":$action->synonyms) }}</option>
+                                @endif
+                                @if ($action->id == 11 && $prof->first()->unit_id == 1)
+                                    <option value="{{ encryptUrlSafe($action->id) }}">{{ strtoupper($action->id == 1?"--":$action->synonyms) }}</option>
+                                @endif
                             @endforeach
                         </select>
                     </div>
-                    <div class="field">
+                    <div class="field" id="assigned_to_pr">
                         <label>Assigned to:</label>
                         <div class="ui fluid search search_people">
                             <div class="ui icon input">
@@ -40,14 +73,14 @@
                           </div>
                     </div>
                     @if ($pr->last_transaction->action == 9)
-                        <div class="field">
+                        {{-- <div class="field">
                             <label>Supplemental</label>
                             <select multiple class="ui dropdown supplemental" name="supplemental" id="supplemental">
                                 @foreach (Supplementary::get() as $sup)
                                     <option value="{{ $sup->id }}">{{ $sup->title }}</option>
                                 @endforeach
                             </select>
-                        </div>
+                        </div> --}}
                     @endif
                     
                     <div class="field">

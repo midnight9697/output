@@ -113,7 +113,7 @@
                                     <div class="field">
                                         <label>ACTION</label>
                                         <select name="alternative" id="alternative">
-                                            @foreach (Alternative::get() as $action)
+                                            @foreach (Alternative::where('synonyms', '!=', 'close')->get() as $action)
                                                 <option value="{{ encryptUrlSafe($action->id) }}">{{ strtoupper($action->id == 1?"--":$action->synonyms) }}</option>
                                             @endforeach
                                         </select>

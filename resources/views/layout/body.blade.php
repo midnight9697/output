@@ -22,28 +22,29 @@
         <div class="menu">
             {{ view('layout.menu', [ 'url' => route('home'), 'title' => 'Dashboard', 'routesplit' => $routesplit, 'permission' => true]) }}
             {{ view('layout.menu', [ 'url' => url('pr'), 'title' => 'Purchase Request', 'routesplit' => $routesplit, 'permission' => true]) }}
-            {{ view('layout.menu', [ 'url' => url('#'), 'title' => 'APP', 'routesplit' => $routesplit, 'permission' => true]) }}
-            {{ view('layout.menu', [ 'url' => url('#'), 'title' => 'PPMP', 'routesplit' => $routesplit, 'permission' => true]) }}
+            {{-- {{ view('layout.menu', [ 'url' => url('#'), 'title' => 'APP', 'routesplit' => $routesplit, 'permission' => (Auth::user()->profile->unit_id == 1)]) }} --}}
+            {{ view('layout.menu', [ 'url' => url('app'), 'title' => 'APP', 'routesplit' => $routesplit, 'permission' => true]) }}
+            {{ view('layout.menu', [ 'url' => url('ppmp'), 'title' => 'PPMP', 'routesplit' => $routesplit, 'permission' => true]) }}
             {{ view('layout.menu', [ 'url' => url('supplemental'), 'title' => 'Supplemental', 'routesplit' => $routesplit, 'permission' => true]) }}
-            {{ view('layout.menu', [ 'url' => url('#'), 'title' => 'RFQ', 'routesplit' => $routesplit, 'permission' => true]) }}
-            {{ view('layout.menu', [ 'url' => url('#'), 'title' => 'Purchase Order', 'routesplit' => $routesplit, 'permission' => true]) }}
-            {{ view('layout.menu', [ 'url' => url('#'), 'title' => 'Abstract', 'routesplit' => $routesplit, 'permission' => true]) }}
+            {{ view('layout.menu', [ 'url' => url('rfq'), 'title' => 'RFQ', 'routesplit' => $routesplit, 'permission' => true]) }}
+            {{ view('layout.menu', [ 'url' => url('purchase_order'), 'title' => 'Purchase Order', 'routesplit' => $routesplit, 'permission' => true]) }}
+            {{ view('layout.menu', [ 'url' => url('abstract'), 'title' => 'Abstract', 'routesplit' => $routesplit, 'permission' => true]) }}
         </div>
     </div>
-
+    
     <div class="item ">
         <div class="header">Administration</div>
         <div class="menu">
             {{ view('layout.menu', [ 'url' => url('users'), 'title' => 'Users', 'routesplit' => $routesplit , 'permission' => Gate::allows('user-view-page')]) }}
             {{ view('layout.menu', [ 'url' => "http://notices.ps-philgeps.gov.ph", 'title' => 'PhilGeps', 'routesplit' => $routesplit, 'permission' => true,'target' => true]) }}
-            {{ view('layout.menu', [ 'url' => "#", 'title' => 'Division', 'routesplit' => $routesplit, 'permission' => true]) }}
-            {{ view('layout.menu', [ 'url' => "#", 'title' => 'BAC', 'routesplit' => $routesplit, 'permission' => true]) }}
-            {{ view('layout.menu', [ 'url' => "#", 'title' => 'Inspector', 'routesplit' => $routesplit, 'permission' => true]) }}
-            {{ view('layout.menu', [ 'url' => "#", 'title' => 'RA 9184', 'routesplit' => $routesplit, 'permission' => true]) }}
+            {{ view('layout.menu', [ 'url' => "division", 'title' => 'Division', 'routesplit' => $routesplit, 'permission' => true]) }}
+            {{ view('layout.menu', [ 'url' => "bac", 'title' => 'BAC', 'routesplit' => $routesplit, 'permission' => true]) }}
+            {{ view('layout.menu', [ 'url' => "inspector", 'title' => 'Inspector', 'routesplit' => $routesplit, 'permission' => true]) }}
+            {{ view('layout.menu', [ 'url' => "https://r8.emb.gov.ph/wp-content/uploads/2025/02/EMB8-Citizens-Charter-External-Internal-Service-2025-Edition-portrait-1.pdf", 'title' => 'RA 9184', 'routesplit' => $routesplit, 'permission' => true]) }}
+            {{ view('layout.menu', [ 'url' => url("supplier"), 'title' => 'Supplier', 'routesplit' => $routesplit, 'permission' => Gate::allows('supplier-view-view')]) }}
         </div>
     </div>
 </div>
-
 {{-- Top Inverted Menu --}}
 <nav class="ui basic icon top fixed menu custom-topbar">
     <a class="item toggle button">
@@ -74,6 +75,9 @@
             </div>
         </div>
     </div>
+    {{-- <div id="holloween">
+        <img src="{{ url('files/can.gif') }}" alt="" width="100" height="100" id="image_holoween">
+    </div> --}}
 </nav>
 
 <div class="pusher">
@@ -101,10 +105,35 @@
                       <p style="height:12px;background:grey;width:100%" class="disabled initia_loader"></p>
                 </div>
                 <div id="body_content_default">
+                    
                     @include('default.loader')
                     @yield('main_content')
                 </div>
             </div>
         </div>
     </div>
+
 </div>
+
+
+
+<style>
+    #holloween {
+        position: fixed;
+        z-index: 10;
+        right:0px;
+        /* display: none; */
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        var custom_topbar = document.getElementsByClassName('custom-topbar')[0];
+        let start = (custom_topbar.offsetWidth - 100);
+        let vertical_start = 0;
+        let max_travel = (custom_topbar.offsetWidth - 100);
+        let max_height = (window.innerHeight - 100);
+        let movement = "left";
+    });
+
+</script>

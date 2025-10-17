@@ -37,7 +37,7 @@ function dataFetcher(data) {
 function transactionTable() {
     let parentElement = $('.transaction_preview');
     let ht = "";
-
+    console.log(PRValidator.members.length);
     PRValidator.transactions.slice(0, 20).forEach((transaction, index) => {
         let receiver = "";
         let member_count = 0;
@@ -49,14 +49,22 @@ function transactionTable() {
         ht += `
         <div class="item">
         <div class="right floated content">
-            <small>Assigned: ${((member_count == PRValidator.members.length)?"Members":transaction.recepient.profile.firstname+" "+transaction.recepient.profile.lastname)}</small>
+        ${
+            (transaction.action == 12?"<span class='ui red text bold'><small><b>FILE CLOSED</b></small></span>":
+                `<small>Assigned to: <b><i>${((member_count > 1)?"Members":transaction.recepient.profile.firstname+" "+transaction.recepient.profile.lastname)}</b></i></small>`
+            )
+        }
         </div>
-          <i class="location arrow icon"></i>
+            <i class="
+                ${
+                    (transaction.sender_id==localStorage.getItem('user')?"upload icon color green":(transaction.recepient.receiver_id == localStorage.getItem('user')?'download icon color blue':"window minimize icon color dark"))
+                }">
+            </i>
           <div class="content">
             <a class="header">${(transaction.sender_id==localStorage.getItem('user')?"You":transaction.sender.firstname+" "+transaction.sender.lastname)}</a>
             ${(transaction.action == 1 && transaction.body != ""?"":`<small style="color:green">(${transaction.act.synonyms})${transaction.recepient.received == 1?" | Received":""}</small>`)}
-            
-            <div class="description"><b>${transaction.created_for}</b> | ${transaction.body}</div>
+            <div class="description"><b>${transaction.created_for}</b></div>
+            <div class="remarks_menu">Remarks: ${transaction.body}</div>
           </div>
         </div>
         `;

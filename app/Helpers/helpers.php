@@ -112,3 +112,31 @@ function transactionBodies() {
         'update_with_items' => 'Modified the purchase request and added a new participant',
     ];
 }
+
+function classify() {
+    return [
+        'Goods',
+        'Infrastructure Projects',
+        'Consulting Services',
+        'Lease of Real Property and Venue',
+        'Common-Use Supplies (CSE)',
+        'Small Value Procurement',
+        'ICT Projects',
+        'Framework Agreement',
+    ];
+}
+
+function pdfjsToFpdiCoords($x_pdfjs, $y_pdfjs, $pageHeightPoints) {
+    // Convert PDF units (points) to mm (1 pt ≈ 0.3528 mm)
+    $x_mm = $x_pdfjs * 0.3528;
+
+    // Flip Y axis from bottom-left to top-left
+    $y_mm = ($pageHeightPoints - $y_pdfjs) * 0.3528;
+
+    return [$x_mm, $y_mm];
+}
+
+function pdfjsToMm($points) {
+    return $points * 1.3 ;
+}
+

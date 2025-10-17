@@ -13,9 +13,13 @@ document.addEventListener('DOMContentLoaded', () => {
   $('#modalRoutePR').on('submit', (e) => {
       e.preventDefault();
       let data = PRValidator.serializeArrayToJson('.routingForm');
+      console.log(PRValidator.assigned);
+      
       data['assigned_to'] = PRValidator.assigned;
       PRClass.routePR(data, (respsons) => {
-        window.location = '../'+localStorage.getItem('pr_id')+'/track';
+        console.log(respsons);
+        
+        // window.location = '../'+localStorage.getItem('pr_id')+'/track';
       })
     });
 
@@ -132,7 +136,11 @@ function transactionTable() {
         console.log(transaction.body);
         ht += `
         <div class="item">
-          <i class="location arrow icon"></i>
+          <i class="
+              ${
+                  (transaction.sender_id==localStorage.getItem('user')?"upload icon color green":(transaction.recepient.receiver_id == localStorage.getItem('user')?'download icon color blue':"window minimize icon color dark"))
+              }">
+          </i>
           <div class="content">
             <a class="header">${(transaction.sender_id==localStorage.getItem('user')?"You":transaction.sender.firstname+" "+transaction.sender.lastname)}</a>
             ${(transaction.action == 1 && transaction.body != ""?"":`<small style="color:green">(${transaction.act.synonyms})</small>`)}

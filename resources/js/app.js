@@ -1,5 +1,9 @@
+import places from './places.json' with { type: 'json' };
 import { AuthClass } from "./login/login";
 let pageLoaderGlobal;
+
+
+
 export class Section {
 
     getSection(division_id = false, action) {
@@ -42,6 +46,28 @@ export class Message {
         this.msgEl.innerHTML = `
                 <div class="ui icon header">
                     <i class="check green icon"></i>
+                    ${msg}
+                </div>
+        `;
+
+        this.msgEl.appendChild(this.div);
+        $(this.msgEl).modal('show');
+    }
+
+    warning(msg, action = () => {}) {
+        this.buttonY = document.createElement('div');
+        this.buttonY.className = "ui red ok inverted button confirm_warning_action";
+        this.buttonY.onclick = action;
+        this.buttonY.innerHTML = `
+            <i class="checkmark icon"></i>
+            Ok
+        `;
+        this.div = document.createElement('div');
+        this.div.className = 'actions';
+        this.div.appendChild(this.buttonY);
+        this.msgEl.innerHTML = `
+                <div class="ui icon header">
+                    <i class="warning yellow icon"></i>
                     ${msg}
                 </div>
         `;
@@ -126,12 +152,9 @@ export class CustomDate {
 export class confModal {
     load(accept, message = false) {
         const ht = `
-            <div class="ui small icon header">
-                <i class="warning small tiny yellow icon"></i>
-                Confirm Action
-            </div>
-            <div class="content">
-                <h5>${message?message:"Are you sure you want to proceed with this action?"}</h5>
+            <div class="ui icon header">
+                <i class="warning yellow icon"></i>
+                ${message?message:"Are you sure you want to proceed with this action?"}
             </div>
             <div class="actions">
                 <div class="ui red basic cancel button">
@@ -236,7 +259,7 @@ export class progressBar {
 
 
 export class Uploader {
-    upload(uri, data, action = () => {}, progress, fail = () => {}) {
+    upload(uri, data, action = () => {}, progress = () => {}, fail = () => {}) {
         var usersClone = this;
         let fd = data;
         
@@ -268,6 +291,71 @@ function getRandomInteger(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+export function global_place(supplier_province,supplier_municipality,supplier_barangay){
+    let provinces = places['08']['province_list'];
+    let municipalities = [];
+    let brgys = [];
+    // select province
+    $('#'+supplier_province)
+    .dropdown({
+      values: Object.keys(provinces).map(function(prov) {
+        return {
+          name: prov,
+          value: prov,
+        }
+      }),
+      onChange: function(value, text, selectedItem) {
+            municipalities = provinces[value]['municipality_list'];
+            console.log('trigger');
+            $('#'+supplier_municipality).form('clear', true);
+            $('#'+supplier_barangay).form('clear', true);
+            // select municipality
+            $('#'+supplier_municipality).dropdown('change values', Object.keys(municipalities).map(function(mun) {
+                return {
+                  name: Object.keys(municipalities[mun])[0],
+                  value: Object.keys(municipalities[mun])[0],
+                };
+            }));
+
+            supplierMunicipalControl();
+      },
+      clearable: true
+    });
+
+    function supplierMunicipalControl() {
+        $('#'+supplier_municipality).dropdown({
+            onChange: function(value,text, selectedItem){
+                $('#'+supplier_barangay).form('clear', true);
+                let tmp_municipality = municipalities.find(municipality => Object.keys(municipality)[0] == value);
+                brgys = value?tmp_municipality[value]['barangay_list']:[];
+
+                $('#'+supplier_barangay).dropdown('change values',  brgys.map(function(brgy) {
+                    return {
+                      name: brgy,
+                      value: brgy,
+                    };
+                }));
+                
+                $('#'+supplier_barangay).dropdown();
+            },
+            clearable: true
+        });
+    }
+
+    function supplierBarangayControl() {
+        $('#'+supplier_barangay).dropdown({
+            clearable: true,
+            onChange: function(value,text, selectedItem){
+    
+            }
+        });
+    }
+    
+    supplierMunicipalControl();
+    supplierBarangayControl();
+    
+}
+
 export const SectionMod = new Section();
 export const MessageMod = new Message();
 export const BtnLoaderMod = new BtnLoader();
@@ -279,6 +367,11 @@ export const uploadControl = new Uploader();
 
 document.addEventListener('DOMContentLoaded', () => {
     // pageLoadMod.destroy();
+    const editorElement = document.getElementById('draft-editor-container');
+    // if (editorElement) {
+    //     createRoot(editorElement).render(<DraftEditor />);
+    // }
+    
     $('.ui .dropdown').dropdown();
     $('#logout_user').on('click', () => {
         AuthClass.logout();

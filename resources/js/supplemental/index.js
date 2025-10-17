@@ -1,30 +1,40 @@
-import { MessageMod, createElement, progressControl, uploadControl } from "../app";
+import { MessageMod, confirmMod, createElement, progressControl, uploadControl } from "../app";
+import { TBLButton } from "../table/buttons";
 import Custom_table from "../table/custom_table";
+import { SupplementalControl } from "./supplemental";
 let SPLTBL = {};
 document.addEventListener('DOMContentLoaded', () => {
 
   SPLTBL = new Custom_table('#splTable', false, true, false, false, './api/supplemental/page');
-    
-  SPLTBL.custom_buttons = function(data) {
-    let div = createElement("", "", "div");
-    let button = createElement("ui very small red button", "REMOVE", "button", function() {
-      console.log('Clicked', data);
-    });
-    div.appendChild(button);
+  SPLTBL.dataSrc = (json) => {
+      return json.data;
+  }
+
+  SPLTBL.custom_buttons = (data) => {
+    let div = document.createElement('div');
+    TBLButton.data = data;
+    TBLButton.updateAction =  () => {
+      window.location = "./supplemental/update/"+data.id;
+    }
+
+    TBLButton.deleteAction = (e) => {
+      confirmMod.load(() => {
+        let spl_id = e.target.dataset.id;
+        SupplementalControl.remove(spl_id, (e) => {
+          SPLTBL.table.ajax.reload();
+          MessageMod.success("Successfully Deleted.");
+        });
+      }, "Do you want to delete this file ?");
+    }
+    TBLButton.loadButtons(div);
     return div;
   };
   
   SPLTBL.load([
-      'filename',
-      'origin',
+      'ref',
       'title',
-      'user_id',
       'created_at',
   ]);
-  
-  $('#create-supplemental').on('click', () => {
-    $('#modalUploadSupplemental').modal('show');
-  });
 
   $('#supplemental').on('change', () => {
     const supplementalFile = document.getElementById('supplemental');
@@ -42,8 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });// onclick event upload-file-button
 });// DOMContentLoaded Endpoint
 
-function filePreview(files) {
-  const supplementalPreview = document.getElementById('files-preview');
+export function filePreview(files, parent = document.getElementById('files-preview')) {
+  const supplementalPreview = parent;
   supplementalPreview.innerHTML = "";
   let ui_list = document.createElement('div');
   ui_list.className = "ui list";

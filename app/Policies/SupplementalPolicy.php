@@ -28,4 +28,11 @@ class SupplementalPolicy
         }
         return true;//($spl->first()->user_id == $user->id);
     }
+
+    public function supplementalCreatorView(User $user, $spl) {
+        if (!$spl->user_id == $user->id) {
+            abort('419', 'Unauthorized Access');
+        }
+        return true;
+    }
 }

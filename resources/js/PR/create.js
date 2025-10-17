@@ -3,6 +3,13 @@ import { PRVItemalidator, PRValidator } from "./validation";
 
 
 document.addEventListener('DOMContentLoaded', () => {
+
+    $('.total_cost').on('input', () => {
+        let total_cost_quantity = document.getElementsByClassName('total_cost');
+        let total_cost = document.getElementById('total_cost');
+        total_cost.value = total_cost_quantity[0].value * total_cost_quantity[1].value
+    })
+
     $('.add_item_btn').on('click', () => {
         $('#modalCreaeItem').modal('show');
     })
@@ -20,7 +27,12 @@ document.addEventListener('DOMContentLoaded', () => {
     PRVItemalidator.CreatePRItemValidation((e) => {
         e.preventDefault();
         $('#modalCreaeItem').modal('hide');
+        let total_cost_element = document.getElementById('total_cost');
+        if (total_cost_element.hasAttribute('disabled')) {
+            total_cost_element.removeAttribute('disabled');
+        }
         PRValidator.items.push(PRValidator.serializeArrayToJson('.formCreatePRItem'));
+        total_cost_element.disabled = true;
         itemsTable();
     });
     

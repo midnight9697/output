@@ -3,6 +3,9 @@
 namespace Database\Factories;
 
 use App\Models\Alternative;
+use App\Models\Division;
+use App\Models\RFQ;
+use App\Models\Section;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -129,10 +132,13 @@ class RFQFactory extends Factory
         // Pick N unique random items (e.g., 10 purposes)
         $randomPurposes = array_slice($allPurposes, 0, 10);
         $user_id = User::inRandomOrder()->first()->id;
+        $section = Section::inRandomOrder()->first();
+        $division = Division::where('id', $section->division_id)->first();
+        $fakename = date('y')."-".date('m')."-".str_pad((rand(10, 200)), 3, '0',STR_PAD_LEFT);
         return [
             'project_purpose' => $this->faker->randomElement($randomPurposes),
-            'rfq_number' => "101 - Planning",
-            'attachment_one' => "PISMU",
+            'rfq_number' => $fakename,
+            'attachment_one' =>  $division->division."-".$section->section,
             'aproved_budget' => $this->faker->randomFloat(2, 10, 1000),
             'standard_unit' => fake()->countryCode(),
             'classification' => $this->faker->randomElement(classify()),

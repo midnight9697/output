@@ -27,13 +27,13 @@ class RFQItemFactory extends Factory
         $rfq = RFQ::inRandomOrder()->first();
         $rfq_id = $rfq->id;
         $specs = $this->faker->randomElement($ictSpecsSentences);
-        $quantity = $this->faker->randomFloat(2, 1, 20);
+        $quantity = (int)$this->faker->randomFloat(2, 1, 20);
         $price = $this->faker->randomFloat(2, 1, 1000);
         
         return [
             'rfq_id' => $rfq_id,
             'specification' => $specs,
-            'bidder_specs' => $specs,
+            'bidder_specs' => '',
             'quantity_unit' =>  $quantity,
             'unit_price' =>  $price,
             'total_price' =>  ($quantity * $price),

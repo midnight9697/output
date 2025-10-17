@@ -30,7 +30,7 @@
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"></script> --}}
     {{-- <script src="https://unpkg.com/pdfjs-dist/build/pdf.js"></script> --}}
     @vite(['resources/js/rfq/index.js'])
-    @vite(['resources/js/table/pdf.js'])
+    {{-- @vite(['resources/js/table/pdf.js']) --}}
     {{-- @vite(['resources/js/table/pdf-1.js']) --}}
     <script>
         const url = './files/rfq.pdf';

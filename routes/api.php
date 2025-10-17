@@ -9,7 +9,7 @@ use App\Http\Controllers\API\SupplementalController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Supplier;
-use App\Http\Controllers\api\SupplierController;
+use App\Http\Controllers\API\SupplierController;
 use App\Models\PurchaseRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;

@@ -7,20 +7,19 @@ import { PRValidator } from "./validation";
 document.addEventListener('DOMContentLoaded', () => {
 
   $('.submit_and_route').on('click', () => {
-    $('#modalRoutePR').trigger('submit');
+    $('#routingForm').trigger('submit');
   });
 
-  $('#modalRoutePR').on('submit', (e) => {
+    PRValidator.CreateRoutingValidator((e) => {
       e.preventDefault();
-      let data = PRValidator.serializeArrayToJson('.routingForm');
-      console.log(PRValidator.assigned);
+      console.log('working');
+      // let data = PRValidator.serializeArrayToJson('.routingForm');
+      // console.log(PRValidator.assigned);
       
-      data['assigned_to'] = PRValidator.assigned;
-      PRClass.routePR(data, (respsons) => {
-        console.log(respsons);
-        
-        window.location = '../'+localStorage.getItem('pr_id')+'/track';
-      })
+      // data['assigned_to'] = PRValidator.assigned;
+      // PRClass.routePR(data, (respsons) => {
+      //   window.location = '../'+localStorage.getItem('pr_id')+'/track';
+      // })
     });
 
     $('.ui.search')

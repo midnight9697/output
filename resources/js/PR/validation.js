@@ -25,6 +25,24 @@ export class Validator {
         });
     }
 
+    CreateRoutingValidator(action, element = 'routingForm') {
+        var self = this;
+        $.fn.form.settings.rules['checkReceiver'] = function(value) {
+            let $id = "ZXlKcGRpSTZJalJJT0ZWclluUXdXR1J1V21GR2VHeHRVMU56YVdjOVBTSXNJblpoYkhWbElqb2lhMmR0Y1ZCaEwybGtZek01YTB0UE9VUk5kSEU0VVQwOUlpd2liV0ZqSWpvaVptWmtZVGt4WkRVeFpHTmlNRGd3WmpCa09HWTNNamswTTJabU56RXhNVGhpTmpoaU1HTTJNak15WkRoaE5EbGpZekZrTXprME5EaGxNVEZpT0RNeE5DSXNJblJoWnlJNklpSjk";
+            console.log( $('#action_routing').val() != $id);
+            
+            return $('#action_routing').val() != $id && (!PRValidator.assigned === undefined);
+        };
+        this.form = 
+        $('#routingForm')
+        .form({
+          fields: {
+            assigned_to: this.fieldsRules('assigned_to', 'checkReceiver', 'Please add a receiver.'),
+          },
+          onSuccess: action
+        });
+    }
+
     fieldsRules(identifier, rule, msg = false) {
         let result =   {
             identifier: identifier,

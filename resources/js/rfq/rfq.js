@@ -17,6 +17,11 @@ export class RFQ {
         this.customPostRequest('./api/rfq/create', data, action, fail);
     }
 
+    getAlternativeId(id, action = () => {}, fail = () => {}) {
+        var usersClone = this;
+        this.customPostRequest('./api/alternative', {'id': id}, action, fail);
+    }
+
     updateRFQ(data, action = () => {}, fail = () => {}) {
       var usersClone = this;
       this.customPostRequest('./api/rfq/update', data, action, fail);

@@ -43,7 +43,6 @@ class SupplierController extends Controller {
         ]);
 
         return ['success', $supplier];
- 
     }
     
 

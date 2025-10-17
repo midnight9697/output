@@ -58,6 +58,7 @@ class AuthServiceProvider extends ServiceProvider
         // 
         Gate::define('rfq-update-view', [RFQPolicy::class, 'updateView']);
         Gate::define('supplier-update-view', [SupplierPolicy::class, 'updateView']);
+        Gate::define('supplier-view-view', [SupplierPolicy::class, 'supplierView']);
 
     }
 }

@@ -1,8 +1,10 @@
-import { MessageMod, confirmMod, createElement, progressControl, uploadControl } from "../app";
+import { MessageMod, confirmMod, createElement, global_place, progressControl, uploadControl } from "../app";
 import { TBLButton } from "../table/buttons";
 import Custom_table from "../table/custom_table";
 import { SupplierClass } from "./supplier";
+import { SupplierValidator } from "./validation";
 let SPLTBL = {};
+let selected_supplier = {};
 document.addEventListener('DOMContentLoaded', () => {
 
   SPLTBL = new Custom_table('#supplier-inbox', false, true, false, false, './api/supplier/get_all_supplier');
@@ -10,11 +12,30 @@ document.addEventListener('DOMContentLoaded', () => {
       return json.data;
   }
 
+    $('.submit_upload_button').on('click', () => {
+    let data = {
+        'supplier_name': SupplierValidator.serializeArrayToJson('.formCreateSupplier').supplier_name,
+        'supplier_province': SupplierValidator.serializeArrayToJson('.formCreateSupplier').supplier_province,
+        'supplier_municipality': SupplierValidator.serializeArrayToJson('.formCreateSupplier').supplier_municipality,
+        'supplier_barangay': SupplierValidator.serializeArrayToJson('.formCreateSupplier').supplier_barangay,
+    }
+    data['id'] = selected_supplier
+
+    SupplierClass.updateSupplier(data)
+  });
+
+  global_place('supplier_province', 'supplier_municipality', 'supplier_barangay')
+
   SPLTBL.custom_buttons = (data) => {
     let div = document.createElement('div');
     TBLButton.data = data;
     TBLButton.updateAction =  () => {
-      window.location = "./supplier/form-update/"+data.id;
+      selected_supplier = data.id;
+      $('#supplier-update-modal').modal('show');
+      $('#supplier_name').val(data.name)
+      $('#supplier_province').dropdown('set selected', data.province);
+      $('#supplier_municipality').dropdown('set selected', data.municipality);
+      $('#supplier_barangay').dropdown('set selected', data.barangay);
     }
 
     TBLButton.deleteAction = (e) => {

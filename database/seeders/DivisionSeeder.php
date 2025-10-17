@@ -51,8 +51,12 @@ class DivisionSeeder extends Seeder
         $this->insertSection(1, "PROVINCIAL ENVIRONMENTAL MANAGEMENT UNIT (NORTHERN SAMAR)", "PEMU");
 
         // SECTION (FAD)
-        $this->insertSection(2, "FINANCE UNIT", "FINANCE");
-        $this->insertSection(2, "ADMINISTRATIVE UNIT", "ADMINISTRATIVE");
+        $this->insertSection(2, "CASHIER UNIT", "CASHIER");
+        $this->insertSection(2, "ACCOUNTING UNIT", "ACCOUNTING");
+        $this->insertSection(2, "BUDGET UNIT", "BUDGET");
+        $this->insertSection(2, "PROPERTY AND SUPPLY UNIT", "SUPPLY");
+        $this->insertSection(2, "RECORDS UNIT", "SUPPLY");
+        $this->insertSection(2, "HUMAN RESOURCE UNIT(HR)", "SUPPLY");
         
         // SECTION (CPD)
         $this->insertSection(3, "TOXIC CHEMICALS AND HAZARDOUZ WASTE PERMITTING UNIT", "TCHWPU");

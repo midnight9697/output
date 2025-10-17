@@ -18,6 +18,10 @@ class SupplierPolicy
     public function updateView(User $user, $supplier_id) {
         $id = decryptUrlSafe($supplier_id);
         $supplier = Supplier::where('id', $id)->first();
-        return $supplier->creator == $user->id;
+        return $user->role == 'superadmin' || $user->role == 'admin';
+    }
+
+    public function supplierView(User $user) {
+        return $user->role == 'superadmin' || $user->role == 'admin';
     }
 }

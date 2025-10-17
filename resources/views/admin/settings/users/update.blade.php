@@ -75,8 +75,8 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="field">
-                        <div class="two fields">
+                    {{-- <div class="field"> --}}
+                        {{-- <div class="two fields"> --}}
                             <div class="field">
                                 <label>Section</label>
                                 <select name="section" id="section" class="ui fluid dropdown">
@@ -85,7 +85,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="field">
+                            {{-- <div class="field">
                                 <label>Unit</label>
                                 <select name="unit" id="unit" class="ui fluid dropdown">
                                     <option value="">--</option>
@@ -93,9 +93,9 @@
                                         <option {{ $unit->id == $user->profile->unit_id?"selected":"" }} value="{{ $unit->id }}">{{ $unit->unit_name }}</option>
                                     @endforeach
                                 </select>
-                            </div>
-                        </div>
-                    </div>
+                            </div> --}}
+                        {{-- </div> --}}
+                    {{-- </div> --}}
                     <div class="field">
                         <label>Role</label>
                         <select name="role" id="role" class="ui fluid dropdown" required>

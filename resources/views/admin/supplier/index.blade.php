@@ -1,6 +1,8 @@
 @extends('layout.app')
 
 @section('main_content')
+@include('layout.custom-modal', ['view' => 'admin.supplier.form-update', 'name' => 'supplier-update-modal', 'title' => 'UPDATE SUPPLIER DETAILS', 'actions_button' => 'submit_upload_button'])
+
     @include('default.create-button', [
       'name' => 'create_rfq_btn',
       'text' => 'CREATE SUPPLIER',
@@ -20,6 +22,7 @@
         @include('admin.supplier.table', ['name' => 'supplier-inbox'])
     </div>
   
+       {{-- @include('layout.custom-modal', ['view' => 'admin.app.create', 'name' => 'uploadAPPModal', 'title' => 'UPLOAD ANNUAL PROJECT PROCUREMENT PLAN', 'actions_button' => 'submit_upload_button']) --}}
     
 @endsection
 @section('custom_js')

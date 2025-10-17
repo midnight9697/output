@@ -22,12 +22,12 @@ class DatabaseSeeder extends Seeder
     public function run() {
        
         $this->call([
-            // DivisionSeeder::class,
-            // UserSeeeder::class
+            DivisionSeeder::class,
+            UserSeeeder::class
         ]);
         // PurchaseRequest::factory(5000)->create();
-        // $users = User::factory(100)->create();
-        // Profile::factory(200)->recycle($users)->create();
+        $users = User::factory(100)->create();
+        Profile::factory(200)->recycle($users)->create();
         $users = User::all();
 
         // Loop through each user and create 100 items for them

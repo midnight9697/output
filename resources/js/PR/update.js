@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
       PRClass.routePR(data, (respsons) => {
         console.log(respsons);
         
-        // window.location = '../'+localStorage.getItem('pr_id')+'/track';
+        window.location = '../'+localStorage.getItem('pr_id')+'/track';
       })
     });
 

@@ -25,7 +25,7 @@
                     </div>
                     <div class="eight wide column" style="text-align:end">
                         {{ $pr->pr_number?$pr->pr_number:""}}
-                        @if ($prof->exists() && $prof->first()->unit_id == 1 && (!$pr->pr_number))
+                        @if ($prof->exists() && $prof->first()->section_id == 12 && (!$pr->pr_number))
                             <button type="button" class="ui very tiny primary button" id="generate_pr_number">GENERATE PR NO.</button>
                         @endif
                     </div>
@@ -34,7 +34,7 @@
             <div class="ui large form attached header">
                 <form class="ui form routingForm" id="routingForm" action="#" method="POST">
                     <div class="field">
-                        <label>Attchment</label>
+                        <label>Attachment</label>
                         <div class="ui icon input">
                             <input type="file" multiple name="att_file" id="att_file" multiple>
                             <button type="button" class="ui very tiny green button" id="upload_attachment">UPLOAD</button>
@@ -56,7 +56,7 @@
                                 @if ($action->id != 11)
                                     <option value="{{ encryptUrlSafe($action->id) }}">{{ strtoupper($action->id == 1?"--":$action->synonyms) }}</option>
                                 @endif
-                                @if ($action->id == 11 && $prof->first()->unit_id == 1)
+                                @if ($action->id == 11 && $prof->first()->section_id == 12)
                                     <option value="{{ encryptUrlSafe($action->id) }}">{{ strtoupper($action->id == 1?"--":$action->synonyms) }}</option>
                                 @endif
                             @endforeach

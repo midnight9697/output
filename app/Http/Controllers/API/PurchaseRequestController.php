@@ -210,6 +210,7 @@ class PurchaseRequestController extends Controller {
                 'receiver_id' => $assigned
             ]);
         }
+
         return $transaction;
     }
 

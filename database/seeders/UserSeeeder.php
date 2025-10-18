@@ -22,7 +22,7 @@ class UserSeeeder extends Seeder
         // ]);
         $user = User::create([
             // "name" => "Marco C. Pantonial",
-            "email" => "marco_pantonial@emb.gov.ph",
+            "email" => "admin@admin.com",
             "password" => '$2a$12$ApuszupbbDQAo8CGYzwLjeIGpAR2vv9/cw1uNdRRa.kvwJ0wFWpJO',
             "permit" => json_encode(['users' => ['c','r','u','d']]),
             'role' => 'superadmin'

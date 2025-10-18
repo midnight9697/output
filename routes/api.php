@@ -10,6 +10,7 @@ use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Supplier;
 use App\Http\Controllers\API\SupplierController;
+use App\Models\Alternative;
 use App\Models\PurchaseRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -104,5 +105,9 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('page',  [APPController::class, 'fetch_by_page']);
         Route::post('remove',  [APPController::class, 'remove']);
         Route::post('create', [APPController::class, 'uploadAttachment']);
+    });
+
+    Route::post('alternative', function(Request $request) {
+        return encryptUrlSafe($request->id);
     });
 });

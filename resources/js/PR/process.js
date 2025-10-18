@@ -53,15 +53,16 @@ document.addEventListener('DOMContentLoaded', () => {
         $('#routingForm').trigger('submit');
     });
 
-    $('#routingForm').on('submit', (e) => {
-        e.preventDefault();
-        let data = PRValidator.serializeArrayToJson('.routingForm');
-        data['supplementary'] = $('#supplemental').dropdown('get value');
-        data['assigned_to'] = PRValidator.assigned;
-        data['attachments'] = uploaded_attachments;
-        PRClass.routePR(data, (respsons) => {
-          window.location = '../'+localStorage.getItem('pr_id')+'/track';
-        });
+    PRValidator.CreateRoutingValidator((e) => {
+      e.preventDefault();
+      console.log('Working');
+      let data = PRValidator.serializeArrayToJson('.routingForm');
+      data['supplementary'] = $('#supplemental').dropdown('get value');
+      data['assigned_to'] = PRValidator.assigned;
+      data['attachments'] = uploaded_attachments;
+      PRClass.routePR(data, (respsons) => {
+        window.location = '../'+localStorage.getItem('pr_id')+'/track';
+      });
     });
     
     $('.ui.search')

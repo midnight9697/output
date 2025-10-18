@@ -25,6 +25,34 @@ export class Validator {
         });
     }
 
+    CreateRoutingValidator(action, element = 'routingForm') {
+        var self = this;
+        $.fn.form.settings.rules['checkReceiver'] = function(value) {
+            
+            let $id = localStorage.getItem('signed');
+            console.log($('#action_process').val());
+            console.log($id);
+            
+            console.log('Is number 12 ?', $('#action_process').val() == $id);
+            if ($('#action_process').val() == $id) {
+                console.log('Is 12');
+                return true;
+            }
+            console.log('Receiver assigned ?', PRValidator.assigned !== undefined);
+            return (PRValidator.assigned !== undefined?true:false);
+            
+            return true;//$('#action_routing').val() != $id && (PRValidator.assigned !== undefined);
+        };
+        this.form = 
+        $('#routingForm')
+        .form({
+          fields: {
+            assigned_to: this.fieldsRules('assigned_to', 'checkReceiver', 'Please add a receiver.'),
+          },
+          onSuccess: action
+        });
+    }
+
     fieldsRules(identifier, rule, msg = false) {
         let result =   {
             identifier: identifier,

@@ -18,4 +18,8 @@ class Recepient extends Model
     public function profile() {
         return $this->hasOne(Profile::class,  'user_id', 'receiver_id');
     }
+
+    public function transaction() {
+        return $this->hasOne(Transaction::class,  'id', 'transaction_id');
+    }
 }

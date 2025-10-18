@@ -2,6 +2,10 @@
     use Carbon\Carbon;
     use App\Models\Member;
     use App\Models\Alternative;
+    $actions = encryptMany(Alternative::where('synonyms', '!=', 'close')->orderBy('id', 'desc')->get() );
+    $signed = array_filter($actions, function ($obj) {
+        return decryptUrlSafe($obj->id)== 12;
+    });
 @endphp
 
 <div class="ui tiny modal" id="modalRoutePR">
@@ -12,12 +16,12 @@
             <div class="ui error message">
                 {{--  --}}
             </div>
-            <form class="ui form routingForm" id="routingForm" action="#" method="POST">
+            <form class="ui form routingForm" id="action_process" action="#" method="POST">
                 <div class="field">
                     <label>Action</label>
                     <select id="action_routing" name="action" >
-                        @foreach (Alternative::where('synonyms', '!=', 'close')->get() as $action)
-                            <option value="{{ encryptUrlSafe($action->id) }}">{{ strtoupper($action->id == 1?"--":$action->synonyms) }}</option>
+                        @foreach (array_reverse($actions) as $action)
+                            <option value="{{ ($action->id) }}">{{ strtoupper($action->id == 1?"--":$action->synonyms) }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -40,3 +44,6 @@
     </div>
     <div class="actions"><button class="ui very tiny primary button submit_and_route">NEW</button></div>
 </div>
+<script>
+    localStorage.setItem('signed', "{{ $signed[0]->id }}");
+</script>

@@ -8,6 +8,10 @@
     use App\Models\Supplementary;
     use App\Models\Profile;
     $prof = Profile::where('user_id', auth()->user()->id);
+    $actions = encryptMany(Alternative::orderBy('id', 'desc')->get());
+    $signed = array_filter($actions, function ($obj) {
+        return decryptUrlSafe($obj->id)== 12;
+    });
 @endphp
     <style>
         .ui.modal.top-aligned {
@@ -15,6 +19,7 @@
           margin: 0 auto !important; /* keep it centered horizontally */
         }
     </style>
+    
     <div class="ui grid">
         <div class="eight wide column">
             {{-- PROCESS FORM SEGMENT --}}
@@ -51,13 +56,13 @@
                     </div>
                     <div class="field">
                         <label>Action:</label>
-                        <select name="action" id="action_process"> 
-                            @foreach (Alternative::get() as $action)
-                                @if ($action->id != 11)
-                                    <option value="{{ encryptUrlSafe($action->id) }}">{{ strtoupper($action->id == 1?"--":$action->synonyms) }}</option>
+                        <select name="action" id="action_process">
+                            @foreach (array_reverse($actions) as $action)
+                                @if (decryptUrlSafe($action->id) != 11)
+                                    <option value="{{ ($action->id) }}">{{ strtoupper(decryptUrlSafe($action->id) == 1?"--":$action->synonyms) }}</option>
                                 @endif
-                                @if ($action->id == 11 && $prof->first()->section_id == 12)
-                                    <option value="{{ encryptUrlSafe($action->id) }}">{{ strtoupper($action->id == 1?"--":$action->synonyms) }}</option>
+                                @if (decryptUrlSafe($action->id) == 11 && $prof->first()->section_id == 12)
+                                    <option value="{{ ($action->id) }}">{{ strtoupper(decryptUrlSafe($action->id) == 1?"--":$action->synonyms) }}</option>
                                 @endif
                             @endforeach
                         </select>
@@ -127,6 +132,7 @@
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('pr_id', "{{ $pr->id }}");
+        localStorage.setItem('signed', "{{ $signed[0]->id }}");
     });
 </script>
 @vite(['resources/js/PR/process.js'])

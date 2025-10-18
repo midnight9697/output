@@ -28,10 +28,20 @@ export class Validator {
     CreateRoutingValidator(action, element = 'routingForm') {
         var self = this;
         $.fn.form.settings.rules['checkReceiver'] = function(value) {
-            let $id = "ZXlKcGRpSTZJalJJT0ZWclluUXdXR1J1V21GR2VHeHRVMU56YVdjOVBTSXNJblpoYkhWbElqb2lhMmR0Y1ZCaEwybGtZek01YTB0UE9VUk5kSEU0VVQwOUlpd2liV0ZqSWpvaVptWmtZVGt4WkRVeFpHTmlNRGd3WmpCa09HWTNNamswTTJabU56RXhNVGhpTmpoaU1HTTJNak15WkRoaE5EbGpZekZrTXprME5EaGxNVEZpT0RNeE5DSXNJblJoWnlJNklpSjk";
-            console.log( $('#action_routing').val() != $id);
             
-            return $('#action_routing').val() != $id && (!PRValidator.assigned === undefined);
+            let $id = localStorage.getItem('signed');
+            console.log($('#action_process').val());
+            console.log($id);
+            
+            console.log('Is number 12 ?', $('#action_process').val() == $id);
+            if ($('#action_process').val() == $id) {
+                console.log('Is 12');
+                return true;
+            }
+            console.log('Receiver assigned ?', PRValidator.assigned !== undefined);
+            return (PRValidator.assigned !== undefined?true:false);
+            
+            return true;//$('#action_routing').val() != $id && (PRValidator.assigned !== undefined);
         };
         this.form = 
         $('#routingForm')

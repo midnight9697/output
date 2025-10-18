@@ -1,8 +1,12 @@
+
 @if ($permission == true)
     <a href="{{ $url }}" target="{{ (isset($target)?"__blank":"") }}" class="item {{ request()->url() == $url ? 'active': '' }}">
         {{-- <div><i class="icon users"></i>{{ $title }}</div> --}}
-        {{-- <i class="home icon"></i> --}}
-        @php
+        {{-- <i class="home icon"></i> --}}    
+        
+    @php
+            
+        
             $icon = "";
 
             switch ($title) {
@@ -34,7 +38,16 @@
             }
         @endphp
         {{-- <div> --}}
-            <i class="{{ $icon }} icon"></i>{{ $title }}
+            @if (isset($badge))
+                @if ($badge > 0)
+                    <div class="ui red left pointing label">{{ $badge }}</div>
+                @else
+                    <i class="{{ $icon }} icon"></i>
+                @endif
+            @else
+                <i class="{{ $icon }} icon"></i>
+            @endif
+            {{ $title }}
         {{-- </div> --}}
     </a>
 @endif

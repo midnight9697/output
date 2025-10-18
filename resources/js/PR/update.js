@@ -13,13 +13,11 @@ document.addEventListener('DOMContentLoaded', () => {
     PRValidator.CreateRoutingValidator((e) => {
       e.preventDefault();
       console.log('working');
-      // let data = PRValidator.serializeArrayToJson('.routingForm');
-      // console.log(PRValidator.assigned);
-      
-      // data['assigned_to'] = PRValidator.assigned;
-      // PRClass.routePR(data, (respsons) => {
-      //   window.location = '../'+localStorage.getItem('pr_id')+'/track';
-      // })
+      let data = PRValidator.serializeArrayToJson('.routingForm');
+      data['assigned_to'] = PRValidator.assigned;
+      PRClass.routePR(data, (respsons) => {
+        window.location = '../'+localStorage.getItem('pr_id')+'/track';
+      })
     });
 
     $('.ui.search')

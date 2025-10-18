@@ -2,6 +2,19 @@
     use Illuminate\Support\Facades\Gate;
     $routesplit = explode(".", Request::route()->getName());
 @endphp
+@php
+    use App\Models\PurchaseRequest;
+    use App\Models\Recepient;
+    use App\Models\RFQ;
+    use App\Models\Supplier;
+    use App\Models\User;
+    
+    $count_user = User::count();
+    $count_supplier = Supplier::count();
+    $count_pr = PurchaseRequest::where('created_by', Auth::user()->id)->count();
+    $count_pr_inbox = Recepient::where('receiver_id', Auth::user()->id)->where('received', '0')->count();
+    $count_rfq = RFQ::where('creator', Auth::user()->id)->count();
+@endphp
 <div class="ui visible sidebar vertical left inverted  menu main-sidebar" id="sidebar">
     <div class="item">
         <div class="sixteen wide column">
@@ -21,7 +34,7 @@
         <div class="header">General</div>
         <div class="menu">
             {{ view('layout.menu', [ 'url' => route('home'), 'title' => 'Dashboard', 'routesplit' => $routesplit, 'permission' => true]) }}
-            {{ view('layout.menu', [ 'url' => url('pr'), 'title' => 'Purchase Request', 'routesplit' => $routesplit, 'permission' => true]) }}
+            {{ view('layout.menu', ['badge' => $count_pr_inbox,  'url' => url('pr'), 'title' => 'Purchase Request', 'routesplit' => $routesplit, 'permission' => true]) }}
             {{-- {{ view('layout.menu', [ 'url' => url('#'), 'title' => 'APP', 'routesplit' => $routesplit, 'permission' => (Auth::user()->profile->unit_id == 1)]) }} --}}
             {{ view('layout.menu', [ 'url' => url('app'), 'title' => 'APP', 'routesplit' => $routesplit, 'permission' => true]) }}
             {{ view('layout.menu', [ 'url' => url('ppmp'), 'title' => 'PPMP', 'routesplit' => $routesplit, 'permission' => true]) }}

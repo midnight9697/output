@@ -21,7 +21,7 @@
                     <label>Action</label>
                     <select id="action_routing" name="action" >
                         @foreach (array_reverse($actions) as $action)
-                            <option value="{{ ($action->id) }}">{{ strtoupper($action->id == 1?"--":$action->synonyms) }}</option>
+                            <option value="{{ ($action->id) }}">{{ strtoupper(decryptUrlSafe($action->id) == 1?"--":$action->synonyms) }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -44,6 +44,8 @@
     </div>
     <div class="actions"><button class="ui very tiny primary button submit_and_route">NEW</button></div>
 </div>
+@if (count($signed) > 0)
 <script>
     localStorage.setItem('signed', "{{ $signed[0]->id }}");
 </script>
+@endif

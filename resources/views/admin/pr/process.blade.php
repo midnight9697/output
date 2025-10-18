@@ -132,8 +132,13 @@
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('pr_id', "{{ $pr->id }}");
-        localStorage.setItem('signed', "{{ $signed[0]->id }}");
     });
 </script>
 @vite(['resources/js/PR/process.js'])
 @endsection
+
+@if (count($signed) > 0)
+<script>
+    localStorage.setItem('signed', "{{ $signed[0]->id }}");
+</script>
+@endif

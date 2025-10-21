@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('abstract_models', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('rfq_id')->constrained('request_for_quotations');
+            $table->foreignId('rfq_id')->nullable();
             $table->string('purpose')->nullable();
             $table->string('filename')->nullable();
             $table->string('origin')->nullable();

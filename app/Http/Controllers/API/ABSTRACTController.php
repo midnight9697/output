@@ -16,29 +16,36 @@ class ABSTRACTController extends Controller {
     }
 
     public function create(Request $request) {
-        return $request;
-        // foreach ($request->items as $item) {
-           
-        //     foreach ($item->bidders as $bidder) {
-        //         $aitem = [
-        //             'rfq_id' => $item->rfq_id,
-        //             'rfq_item_id' => $item->id,
-        //             'abstract_id' => $abstract->id,
-        //             'supplier_id' => $item->rfq_id,
-        //             'item_number' => $item->rfq_id,
-        //             'unit_cost' => $item->rfq_id,
-        //             'total_cost' => $item->rfq_id,
-        //         ];
-        //         AbstractModelItems::create($item);
-        //     }
-        // }
-        // $new = AbstractModel::create([
-        //     'ref' => $request->ref,
-        //     'purpose' => $request->purpose,
-        //     'filename' => $request->filename,
-        //     'origin' => $request->origin,
-        //     'filetype' => $request->filetype,
-        //     'creator' => Auth::user()->id,
-        // ]);
+        $abstract = AbstractModel::create([
+            'purpose' => $request->purpose,
+            'creator' => Auth::user()->id,
+        ]);
+        $unitprices = $request->unit_prices;
+        $unitcosts = $request->unit_costs;
+        foreach ($request->items as $item) {
+            foreach ($item['bidders'] as $bidder) {
+                $bidder = (object)$bidder;
+                $bidder_price =array_filter($unitprices, function($price) use($bidder) {
+                    $price = (object)$price;
+                    return decryptUrlSafe($bidder->id) == decryptUrlSafe($price->bidder_id);
+                });
+                $bidder_cost = array_filter($unitcosts, function($cost) use($bidder) {
+                    $cost = (object)$cost;
+                    return decryptUrlSafe($bidder->id) == decryptUrlSafe($cost->bidder_id);
+                });
+                $item = (object)$item;
+                $aitem = [
+                    'rfq_id' => $item->rfq_id,
+                    'rfq_item_id' => decryptUrlSafe($item->id),
+                    'abstract_id' => $abstract->id,
+                    'supplier_id' => decryptUrlSafe($bidder->id),
+                    'item_number' => 0,
+                    'unit_cost' => $bidder_cost[array_keys($bidder_cost)[0]]['unit_cost'],//(count($bidder_cost ) > 0?:""),
+                    'total_cost' => $bidder_price[array_keys($bidder_price)[0]]['unit_price'],//(count($bidder_price ) > 0?:""),
+                ];
+                AbstractModelItems::create($aitem);
+            }
+        }
+        return ['success'];
     }
 }

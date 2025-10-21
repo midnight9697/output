@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
             else {
                 value.forEach(supplier_id => {
                     if (selectedSuppliers.filter(el => el.id == supplier_id).length == 0) {
+                        
                         selectedSuppliers.push({ name:$choice, id: supplier_id});
                     }
                 });
@@ -50,10 +51,26 @@ document.addEventListener('DOMContentLoaded', () => {
     abstractBidValidator.CreateAbstractValidation((e) => {
         e.preventDefault();
         console.log('working...');
+        let unit_prices = [];
+        let unit_costs = [];
+        selectedSuppliers.forEach(bidder => {
+            let unitprice = document.getElementById('unitprice'+bidder.id);
+            let unitcost = document.getElementById('unitcost'+bidder.id);
+            unit_prices.push({
+                bidder_id: bidder.id,
+                unit_price: unitprice.value,
+            })
+            unit_costs.push({
+                bidder_id: bidder.id,
+                unit_cost: unitcost.value,
+            })
+        });     
         abstractController.create({
             purpose: $('#purpose').val(),
             rfq_ids: $('.ui.dropdown.rfqs').dropdown('get value'),
-            'items': items //items with bidders 
+            'items': items, //items with bidders 
+            'unit_costs': unit_costs,//items with bidders
+            'unit_prices': unit_prices //items with bidders 
         }, (res) => {
             console.log('response', res);
         })
@@ -80,8 +97,8 @@ function biddersTable(bids) {
         projectrow += `
             <tr>
                 <td>${bid.name}</td>
-                <td><input type="text" class="unit_price" id="unit_price[]" name="unit_price" placeholder=""></td>
-                <td><input type="text" class="unit_cost" id="unit_cost[]" name="unit_cost" placeholder=""></td>
+                <td><input type="text" class="supplier_unit_price" id="unitprice${bid.id}" name="unit_price"  data-supplier="${bid.id}"placeholder=""></td>
+                <td><input type="text" class="supplier_unit_cost" id="unitcost${bid.id}" name="unit_cost" data-supplier="${bid.id}" placeholder=""></td>
             </tr>
         `;
     }
@@ -143,7 +160,8 @@ function projectsTable(projects) {
             specification: e.target.dataset.specification,
             quantity_unit: e.target.dataset.quantity_unit,
             unit_price: e.target.dataset.unit_price,
-            total_price: e.target.dataset.total_price
+            total_price: e.target.dataset.total_price,
+            rfq_id: e.target.dataset.rfq_id,
         };
 
         $('#description').val(e.target.dataset.specification);

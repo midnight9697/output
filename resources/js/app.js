@@ -306,6 +306,7 @@ export function global_place(supplier_province,supplier_municipality,supplier_ba
       }),
       onChange: function(value, text, selectedItem) {
             municipalities = provinces[value]['municipality_list'];
+            document.getElementById('supplier_province').value == value
             console.log('trigger');
             $('#'+supplier_municipality).form('clear', true);
             $('#'+supplier_barangay).form('clear', true);
@@ -316,7 +317,6 @@ export function global_place(supplier_province,supplier_municipality,supplier_ba
                   value: Object.keys(municipalities[mun])[0],
                 };
             }));
-
             supplierMunicipalControl();
       },
       clearable: true

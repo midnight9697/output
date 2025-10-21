@@ -1,4 +1,4 @@
-<form class="ui form formCreateSupplier" action="#" id="formCreateSupplier" method="post">
+<form class="ui form formUpdateSupplier" action="#" id="formUpdateSupplier" method="post">
     <div class="ui error message">
         {{--  --}}
     </div>

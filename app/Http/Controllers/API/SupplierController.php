@@ -5,14 +5,23 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
 class SupplierController extends Controller {
     
-    public function get_all_supplier() {
-        $supplier = Supplier::orderBy('created_at', 'desc');
+    public function get_all_supplier()
+    {
+        $supplier = Supplier::select(
+                '*',
+                DB::raw("CONCAT(barangay, ', ', municipality, ', ', province) as specificaddress")
+            )
+            ->orderBy('created_at', 'desc')
+            ->get();
+    
         return encryptIds($supplier);
     }
+    
 
     public function create(Request $request) {
         $supplier = Supplier::create([
@@ -41,7 +50,6 @@ class SupplierController extends Controller {
             'municipality' => $request->supplier_municipality,
             'barangay' => $request->supplier_barangay,
         ]);
-
         return ['success', $supplier];
     }
     

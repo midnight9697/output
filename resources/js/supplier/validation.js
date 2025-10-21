@@ -23,6 +23,25 @@ export class Validator {
         });
     }
 
+    UpdateSupplierValidation(action, element = 'formUpdateSupplier') {
+        var self = this;
+        $.fn.form.settings.rules['checkItems'] = function(value) {
+            return self.items.length > 0;
+        };
+        this.form =    
+        $('.ui.form.'+element)
+        .form({
+          fields: {
+            province: this.fieldsRules('supplier_province', 'empty'),
+            municipality: this.fieldsRules('supplier_municipality', 'empty'),
+            barangay: this.fieldsRules('supplier_barangay', 'empty'),
+            supplier_name: this.fieldsRules('supplier_name', 'empty'),
+          },
+          onSuccess: action
+        });
+    }
+
+
     fieldsRules(identifier, rule, msg = false) {
         let result =   {
             identifier: identifier,

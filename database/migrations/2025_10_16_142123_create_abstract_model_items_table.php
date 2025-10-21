@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('abstract_id')->constrained('abstract_models');
             $table->foreignId('rfq_id')->constrained('request_for_quotations');
+            $table->foreignId('rfq_item_id')->constrained('quotation_items');
             $table->foreignId('supplier_id')->constrained();
             $table->string('item_number');
             $table->string('unit_cost')->nullable();

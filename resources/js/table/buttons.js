@@ -1,4 +1,4 @@
-class tableButtons {
+export class tableButtons {
 
     constructor() {
         this.downAction =  false 

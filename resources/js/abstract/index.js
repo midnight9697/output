@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     active_table.custom_buttons = (data) => {
         let div = document.createElement('div');
         TBLButton.updateAction = () => {
-          window.location = "./rfq/form-update/"+data.id;        
+          window.location = "./abstract/process/"+data.id;        
         }
         
         TBLButton.loadButtons(div);

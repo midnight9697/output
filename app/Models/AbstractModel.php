@@ -9,7 +9,7 @@ class AbstractModel extends Model {
     use HasFactory;
 
     protected $fillable = [
-        'ref',
+        'rfq_id',
         'purpose',
         'filename',
         'origin',

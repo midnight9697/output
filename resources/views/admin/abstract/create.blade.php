@@ -20,7 +20,14 @@
         {{--  --}}
     </div>
     <div class="ui top attached segment">
-        <h5> ABSTRACT DETAILS</h5>
+        <div class="ui right aligned grid">
+            <div class="right floated left aligned eight wide column">
+                <h5>ABSTRACT</h5>
+            </div>
+            <div class="left floated right aligned eight wide column">
+                <button type="button" class="ui very tiny primary button create-abstarct-button">CREATE</button>
+            </div>
+        </div>
      </div>
     <div class="ui attached segment">
         <div class="field">
@@ -36,9 +43,9 @@
             </div>
             <div class="field">
                 <label for="quotation">RFQ</label>
-                <select closeOnChange={true} name="quotation" multiple id="quotation" class="ui fluid multiple search selection dropdown">
+                <select closeOnChange={true} name="quotation" multiple id="quotation" class="ui fluid multiple search selection dropdown rfqs">
                     @foreach (encryptMany(RFQ::where('creator', auth()->user()->id)->orderBy('created_at', 'desc')->get()) as $item)
-                        <option value="{{ $item->id }}">{{ $item->project_purpose }}</option>
+                        <option {{ ((decryptUrlSafe($rfq->id)) == decryptUrlSafe($item->id)?"selected":"") }} value="{{ $item->id }}">{{ $item->project_purpose }}</option>
                     @endforeach
                 </select>
             </div>
@@ -62,6 +69,9 @@
 @endsection
 
 @section('custom_js')
+    <script>
+        localStorage.setItem('rfq_id', "{{ $rfq->id }}");
+    </script>
     @vite(['resources/js/abstract/create.js'])
     @vite(['resources/js/abstract/add_bidder.js'])
 @endsection

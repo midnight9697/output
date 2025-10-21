@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\ABSTRACTController;
 use App\Http\Controllers\API\APPController;
 use App\Http\Controllers\API\FileController;
 use App\Http\Controllers\API\PPMPController;
@@ -102,9 +103,7 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::prefix('abstract')->group(function() {
-        Route::get('page',  [APPController::class, 'fetch_by_page']);
-        Route::post('remove',  [APPController::class, 'remove']);
-        Route::post('create', [APPController::class, 'uploadAttachment']);
+        Route::post('create', [ABSTRACTController::class, 'create']);
     });
 
     Route::post('alternative', function(Request $request) {

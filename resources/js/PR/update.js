@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     PRValidator.CreateRoutingValidator((e) => {
       e.preventDefault();
-      console.log('working');
       let data = PRValidator.serializeArrayToJson('.routingForm');
       data['assigned_to'] = PRValidator.assigned;
       PRClass.routePR(data, (respsons) => {

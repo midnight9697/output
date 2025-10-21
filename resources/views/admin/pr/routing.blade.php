@@ -2,7 +2,8 @@
     use Carbon\Carbon;
     use App\Models\Member;
     use App\Models\Alternative;
-    $actions = encryptMany(Alternative::where('synonyms', '!=', 'close')->orderBy('id', 'desc')->get() );
+    // $actions = encryptMany(Alternative::where('synonyms', '!=', 'close')->orderBy('id', 'desc')->get() );
+    $actions = encryptMany(Alternative::orderBy('id', 'desc')->get() );
     $signed = array_filter($actions, function ($obj) {
         return decryptUrlSafe($obj->id)== 12;
     });
@@ -16,12 +17,14 @@
             <div class="ui error message">
                 {{--  --}}
             </div>
-            <form class="ui form routingForm" id="action_process" action="#" method="POST">
+            <form class="ui form routingForm" id="routingForm" action="#" method="POST">
                 <div class="field">
                     <label>Action</label>
                     <select id="action_routing" name="action" >
                         @foreach (array_reverse($actions) as $action)
-                            <option value="{{ ($action->id) }}">{{ strtoupper(decryptUrlSafe($action->id) == 1?"--":$action->synonyms) }}</option>
+                            @if ($action->synonyms != 'Close')
+                                <option value="{{ ($action->id) }}">{{ strtoupper(decryptUrlSafe($action->id) == 1?"--":$action->synonyms) }}</option>
+                            @endif
                         @endforeach
                     </select>
                 </div>

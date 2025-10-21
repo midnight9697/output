@@ -40,8 +40,6 @@ export class Validator {
             }
             console.log('Receiver assigned ?', PRValidator.assigned !== undefined);
             return (PRValidator.assigned !== undefined?true:false);
-            
-            return true;//$('#action_routing').val() != $id && (PRValidator.assigned !== undefined);
         };
         this.form = 
         $('#routingForm')

@@ -11,17 +11,17 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
-    {
-        // Schema::create('abstract_model_items', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->foreignId('abstract_id')->constrained('abstract_models');
-        //     $table->string('item_number');
-        //     $table->string('quantity');
-        //     $table->string('unit');
-        //     $table->string('particulars');
-        //     $table->timestamps();
-        // });
+    public function up() {
+        Schema::create('abstract_model_items', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('abstract_id')->constrained('abstract_models');
+            $table->foreignId('rfq_id')->constrained('request_for_quotations');
+            $table->foreignId('supplier_id')->constrained();
+            $table->string('item_number');
+            $table->string('unit_cost')->nullable();
+            $table->string('total_cost')->nullable();
+            $table->timestamps();
+        });
     }
 
     /**

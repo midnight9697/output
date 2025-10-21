@@ -1,36 +1,41 @@
+import { TBLButton } from "../table/buttons";
+import { rfqClass } from "../rfq/rfq";
 
 document.addEventListener('DOMContentLoaded', () => {
-    
+    $('.ui.dropdown').dropdown({
+        onChange: function(value, text, $choice) {
+            rfqClass.fetch_rfq({
+                ids: value
+            }, (response) => {
+                console.log(response);
+                projectsTable(response.data);
+            })
+        }
+    });
+    // projectsTable([]);
 });
 
 function projectsTable(projects) {
-    console.log(projects);
     let projectrow = "";
-    
-    projects.forEach(proj => {
+    for (let i = 0; i < projects.length; i++) {
+        const proj = projects[i];
+        console.log('Shit', proj);
         let parent = document.createElement('div');
         TBLButton.data = proj;
-        TBLButton.deleteAction = true;
-        TBLButton.deleteClassName = "removeItem";
+        TBLButton.updateAction = true;
+        TBLButton.updateClassName = "updateItem";
         TBLButton.loadButtons(parent);
         projectrow += `
             <tr>
-                <td>${proj.code}</td>
-                <td>${proj.procurement_project}</td>
-                <td>${proj.end_user}</td>
-                <td>${(proj.early_procurement==1?"YES":"NO")}</td>
-                <td>${proj.mode_of_procurement}</td>
-                <td>${proj.advertisement}</td>
-                <td>${proj.submission}</td>
-                <td>${proj.notice_of_awards}</td>
-                <td>${proj.contract_signing}</td>
-                <td>${proj.total}</td>
-                <td>${proj.mooe}</td>
-                <td>${proj.co}</td>
+                <td>${(i+1)}</td>
+                <td>${proj.quantity_unit}</td>
+                <td></td>
+                <td>${proj.specification}</td>
+                <td>${parent.innerHTML}</td>
             </tr>
         `;
-    });
-
+    }
+    
     if (projects.length == 0) {
         projectrow += `
             <tr>
@@ -39,11 +44,10 @@ function projectsTable(projects) {
         `;
     }
 
-    document.getElementById('projects_table_body').innerHTML = projectrow;
-    $('.removeItem').on('click', (e) => {
+    document.getElementById('abstract-items-body').innerHTML = projectrow;
+    $('.updateItem').on('click', (e) => {
         console.log(e.target.dataset.id);
-        SupplementalValidator.items = SupplementalValidator.items.filter(el => el.id != e.target.dataset.id);
-        specsTable(SupplementalValidator.items);
+        $('#addBiddderModal').modal('show');
     });
     TBLButton.relinitialize();
 }

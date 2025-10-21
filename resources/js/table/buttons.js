@@ -10,6 +10,7 @@ class tableButtons {
         this.downName = "Download";
         this.deleteName = "Delete";
         this.deleteClassName = "";
+        this.updateClassName = "";
         this.data = {};
     }
 
@@ -52,6 +53,7 @@ class tableButtons {
         button.className = 'item link';
         vbutton.className = 'item link';
         dbutton.className = 'item link'+ " "+this.deleteClassName;
+        button.className = 'item link'+ " "+this.updateClassName;
         options_button.className = "ui icon button custom-options-button";
         popup.className = 'ui popup custom-popup';
         menu.className = 'ui vertical very tiny menu';

@@ -22,8 +22,7 @@
         @include('default.create-table', [ 'name' => 'abstract-table',
           'columns' => [
             'REF NO.',
-            'TITLE',
-            'UPLOADED AT'
+            'PROJECT PURPOSE',
           ]
         ])
     </div>

@@ -103,6 +103,7 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::prefix('abstract')->group(function() {
+        Route::get('/page', [ABSTRACTController::class, 'fetch_by_page']);
         Route::post('create', [ABSTRACTController::class, 'create']);
     });
 

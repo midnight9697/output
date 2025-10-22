@@ -4,7 +4,7 @@ import Custom_table from "../table/custom_table";
 var active_table;
 var items_table;
 document.addEventListener('DOMContentLoaded', () => {
-    active_table = new Custom_table('#abstract-table', false, true, false, false, './api/rfq/page')
+    active_table = new Custom_table('#abstract-table', false, true, false, false, './api/abstract/page')
     items_table = document.getElementById('#abstract-items-body')
 
     $('#create_abstract_vbtn').on('click', () => {
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     active_table.custom_buttons = (data) => {
         let div = document.createElement('div');
         TBLButton.updateAction = () => {
-          window.location = "./abstract/process/"+data.id;        
+          window.location = "./abstract/process/"+data.rfq_id;
         }
         
         TBLButton.loadButtons(div);
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     active_table.load([
-        'rfq_number',
-        'project_purpose',
+        'purpose',
+        'created_at',
     ]);
 });

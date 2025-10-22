@@ -3,6 +3,7 @@ import { rfqClass } from "../rfq/rfq";
 import Custom_table from "../table/custom_table";
 import { abstractBidValidator } from "./validation";
 import { abstractController } from "./abstract";
+import { MessageMod } from "../app";
 let selectedSuppliers = [];
 let current_item = {};
 let items = [];
@@ -72,13 +73,16 @@ document.addEventListener('DOMContentLoaded', () => {
             'unit_costs': unit_costs,//items with bidders
             'unit_prices': unit_prices //items with bidders 
         }, (res) => {
-            console.log('response', res);
+            MessageMod.success('Abstract Created', () => {
+                window.location.reload();
+            });
         })
     })
 
     abstractBidValidator.CreateAbstractBidValidation((e) => {
         e.preventDefault();
         console.log('Working', items);
+        MessageMod.success('Successfully saved');
     })
 
     rfqClass.fetch_rfq({

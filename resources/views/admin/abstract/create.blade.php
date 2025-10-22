@@ -43,7 +43,7 @@
             </div>
             <div class="field">
                 <label for="quotation">RFQ</label>
-                <select closeOnChange={true} name="quotation" multiple id="quotation" class="ui fluid multiple search selection dropdown rfqs">
+                <select closeOnChange={true} name="quotation" id="quotation" class="ui fluid search selection dropdown rfqs">
                     @foreach (encryptMany(RFQ::where('creator', auth()->user()->id)->orderBy('created_at', 'desc')->get()) as $item)
                         <option {{ ((decryptUrlSafe($rfq->id)) == decryptUrlSafe($item->id)?"selected":"") }} value="{{ $item->id }}">{{ $item->project_purpose }}</option>
                     @endforeach

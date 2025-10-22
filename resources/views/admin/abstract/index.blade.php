@@ -21,8 +21,8 @@
     <div class="ui bottom attached active tab segment" data-tab="head1">
         @include('default.create-table', [ 'name' => 'abstract-table',
           'columns' => [
-            'REF NO.',
             'PROJECT PURPOSE',
+            'DATE CREATED',
           ]
         ])
     </div>

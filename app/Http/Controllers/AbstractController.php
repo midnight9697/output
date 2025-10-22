@@ -5,19 +5,31 @@ namespace App\Http\Controllers;
 use App\Models\RFQ;
 use Illuminate\Http\Request;
 
-class AbstractController extends Controller
-{
+class MyClass {
+    public $property1;
+
+    public function method1() {
+        return "This is a method.";
+    }
+}
+class AbstractController extends Controller {
     public function index(){
         return view('admin.abstract.index');
     }
 
-    public function create($id){
-        $rfq = RFQ::where('id', decryptUrlSafe($id));
+    public function create($id = false){
+        $rfq = RFQ::where('id', ($id?decryptUrlSafe($id):null));
         if (!$rfq->exists()) {
-            abort('404', 'Not Found');
+            $rfq = (object)[
+                'purpose' => '',
+                'id' => encryptUrlSafe($id),
+            ];
+        }
+        else {
+            $rfq = encryptSingle($rfq->first());
         }
         return view('admin.abstract.create', [
-            'rfq' => encryptSingle($rfq->first())
+            'rfq' => $rfq
         ]);
     }
 

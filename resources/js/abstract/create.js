@@ -19,14 +19,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     $('.ui.dropdown.suppliers').dropdown({
         onChange: function(value, text, $choice) {
-            console.log('ITEMS', items);
             if (typeof $choice == "object") {
                 selectedSuppliers = selectedSuppliers.filter(el => (value.includes(el.id.toString())));
             }
             else {
                 value.forEach(supplier_id => {
                     if (selectedSuppliers.filter(el => el.id == supplier_id).length == 0) {
-                        
                         selectedSuppliers.push({ name:$choice, id: supplier_id});
                     }
                 });
@@ -68,8 +66,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });     
         abstractController.create({
             purpose: $('#purpose').val(),
-            rfq_ids: $('.ui.dropdown.rfqs').dropdown('get value'),
-            'items': items, //items with bidders 
+            rfq_ids: [$('.ui.dropdown.rfqs').dropdown('get value')],
+            'items': items, //items with bidders
             'unit_costs': unit_costs,//items with bidders
             'unit_prices': unit_prices //items with bidders 
         }, (res) => {

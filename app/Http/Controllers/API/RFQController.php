@@ -120,14 +120,19 @@ class RFQController extends Controller {
 
     public function fetch_rfq(Request $request) {
         if (isset($request->ids)) {
-            $ids = [];
-            foreach ($request->ids as $rfq_id) {
-                $id = decryptUrlSafe($rfq_id);
-                $ids[] = $id;
-            }
-            return encryptMany(RFQItem::whereIn('rfq_id', $ids)->with('quotation')->get());
+            $id = decryptUrlSafe($request->ids);
+            // $ids = [];
+            // foreach ($request->ids as $rfq_id) {
+            //     $id = decryptUrlSafe($rfq_id);
+            //     $ids[] = $id;
+            // }
+            // return encryptMany(RFQItem::whereIn('rfq_id', $ids)->with('quotation')->get());
+            // $rfq = RFQ::where('id', $id)->with('items')->get();
+            return encryptMany(RFQItem::where('rfq_id', $id)->with('quotation')->get());
         }
-        $id = decryptUrlSafe($request->id);
+        else {
+            $id = decryptUrlSafe($request->id);
+        }
         $rfq = RFQ::where('id', $id)->with('items')->first();
         return encryptSingle($rfq);
     }

@@ -146,6 +146,7 @@ h1 { text-align: center; }
 <script async src="{{env('MARCO_MAP_API')}}"></script>
 @endsection
 @section('custom_js')
+    <script async defer src="{{env('MARCO_MAP_API')}}"></script>
     @vite(['resources/js/home.js'])
     <script>
         localStorage.setItem('asset', "{{ asset('mapicon.png') }}");

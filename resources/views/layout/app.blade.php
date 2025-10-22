@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
     <link href="{{ url('plugins/quill/quill.snow.css') }}" rel="stylesheet">
     <link rel="icon" href="{{asset('emb_logo.png')}}" type="image/x-icon">
-
+    <script async defer src="{{env('MARCO_MAP_API')}}"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <style>

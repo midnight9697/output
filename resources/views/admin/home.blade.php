@@ -143,7 +143,6 @@ h1 { text-align: center; }
             </div>
         </div>
 </div>
-<script async defer src="{{env('MARCO_MAP_API')}}"></script>
 @endsection
 @section('custom_js')
     @vite(['resources/js/home.js'])

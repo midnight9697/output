@@ -126,7 +126,7 @@
 </div> --}}
 @endsection
 @section('custom_js')
-<script async src="{{env('MARCO_MAP_API')}}"></script>
+{{-- <script async src="{{env('MARCO_MAP_API')}}"></script> --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
 @vite(['resources/js/supplier/create.js'])
 

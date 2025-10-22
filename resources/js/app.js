@@ -195,7 +195,6 @@ export class pageLoader {
 
     destroy(pageLoadClass) {
         $(pageLoadClass).removeClass('active');
-        console.log(pageLoadClass);
     }
 }
 

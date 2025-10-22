@@ -43,6 +43,8 @@ document.addEventListener('DOMContentLoaded', () => {
       $('#supplier_province').dropdown('set selected', data.province);
       $('#supplier_municipality').dropdown('set selected', data.municipality);
       $('#supplier_barangay').dropdown('set selected', data.barangay);
+      $('#supplier_latitude').val(data.latitude);
+      $('#supplier_longitude').val(data.longitude);
       localStorage.setItem('supplier_id', data.id)
     }
 

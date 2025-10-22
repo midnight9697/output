@@ -43,4 +43,23 @@
                 </div>
             </div>
     </div>
+
+    <div class="field">
+        <div  class="two fields">
+            <div class="field">
+                <input type="text" name="supplier_latitude" placeholder="LATITUDE" id="supplier_latitude">
+            </div>
+            <div class="field">
+                <input type="text" name="supplier_longitude" placeholder="LONGITUDE" id="supplier_longitude">
+            </div>
+            <div class="ui labeled button" tabindex="0">
+                <div class="ui red button">
+                  <i class="location arrow icon"></i> 
+                </div>
+                <a class="ui basic red left pointing label">
+                 LOCATION
+                </a>
+              </div>
+        </div>
+    </div>
 </form>

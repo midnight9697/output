@@ -23,14 +23,34 @@ function decryptUrlSafe($value) {
 }
 
 function encryptIds($data) {
-    return DataTables::of ($data)
-        ->editColumn('id', function($res) {
+    $tls = DataTables::of ($data)
+    ->editColumn('created_at', function($res) {
+        return date('M d, Y', strtotime($res->created_at));
+    });
+    editColumnCustom($tls, $data);
+    return $tls->make(true);
+}
+
+function editColumnCustom($q, $data) {
+    if (!is_array($data)) {
+        $data = $data->get();
+    }
+    if (count($data) > 0) {
+        foreach (array_keys((array)$data[0]->toArray()) as $key) {
+            $key_arr = explode("_", $key);
+            if (in_array('id', $key_arr)) {
+                $q->editColumn($key, function($query) use($key) {
+                    return encryptUrlSafe($query->{$key});
+                });
+            }
+        }
+    }
+    else {
+        $q->editColumn('id', function($res) {
             return encryptUrlSafe($res->id);
-        })
-        ->editColumn('created_at', function($res) {
-            return date('M d, Y', strtotime($res->created_at));
-        })
-        ->make(true);
+        });
+    }
+    
 }
 
 function encryptSingle($data) {
@@ -91,7 +111,8 @@ function encryptSingle($data) {
             
             $value = encryptMany($data->{$merge});
         }
-        $converted->{$key} = ($key == 'id'?encryptUrlSafe($value):$value);
+        $key_arr = explode("_", $key);
+        $converted->{$key} = ($key == 'id' || in_array('id', $key_arr)?encryptUrlSafe($value):$value);
     }
     // echo json_encode($converted);
     return (object)$converted;

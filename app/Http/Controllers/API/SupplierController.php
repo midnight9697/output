@@ -16,8 +16,8 @@ class SupplierController extends Controller {
                 '*',
                 DB::raw("CONCAT(barangay, ', ', municipality, ', ', province) as specificaddress")
             )
-            ->orderBy('created_at', 'desc')
-            ->get();
+            ->orderBy('created_at', 'desc');
+            // ->get();
     
         return encryptIds($supplier);
     }

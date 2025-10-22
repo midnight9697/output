@@ -121,13 +121,6 @@ class RFQController extends Controller {
     public function fetch_rfq(Request $request) {
         if (isset($request->ids)) {
             $id = decryptUrlSafe($request->ids);
-            // $ids = [];
-            // foreach ($request->ids as $rfq_id) {
-            //     $id = decryptUrlSafe($rfq_id);
-            //     $ids[] = $id;
-            // }
-            // return encryptMany(RFQItem::whereIn('rfq_id', $ids)->with('quotation')->get());
-            // $rfq = RFQ::where('id', $id)->with('items')->get();
             return encryptMany(RFQItem::where('rfq_id', $id)->with('quotation')->get());
         }
         else {
@@ -138,7 +131,7 @@ class RFQController extends Controller {
     }
 
     public function fetch_by_page() {
-        $rfqs = RFQ::where('creator', Auth::user()->id)->has('items')->orderByDesc('created_at')->get();
+        $rfqs = RFQ::where('creator', Auth::user()->id)->has('items')->orderByDesc('created_at');
         return encryptIds($rfqs);
     }
 }

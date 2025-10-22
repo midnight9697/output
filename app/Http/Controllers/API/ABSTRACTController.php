@@ -17,6 +17,7 @@ class ABSTRACTController extends Controller {
 
     public function create(Request $request) {
         $abstract = AbstractModel::create([
+            'rfq_id' => decryptUrlSafe($request->rfq_ids[0]),
             'purpose' => $request->purpose,
             'creator' => Auth::user()->id,
         ]);

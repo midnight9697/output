@@ -127,7 +127,7 @@
     "src": "resources/js/PR/update.js"
   },
   "resources/js/PR/validation.js": {
-    "file": "assets/validation-f5ef5fbf.js",
+    "file": "assets/validation-97e73ebb.js",
     "isEntry": true,
     "src": "resources/js/PR/validation.js"
   },
@@ -149,7 +149,7 @@
     "src": "resources/js/User/User.js"
   },
   "resources/js/User/Validation.js": {
-    "file": "assets/Validation-97e73ebb.js",
+    "file": "assets/Validation-fbf88a6b.js",
     "isEntry": true,
     "src": "resources/js/User/Validation.js"
   },
@@ -191,6 +191,11 @@
     "isEntry": true,
     "src": "resources/js/abstract/abstract.js"
   },
+  "resources/js/abstract/add_bidder.js": {
+    "file": "assets/add_bidder-4ed993c7.js",
+    "isEntry": true,
+    "src": "resources/js/abstract/add_bidder.js"
+  },
   "resources/js/abstract/create.js": {
     "file": "assets/create-4610591d.js",
     "imports": [
@@ -209,6 +214,11 @@
     ],
     "isEntry": true,
     "src": "resources/js/abstract/index.js"
+  },
+  "resources/js/abstract/validation.js": {
+    "file": "assets/validation-f5ef5fbf.js",
+    "isEntry": true,
+    "src": "resources/js/abstract/validation.js"
   },
   "resources/js/app.js": {
     "file": "assets/app-66f94b8c.js",
@@ -234,7 +244,7 @@
     "src": "resources/js/app/index.js"
   },
   "resources/js/app/validation.js": {
-    "file": "assets/validation-b5645bc0.js",
+    "file": "assets/validation-3f7a7dc7.js",
     "isEntry": true,
     "src": "resources/js/app/validation.js"
   },
@@ -283,7 +293,7 @@
     "src": "resources/js/login/reset_password.js"
   },
   "resources/js/login/validation.js": {
-    "file": "assets/validation-3f7a7dc7.js",
+    "file": "assets/validation-4ed993c7.js",
     "isEntry": true,
     "src": "resources/js/login/validation.js"
   },
@@ -303,7 +313,7 @@
     "src": "resources/js/ppmp/ppmp.js"
   },
   "resources/js/ppmp/validation.js": {
-    "file": "assets/validation-fbf88a6b.js",
+    "file": "assets/validation-b5645bc0.js",
     "isEntry": true,
     "src": "resources/js/ppmp/validation.js"
   },
@@ -386,7 +396,7 @@
     "src": "resources/js/supplemental/update.js"
   },
   "resources/js/supplemental/validation.js": {
-    "file": "assets/validation-4ed993c7.js",
+    "file": "assets/validation-b5a35c2a.js",
     "isEntry": true,
     "src": "resources/js/supplemental/validation.js"
   },

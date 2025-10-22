@@ -65,6 +65,8 @@ export default defineConfig({
                   'resources/js/abstract/index.js',
                   'resources/js/abstract/create.js',
                   'resources/js/abstract/abstract.js',
+                  'resources/js/abstract/add_bidder.js',
+                  'resources/js/abstract/validation.js',
 
                     //   SUPPLIER
                     'resources/js/supplier/index.js',

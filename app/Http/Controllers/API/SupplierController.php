@@ -29,6 +29,8 @@ class SupplierController extends Controller {
             'province' => $request->supplier_province,
             'municipality' => $request->supplier_municipality,
             'barangay' => $request->supplier_barangay,
+            'latitude' => $request->supplier_latitude,
+            'longitude' => $request->supplier_longitude,
         ]);
 
         return ['success', $supplier];
@@ -49,6 +51,8 @@ class SupplierController extends Controller {
             'province' => $request->supplier_province,
             'municipality' => $request->supplier_municipality,
             'barangay' => $request->supplier_barangay,
+            'latitude' => $request->supplier_latitude,
+            'longitude' => $request->supplier_longitude,
         ]);
         return ['success', $supplier];
     }

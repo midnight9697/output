@@ -15,7 +15,9 @@ class Supplier extends Model
         'name',
         'municipality',
         'province',
-        'barangay'
+        'barangay',
+        'latitude',
+        'longitude'
     ];
 
     

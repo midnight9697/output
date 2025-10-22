@@ -18,6 +18,8 @@ export class Validator {
             municipality: this.fieldsRules('supplier_municipality', 'empty'),
             barangay: this.fieldsRules('supplier_barangay', 'empty'),
             supplier_name: this.fieldsRules('supplier_name', 'empty'),
+            latitude: this.fieldsRules('supplier_latitude', 'empty'),
+            longitude: this.fieldsRules('supplier_longitude', 'empty'),
           },
           onSuccess: action
         });
@@ -36,6 +38,8 @@ export class Validator {
             municipality: this.fieldsRules('supplier_municipality', 'empty'),
             barangay: this.fieldsRules('supplier_barangay', 'empty'),
             supplier_name: this.fieldsRules('supplier_name', 'empty'),
+            latitude: this.fieldsRules('supplier_latitude', 'empty'),
+            longitude: this.fieldsRules('supplier_longitude', 'empty'),
           },
           onSuccess: action
         });

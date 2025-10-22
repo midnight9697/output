@@ -2,12 +2,12 @@ import { pageLoadMod } from "./app";
 import { rfqClass } from "./rfq/rfq";
 
 document.addEventListener('DOMContentLoaded', () => {
-   let rfq_counter = $('.rfq_counter');
+   // let rfq_counter = $('.rfq_counter');
   
-   setInterval(() => {
-      rfqCounter();
-   }, 1000);
-   pageLoadMod.destroy();
+   // setInterval(() => {
+   //    rfqCounter();
+   // }, 1000);
+   // pageLoadMod.destroy();
 });
 
 function rfqCounter() {

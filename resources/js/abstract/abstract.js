@@ -11,10 +11,7 @@ class AbstractModel {
 
     create(data, action, fail) {
         var usersClone = this;
-        let fd = new FormData();
-        fd.append('att_file', data, data.name);
-        fd.append('filename', data.name);
-        this.customPostURequest('./api/abstract/create', fd, action, fail);
+        this.customPostURequest('./api/abstract/create', data, action, fail);
     }
 
     customGetRequest(url, action, fail = () => {}) {

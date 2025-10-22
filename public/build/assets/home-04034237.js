@@ -1,1 +1,0 @@
-import{p as o}from"./login-ab27f3ad.js";import{r}from"./rfq-dec22fc4.js";document.addEventListener("DOMContentLoaded",()=>{$(".rfq_counter"),setInterval(()=>{e()},1e3),o.destroy()});function e(){r.counter(function(t){$(".rfq_counter").html(t)})}

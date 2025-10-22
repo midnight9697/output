@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AbstractController;
 use App\Http\Controllers\API\FileController;
+use App\Http\Controllers\API\MapController;
 use App\Http\Controllers\API\SupplementalController as APISupplementalController;
 use App\Http\Controllers\APPController;
 use App\Http\Controllers\AuthController;
@@ -48,6 +49,7 @@ Route::prefix('login')->group(function() {
 Route::get('reset_password/{selector}/{token}', [AuthController::class, 'changePasswordView']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
+    Route::post('map_loader', [MapController::class, 'index'])->name('map_loader');
     Route::get('/', [ProfileController::class, 'homeView'])->name('home');
     // Route::get('logout', [AuthController::class, 'logout']);
     Route::get('dashboard', [ProfileController::class, 'homeView']);
@@ -85,6 +87,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::prefix('abstract')->group(function() {
         Route::get('/', [AbstractController::class, 'index'])->name('abstract request');
         Route::get('create', [AbstractController::class, 'create'])->name('abstract create');
+        Route::get('process/{id}', [AbstractController::class, 'create'])->name('abstract (BAC)');
         Route::get('update', [AbstractController::class, 'create'])->name('abstract update');
     });
 

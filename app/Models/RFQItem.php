@@ -16,4 +16,8 @@ class RFQItem extends Model {
         'unit_price',
         'total_price',
     ];
+
+    public function quotation() {
+        return $this->hasOne(RFQ::class, 'id', 'rfq_id');
+    }
 }

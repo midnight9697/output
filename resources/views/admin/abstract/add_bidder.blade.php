@@ -29,7 +29,7 @@
         <label for="suppliers">SUPPLIERS</label>
         <select closeOnChange={true} name="suppliers" multiple id="suppliers" class="ui fluid multiple search selection dropdown suppliers">
             @foreach (encryptMany(Supplier::get()) as $supplier)
-                <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
+                <option value="{{ $supplier->name }}">{{ $supplier->name }}</option>
             @endforeach
         </select>
     </div>

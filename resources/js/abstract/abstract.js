@@ -1,4 +1,10 @@
 class AbstractModel {
+
+  fetch_bidders(rfq_id, action, fail) {
+      var usersClone = this;
+      this.customPostRequest('./api/abstract/bidders', {'rfq_id': rfq_id}, action, fail);
+  }
+
     fetch_by_page(action, fail) {
         var usersClone = this;
         this.customGetRequest('./api/abstract', action, fail);

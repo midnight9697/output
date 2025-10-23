@@ -27,4 +27,9 @@ class RFQ extends Model {
     public function rfqItems() {
         return $this->hasMany(RFQItem::class, 'rfq_id');
     }
+
+    public function abstract() {
+        $user = $this->hasOne(AbstractModel::class, 'rfq_id', 'id');
+        return $user;
+    }
 }

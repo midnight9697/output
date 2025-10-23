@@ -1,6 +1,6 @@
 <table class="ui very basic collapsing celled table hidden {{ $name }}" id="{{ $name }}" style="width: 100%">
 {{-- <table class="ui very basic collapsing celled table hidden {{ $name }}" id="{{ $name }}"> --}}
-  <thead>
+  <thead id="{{ (isset($headerId)?$headerId:"") }}">
         @if (isset($headers))
         <tr>
             @foreach ($headers as $column)

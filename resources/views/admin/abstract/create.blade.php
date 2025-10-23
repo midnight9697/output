@@ -34,20 +34,20 @@
             <div class="two fields">
                 <div class="field">
                     <label for="purpose">PURPOSE</label>
-                    <input type="text" name="purpose" id="purpose" placeholder="Purpose">
+                    <input type="text" name="purpose" id="purpose" placeholder="Purpose" value="{{ ($abstract?$abstract->purpose:"") }}">
                 </div>
                 <div class="field">
+                    <label for="quotation">RFQ</label>
+                    <select disabled closeOnChange={true} name="quotation" id="quotation" class="ui fluid search selection dropdown rfqs">
+                        @foreach (encryptMany(RFQ::where('creator', auth()->user()->id)->orderBy('created_at', 'desc')->get()) as $item)
+                            <option {{ ((decryptUrlSafe($rfq->id)) == decryptUrlSafe($item->id)?"selected":"") }} value="{{ $item->id }}">{{ $item->project_purpose }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                {{-- <div class="field">
                     <label>UPLOAD ABSTRACT FILE (Optional)</label>
                     <input type="file" multiple class="file" id="files" name="files" placeholder="FILE UPLOAD">
-                </div>
-            </div>
-            <div class="field">
-                <label for="quotation">RFQ</label>
-                <select closeOnChange={true} name="quotation" id="quotation" class="ui fluid search selection dropdown rfqs">
-                    @foreach (encryptMany(RFQ::where('creator', auth()->user()->id)->orderBy('created_at', 'desc')->get()) as $item)
-                        <option {{ ((decryptUrlSafe($rfq->id)) == decryptUrlSafe($item->id)?"selected":"") }} value="{{ $item->id }}">{{ $item->project_purpose }}</option>
-                    @endforeach
-                </select>
+                </div> --}}
             </div>
         </div>
     </div>
@@ -56,6 +56,7 @@
     </div>
     <div class="ui bottom attached segment">
         @include('default.create-table', [ 'name' => 'abstract-items-table', 'body' => 'abstract-items-body',
+        'headerId' => 'abstract-header-columns',
         'columns' => [
             'ITEM',
             'QTY',

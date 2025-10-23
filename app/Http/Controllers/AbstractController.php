@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AbstractModel;
 use App\Models\RFQ;
 use Illuminate\Http\Request;
 
@@ -29,7 +30,8 @@ class AbstractController extends Controller {
             $rfq = encryptSingle($rfq->first());
         }
         return view('admin.abstract.create', [
-            'rfq' => $rfq
+            'rfq' => $rfq,
+            'abstract' => AbstractModel::where('rfq_id', decryptUrlSafe($id))->first()
         ]);
     }
 

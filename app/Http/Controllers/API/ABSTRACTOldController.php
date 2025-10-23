@@ -11,26 +11,31 @@ use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class ABSTRACTController extends Controller {
+class ABSTRACTOldController extends Controller {
     
     public function fetch_rfq_bidders(Request $request) {
-        $request->merge(['ids' => $request->rfq_id]);
-        $rfq_from_rfq = app(RFQController::class)->fetch_rfq($request);
-        $supplier_ids = [];
-        $suppliers = [];
-        foreach ($rfq_from_rfq as $rfqitem) {
-            $rfq_item = $rfqitem;
-            $rfq_item->abstract_items = AbstractModelItems::where('rfq_item_id', (decryptUrlSafe($rfqitem->id)))->with('supplier')->get();
-            $rfq_t_bidders[] = $rfq_item;
-            foreach ($rfq_item->abstract_items as $abstract_item) {
-                if (!in_array($abstract_item->supplier->id, $supplier_ids)) {
-                    $supplier_ids[] = $abstract_item->supplier->id;
-                    $suppliers[] = $abstract_item->supplier;
-                }
+        $rfq_id = decryptUrlSafe($request->rfq_id);
+        $rfq = RFQ::where('id', $rfq_id)->with('abstract')->first();
+        $rfq_bidders =  AbstractModelItems::where('abstract_id', ($rfq->abstract?$rfq->abstract->id:0))->with('supplier')->get();
+        $rfq_suppliers = [];
+        $rfq_t_bidders = [];
+        foreach ($rfq_bidders as $rfq_bidder) {
+            $bind_to_array = array_filter($rfq_suppliers, function($rfq_supplier) use($rfq_bidder) {
+                return $rfq_bidder->supplier_id == $rfq_supplier->supplier_id;
+            });
+            $supplier = Supplier::where('id', $rfq_bidder->supplier_id)->first();
+            if (count($bind_to_array) == 0) {
+                $rfq_suppliers[] = $supplier;
             }
         }
-        
-        return ['items' => $rfq_t_bidders, 'suppliers' => $suppliers];
+        $request->merge(['ids' => $request->rfq_id]);
+        $rfq_from_rfq = app(RFQController::class)->fetch_rfq($request);
+        foreach ($rfq_from_rfq as $rfqitem) {
+            $abstract_item = $rfqitem;
+            $abstract_item->abstract_item = AbstractModelItems::where('rfq_item_id', (decryptUrlSafe($rfqitem->id)))->with('supplier')->first();
+            $rfq_t_bidders[] = $abstract_item;
+        }
+        return ['rfq_bidders' => $rfq_bidders, 'suppliers' => $rfq_suppliers, 'items' => $rfq_t_bidders];
     }
 
     public function fetch_by_page(Request $request) {

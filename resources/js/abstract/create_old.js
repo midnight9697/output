@@ -14,6 +14,52 @@ document.addEventListener('DOMContentLoaded', () => {
     abstract_header_columns = document.getElementById('abstract-header-columns');
     main_header_column = abstract_header_columns.children[0].innerHTML;
 
+    $('.create-abstarct-button').on('click', () => {
+        $('.form-create-abstract').trigger('submit')
+    });
+
+    $('.submit_bidder_button').on('click', () => {
+        $('.form-abstract-bid').trigger('submit');
+    })
+
+    $('.ui.dropdown.suppliers').dropdown({
+        onChange: function(value, text, $choice) {
+            if (typeof $choice == "object") {
+                selectedSuppliers = selectedSuppliers.filter(el => (value.includes(el.id.toString())));
+            }
+            else {
+                value.forEach(supplier_id => {
+                    if (selectedSuppliers.filter(el => el.id == supplier_id).length == 0) {
+                        selectedSuppliers.push({ name:$choice, id: supplier_id});
+                    }
+                });
+            }
+            let suppliers = [];
+            selectedSuppliers.forEach(bidder => {
+                let unitprice = document.getElementById('unitprice'+bidder.id);
+                let unitcost = document.getElementById('unitcost'+bidder.id);
+                bidder.unit_cost = unitcost.value;
+                bidder.unit_price = unitprice.value;
+                bidder.bidder_id =bidder.id;
+                suppliers.push(bidder);
+            });
+            current_item.bidders = selectedSuppliers;
+            items = items.filter(el => el.id != current_item.id);
+            items.push(current_item);
+            biddersTable(selectedSuppliers);
+        }
+    });
+
+    $('.ui.dropdown.rfqs').dropdown({
+        onChange: function(value, text, $choice) {
+            rfqClass.fetch_rfq({
+                ids: value
+            }, (response) => {
+                projectsTable(response.data);
+            })
+        }
+    });
+
     abstractBidValidator.CreateAbstractValidation((e) => {
         e.preventDefault();
         console.log('working...');
@@ -52,8 +98,19 @@ document.addEventListener('DOMContentLoaded', () => {
         })
     })
 
-    abstractController.fetch_bidders($('.ui.dropdown.rfqs').dropdown('get value'), (bidders_response) => {
-        projectsTable(bidders_response.data);
+    abstractBidValidator.CreateAbstractBidValidation((e) => {
+        e.preventDefault();
+        console.log('Working', items);
+        MessageMod.success('Successfully saved');
+    })
+
+    rfqClass.fetch_rfq({
+        ids:  $('.ui.dropdown.rfqs').dropdown('get value')
+    }, (response) => {
+        let rfq_items = response.data;
+        abstractController.fetch_bidders($('.ui.dropdown.rfqs').dropdown('get value'), (bidders_response) => {
+            projectsTable(bidders_response.data);
+        });
     });
 });
 
@@ -66,9 +123,9 @@ function biddersTable(bids) {
         const bid = bids[i];
         projectrow += `
             <tr>
-                <td>${bid.supplier.name}</td>
-                <td><input type="text" class="supplier_unit_price" id="unitprice${bid.supplier.id}" name="unit_price"  data-supplier="${bid.supplier.id}"placeholder=""></td>
-                <td><input type="text" class="supplier_unit_cost" id="unitcost${bid.supplier.id}" name="unit_cost" data-supplier="${bid.supplier.id}" placeholder=""></td>
+                <td>${bid.name}</td>
+                <td><input type="text" class="supplier_unit_price" id="unitprice${bid.id}" name="unit_price"  data-supplier="${bid.id}"placeholder=""></td>
+                <td><input type="text" class="supplier_unit_cost" id="unitcost${bid.id}" name="unit_cost" data-supplier="${bid.id}" placeholder=""></td>
             </tr>
         `;
     }
@@ -87,6 +144,7 @@ function biddersTable(bids) {
 }
 
 function projectsTable(data) {
+    let bidders = data.rfq_bidders;
     let projects = data.items;
     let suppliers = data.suppliers;
     console.log(data);
@@ -117,24 +175,22 @@ function projectsTable(data) {
     items = items.map((e) => {
         let item = e;
         item['bidders'] = [];
-        item['bidders']['supplier'] = null;
         return item;
     });
     let projectrow = "";
     for (let i = 0; i < projects.length; i++) {
         const proj = projects[i];
+        console.log('Shit', proj);
         let parent = document.createElement('div');
         TBLButton.data = proj;
         TBLButton.updateAction = true;
-        TBLButton.udpateName = "Supplier";
         TBLButton.updateClassName = "updateItem";
         TBLButton.loadButtons(parent);
         let supplierRow = "";
         suppliers.forEach(supplier => {
-            let hasBidder = proj.abstract_items.find(el => el.supplier.name == supplier.name);
             supplierRow += `
-                <td>${(hasBidder?hasBidder.unit_cost:"")}</td>
-                <td>${(hasBidder?hasBidder.total_cost:"")}</td>
+                <td>${(proj.abstract_item?(proj.abstract_item.supplier.name == supplier.name?proj.abstract_item.unit_cost:""):"")}</td>
+                <td>${(proj.abstract_item?(proj.abstract_item.supplier.name == supplier.name?proj.abstract_item.total_cost:""):"")}</td>
             `;
         });
         projectrow += `
@@ -148,6 +204,7 @@ function projectsTable(data) {
             </tr>
         `;
     }
+    
     if (projects.length == 0) {
         projectrow += `
             <tr>
@@ -167,15 +224,7 @@ function projectsTable(data) {
             total_price: e.target.dataset.total_price,
             rfq_id: e.target.dataset.rfq_id,
         };
-        // $('.ui.dropdown.supplier').dropdown('set value', '10');
-        let item = items.find(el => el.id == current_item.id);
-        let selected = [];
-        item.abstract_items.forEach(abstract_item => {
-            selected.push(abstract_item.supplier.name);
-        });
-        biddersTable(item.abstract_items);
-
-        $('.ui.dropdown.suppliers').dropdown('set selected', selected);
+        
         $('#description').val(e.target.dataset.specification);
         $('#quantity').val(e.target.dataset.quantity_unit);
         $('#unit_price').val(e.target.dataset.unit_price);

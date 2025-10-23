@@ -17,4 +17,8 @@ class AbstractModelItems extends Model {
         'unit_cost',
         'total_cost',
     ];
+
+    public function supplier() {
+        return $this->hasOne(Supplier::class, 'id', 'supplier_id');
+    }
 }

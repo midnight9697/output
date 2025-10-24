@@ -20,7 +20,7 @@ class ABSTRACTController extends Controller {
         $suppliers = [];
         foreach ($rfq_from_rfq as $rfqitem) {
             $rfq_item = $rfqitem;
-            $rfq_item->abstract_items = AbstractModelItems::where('rfq_item_id', (decryptUrlSafe($rfqitem->id)))->with('supplier')->get();
+            $rfq_item->abstract_items = encryptMany(AbstractModelItems::where('rfq_item_id', (decryptUrlSafe($rfqitem->id)))->with('supplier')->get());
             $rfq_t_bidders[] = $rfq_item;
             foreach ($rfq_item->abstract_items as $abstract_item) {
                 if (!in_array($abstract_item->supplier->id, $supplier_ids)) {

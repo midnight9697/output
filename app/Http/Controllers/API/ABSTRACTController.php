@@ -23,14 +23,14 @@ class ABSTRACTController extends Controller {
             $rfq_item->abstract_items = encryptMany(AbstractModelItems::where('rfq_item_id', (decryptUrlSafe($rfqitem->id)))->with('supplier')->get());
             $rfq_t_bidders[] = $rfq_item;
             foreach ($rfq_item->abstract_items as $abstract_item) {
-                if (!in_array($abstract_item->supplier->id, $supplier_ids)) {
-                    $supplier_ids[] = $abstract_item->supplier->id;
+                if (!in_array($abstract_item->supplier->name, $supplier_ids)) {
+                    $supplier_ids[] = $abstract_item->supplier->name;
                     $suppliers[] = $abstract_item->supplier;
                 }
             }
         }
         
-        return ['items' => $rfq_t_bidders, 'suppliers' => $suppliers];
+        return ['items' => $rfq_t_bidders, 'suppliers' => $suppliers, 'all_supplier_lists' => encryptMany(Supplier::get())];
     }
 
     public function fetch_by_page(Request $request) {
@@ -39,7 +39,6 @@ class ABSTRACTController extends Controller {
     }
 
     public function create(Request $request) {
-        return $request;
         if (AbstractModel::where('rfq_id', decryptUrlSafe($request->rfq_ids[0]))->exists()) {
             $abstract = AbstractModel::where('rfq_id', decryptUrlSafe($request->rfq_ids[0]))->update([
                 'purpose' => $request->purpose,
@@ -54,37 +53,31 @@ class ABSTRACTController extends Controller {
             ]);
         }
         
-        $unitprices = $request->unit_prices;
-        $unitcosts = $request->unit_costs;
         foreach ($request->items as $item) {
-            foreach ($item['bidders'] as $bidder) {
-                $bidder = (object)$bidder;
-                $bidder_price =array_filter($unitprices, function($price) use($bidder) {
-                    $price = (object)$price;
-                    return decryptUrlSafe($bidder->id) == decryptUrlSafe($price->bidder_id);
-                });
-                $bidder_cost = array_filter($unitcosts, function($cost) use($bidder) {
-                    $cost = (object)$cost;
-                    return decryptUrlSafe($bidder->id) == decryptUrlSafe($cost->bidder_id);
-                });
-                $item = (object)$item;
+            $item = (object) $item;
+            $bidders = $item->abstract_items;
+            foreach ($bidders as $bidder) {
+                $bidder = (object) $bidder;
+                $supplier = (object) $bidder->supplier;
                 $aitem = [
                     'rfq_id' => decryptUrlSafe($item->rfq_id),
                     'rfq_item_id' => decryptUrlSafe($item->id),
                     'abstract_id' => $abstract->id,
-                    'supplier_id' => decryptUrlSafe($bidder->id),
+                    'supplier_id' => decryptUrlSafe($supplier->id),
                     'item_number' => 0,
-                    'unit_cost' => $bidder_cost[array_keys($bidder_cost)[0]]['unit_cost'],//(count($bidder_cost ) > 0?:""),
-                    'total_cost' => $bidder_price[array_keys($bidder_price)[0]]['unit_price'],//(count($bidder_price ) > 0?:""),
+                    'unit_cost' => $bidder->unit_cost,
+                    'total_cost' => $bidder->total_cost,
                 ];
-                $abstractItemExist = AbstractModelItems::where('rfq_item_id', decryptUrlSafe($item->id));
+
+                $abstractItemExist = AbstractModelItems::where('rfq_item_id', decryptUrlSafe($item->id))->where('supplier_id', decryptUrlSafe($supplier->id));
                 if ($abstractItemExist->exists()) {
-                    AbstractModelItems::where('rfq_id', decryptUrlSafe($item->id))->update($aitem);
+                    AbstractModelItems::where('rfq_id', decryptUrlSafe($item->id))->where('supplier_id', decryptUrlSafe($supplier->id))->update($aitem);
                 }
                 else {
                     AbstractModelItems::create($aitem);
                 }
             }
+            
         }
         return ['success'];
     }

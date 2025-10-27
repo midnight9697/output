@@ -25,7 +25,7 @@
                 <h5>ABSTRACT</h5>
             </div>
             <div class="left floated right aligned eight wide column">
-                <button type="button" class="ui very tiny primary button create-abstarct-button">CREATE</button>
+                <button type="button" class="ui very tiny {{ $abstract?"green":'primary' }} button create-abstarct-button">{{ $abstract?"SAVE CHANGES":'CREATE' }}</button>
             </div>
         </div>
      </div>

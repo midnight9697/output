@@ -6,11 +6,44 @@ import { map } from "lodash";
 let selectedSuppliers = [];
 let current_item = {};
 let items = [];
+let all_supplier_lists = [];
 let abstract_header_columns;
 let main_header_column;
+let all_selected_suppliers = [];
 document.addEventListener('DOMContentLoaded', () => {
     abstract_header_columns = document.getElementById('abstract-header-columns');
     main_header_column = abstract_header_columns.children[0].innerHTML;
+
+    $('.submit_bidder_button').on('click', () => {
+        $('.form-abstract-bid').trigger('submit');
+    })
+
+    $('.ui.dropdown.suppliers').dropdown({
+        onChange: function(value, text, $choice) {
+            if (typeof $choice == "object") {
+                selectedSuppliers = selectedSuppliers.filter(el => (value.includes(el.name)));
+            }
+            else {
+                value.forEach(supplier_name => {
+                    if (selectedSuppliers.filter(el => el.supplier.name == supplier_name).length == 0) {
+                        let supplier = (current_item.abstract_items.find(el => el.supplier.name == text)?current_item.abstract_items.find(el => el.supplier.name == text):{
+                            supplier:all_supplier_lists.find(el => el.name == text),
+                            unit_cost: '',
+                            total_cost: '',
+                        });
+                        
+                        selectedSuppliers.push(supplier);
+                    }
+                });
+            }
+            console.log('supplier', selectedSuppliers);
+            if (!all_selected_suppliers.includes(text)) {
+                all_selected_suppliers.push(text);
+            }
+            biddersTable(selectedSuppliers);
+            console.log(selectedSuppliers);
+        }
+    });
 
     $('#addBiddderModal')
     .modal({
@@ -24,12 +57,30 @@ document.addEventListener('DOMContentLoaded', () => {
         $('.form-create-abstract').trigger('submit')
     });
 
+    abstractBidValidator.CreateAbstractBidValidation((e) => {
+        e.preventDefault();
+        let tmp_suppliers = $('.ui.dropdown.suppliers').dropdown('get value');
+        console.log(all_supplier_lists.filter(el => all_selected_suppliers.includes(el.name)));
+        projectsTable({
+            'items': items,
+            'all_supplier_lists': all_supplier_lists,
+            'suppliers': all_supplier_lists.filter(el => all_selected_suppliers.includes(el.name))
+        });
+        $('#addBiddderModal').modal('hide');
+    })
+
     abstractBidValidator.CreateAbstractValidation((e) => {
         e.preventDefault();
-        let tmp_item = items.map(el => {
-            return el.id == current_item.id?current_item:el;
-        });
-        console.log('tmp_item', current_item);
+        console.log('tmp_item', items);
+        abstractController.create({
+            purpose: $('#purpose').val(),
+            rfq_ids: [$('.ui.dropdown.rfqs').dropdown('get value')],
+            'items': items, //items with bidders
+        }, (res) => {
+            MessageMod.success('Abstract Created', () => {
+                window.location.reload();
+            });
+        })
     });
 
     abstractController.fetch_bidders($('.ui.dropdown.rfqs').dropdown('get value'), (bidders_response) => {
@@ -38,21 +89,26 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function biddersTable(bids) {
-    
+    current_item.abstract_items = selectedSuppliers;
     let projectrow = "";
     const biddersTableButton = new tableButtons();
-
+    let current_abstract_items = [];
     for (let i = 0; i < bids.length; i++) {
         const bid = bids[i];
+        console.log(bid);
+        
+        current_abstract_items.push(bid);
         projectrow += `
             <tr>
                 <td>${bid.supplier.name}</td>
-                <td><input type="text" value="${bid.unit_cost}" class="supplier_unit_price" id="unitprice${bid.supplier.id}" name="unit_price"  data-supplier="${bid.supplier.id}"placeholder=""></td>
-                <td><input type="text" value="${bid.total_cost}" class="supplier_unit_cost" id="unitcost${bid.supplier.id}" name="unit_cost" data-supplier="${bid.supplier.id}" placeholder=""></td>
+                <td><input type="text" value="${bid.unit_cost}" class="supplier_unit_price" data-supplier_name="${bid.supplier.name}" id="unitprice${bid.supplier.id}" name="unit_price"  data-supplier="${bid.supplier.id}"placeholder=""></td>
+                <td><input type="text" value="${bid.total_cost}" class="supplier_unit_cost" data-supplier_name="${bid.supplier.name}" id="unitcost${bid.supplier.id}" name="unit_cost" data-supplier="${bid.supplier.id}" placeholder=""></td>
             </tr>
         `;
     }
-
+    items = items.map((el) => {
+        return (el.id == current_item.id?current_item:el);
+    });
     if (bids.length == 0) {
         projectrow += `
             <tr>
@@ -62,12 +118,54 @@ function biddersTable(bids) {
     }
 
     document.getElementById('abstract-bidders-body').innerHTML = projectrow;
-   
+    
+    $('.supplier_unit_price').on('input', (e) => {
+        console.clear();
+        let abstract_item = current_item.abstract_items.find(el => el.supplier.name == e.target.dataset.supplier_name);
+        abstract_item = (abstract_item?abstract_item:{
+            'supplier': all_supplier_lists.find(el => el.name == e.target.dataset.supplier_name),
+            'unit_cost': '',
+            'total_cost': ''
+        })
+        abstract_item.unit_cost = e.target.value;
+        current_item.abstract_items = current_item.abstract_items.map(el => {
+            if (el.supplier.name == abstract_item.supplier.name) {
+                return abstract_item;
+            }
+            return el;
+        });
+        items = items.map(el => {
+            return (current_item.id == el.id?current_item:el);
+        });
+        console.log('items', items);
+    });
+
+    $('.supplier_unit_cost').on('input', (e) => {
+        console.clear();
+        let abstract_item = current_item.abstract_items.find(el => el.supplier.name == e.target.dataset.supplier_name);
+        abstract_item = (abstract_item?abstract_item:{
+            'supplier': all_supplier_lists.find(el => el.name == e.target.dataset.supplier_name),
+            'unit_cost': '',
+            'total_cost': ''
+        })
+        abstract_item.total_cost = e.target.value;
+        current_item.abstract_items = current_item.abstract_items.map(el => {
+            if (el.supplier.name == abstract_item.supplier.name) {
+                return abstract_item;
+            }
+            return el;
+        });
+        items = items.map(el => {
+            return (current_item.id == el.id?current_item:el);
+        });
+        console.log('items', items);
+    });
     biddersTableButton.relinitialize();
 }
 
 function projectsTable(data) {
     let projects = data.items;
+    all_supplier_lists = data.all_supplier_lists;
     let suppliers = data.suppliers;
     let ht_supplier = "";
     abstract_header_columns.innerHTML = "";
@@ -76,6 +174,9 @@ function projectsTable(data) {
         ht_supplier += `
             <th colspan="2" rowspan="2">${supplier.name}</th>
         `;
+        if (!all_selected_suppliers.includes(supplier.name)) {
+            all_selected_suppliers.push(supplier.name);
+        }
     });
     
     abstract_header_columns.innerHTML = `
@@ -93,19 +194,19 @@ function projectsTable(data) {
     `;
 
     items = projects;
-    items = items.map((e) => {
-        let item = e;
-        item['bidders'] = [];
-        item['bidders']['supplier'] = null;
-        return item;
-    });
+    // items = items.map((e) => {
+    //     let item = e;
+    //     item['bidders'] = [];
+    //     // item['bidders']['supplier'] = null;
+    //     return item;
+    // });
     let projectrow = "";
     for (let i = 0; i < projects.length; i++) {
         const proj = projects[i];
         let parent = document.createElement('div');
         TBLButton.data = proj;
         TBLButton.updateAction = true;
-        TBLButton.udpateName = "Supplier";
+        TBLButton.udpateName = "BIDDERS";
         TBLButton.updateClassName = "updateItem";
         TBLButton.loadButtons(parent);
         let supplierRow = "";
@@ -138,14 +239,17 @@ function projectsTable(data) {
     $('.updateItem').on('click', (e) => {
         $('.ui.dropdown.suppliers').dropdown('clear');
         let item = items.find(el => el.id == e.target.dataset.id);
+        
         let selected = [];
         selectedSuppliers = [];
         current_item = item;
+        console.log('Shit', current_item.abstract_items);
         item.abstract_items.forEach(abstract_item => {
             selected.push(abstract_item.supplier.name);
+            
+            selectedSuppliers.push(abstract_item);
         });
-        console.log(current_item);
-        biddersTable(item.abstract_items);
+        biddersTable(selectedSuppliers);
         $('.ui.dropdown.suppliers').dropdown('set selected', selected);
         $('#description').val(e.target.dataset.specification);
         $('#quantity').val(e.target.dataset.quantity_unit);

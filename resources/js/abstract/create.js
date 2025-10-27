@@ -172,23 +172,32 @@ function projectsTable(data) {
     let blank_supplier = ""
     suppliers.forEach(supplier => {
         ht_supplier += `
-            <th colspan="2" rowspan="2">${supplier.name}</th>
+            <th style="text-align:center" colspan="2">${supplier.name}</th>
         `;
         if (!all_selected_suppliers.includes(supplier.name)) {
             all_selected_suppliers.push(supplier.name);
         }
+
+        blank_supplier += `
+            <th style="width:120px;text-align:center">UNIT COST</th>
+            <th style="width:120px;text-align:center">TOTAL COST</th>
+        `;
     });
     
     abstract_header_columns.innerHTML = `
         <tr>
-            <th rowspan="2">ITEM</th>
-            <th rowspan="2">QTY</th>
-            <th rowspan="2">UNIT</th>
-            <th rowspan="2">ITEM/DESCRIPTION</th>
+            <th style="text-align:center">ITEM</th>
+            <th style="text-align:center">QTY</th>
+            <th style="text-align:center">UNIT</th>
+            <th style="text-align:center">ITEM/DESCRIPTION</th>
             ${ht_supplier}
             <th rowspan="2">ACTION</th>
         </tr>
         <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
             ${blank_supplier}
         </tr>
     `;

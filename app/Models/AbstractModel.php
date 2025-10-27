@@ -16,4 +16,9 @@ class AbstractModel extends Model {
         'filetype',
         'creator',
     ];
+
+    public function abstract_items() {
+        $sections = $this->hasMany(Section::class, 'division_id');
+        return $sections;
+    }
 }

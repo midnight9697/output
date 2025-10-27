@@ -89,6 +89,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('create', [AbstractController::class, 'create'])->name('abstract create');
         Route::get('process/{id}', [AbstractController::class, 'create'])->name('abstract (BAC)');
         Route::get('update', [AbstractController::class, 'create'])->name('abstract update');
+        Route::get('preview/{abstract_id}', [AbstractController::class, 'preView'])->name('abstract preview');
     });
 
     Route::prefix('division')->group(function() {

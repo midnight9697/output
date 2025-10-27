@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\AbstractModel;
 use App\Models\RFQ;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Dompdf\Options;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class MyClass {
     public $property1;
@@ -44,6 +47,31 @@ class AbstractController extends Controller {
         return view('admin.abstract.create', [
             'rfq' => encryptSingle($rfq->first())
         ]);
+    }
+
+    public function preView($abstract_id) {
+        $id = decryptUrlSafe($abstract_id);
+        $abstract = AbstractModel::where('id', $id)->with('abstract_items')->first();
+        // if (!Gate::allows('pr-file-view', $abstract->id)) {
+        //     abort(403, 'Unauthorize action.');
+        // }
+        $suppliers = [];
+        foreach ($abstract->abstract_items as $item) {
+            // $suppliers[] = (object)$item->supplier;
+        }
+        $data = json_encode((object)['data' => public_path(''), 'id' => $id, 'abstract' => $abstract, 'suppliers' => $suppliers]);
+       
+        $pdf = Pdf::loadView('admin.abstract.preview', [
+            'data' => $data
+        ]);
+
+        $pdf->setOptions(['isRemoteEnabled' =>true]);
+        $pdf->setPaper('folio', 'landscape');
+        return $pdf->stream();
+        // return view('admin.abstract.preview', [
+        //     'data' => $data
+        // ]);
+        
     }
 
 }

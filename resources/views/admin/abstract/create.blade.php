@@ -25,6 +25,9 @@
                 <h5>ABSTRACT</h5>
             </div>
             <div class="left floated right aligned eight wide column">
+                <a href="{{ route('abstract preview', [
+                    'abstract_id' => encryptUrlSafe($abstract->id)
+                ]) }}" class="ui very tiny secondary button">PREVIEW</a>
                 <button type="button" class="ui very tiny {{ $abstract?"green":'primary' }} button create-abstarct-button">{{ $abstract?"SAVE CHANGES":'CREATE' }}</button>
             </div>
         </div>

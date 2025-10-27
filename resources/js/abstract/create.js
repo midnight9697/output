@@ -136,6 +136,7 @@ function projectsTable(data) {
     }
     document.getElementById('abstract-items-body').innerHTML = projectrow;
     $('.updateItem').on('click', (e) => {
+        
         $('.ui.dropdown.suppliers').dropdown('clear');
         let item = items.find(el => el.id == e.target.dataset.id);
         let selected = [];
@@ -144,7 +145,7 @@ function projectsTable(data) {
         item.abstract_items.forEach(abstract_item => {
             selected.push(abstract_item.supplier.name);
         });
-        console.log(current_item);
+        
         biddersTable(item.abstract_items);
         $('.ui.dropdown.suppliers').dropdown('set selected', selected);
         $('#description').val(e.target.dataset.specification);

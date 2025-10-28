@@ -21,4 +21,8 @@ class AbstractModelItems extends Model {
     public function supplier() {
         return $this->hasOne(Supplier::class, 'id', 'supplier_id');
     }
+    
+    public function item() {
+        return $this->hasOne(RFQItem::class, 'id', 'rfq_item_id');
+    }
 }

@@ -38,6 +38,11 @@
                 padding:5px;
                 /* display:inline-block */
             }
+            thead, th, td {
+                border: solid black 1px;
+                text-align:center;
+                padding: 5px;
+            }
         </style>
     </head>
     <body>
@@ -51,12 +56,36 @@
                         <th>UNIT</th>
                         <th>DESCRIPTION</th>
                         @foreach (json_decode($data)->suppliers as $supplier)
-                            <th>{{ "Supplier" }}</th>
+                            <th colspan="2">{{ $supplier->name }}</th>
                         @endforeach
                     </tr>
+                   <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        @foreach (json_decode($data)->suppliers as $supplier)
+                            <th style="width:120px">UNIT COST</th>
+                            <th style="width:120px">TOTAL COST</th>
+                        @endforeach
+                   </tr>
                 </thead>
                 <tbody>
-                  
+                    @foreach (json_decode($data)->abstract->abstract_items as $key => $abstract_item)
+                        <tr>
+                            <td>{{ ($key+1) }}</td>
+                            <td>{{ $abstract_item->item->quantity_unit }}</td>
+                            <td>{{ "N/A" }}</td>
+                            <td>{{ $abstract_item->item->specification }}</td>
+                            @foreach (json_decode($data)->suppliers as $supplier)
+                                @php
+                                    $bidder = ($supplier->name === $abstract_item->supplier->name);
+                                @endphp
+                                <td>{{ $bidder?$abstract_item->unit_cost: ""}}</td>
+                                <td>{{ $bidder?$abstract_item->total_cost: ""}}</td>
+                            @endforeach
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

@@ -57,8 +57,14 @@ class AbstractController extends Controller {
         // }
         $suppliers = [];
         foreach ($abstract->abstract_items as $item) {
-            // $suppliers[] = (object)$item->supplier;
+            $onTheList = array_filter($suppliers, function($supplier) use($item) {
+                return $supplier->name == $item->supplier->name;
+            });
+            if (count($onTheList) == 0) {
+                $suppliers[] = (object)$item->supplier;
+            }
         }
+        // return ['abstract' => $abstract, 'suppliers' => $suppliers];
         $data = json_encode((object)['data' => public_path(''), 'id' => $id, 'abstract' => $abstract, 'suppliers' => $suppliers]);
        
         $pdf = Pdf::loadView('admin.abstract.preview', [

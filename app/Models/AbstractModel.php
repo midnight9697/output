@@ -18,7 +18,9 @@ class AbstractModel extends Model {
     ];
 
     public function abstract_items() {
-        $sections = $this->hasMany(Section::class, 'division_id');
+        $sections = $this->hasMany(AbstractModelItems::class, 'abstract_id')->with('item');
         return $sections;
     }
+
+    
 }

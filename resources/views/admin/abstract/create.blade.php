@@ -27,7 +27,7 @@
             <div class="left floated right aligned eight wide column">
                 <a href="{{ route('abstract preview', [
                     'abstract_id' => encryptUrlSafe($abstract->id)
-                ]) }}" class="ui very tiny secondary button">PREVIEW</a>
+                ]) }}" class="ui very tiny secondary button" target="__blank">PREVIEW</a>
                 <button type="button" class="ui very tiny {{ $abstract?"green":'primary' }} button create-abstarct-button">{{ $abstract?"SAVE CHANGES":'CREATE' }}</button>
             </div>
         </div>

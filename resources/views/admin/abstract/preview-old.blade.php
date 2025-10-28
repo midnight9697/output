@@ -1,23 +1,9 @@
 <style>
-    @page {
-        /* display:inline-block; */
-    }
-    thead {
-        display: table-header-group; /* default behavior */
-    }
-
-    thead {
-        display: table-row-group !important; /* prevent repeating */
-    }
     .table-container {
-        width: 100%;       /* div takes full width of parent */
-        max-width: 100%;   /* prevents overflow */
-        /* font-size: clamp(30px, 100px, 60px) !important;  */
-        /* -webkit-text-size-adjust: 10%; */
-        transform-origin:center top;
-        font-family: "Helvetica", "Arial", sans-serif;
-        
-      
+      width: 100%;       /* div takes full width of parent */
+      max-width: 100%;   /* prevents overflow */
+      /* font-size: clamp(30px, 100px, 60px) !important;  */
+      /* -webkit-text-size-adjust: 10%; */
     }
     /* table, th, td {
         border: 1px solid black;
@@ -27,7 +13,7 @@
     } */
     .table-container table {
         width: 100%;
-        /* table-layout: fixed; */
+        table-layout: fixed;
         border-collapse: collapse;
         /*font-size: clamp(2rem, 10%, 4rem); text scales between 12px and 16px */
     }
@@ -37,24 +23,18 @@
         border: 1px solid #ccc;
         word-wrap: break-word;  /* wraps long content inside cell */
         white-space: normal;    /* allows text to wrap */
-        text-align: center;
-    }
-    
-    table, tr, td, th {
-        page-break-inside: auto !important;
-        break-inside: auto !important;
     }
 </style>
-            <img src="{{ (!$data?$url:json_decode($data)->data) }}/files/images/abstract-header.png" alt="footer.png" height="80px"style="left: 0;right: 0;position:absolute;background-color: white;background-blend-mode: luminosity;width:100%">
-
-            <div class="table-container" id="content" style=" transform: scale({{ (isset(json_decode($data)->scaleX)?json_decode($data)->scaleX:1) }});">
-                <table style="margin-top:100px">
+<div style="font-size: clamp(2px, 5vw, 12px) !important;">
+        <div class="table-container">
+            {{-- <img src="{{ (!$data?$url:json_decode($data)->data) }}/files/images/abstract-header.png" alt="footer.png" height="80px" width="98%" style="left: 1%;position:absolute;background-color: white;background-blend-mode: luminosity;"> --}}
+                <table>
                     <thead>
                         <tr>
-                            <th style="width:120px">ITEM</th>
-                            <th style="width:120px">QUANTITY</th>
-                            <th style="width:120px">UNIT</th>
-                            <th style="width: 400px">DESCRIPTION</th>
+                            <th>ITEM</th>
+                            <th>QUANTITY</th>
+                            <th>UNIT</th>
+                            <th style="min-width: 500px">DESCRIPTION</th>
                             @foreach (json_decode($data)->suppliers as $supplier)
                                 <th colspan="2">{{ $supplier->name }}</th>
                             @endforeach
@@ -98,3 +78,4 @@
                     </tbody>
                 </table>
         </div>
+</div>

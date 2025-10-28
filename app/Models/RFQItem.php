@@ -20,4 +20,8 @@ class RFQItem extends Model {
     public function quotation() {
         return $this->hasOne(RFQ::class, 'id', 'rfq_id');
     }
+
+    public function abstract_items() {
+        return $this->hasMany(AbstractModelItems::class, 'rfq_item_id')->with('supplier');
+    }
 }

@@ -7,7 +7,7 @@ class WkhtmltoimageService {
 
     public function __construct()
     {
-        $this->binary = base_path('app/Http/Controllers/bin/wkhtmltoimage');
+        $this->binary = base_path(env('WKHTMLTOIMAGE_PATH'));
         //   $binary = base_path('app/Http/Controllers/bin/wkhtmltoimage');
         //  return shell_exec("$binary --version 2>&1");
         if (!file_exists($this->binary)) {

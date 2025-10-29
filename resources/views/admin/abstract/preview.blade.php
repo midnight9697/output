@@ -107,7 +107,54 @@
                         @endforeach
                     </tr>
                 @endforeach
-                
+                @foreach (json_decode($data)->items as $key => $item)
+                    @php
+                        $abstract_items = $item->abstract_items;
+                    @endphp
+                    <tr>
+                        <td>{{ ($key+1) }}</td>
+                        <td>{{ $item->quantity_unit }}</td>
+                        <td>{{ "N/A" }}</td>
+                        <td>{{ $item->specification }}</td>
+                        @foreach (json_decode($data)->suppliers as $supplier)
+                            @php
+                                $bidders = array_filter($abstract_items, function($abstract_item) use($supplier) {
+                                    return $abstract_item->supplier->name == $supplier->name;
+                                });
+                                $bidder = null;
+                                if (count($bidders) > 0) {
+                                    $bidder = $bidders[array_keys($bidders)[0]];
+                                }
+                            @endphp
+                            <td>{{ $bidder?$bidder->unit_cost: ""}}</td>
+                            <td>{{ $bidder?$bidder->total_cost: ""}}</td>
+                        @endforeach
+                    </tr>
+                @endforeach
+                @foreach (json_decode($data)->items as $key => $item)
+                    @php
+                        $abstract_items = $item->abstract_items;
+                    @endphp
+                    <tr>
+                        <td>{{ ($key+1) }}</td>
+                        <td>{{ $item->quantity_unit }}</td>
+                        <td>{{ "N/A" }}</td>
+                        <td>{{ $item->specification }}</td>
+                        @foreach (json_decode($data)->suppliers as $supplier)
+                            @php
+                                $bidders = array_filter($abstract_items, function($abstract_item) use($supplier) {
+                                    return $abstract_item->supplier->name == $supplier->name;
+                                });
+                                $bidder = null;
+                                if (count($bidders) > 0) {
+                                    $bidder = $bidders[array_keys($bidders)[0]];
+                                }
+                            @endphp
+                            <td>{{ $bidder?$bidder->unit_cost: ""}}</td>
+                            <td>{{ $bidder?$bidder->total_cost: ""}}</td>
+                        @endforeach
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>

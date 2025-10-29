@@ -22,5 +22,9 @@ class AbstractModel extends Model {
         return $sections;
     }
 
+    public function quotation() {
+        return $this->hasOne(RFQ::class, 'id', 'rfq_id');
+    }
+
     
 }

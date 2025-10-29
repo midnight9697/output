@@ -62,6 +62,7 @@ class AbstractController extends Controller {
     }
 
     public function generate($abstract_id) {
+        
         return env('WKHTMLTOIMAGE_PATH');
        
         $id = decryptUrlSafe($abstract_id);
@@ -166,6 +167,7 @@ class AbstractController extends Controller {
     }
 
     public function preView($abstract_id) {
+      
         $id = decryptUrlSafe($abstract_id);
         $abstract = AbstractModel::where('id', $id)->with('quotation')->with('abstract_items')->first();
         $rfq_items = RFQItem::where('rfq_id', $abstract->rfq_id)->with('abstract_items')->get();

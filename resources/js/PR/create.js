@@ -19,7 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     PRValidator.CreatePRValidation((e) => {
         e.preventDefault();
-        PRClass.creatPR(PRValidator.serializeArrayToJson('.createpr'), PRValidator.items, (e) => {
+        let serielize = PRValidator.serializeArrayToJson('.createpr');
+        PRClass.creatPR(serielize, PRValidator.items, (e) => {
             window.location.reload(true);
         });
     });

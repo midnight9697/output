@@ -1,3 +1,4 @@
+import { PRClass } from "../PR/purchase_request";
 import { PRValidator } from "../PR/validation";
 import { TBLButton } from "../table/buttons";
 import Custom_table from "../table/custom_table";
@@ -19,9 +20,26 @@ document.addEventListener('DOMContentLoaded', () => {
     
 });
 
+PRClass.getPrItems(localStorage.getItem('pr_id'), (data) => {
+    let items = data.items;
+    let tmp_items = [];
+    items.forEach(item => {
+        tmp_items.push({
+            id: Math.floor(Math.random() * 1000),
+            bidder_specs: item.item_description,
+            quantity_unit: item.quantity,
+            specification: item.item_description,
+            total_price: item.total_cost,
+            unit_price: item.unit_cost
+        })
+    });
+
+    RFQValidator.items = [...tmp_items];
+    specsTable(tmp_items);
+});
+
 RFQValidator.CreateRFQValidation((e) => {
     e.preventDefault();
-    console.log(RFQValidator.serializeArrayToJson('#formCreateRFQ'));
     let data = {
         'project_purpose': PRValidator.serializeArrayToJson('.formCreateRFQ').project_purpose,
         'rfq_number': PRValidator.serializeArrayToJson('.formCreateRFQ').rfq_number,
@@ -30,7 +48,8 @@ RFQValidator.CreateRFQValidation((e) => {
         'standard_unit': PRValidator.serializeArrayToJson('.formCreateRFQ').standard_unit,
         'target_delivery_date': PRValidator.serializeArrayToJson('.formCreateRFQ').target_deliver_date,
         'classification': PRValidator.serializeArrayToJson('.formCreateRFQ').classification,
-        'items': RFQValidator.items
+        'items': RFQValidator.items,
+        'pr_id': localStorage.getItem('pr_id')
     }
     rfqClass.creatRFQ(data, (e) => {
         window.location.reload(true);

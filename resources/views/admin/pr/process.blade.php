@@ -29,10 +29,16 @@
                         <p>PROCESS PURCHASE REQUEST</p>
                     </div>
                     <div class="eight wide column" style="text-align:end">
-                        {{ $pr->pr_number?$pr->pr_number:""}}
+                        @if ($pr->pr_number)
+                        <button class="ui very tiny white button"> {{ $pr->pr_number?$pr->pr_number:""}}</button>
+                        @endif
                         @if ($prof->exists() && $prof->first()->section_id == 12 && (!$pr->pr_number))
                             <button type="button" class="ui very tiny primary button" id="generate_pr_number">GENERATE PR NO.</button>
                         @endif
+                        <a href="{{ route('pr.rfq', [
+                                        'type' => 'create',
+                                        'pr_id' => $pr->id
+                                    ]) }}" class="ui very tiny primary button create_rfq_btn">CREATE RFQ</a>
                     </div>
                 </div>
             </div>

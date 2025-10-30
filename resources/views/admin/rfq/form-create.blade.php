@@ -5,7 +5,7 @@
 <div class="ui top attached segment">
     <div class="ui two column grid">
         <div class="column">
-            <button class="ui grey very tiny button">REQUEST FOR QUOTATION FORM</button>
+            <b>REQUEST FOR QUOTATION FORM</b> - <b style="{{ ($pr->pr_number?"color:green":"color:red") }}">{{ isset($pr)?($pr->pr_number?$pr->pr_number:"PR NUMBER NOT SET"):"" }}</b>
         </div>
         <div class="column" style="text-align: right">
             <button class="ui primary very tiny button submit_rfq_form_button">PROCEED</button>
@@ -100,6 +100,13 @@
 </div>
 @endsection
 @section('custom_js')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+    @if (isset($pr))
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            localStorage.setItem('pr_id', "{{ $pr->id }}");
+        })
+    </script>
+    @endif
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script> --}}
     @vite(['resources/js/rfq/create.js'])
 @endsection

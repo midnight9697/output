@@ -72,10 +72,11 @@ class RFQController extends Controller {
         RFQItem::whereNotIn('id', $new_item_ids)->where('rfq_id', $id)->delete();
         return ['success', $rfq];
     }
-    
+
     public function create_rfq(Request $request) {
         $rfq = RFQ::create([
             'project_purpose' => $request->project_purpose,
+            'pr_id' => decryptUrlSafe($request->pr_id),
             'rfq_number' => $request->rfq_number, //date('y-m')+'-'.str_pad((RFQ::count() + 1), 3, '0',STR_PAD_LEFT),
             'attachment_one' => $request->attachment_one,
             'aproved_budget' => $request->aproved_budget,

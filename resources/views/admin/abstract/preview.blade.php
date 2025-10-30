@@ -55,27 +55,23 @@
     </div>
    
     <div class="table-container">
-        @include('admin.abstract.abstract-details', ['left_value' => 'PR2025-02-001', 'left' => 'Office/End-user', 'right' => 'PR No.'])
-        @include('admin.abstract.abstract-details', ['left_value' => json_decode($data)->abstract->quotation->project_purpose, 'left' => 'Project Name', 'right' => 'PR Date'])
-        @include('admin.abstract.abstract-details', ['left_value' => '', 'left' => 'Funding Source', 'right' => 'RFQ No.'])
+        @include('admin.abstract.abstract-details', ['left_value' => 'PR2025-02-001', 'left' => 'Office/End-user', 'right' => 'PR No.', 'right_value' =>  json_decode($data)->abstract->quotation->purchase_requst->pr_number])
+        @include('admin.abstract.abstract-details', ['left_value' => json_decode($data)->abstract->quotation->project_purpose, 'left' => 'Project Name', 'right' => 'PR Date', 'right_value' => date('Y-m-d', strtotime(json_decode($data)->abstract->quotation->purchase_requst->created_at))])
+        @include('admin.abstract.abstract-details', ['left_value' => '', 'left' => 'Funding Source', 'right' => 'RFQ No.', 'right_value' => json_decode($data)->abstract->quotation->rfq_number])
         @include('admin.abstract.abstract-details', ['left_value' => (json_decode($data)->abstract->quotation->classification), 'left' => 'Mode of Procurement', 'right' => 'Date of Opening'])
         @include('admin.abstract.abstract-details', ['left_value' => '', 'left' => 'ABC', 'right' => 'Time'])
         <table>
             <thead>
                 <tr>
-                    <th>ITEM</th>
-                    <th>QUANTITY</th>
-                    <th>UNIT</th>
-                    <th style="min-width: 300px">DESCRIPTION</th>
+                    <th rowspan="2">ITEM</th>
+                    <th rowspan="2">QUANTITY</th>
+                    <th rowspan="2">UNIT</th>
+                    <th rowspan="2" style="min-width: 300px">DESCRIPTION</th>
                     @foreach (json_decode($data)->suppliers as $supplier)
                         <th colspan="2">{{ $supplier->name }}</th>
                     @endforeach
                 </tr>
                <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
                     @foreach (json_decode($data)->suppliers as $supplier)
                         <th>UNIT COST</th>
                         <th>TOTAL COST</th>
@@ -83,54 +79,6 @@
                </tr>
             </thead>
             <tbody>
-                @foreach (json_decode($data)->items as $key => $item)
-                    @php
-                        $abstract_items = $item->abstract_items;
-                    @endphp
-                    <tr>
-                        <td>{{ ($key+1) }}</td>
-                        <td>{{ $item->quantity_unit }}</td>
-                        <td>{{ "N/A" }}</td>
-                        <td>{{ $item->specification }}</td>
-                        @foreach (json_decode($data)->suppliers as $supplier)
-                            @php
-                                $bidders = array_filter($abstract_items, function($abstract_item) use($supplier) {
-                                    return $abstract_item->supplier->name == $supplier->name;
-                                });
-                                $bidder = null;
-                                if (count($bidders) > 0) {
-                                    $bidder = $bidders[array_keys($bidders)[0]];
-                                }
-                            @endphp
-                            <td>{{ $bidder?$bidder->unit_cost: ""}}</td>
-                            <td>{{ $bidder?$bidder->total_cost: ""}}</td>
-                        @endforeach
-                    </tr>
-                @endforeach
-                @foreach (json_decode($data)->items as $key => $item)
-                    @php
-                        $abstract_items = $item->abstract_items;
-                    @endphp
-                    <tr>
-                        <td>{{ ($key+1) }}</td>
-                        <td>{{ $item->quantity_unit }}</td>
-                        <td>{{ "N/A" }}</td>
-                        <td>{{ $item->specification }}</td>
-                        @foreach (json_decode($data)->suppliers as $supplier)
-                            @php
-                                $bidders = array_filter($abstract_items, function($abstract_item) use($supplier) {
-                                    return $abstract_item->supplier->name == $supplier->name;
-                                });
-                                $bidder = null;
-                                if (count($bidders) > 0) {
-                                    $bidder = $bidders[array_keys($bidders)[0]];
-                                }
-                            @endphp
-                            <td>{{ $bidder?$bidder->unit_cost: ""}}</td>
-                            <td>{{ $bidder?$bidder->total_cost: ""}}</td>
-                        @endforeach
-                    </tr>
-                @endforeach
                 @foreach (json_decode($data)->items as $key => $item)
                     @php
                         $abstract_items = $item->abstract_items;

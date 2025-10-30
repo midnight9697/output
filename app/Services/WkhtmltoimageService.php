@@ -7,8 +7,9 @@ class WkhtmltoimageService {
 
     public function __construct()
     {
-        $this->binary = env('WKHTMLTOIMAGE_PATH');
-
+        $this->binary = base_path(env('WKHTMLTOIMAGE_PATH'));
+        //   $binary = base_path('app/Http/Controllers/bin/wkhtmltoimage');
+        //  return shell_exec("$binary --version 2>&1");
         if (!file_exists($this->binary)) {
             throw new \Exception("wkhtmltoimage not found at {$this->binary}");
         }

@@ -82,6 +82,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::prefix('purchase_order')->group(function() {
         Route::get('/', [PurchaseOrderController::class, 'index'])->name('purchase order request');
+        Route::get('/create', [PurchaseOrderController::class, 'create'])->name('create purchase order request');
+        Route::get('form-update/{id}', [PurchaseOrderController::class, 'edit'])->name('RFQ FORM UPDATE');
+
     });
 
     Route::prefix('abstract')->group(function() {

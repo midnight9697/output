@@ -20,7 +20,6 @@ export default class Custom_table {
         self = this;
         this.dataSrc = function(json) {
             self.getItems(json);
-            console.log(json);
             return json.data;
         }
         // this.setEditor();

@@ -6,6 +6,7 @@ use App\Models\AbstractModel;
 use App\Models\RFQ;
 use App\Models\RFQItem;
 use App\Models\TemporaryImages;
+use App\Services\ParaphraserService;
 use App\Services\WkhtmltoimageService;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Dompdf\Options;
@@ -26,12 +27,15 @@ class MyClass {
 class AbstractController extends Controller {
 
     protected WkhtmltoimageService $service;
+    protected ParaphraserService $pharService;
     
-    public function __construct(WkhtmltoimageService $service) {
+    public function __construct(WkhtmltoimageService $service, ParaphraserService $pharService) {
         $this->service = $service;
+        $this->pharService = $pharService;
     }
 
     public function index(){
+        return $this->pharService->rephrase("You fucking awesome");
         return view('admin.abstract.index');
     }
 

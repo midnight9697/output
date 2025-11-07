@@ -34,6 +34,11 @@ class RFQ extends Model {
         return $user;
     }
 
+    public function created_by() {
+        $user = $this->hasOne(User::class, 'creator', 'id');
+        return $user;
+    }
+
     public function purchase_requst() {
         $user = $this->hasOne(PurchaseRequest::class, 'id', 'pr_id');
         return $user;

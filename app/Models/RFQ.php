@@ -35,7 +35,7 @@ class RFQ extends Model {
     }
 
     public function created_by() {
-        $user = $this->hasOne(User::class, 'creator', 'id');
+        $user = $this->hasOne(User::class, 'id', 'creator');
         return $user;
     }
 

@@ -67,7 +67,8 @@ function CTable(CTBL, tab = 'inbox') {
     CTBL.custom_buttons = (data) => {
       
       let div = document.createElement('div');
-      TBLButton.viewName = "Abstract";
+      TBLButton.viewName = "ABSTRACT";
+      TBLButton.udpateName = "UPDATE";
       TBLButton.updateAction = () => {
         window.location = "./rfq/form-update/"+data.id;        
       }

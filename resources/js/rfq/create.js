@@ -35,6 +35,7 @@ PRClass.getPrItems(localStorage.getItem('pr_id'), (data) => {
     });
 
     RFQValidator.items = [...tmp_items];
+    
     specsTable(tmp_items);
 });
 

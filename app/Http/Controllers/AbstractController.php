@@ -33,7 +33,7 @@ class AbstractController extends Controller {
         $this->service = $service;
         $this->pharService = $pharService;
     }
-
+    
     public function index(){
         // return $this->pharService->rephrase("You fucking awesome");
         return view('admin.abstract.index');

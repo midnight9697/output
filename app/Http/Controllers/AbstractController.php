@@ -35,7 +35,7 @@ class AbstractController extends Controller {
     }
 
     public function index(){
-        return $this->pharService->rephrase("You fucking awesome");
+        // return $this->pharService->rephrase("You fucking awesome");
         return view('admin.abstract.index');
     }
 

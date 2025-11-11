@@ -5,9 +5,12 @@
 <div class="ui top attached segment">
     <div class="ui two column grid">
         <div class="column">
-            <button class="ui grey very tiny button">REQUEST FOR QUOTATION FORM</button>
+            <b>REQUEST FOR QUOTATION FORM</b> - <b style="{{ ($pr->pr_number?"color:green":"color:red") }}">{{ isset($pr)?($pr->pr_number?$pr->pr_number:"PR NUMBER NOT SET"):"" }}</b>
         </div>
         <div class="column" style="text-align: right">
+            <a href="{{ route('abstract (BAC)', [
+                'id' => $pr->id
+            ]) }}" class="ui very tiny primary button">CREATE ABSTRACT</a>
             <button class="ui green very tiny button submit_rfq_form_button">SAVE CHANGES</button>
         </div>
     </div>

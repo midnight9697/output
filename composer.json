@@ -12,7 +12,8 @@
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
-        "mikehaertl/php-pdftk": "^0.13.1",
+        "mikehaertl/phpwkhtmltopdf": "^2.5",
+        "openai-php/client": "^0.18.0",
         "setasign/fpdf": "^1.8",
         "setasign/fpdi": "^2.6",
         "yajra/laravel-datatables": "^9.0",
@@ -67,7 +68,8 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "allow-plugins": {
-            "pestphp/pest-plugin": true
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true
         }
     },
     "minimum-stability": "stable",

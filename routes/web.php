@@ -70,6 +70,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('view/{id}', [PurchaseRequestController::class, 'viewPR'])->name('view.purchase request');
         Route::get('process/{id}', [PurchaseRequestController::class, 'processView'])->name('process.purchase request');
         Route::post('decrypt_action', [PurchaseRequestController::class, 'decrypt_action'])->name('process.decrypt_action');
+        Route::get('rfq/{type}/{pr_id}', [RFQController::class, 'rfqFormCreate'])->name('pr.rfq');
     });
 
     Route::prefix('ppmp')->group(function() {
@@ -129,8 +130,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::prefix('login')->group(function() {
         Route::post('logout', [AuthController::class, 'logout']);
     });
-
-
 });
 
 Route::prefix('system')->group(function () {

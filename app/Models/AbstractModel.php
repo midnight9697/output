@@ -23,8 +23,7 @@ class AbstractModel extends Model {
     }
 
     public function quotation() {
-        return $this->hasOne(RFQ::class, 'id', 'rfq_id');
+        return $this->hasOne(RFQ::class, 'id', 'rfq_id')->with('purchase_requst');
     }
 
-    
 }

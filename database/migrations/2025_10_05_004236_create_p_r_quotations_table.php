@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('p_r_quotations', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('rfq_item_id')->constrained('quotation_items');
-            $table->foreignId('purchase_request_item_id')->constrained('p_r_items');
-            $table->timestamps();
-        });
+        // Schema::create('p_r_quotations', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->foreignId('rfq_item_id')->constrained('quotation_items');
+        //     $table->foreignId('purchase_request_item_id')->constrained('p_r_items');
+        //     $table->timestamps();
+        // });
     }
 
     /**
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('p_r_quotations');
+        // Schema::dropIfExists('p_r_quotations');
     }
 };

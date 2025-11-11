@@ -8,7 +8,7 @@
     use App\Models\Supplementary;
     use App\Models\Profile;
     $prof = Profile::where('user_id', auth()->user()->id);
-    $actions = encryptMany(Alternative::orderBy('id', 'desc')->get());
+    $actions = encryptMany($pr->pr_number?Alternative::orderBy('id', 'desc')->get():Alternative::orderBy('id', 'desc')->whereNot('id', 12)->get());
     $signed = array_filter($actions, function ($obj) {
         return decryptUrlSafe($obj->id)== 12;
     });
@@ -29,10 +29,16 @@
                         <p>PROCESS PURCHASE REQUEST</p>
                     </div>
                     <div class="eight wide column" style="text-align:end">
-                        {{ $pr->pr_number?$pr->pr_number:""}}
+                        @if ($pr->pr_number)
+                        <button class="ui very tiny white button"> {{ $pr->pr_number?$pr->pr_number:""}}</button>
+                        @endif
                         @if ($prof->exists() && $prof->first()->section_id == 12 && (!$pr->pr_number))
                             <button type="button" class="ui very tiny primary button" id="generate_pr_number">GENERATE PR NO.</button>
                         @endif
+                        {{-- <a href="{{ route('pr.rfq', [
+                            'type' => 'create',
+                            'pr_id' => $pr->id
+                        ]) }}" class="ui very tiny primary button create_rfq_btn">CREATE RFQ</a> --}}
                     </div>
                 </div>
             </div>
@@ -59,11 +65,11 @@
                         <select name="action" id="action_process">
                             @foreach (array_reverse($actions) as $action)
                                 @if (decryptUrlSafe($action->id) != 11)
-                                    <option value="{{ ($action->id) }}">{{ strtoupper(decryptUrlSafe($action->id) == 1?"--":$action->synonyms) }}</option>
-                                @endif
-                                @if (decryptUrlSafe($action->id) == 11 && $prof->first()->section_id == 12)
-                                    <option value="{{ ($action->id) }}">{{ strtoupper(decryptUrlSafe($action->id) == 1?"--":$action->synonyms) }}</option>
-                                @endif
+                                     <option value="{{ ($action->id) }}">{{ strtoupper(decryptUrlSafe($action->id) == 1?"--":$action->synonyms) }}</option>
+                                 @endif
+                                 @if (decryptUrlSafe($action->id) == 11 && $prof->first()->section_id == 12)
+                                     <option value="{{ ($action->id) }}">{{ strtoupper(decryptUrlSafe($action->id) == 1?"--":$action->synonyms) }}</option>
+                                 @endif
                             @endforeach
                         </select>
                     </div>

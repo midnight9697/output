@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string('project_purpose')->nullable();
             $table->string('rfq_number')->nullable();
+            $table->foreignId('pr_id')->nullable();
             $table->string('attachment_one')->nullable();
             $table->string('aproved_budget')->nullable();
             $table->string('standard_unit')->nullable();

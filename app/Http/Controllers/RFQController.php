@@ -14,9 +14,11 @@ class RFQController extends Controller {
     }
 
     public function rfqFormCreate($type, $pr_id) {
-        $pr = PurchaseRequest::where('id', decryptUrlSafe($pr_id));
+        $pr = PurchaseRequest::where('id', decryptUrlSafe($pr_id))->whereHas('transactions', function($query) {
+            return $query->where('action', 12);
+        });
         if (!$pr->exists()) {
-            return abort(404, 'Not Found');
+            return abort(401, 'Unauthorized Action');
         }
 
         if (RFQ::where('pr_id', $pr->first()->id)->exists()) {

@@ -11,6 +11,7 @@ use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Supplier;
 use App\Http\Controllers\API\SupplierController;
+use App\Http\Controllers\API\PurhaseOrderController;
 use App\Models\Alternative;
 use App\Models\PurchaseRequest;
 use Illuminate\Http\Request;
@@ -108,7 +109,17 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('create', [ABSTRACTController::class, 'create']);
     });
 
+    Route::prefix('purchase_order')->group(function() {
+        Route::get('page', [PurhaseOrderController::class, 'fetch_purchase_order']);
+        Route::post('remove', [PurhaseOrderController::class, 'remove']);
+        Route::post('create', [PurhaseOrderController::class, 'create']);
+        Route::post('fetch_suppliers', [PurhaseOrderController::class, 'fetch_suppliers']);
+        Route::post('select_suppliers', [PurhaseOrderController::class, 'select_suppliers']);
+    });
+
     Route::post('alternative', function(Request $request) {
         return encryptUrlSafe($request->id);
     });
+
+
 });

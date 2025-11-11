@@ -197,10 +197,9 @@
     "src": "resources/js/abstract/add_bidder.js"
   },
   "resources/js/abstract/create.js": {
-    "file": "assets/create-4610591d.js",
+    "file": "assets/create-9238d2e9.js",
     "imports": [
       "_buttons-029d3042.js",
-      "_rfq-aa6142fc.js",
       "resources/js/login/login.js"
     ],
     "isEntry": true,
@@ -216,7 +215,7 @@
     "src": "resources/js/abstract/index.js"
   },
   "resources/js/abstract/validation.js": {
-    "file": "assets/validation-f5ef5fbf.js",
+    "file": "assets/validation-4ed993c7.js",
     "isEntry": true,
     "src": "resources/js/abstract/validation.js"
   },
@@ -244,7 +243,7 @@
     "src": "resources/js/app/index.js"
   },
   "resources/js/app/validation.js": {
-    "file": "assets/validation-3f7a7dc7.js",
+    "file": "assets/validation-b5a35c2a.js",
     "isEntry": true,
     "src": "resources/js/app/validation.js"
   },
@@ -293,7 +292,7 @@
     "src": "resources/js/login/reset_password.js"
   },
   "resources/js/login/validation.js": {
-    "file": "assets/validation-4ed993c7.js",
+    "file": "assets/validation-c42ce534.js",
     "isEntry": true,
     "src": "resources/js/login/validation.js"
   },
@@ -396,7 +395,7 @@
     "src": "resources/js/supplemental/update.js"
   },
   "resources/js/supplemental/validation.js": {
-    "file": "assets/validation-b5a35c2a.js",
+    "file": "assets/validation-f5ef5fbf.js",
     "isEntry": true,
     "src": "resources/js/supplemental/validation.js"
   },
@@ -426,7 +425,7 @@
     "src": "resources/js/supplier/supplier.js"
   },
   "resources/js/supplier/validation.js": {
-    "file": "assets/validation-c42ce534.js",
+    "file": "assets/validation-3f7a7dc7.js",
     "isEntry": true,
     "src": "resources/js/supplier/validation.js"
   },

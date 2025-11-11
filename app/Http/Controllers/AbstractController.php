@@ -5,10 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\AbstractModel;
 use App\Models\RFQ;
 use App\Models\RFQItem;
+use App\Models\TemporaryImages;
+use App\Services\ParaphraserService;
+use App\Services\WkhtmltoimageService;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Dompdf\Options;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Spatie\Browsershot\Browsershot;
+use Intervention\Image\ImageManagerStatic as Image;
+use mikehaertl\wkhtmlto\Pdf as WkhtmltoPdf;
 
 class MyClass {
     public $property1;
@@ -17,8 +23,19 @@ class MyClass {
         return "This is a method.";
     }
 }
+
 class AbstractController extends Controller {
+
+    protected WkhtmltoimageService $service;
+    protected ParaphraserService $pharService;
+    
+    public function __construct(WkhtmltoimageService $service, ParaphraserService $pharService) {
+        $this->service = $service;
+        $this->pharService = $pharService;
+    }
+    
     public function index(){
+        // return $this->pharService->rephrase("You fucking awesome");
         return view('admin.abstract.index');
     }
 
@@ -52,11 +69,8 @@ class AbstractController extends Controller {
 
     public function preView($abstract_id) {
         $id = decryptUrlSafe($abstract_id);
-        $abstract = AbstractModel::where('id', $id)->with('abstract_items')->first();
+        $abstract = AbstractModel::where('id', $id)->with('quotation')->with('abstract_items')->first();
         $rfq_items = RFQItem::where('rfq_id', $abstract->rfq_id)->with('abstract_items')->get();
-        // if (!Gate::allows('pr-file-view', $abstract->id)) {
-        //     abort(403, 'Unauthorize action.');
-        // }
         $suppliers = [];
         foreach ($abstract->abstract_items as $item) {
             $onTheList = array_filter($suppliers, function($supplier) use($item) {
@@ -66,39 +80,11 @@ class AbstractController extends Controller {
                 $suppliers[] = (object)$item->supplier;
             }
         }
-        // return ['abstract' => $abstract, 'suppliers' => $suppliers];
+        
         $data = json_encode((object)['data' => public_path(''), 'id' => $id, 'abstract' => $abstract, 'suppliers' => $suppliers, 'items' => $rfq_items]);
-        $pdf = Pdf::loadView('admin.abstract.preview', [
+        $html = view('admin.abstract.preview', [
             'data' => $data
-        ]);
-        $pdf->setPaper('folio', 'landscape');
-        $pdf->render();
-        
-        $canvas = $pdf->getDomPDF()->getCanvas();
-        $pageWidth = $canvas->get_width();
-        $contentWidth = (760 + (count($suppliers) * 240));
-        $contentWidth = $contentWidth - ($pageWidth * 0.202991452991453);
-        $scaleX = $pageWidth / $contentWidth;
-        if ($scaleX < 1) {
-            $scaleX = min(1, $pageWidth / $contentWidth);
-            // return ['page' => $pageWidth, 'content' => $contentWidth, $scaleX." of content" => $contentWidth * $scaleX];
-            $data = json_encode((object)['data' => public_path(''), 'id' => $id, 'abstract' => $abstract, 'suppliers' => $suppliers, 'items' => $rfq_items, 'scaleX' => $scaleX]);
-            
-            $scaledHtml = view('admin.abstract.preview',['data' =>  $data])->render();
-            $scaledHtml = "
-                {$scaledHtml}
-            ";
-
-            // $pdf->set_paper(array(0,0,1000,2000)); //
-            // $pdf->setOptions(['isRemoteEnabled' =>true, 'dpi' => 74]);
-            $pdf = Pdf::loadHTML($scaledHtml)->setPaper('folio', 'landscape');
-        }
-      
-        return $pdf->stream();
-        // return view('admin.abstract.preview', [
-        //     'data' => $data
-        // ]);
-        
+        ])->render(); // or load your React build’s HTML
+        return $this->service->GeneratePdf($html, $abstract->purpose);
     }
-
 }

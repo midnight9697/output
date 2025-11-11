@@ -78,6 +78,10 @@
                                     ITEMS
                                 </div>
                                 <div class="left floated right aligned eight wide column">
+                                    <a href="{{ route('pr.rfq', [
+                                        'type' => 'create',
+                                        'pr_id' => $pr->id
+                                    ]) }}" class="ui very tiny primary button create_rfq_btn">CREATE RFQ</a>
                                     <button type="button" class="ui very tiny primary button add_item_btn">ADD</button>
                                 </div>
                             </div>

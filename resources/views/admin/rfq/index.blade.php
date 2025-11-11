@@ -1,12 +1,12 @@
 @extends('layout.app')
 
 @section('main_content')
-    @include('default.create-button', [
+    {{-- @include('default.create-button', [
       'name' => 'create_rfq_btn',
       'text' => 'CREATE RFQ',
       'icon' => 'plus',
       'link' => url('rfq/form-create')
-    ])
+    ]) --}}
     {{-- <input type="file" id="fileInput" />
     <pre id="output"></pre>
     

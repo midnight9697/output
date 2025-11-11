@@ -49,7 +49,7 @@ class Transaction extends Model
     }
 
     public function purchase_request() {
-        return $this->hasOne(PurchaseRequest::class, 'purchase_request_id');
+        return $this->hasOne(PurchaseRequest::class, 'id', 'purchase_request_id');
     }
 
     public function getReplaceAttribute() {

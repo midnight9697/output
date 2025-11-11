@@ -18,6 +18,7 @@ class RFQ extends Model {
         'classification',
         'creator',
         'remarks',
+        'pr_id',
     ];
 
     public function items() {
@@ -30,6 +31,16 @@ class RFQ extends Model {
 
     public function abstract() {
         $user = $this->hasOne(AbstractModel::class, 'rfq_id', 'id');
+        return $user;
+    }
+
+    public function created_by() {
+        $user = $this->hasOne(User::class, 'id', 'creator');
+        return $user;
+    }
+
+    public function purchase_requst() {
+        $user = $this->hasOne(PurchaseRequest::class, 'id', 'pr_id');
         return $user;
     }
 }

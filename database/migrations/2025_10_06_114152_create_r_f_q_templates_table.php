@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('quotation_templates', function (Blueprint $table) {
-            $table->id();
-            $table->json('contents')->nullable();
-            $table->timestamps();
-        });
+        // Schema::create('quotation_templates', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->json('contents')->nullable();
+        //     $table->timestamps();
+        // });
     }
 
     /**
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('quotation_templates');
+        // Schema::dropIfExists('quotation_templates');
     }
 };

@@ -21,12 +21,12 @@
           <img src="{{ url('files/images/emb.png') }}" class="ui very tiny circular image centered">
         </div>
         <div class="content" style="text-align: center">
-          <span class="header">{{ Auth::user()->full_name }}</span>
+          <span class="header">{{ auth()->user()->full_name }}</span>
           {{-- <div class="meta">
             <span class="date">{{ Auth::user()->full_name }}</span>
           </div> --}}
           <div class="description">
-            {{ Auth::user()->profile->position }}
+            {{ auth()->user()->profile->position }}
           </div>
         </div>
     </div>

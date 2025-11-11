@@ -25,7 +25,7 @@ $quotation = RFQ::orderByDesc('id')->with('created_by')->first();
             <div class="meta">
               Users
             </div>
-            <div class="description">
+            <div class="description" style="min-height:40px">
               <b>{{ User::orderByDesc('id')->first()->fullname }}</b> have been recently added to the system.
             </div>
           </div>
@@ -48,7 +48,7 @@ $quotation = RFQ::orderByDesc('id')->with('created_by')->first();
             <div class="meta">
               Supplier
             </div>
-            <div class="description">
+            <div class="description" style="min-height:40px">
               <b>{{ Supplier::orderByDesc('id')->first()->name }}</b> is the newly added supplier in this system.
             </div>
           </div>
@@ -71,8 +71,8 @@ $quotation = RFQ::orderByDesc('id')->with('created_by')->first();
             <div class="meta">
               Purchase Request
             </div>
-            <div class="description">
-              {{ ($lastTransaction?$lastTransaction->body:"Please raise a purchase request to initiate the procedure.") }}
+            <div class="description" style="min-height:40px">
+              {{ ($lastTransaction?"A formal request to buy goods or services.":"Please raise a purchase request to initiate the procedure.") }}
             </div>
           </div>
           <div class="extra content">
@@ -94,8 +94,8 @@ $quotation = RFQ::orderByDesc('id')->with('created_by')->first();
             <div class="meta">
               Request for Quotation
             </div>
-            <div class="description">
-             {{ ($quotation?$quotation->created_by->fullname." generated a quotation in response to the purchase request.":"To begin the process, please create a purchase request.") }}
+            <div class="description" style="min-height:40px">
+             {{ ($quotation?$quotation->created_by->fullname." created a quotation in response to the purchase request.":"To begin the process, please create a purchase request.") }}
             </div>
           </div>
           <div class="extra content">

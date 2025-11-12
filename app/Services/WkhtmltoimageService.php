@@ -27,7 +27,7 @@ class WkhtmltoimageService {
         $binary = '"' . $this->binary . '"';
         $tempHtmlQuoted = '"file:///' . str_replace('\\', '/', $tempHtml) . '"';
         $outputPathQuoted = '"' . $outputPath . '"';
-    
+        
         // Build command safely
         $cmd = "{$binary} --enable-local-file-access --width {$width} --javascript-delay {$delay} {$tempHtmlQuoted} {$outputPathQuoted} 2>&1";
     

@@ -294,7 +294,7 @@ class PurchaseRequestController extends Controller {
             ->whereHas('lastTransaction', function($query) {
             return $query->whereHas('recepient', function($q) {
                 return $q->where('receiver_id', Auth::user()->id);
-            });
+            })->whereNot('action', 12);
         });
         
         $pr->orderByDesc(

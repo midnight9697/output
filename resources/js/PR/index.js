@@ -1,3 +1,4 @@
+import { TBLButton } from "../table/buttons";
 import Custom_table from "../table/custom_table";
 import { PRClass } from "./purchase_request";
 
@@ -48,8 +49,9 @@ function CTable(CTBL, tab = 'inbox') {
         let url = window.location+'/'+data.id+'/edit';
         let ui = "ui very tiny "+(localStorage.getItem('user') == data.created_by.user_id?"green":"grey")+" button";
         if (data.approval == 1) {
-            title = "TRACK";
-            url = window.location+'/'+data.id+'/track';
+            console.log('Shit', data);
+            title = data.last_transaction.action == 12?"QUOTATION":"TRACK";
+            url = data.last_transaction.action == 12?'/pr/rfq/create/'+data.id:window.location+'/'+data.id+'/track';
             ui = "ui very tiny primary button";
             if (tab == 'inbox') {
                 if (data.last_transaction.last_recepient) {

@@ -9,11 +9,11 @@
 @endsection
 
 @section('main_content')
-    @include('default.create-button', [
+    {{-- @include('default.create-button', [
       'name' => 'create_abstract_vbtn',
       'text' => 'CREATE ABSTRACT',
       'icon' => 'plus',
-    ])
+    ]) --}}
     <div class="ui top attached tabular menu">
         <div class="active item" data-tab="head1">ACTIVE</div>
         <div class="item" data-tab="head2">ARCHIVE</div>

@@ -123,7 +123,7 @@
                 </td>
                 <td style="font-weight:bold;text-align:center">
                     <p style="margin:0px;text-decoration:underline;font-weight:bold">ATTY. RODOLFO A. YODICO, II</p>
-                    <small>|</small>
+                    <small style="height:70px"></small>
                 </td>
                 <td style="font-weight:bold;text-align:center">
                     <p style="margin:0px;text-decoration:underline;font-weight:bold">ENGR.VENUS V. BAUTISTA</p>
@@ -142,12 +142,12 @@
                 <td>
 
                 </td>
-                <td style="text-align:center;">
+                <td style="height: 100px;text-align:center;">
                     <p style="margin:0px;text-decoration:underline;font-weight:bold">EIVER KY C. VILLEGAS</p>
                     <small>Canvasser</small>
                 </td>
                 <td style="text-align:center;font-weight:bold">
-                    <p style="margin:0px;text-decoration:underline;font-weight:bold">ENGR. ALEX D. JIMENEZ</p>
+                    <p style="margin:0px;text-decoration:underline;font-weight:bold">ENGR. HENNENCY G. HAYAG</p>
                     <small>Chairperson, BAC</small>
                 </td>
             </tr>
@@ -159,7 +159,7 @@
                 <td>
                     
                 </td>
-                <td style="text-align:center;">
+                <td style="height: 100px;text-align:center;">
                     <p style="margin:0px;text-decoration:underline;font-weight:bold">ENGR. NOEL C. CABIAO</p>
                     <small>Head, Property and Supply Unit</small>
                 </td>

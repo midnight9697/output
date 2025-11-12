@@ -1,4 +1,4 @@
-<div class="ui top aligned modal" id="{{ $name }}" >
+<div class="ui top aligned {{ isset($size)?$size:"" }} modal" id="{{ $name }}" >
     <i class="close icon"></i>
     <div class="header">
         <h3 class="modal-title">{{ $title }}</h3>

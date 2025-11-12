@@ -69,4 +69,7 @@ class PurchaseRequest extends Model
         return $this->belongsTo(Transaction::class, 'purchase_request_id', 'id');
     }
     
+    public function monitoring() {
+        return $this->hasOne(PRMonitor::class, 'pr_id');
+    }
 }

@@ -9,19 +9,27 @@
 @endsection
 
 @section('main_content')
+    @include('layout.custom-modal', [
+        'view' => 'admin.pr.monitor', 
+        'name' => 'updateMonitorModal', 
+        'title' => 'PR MONITORING', 
+        'actions_button' => 'submit_monitoring_button',
+        'size' => 'small'
+    ])
     @include('default.create-button', [
       'name' => 'create_user_vbtn',
       'text' => 'PURCHASE REQUEST',
       'icon' => 'plus',
       'link' => url('pr/create')
     ])
+    
     <div class="ui top attached tabular menu">
-        <div class="active item" data-tab="inbox">INBOX</div>
+        <div class="item" data-tab="inbox">INBOX</div>
         <div class="item" data-tab="outbox">OUTBOX</div>
         <div class="item" data-tab="personal">DRAFT</div>
-        <div class="item" data-tab="close">CLOSED</div>
+        <div class="item active" data-tab="close">CLOSED</div>
     </div>
-    <div class="ui bottom attached active tab segment" data-tab="inbox">
+    <div class="ui bottom attached tab segment" data-tab="inbox">
         @include('admin.pr.pr_table', ['name' => 'inbox'])
     </div>
     <div class="ui bottom attached tab segment" data-tab="outbox">
@@ -30,7 +38,7 @@
     <div class="ui bottom attached tab segment" data-tab="personal">
         @include('admin.pr.pr_table', ['name' => 'personal'])
     </div>
-    <div class="ui bottom attached tab segment" data-tab="close">
+    <div class="ui bottom attached tab active segment" data-tab="close">
         @include('admin.pr.pr_table', ['name' => 'close'])
     </div>
     

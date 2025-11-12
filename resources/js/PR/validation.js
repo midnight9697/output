@@ -79,6 +79,18 @@ export class Validator {
 
         return json;
     }
+
+    CreatePRMonitorValidation(action, element = 'formCreatePRMonitorItem') {
+        this.form = 
+        $('.ui.form.'+element)
+        .form({
+            fields: {
+            
+            },
+            onSuccess: action
+        });
+    }
+
 }
 
 

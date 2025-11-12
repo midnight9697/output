@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     active_table.custom_buttons = (data) => {
         let div = document.createElement('div');
+        TBLButton.udpateName = "UPDATE";
         TBLButton.updateAction = () => {
           window.location = "./abstract/process/"+data.rfq_id;
         }

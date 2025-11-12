@@ -61,8 +61,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('outbox_pr', [PurchaseRequestController::class, 'fetch_outbox_pr_by_page'])->name('fetch_outbox_pr_by_page');
         Route::get('track_pr', [PurchaseRequestController::class, 'fetch_track_pr_by_page'])->name('fetch_track_pr_by_page');
         Route::get('inbox_pr', [PurchaseRequestController::class, 'fetch_inbox_pr_by_page'])->name('fetch_inbox_pr_by_page');
-
-
+        Route::post('monitor/create', [PurchaseRequestController::class, 'create_pr_monitor'])->name('create monitor');
     });
 
     Route::prefix('rfq')->group(function() {

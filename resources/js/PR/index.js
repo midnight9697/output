@@ -56,6 +56,10 @@ function CTable(CTBL, tab = 'inbox') {
             TBLButton.viewAction = () => {
                 window.location = '/pr/rfq/create/'+data.id;
             }
+            TBLButton.deleteName = "TRACK";
+            TBLButton.deleteAction = () => {
+                window.location = '/pr/'+data.id+'/track';
+            }
             TBLButton.updateAction = () => {
                 current_update_pr = data;
                 console.log(data);
@@ -85,6 +89,8 @@ function CTable(CTBL, tab = 'inbox') {
                     console.log('binder', bind_monitor_data);
                     PRClass.createUpdatePRMonitor(bind_monitor_data, (result) => {
                         console.log('Result', result);
+                        CTBL.table.ajax.reload();
+
                         MessageMod.success('SAVED CHANGES', () => {
                             $('#updateMonitorModal').modal('hide');
                         });

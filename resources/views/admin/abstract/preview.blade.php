@@ -106,3 +106,67 @@
             </tbody>
         </table>
     </div>
+    
+    <table style="width:100%;margin-top:30px;font-size:12px">
+        <thead>
+            <tr>
+                <td>Prepared by:</td>
+                <td>Conforme (End-user):</td>
+                <td colspan="2">Recommending Approval:</td>
+            </tr>
+            <tr>
+                <td style="height: 100px;text-align:center">
+                    <div style="text-wrap:wrap">
+                        <p style="margin:0px;text-decoration:underline;font-weight:bold">JANE C. NOVEDA</p>
+                        <small>Support Staff</small>
+                    </div>
+                </td>
+                <td style="font-weight:bold;text-align:center">
+                    <p style="margin:0px;text-decoration:underline;font-weight:bold">ATTY. RODOLFO A. YODICO, II</p>
+                    <small style="height:70px"></small>
+                </td>
+                <td style="font-weight:bold;text-align:center">
+                    <p style="margin:0px;text-decoration:underline;font-weight:bold">ENGR.VENUS V. BAUTISTA</p>
+                    <small>Member, BAC</small>
+                </td>
+                <td style="font-weight:bold;text-align:center">
+                    <p style="margin:0px;text-decoration:underline;font-weight:bold">ENGR.LIZA A. TAN</p>
+                    <small>Member, BAC</small>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="3">Canvassed by:</td>
+            </tr>
+            <tr>
+                <td>
+
+                </td>
+                <td style="height: 100px;text-align:center;">
+                    <p style="margin:0px;text-decoration:underline;font-weight:bold">EIVER KY C. VILLEGAS</p>
+                    <small>Canvasser</small>
+                </td>
+                <td style="text-align:center;font-weight:bold">
+                    <p style="margin:0px;text-decoration:underline;font-weight:bold">ENGR. HENNENCY G. HAYAG</p>
+                    <small>Chairperson, BAC</small>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="3">Checked by:</td>
+            </tr>
+            <tr>
+                <td>
+                    
+                </td>
+                <td style="height: 100px;text-align:center;">
+                    <p style="margin:0px;text-decoration:underline;font-weight:bold">ENGR. NOEL C. CABIAO</p>
+                    <small>Head, Property and Supply Unit</small>
+                </td>
+                <td style="text-align:center;">
+                    <p style="margin:0px;text-decoration:underline;font-weight:bold">ENGR. ALEX D. JIMENEZ</p>
+                    <small> Regional Director</small>
+                </td>
+            </tr>
+        </thead>
+    </table>

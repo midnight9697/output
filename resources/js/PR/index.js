@@ -1,13 +1,18 @@
+import { MessageMod } from "../app";
 import { TBLButton } from "../table/buttons";
 import Custom_table from "../table/custom_table";
 import { PRClass } from "./purchase_request";
-
+import { PRValidator } from "./validation";
+let current_update_pr = [];
 document.addEventListener('DOMContentLoaded', () => {
     $('.menu .item').tab();
     CTable(new Custom_table('#inbox', false, true, false, false, './api/pr/inbox_pr'), 'inbox');
     CTable(new Custom_table('#outbox', false, true, false, false, './api/pr/outbox_pr'), 'outbox');
     CTable(new Custom_table('#personal', false, true, false, false, './api/pr/track_pr'), 'track');
     CTable(new Custom_table('#close', false, true, false, false, './api/pr/closed_pr'), 'close');
+    $('.submit_monitoring_button').on('click', () => {
+        $('#formCreatePRMonitorItem').trigger('submit');
+    })
 });
 
 function CTable(CTBL, tab = 'inbox') {
@@ -43,13 +48,65 @@ function CTable(CTBL, tab = 'inbox') {
     }
     
     CTBL.custom_buttons = (data) => {
+        if (data.last_transaction.action == 12) {
+            let div = document.createElement('div');
+            TBLButton.data = data;
+            TBLButton.viewName = "QUOTATION";
+            TBLButton.udpateName = "PR MONITORING";
+            TBLButton.viewAction = () => {
+                window.location = '/pr/rfq/create/'+data.id;
+            }
+            TBLButton.deleteName = "TRACK";
+            TBLButton.deleteAction = () => {
+                window.location = '/pr/'+data.id+'/track';
+            }
+            TBLButton.updateAction = () => {
+                current_update_pr = data;
+                console.log(data);
+                $('#formCreatePRMonitorItem')[0].reset();      
+                $('.ui.dropdown.suppliers').dropdown('clear');
+                document.getElementById('monitoring_pr_number').innerHTML = data.pr_number;
+                const dropdown = $('.ui.dropdown.suppliers').dropdown();
+
+                if (current_update_pr.monitoring) {
+                    let monitor = current_update_pr.monitoring;
+                    document.getElementById('canvass_date').value = (monitor.canvass?formatYMD(new Date(monitor.canvass)):"");
+                    document.getElementById('abstract_date').value = (monitor.abstract?formatYMD(new Date(monitor.abstract)):"");
+                    document.getElementById('opening_date').value = (monitor.opening?formatYMD(new Date(monitor.opening)):"");
+                    document.getElementById('date_of_award').value = (monitor.award_date?formatYMD(new Date(monitor.award_date)):"");
+                    document.getElementById('date_of_po').value = (monitor.order_date?formatYMD(new Date(monitor.order_date)):"");
+                    // Dynamically set selected values (must match data-value)
+                    const decoded = monitor.winner
+                    .replace(/&quot;/g, '"')   // replace &quot; with"
+                    .replace(/&amp;/g, '&');
+                    dropdown.dropdown('set selected',JSON.parse(decoded));
+                }
+                PRValidator.CreatePRMonitorValidation((e) => {
+                    e.preventDefault();
+                    let bind_monitor_data = PRValidator.serializeArrayToJson('#formCreatePRMonitorItem');
+                    bind_monitor_data['winners'] = dropdown.dropdown('get value');
+                    bind_monitor_data['pr_id'] = current_update_pr.id;
+                    console.log('binder', bind_monitor_data);
+                    PRClass.createUpdatePRMonitor(bind_monitor_data, (result) => {
+                        console.log('Result', result);
+                        CTBL.table.ajax.reload();
+
+                        MessageMod.success('SAVED CHANGES', () => {
+                            $('#updateMonitorModal').modal('hide');
+                        });
+                    })
+                });
+                $('#updateMonitorModal').modal('show');
+            }
+            TBLButton.loadButtons(div);
+            return div;
+        }
         let button = document.createElement('button');
         console.log('CREATED BY', data.approval);
         let title = (localStorage.getItem('user') == data.created_by.user_id?"EDIT":'REVIEW');
         let url = window.location+'/'+data.id+'/edit';
         let ui = "ui very tiny "+(localStorage.getItem('user') == data.created_by.user_id?"green":"grey")+" button";
         if (data.approval == 1) {
-            console.log('Shit', data);
             title = data.last_transaction.action == 12?"QUOTATION":"TRACK";
             url = data.last_transaction.action == 12?'/pr/rfq/create/'+data.id:window.location+'/'+data.id+'/track';
             ui = "ui very tiny primary button";
@@ -118,3 +175,11 @@ function CTable(CTBL, tab = 'inbox') {
         'last_transaction_created_at_as_latest_date',
     ]);
 }
+
+function formatYMD(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+    const day = String(date.getDate()).padStart(2, '0');
+  
+    return `${year}-${month}-${day}`;
+  }

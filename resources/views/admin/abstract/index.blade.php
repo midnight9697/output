@@ -9,6 +9,7 @@
 @endsection
 
 @section('main_content')
+   
     {{-- @include('default.create-button', [
       'name' => 'create_abstract_vbtn',
       'text' => 'CREATE ABSTRACT',
@@ -29,8 +30,6 @@
     <div class="ui bottom attached tab segment" data-tab="head2">
         show
     </div>
-
-    
 @endsection
 
 @section('custom_js')

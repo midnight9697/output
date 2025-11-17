@@ -83,6 +83,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::prefix('purchase_order')->group(function() {
         Route::get('/', [PurchaseOrderController::class, 'index'])->name('purchase order request');
+        Route::get('/create', [PurchaseOrderController::class, 'create'])->name('create purchase order request');
+        Route::get('form-update/{id}', [PurchaseOrderController::class, 'edit'])->name('RFQ FORM UPDATE');
+
     });
 
     Route::prefix('abstract')->group(function() {
@@ -117,6 +120,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/', [RFQController::class, 'rfqView'])->name('Request for Quotation');
         Route::get('form-create', [RFQController::class, 'rfqFormCreate'])->name('RFQ FORM CREATE');
         Route::get('form-update/{id}', [RFQController::class, 'rfqFormUpdateView'])->name('RFQ FORM UPDATE');
+        Route::get('preview/{id}', [RFQController::class, 'rfqPreview'])->name('RFQ FORM PREVIEW');
     });
 
     Route::prefix('supplier')->group(function() {

@@ -1,4 +1,4 @@
-import places from './places.json' with { type: 'json' };
+import places from './places.json'
 import { AuthClass } from "./login/login";
 let pageLoaderGlobal;
 

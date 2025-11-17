@@ -45,4 +45,8 @@ class RFQController extends Controller {
             'pr' => encryptSingle($pr->first())
         ]);
     }
+
+    public function rfqPreview($rfq_id) {
+        return view('admin.rfq.preview');
+    }
 }

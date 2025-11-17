@@ -1,18 +1,19 @@
+import { MessageMod, confirmMod } from "../app";
 import { quillClass } from "../quil";
 import { TBLButton } from "../table/buttons";
 import Custom_table from "../table/custom_table";
-import { rfqClass } from "./rfq";
+import { PurchaseOrderClass } from "./purchase_order";
 var update_quill;
 var quill;
 
 document.addEventListener('DOMContentLoaded', () => {
     $('.menu .item').tab();
-    const inbox = CTable(new Custom_table('#rfq-inbox', false, true, true, false, './api/rfq/page'), 'inbox');
-    const outbox = CTable(new Custom_table('#rfq-outbox', false, true, false, false, './api/rfq/page'), 'inbox');
+    const inbox = CTable(new Custom_table('#purchase_order_tab', false, true, true, false, './api/purchase_order/page'), 'inbox');
+    // const outbox = CTable(new Custom_table('#rfq-outbox', false, true, false, false, './api/rfq/page'), 'inbox');
     
     // document.getElementById('modalCreateRFQ').onsubmit = (e) => {
     //   e.preventDefault();
-    //   rfqClass.creatRFQTemplate({
+    //   PurchaseOrderClass.creatRFQTemplate({
     //     contents: JSON.stringify(quill.getContents())
     //   }, (e) => {
     //     inbox.table.ajax.reload();
@@ -36,21 +37,21 @@ document.addEventListener('DOMContentLoaded', () => {
 function CTable(CTBL, tab = 'inbox') {
     switch (tab) {
         case 'inbox':
-            rfqClass.inbox_rfq = (res) => {
+            PurchaseOrderClass.inbox_rfq = (res) => {
                 CTBL.dataSrc = (json) => {
                     return res
                 }
             }
             break;
         case 'outbox':
-            rfqClass.outbox_pr = (res) => {
+            PurchaseOrderClass.outbox_pr = (res) => {
                 CTBL.dataSrc = (json) => {
                     return res
                 }
             }
             break;
         case 'close': 
-            rfqClass.closed_pr = (res) => {
+            PurchaseOrderClass.closed_pr = (res) => {
                 CTBL.dataSrc = (json) => {
                     return res
                 }
@@ -65,33 +66,30 @@ function CTable(CTBL, tab = 'inbox') {
     }
     
     CTBL.custom_buttons = (data) => {
-      
       let div = document.createElement('div');
-      TBLButton.viewName = "ABSTRACT";
-      TBLButton.udpateName = "UPDATE";
-      TBLButton.deleteName = 'PREVIEW';
-
-      TBLButton.deleteAction = () => {
-        window.location = "./rfq/preview/"+data.id;
-      }
-
+      TBLButton.viewName = "Update";
       TBLButton.updateAction = () => {
-        window.location = "./rfq/form-update/"+data.id;    
+        window.location = "./purchase_order/form-update/"+data.id;        
       }
 
-      TBLButton.viewAction = () => {
-        window.location = "./abstract/process/"+data.id;        
+      TBLButton.deleteAction = (e) => {
+        confirmMod.load(() => {
+          PurchaseOrderClass.remove(data.id, (e) => {
+            SPLTBL.table.ajax.reload();
+            MessageMod.success("Successfully Deleted.");
+          });
+        }, "Do you want to delete this file ?");
       }
       
       TBLButton.loadButtons(div);
       return div;
-  }
+    }
 
     CTBL.load([
-        'rfq_number',
-        'project_purpose',
-        'aproved_budget',
-        'classification'
+        'purchase_order_no',
+        'purchase_order_no',
+        'purchase_order_no',
+        'created_at',
     ]);
 
     

@@ -11,6 +11,7 @@ use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Supplier;
 use App\Http\Controllers\API\SupplierController;
+use App\Http\Controllers\API\PurhaseOrderController;
 use App\Models\Alternative;
 use App\Models\PurchaseRequest;
 use Illuminate\Http\Request;
@@ -60,8 +61,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('outbox_pr', [PurchaseRequestController::class, 'fetch_outbox_pr_by_page'])->name('fetch_outbox_pr_by_page');
         Route::get('track_pr', [PurchaseRequestController::class, 'fetch_track_pr_by_page'])->name('fetch_track_pr_by_page');
         Route::get('inbox_pr', [PurchaseRequestController::class, 'fetch_inbox_pr_by_page'])->name('fetch_inbox_pr_by_page');
-
-
+        Route::post('monitor/create', [PurchaseRequestController::class, 'create_pr_monitor'])->name('create monitor');
     });
 
     Route::prefix('rfq')->group(function() {
@@ -108,7 +108,17 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('create', [ABSTRACTController::class, 'create']);
     });
 
+    Route::prefix('purchase_order')->group(function() {
+        Route::get('page', [PurhaseOrderController::class, 'fetch_purchase_order']);
+        Route::post('remove', [PurhaseOrderController::class, 'remove']);
+        Route::post('create', [PurhaseOrderController::class, 'create']);
+        Route::post('fetch_suppliers', [PurhaseOrderController::class, 'fetch_suppliers']);
+        Route::post('select_suppliers', [PurhaseOrderController::class, 'select_suppliers']);
+    });
+
     Route::post('alternative', function(Request $request) {
         return encryptUrlSafe($request->id);
     });
+
+
 });

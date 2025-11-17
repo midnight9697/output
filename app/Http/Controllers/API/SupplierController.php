@@ -10,8 +10,7 @@ use Illuminate\Support\Facades\Gate;
 
 class SupplierController extends Controller {
     
-    public function get_all_supplier()
-    {
+    public function get_all_supplier(){
         $supplier = Supplier::select(
                 '*',
                 DB::raw("CONCAT(barangay, ', ', municipality, ', ', province) as specificaddress")

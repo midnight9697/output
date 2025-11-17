@@ -69,8 +69,14 @@ function CTable(CTBL, tab = 'inbox') {
       let div = document.createElement('div');
       TBLButton.viewName = "ABSTRACT";
       TBLButton.udpateName = "UPDATE";
+      TBLButton.deleteName = 'PREVIEW';
+
+      TBLButton.deleteAction = () => {
+        window.location = "./rfq/preview/"+data.id;
+      }
+
       TBLButton.updateAction = () => {
-        window.location = "./rfq/form-update/"+data.id;        
+        window.location = "./rfq/form-update/"+data.id;    
       }
 
       TBLButton.viewAction = () => {

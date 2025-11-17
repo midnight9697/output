@@ -120,6 +120,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/', [RFQController::class, 'rfqView'])->name('Request for Quotation');
         Route::get('form-create', [RFQController::class, 'rfqFormCreate'])->name('RFQ FORM CREATE');
         Route::get('form-update/{id}', [RFQController::class, 'rfqFormUpdateView'])->name('RFQ FORM UPDATE');
+        Route::get('preview/{id}', [RFQController::class, 'rfqPreview'])->name('RFQ FORM PREVIEW');
     });
 
     Route::prefix('supplier')->group(function() {

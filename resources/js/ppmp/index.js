@@ -26,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
     active_table.custom_buttons = (data) => {
         let div = document.createElement('div');
         TBLButton.data = data;
-        
         TBLButton.deleteAction = (e) => {
           confirmMod.load(() => {
             let ppmp__id = e.target.dataset.id;

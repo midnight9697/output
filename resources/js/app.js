@@ -174,7 +174,7 @@ export class confModal {
         
         document.getElementById('main_event').appendChild(this.modal);
         $(this.modal).modal({
-            allowMultiple: false
+            allowMultiple: false 
         })
         $(this.modal).modal('show');
         $('.confirm_warning_action').on('click', (e) => {

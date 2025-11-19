@@ -12,6 +12,10 @@ export class tableButtons {
         this.deleteClassName = "";
         this.updateClassName = "";
         this.data = {};
+        this.popup = document.createElement('div');
+        this.menu = []; 
+        this.options_button = document.createElement("div");
+
     }
 
     loadButtons(parent) {
@@ -83,6 +87,50 @@ export class tableButtons {
         parent.appendChild(popup);
 
         this.relinitialize();
+    }
+
+    createCustomButton(parent, customBtnName, customBtnClassName, action) {
+      var self = this;
+      let button = document.createElement('div');
+      let menu = document.createElement('div');
+      Object.keys(this.data).forEach(key => {
+        button.dataset[key] = this.data[key];
+      });
+      
+      this.options_button.innerHTML = `
+        <i class="ellipsis vertical icon"></i>
+      `;
+      
+      button.innerHTML =  `
+        <i class="edit icon"></i> ${customBtnName}
+      `;
+
+      button.className = 'item link';
+      button.className = 'item link'+ " "+customBtnClassName;
+      this.options_button.className = "ui icon button custom-options-button";
+      this.popup.className = 'ui popup custom-popup';
+      menu.className = 'ui vertical very tiny menu';
+      parent.appendChild(this.options_button);
+      button.onclick = action;
+
+      if (action) {
+        menu.appendChild(button);
+      }
+      this.menu.push(menu);
+    }
+
+    loadCustomBtns(parent) {
+      this.menu.forEach(menu => {
+        this.popup.appendChild(menu);
+      });
+      parent.appendChild(this.popup);
+      this.relinitialize();
+    }
+    
+    resetBtns() {
+      this.popup.innerHTML = "";
+      this.options_button.innerHTML = "";
+      this.menu.innerHTML = [];
     }
 
     relinitialize() {

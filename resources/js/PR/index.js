@@ -50,7 +50,17 @@ function CTable(CTBL, tab = 'inbox') {
     CTBL.custom_buttons = (data) => {
         if (data.last_transaction.action == 12) {
             let div = document.createElement('div');
+            TBLButton.resetBtns();
             TBLButton.data = data;
+            TBLButton.createCustomButton(div, 'QUOTATION', 'quotation_btn', () => {
+                window.location = '/pr/rfq/create/'+data.id;
+            })
+            
+            TBLButton.createCustomButton(div, 'TRACK', 'quotation_btn', () => {
+                window.location = '/pr/'+data.id+'/track';
+            })
+            TBLButton.loadCustomBtns(div);
+            return div;
             TBLButton.viewName = "QUOTATION";
             TBLButton.udpateName = "PR MONITORING";
             TBLButton.viewAction = () => {

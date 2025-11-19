@@ -1,0 +1,39 @@
+@page {
+    /* display:inline-block; */
+    margin-bottom:none;
+    margin-top:10px;
+}
+thead {
+    display: table-header-group; /* default behavior */
+}
+thead {
+    display: table-row-group !important; /* prevent repeating */
+}
+.table-container {
+    width: 100%;       /* div takes full width of parent */
+    max-width: 100%;   /* prevents overflow */
+    /* font-size: clamp(30px, 100px, 60px) !important;  */
+    /* -webkit-text-size-adjust: 10%; */
+    transform-origin:center top;
+    font-family: "Helvetica", sans-serif;
+}
+.table-container table {
+    width: 100%;
+    /* table-layout: fixed; */
+    border-collapse: collapse;
+    /*font-size: clamp(2rem, 10%, 4rem); text scales between 12px and 16px */
+}
+.table-container th,
+.table-container td {
+    padding: 8px;
+    border: 1px solid #524c4c;
+    word-wrap: break-word;  /* wraps long content inside cell */
+    white-space: normal;    /* allows text to wrap */
+    text-align: center;
+    font-size: 12;
+}
+
+table, tr, td, th {
+    page-break-inside: auto !important;
+    break-inside: auto !important;
+}

@@ -4,6 +4,7 @@ import Custom_table from "../table/custom_table";
 import { ppmpController } from "./ppmp";
 import { ppmpValidator } from "./validation";
 var active_table = null;
+
 document.addEventListener('DOMContentLoaded', () => {
     active_table = new Custom_table('#ppmp-table', false, true, false, false, './api/ppmp/page')
 

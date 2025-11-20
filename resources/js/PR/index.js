@@ -50,27 +50,23 @@ function CTable(CTBL, tab = 'inbox') {
     CTBL.custom_buttons = (data) => {
         if (data.last_transaction.action == 12) {
             let div = document.createElement('div');
-            TBLButton.resetBtns();
             TBLButton.data = data;
+            TBLButton.loadCustomBtns(div);
+            
+            TBLButton.createCustomButton(div, 'PREVIEW', 'preview_btn', () => {
+                window.open('/pr/view/'+data.id, "_blank");
+            })
+
             TBLButton.createCustomButton(div, 'QUOTATION', 'quotation_btn', () => {
                 window.location = '/pr/rfq/create/'+data.id;
             })
             
-            TBLButton.createCustomButton(div, 'TRACK', 'quotation_btn', () => {
+            TBLButton.createCustomButton(div, 'TRACK', 'tracking_btn', () => {
                 window.location = '/pr/'+data.id+'/track';
+
             })
-            TBLButton.loadCustomBtns(div);
-            return div;
-            TBLButton.viewName = "QUOTATION";
-            TBLButton.udpateName = "PR MONITORING";
-            TBLButton.viewAction = () => {
-                window.location = '/pr/rfq/create/'+data.id;
-            }
-            TBLButton.deleteName = "TRACK";
-            TBLButton.deleteAction = () => {
-                window.location = '/pr/'+data.id+'/track';
-            }
-            TBLButton.updateAction = () => {
+
+            TBLButton.createCustomButton(div, 'PR MONITOR', 'pr_monitor', () => {
                 current_update_pr = data;
                 console.log(data);
                 $('#formCreatePRMonitorItem')[0].reset();      
@@ -107,8 +103,9 @@ function CTable(CTBL, tab = 'inbox') {
                     })
                 });
                 $('#updateMonitorModal').modal('show');
-            }
-            TBLButton.loadButtons(div);
+            })
+
+            TBLButton.relinitialize();
             return div;
         }
         let button = document.createElement('button');

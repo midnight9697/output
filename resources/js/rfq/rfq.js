@@ -11,6 +11,24 @@ export class RFQ {
         console.log('local', localStorage.getItem('bearer'));
         this.customGetRequest('./api/rfq/page'+(page?"?page="+page:""), action);
     }
+
+    getDox(action, page = false) {
+      jQuery.ajax({
+        url:'/files/rfq.docx',
+        cache:false,
+        xhr:function(){// Seems like the only way to get access to the xhr object
+            var xhr = new XMLHttpRequest();
+            xhr.responseType= 'blob'
+            xhr.headers = {
+              'Authorization': `Bearer ${localStorage.getItem('bearer')}`
+            };
+            return xhr;
+        },
+        success: function(data){
+          action(data);
+        }
+      });
+  }
     
     creatRFQ(data, action = () => {}, fail = () => {}) {
         var usersClone = this;
@@ -54,6 +72,7 @@ export class RFQ {
         action(e.data.data);
       } )
     }
+    
 }
 
 export const rfqClass = new RFQ();

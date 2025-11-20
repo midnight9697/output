@@ -71,12 +71,12 @@ function CTable(CTBL, tab = 'inbox') {
         TBLButton.loadCustomBtns(div);
 
         TBLButton.createCustomButton(div, 'PREVIEW', 'preview_btn', () => {
-            // window.open( "./rfq/preview/"+data.id, "_blank");
-            rfqClass.getDox((data) => {
-                console.log('file', data);
-                $('#modalDocumentPreview').modal('show');
-                preview('document-preview', data);
-            });
+            window.open( "./rfq/preview/"+data.id, "_blank");
+            // rfqClass.getDox((data) => {
+            //     console.log('file', data);
+            //     $('#modalDocumentPreview').modal('show');
+            //     preview('document-preview', data);
+            // });
         })
 
         TBLButton.createCustomButton(div, 'UPDATE', 'update_btn', () => {

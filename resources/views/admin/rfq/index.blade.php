@@ -1,59 +1,104 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DOCX Preview Example</title>
-  <style>
-    /* Optional: Styling the viewer */
-    #viewer {
-      margin-top: 20px;
-      font-family: Arial, sans-serif;
+@extends('layout.app')
+
+@section('main_content')
+<style>
+    #viewer img {
+      display: inline-block;
+      vertical-align: middle;
     }
-    img {
-      max-width: 100%; /* Ensures images are responsive */
-      margin-bottom: 20px;
+    
+    #viewer .left-align {
+      float: left;
+      margin-right: 10px;
     }
-  </style>
-</head>
-<body>
+    
+    #viewer .right-align {
+      float: right;
+      margin-left: 10px;
+    }
 
-  <h1>Upload a DOCX file to preview</h1>
-  <input type="file" id="docxFile" accept=".docx">
-  <div id="viewer"></div>
-  <script src="{{ url('plugins/docx-preview/jszip.min.js') }}"></script>
-  <script src="{{ url('plugins/docx-preview/docx-preview.js') }}"></script>
-  <script>
-    // Set up options to include header and footer rendering
-    const docxOptions = Object.assign(docx.defaultOptions, {
-      renderHeaders: true,
-      renderFooters: true,
-      useBase64URL: true,   // Use base64 for embedded images
-      ignoreWidth: false,   // Retain the original image size
-      ignoreHeight: false,  // Retain the original image size
-      experimental: true,   // Enable floating object support
-      debug: false,         // Disable debug messages (set to true if needed)
-    });
+</style>
 
-    const input = document.getElementById("docxFile");
-    const viewer = document.getElementById("viewer");
+<div class="ui top aligned modal" id="modalDocumentPreview">
+    <i class="close icon"></i>
+    <div class="header">
+        <h3 class="modal-title">RFQ PREVIEW</h3>
+    </div>
+    <div class="content">
+        <div class="ui form attached segment">
+            <div id="document-preview" style="height:100%;width:100%">
 
-    input.addEventListener("change", async (e) => {
-      const file = e.target.files[0];
-      if (!file) return;
+            </div>
+        </div>
+    </div>
+    <div class="actions">
+        <button class="ui primary very tiny button add_rfq_item_button">PROCEED</button>
+    </div>
+</div>
+    {{-- @include('default.create-button', [
+      'name' => 'create_rfq_btn',
+      'text' => 'CREATE RFQ',
+      'icon' => 'plus',
+      'link' => url('rfq/form-create')
+    ]) --}}
+    {{-- <input type="file" id="fileInput" />
+    <pre id="output"></pre>
+    
+    <button id="fillPdfBtn">Download</button> --}}
+    {{-- <canvas id="pdf-canvas"></canvas> --}}
+    <div class="ui top attached tabular menu">
+        <div class="active item" data-tab="rfq-inbox">RFQ</div>
+        {{-- <div class="item" data-tab="rfq-outbox">ARCHIVED</div> --}}
+    </div>
+    
+    <div class="ui bottom attached active tab segment" data-tab="rfq-inbox">
+        @include('admin.rfq.table', ['name' => 'rfq-inbox'])
+    </div>
+    <div class="ui bottom attached tab segment" data-tab="rfq-outbox">
+        @include('admin.rfq.table', ['name' => 'rfq-outbox'])
+    </div>
+    
+@endsection
+@section('custom_js')
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script> --}}
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"></script> --}}
+    {{-- <script src="https://unpkg.com/pdfjs-dist/build/pdf.js"></script> --}}
+   
+    @vite(['resources/js/rfq/index.js'])
+    {{-- @vite(['resources/js/table/pdf.js']) --}}
+    {{-- @vite(['resources/js/table/pdf-1.js']) --}}
+    <script>
+        const url = './files/rfq.pdf';
+        // const loadingTask = pdfjsLib.getDocument(url);
 
-      const arrayBuffer = await file.arrayBuffer();
+        // loadingTask.promise.then(pdf => {
+        //   console.log('PDF loaded');
 
-      // Clear previous content in the viewer
-      viewer.innerHTML = "";
+        //   // Fetch the first page
+        //   return pdf.getPage(1).then(page => {
+        //     console.log('Page loaded');
 
-      // Render DOCX into the viewer with the specified options
-      docx.renderAsync(arrayBuffer, viewer, docxOptions)
-        .catch((err) => {
-          console.error("Error rendering DOCX:", err);
-        });
-    });
-  </script>
+        //     const scale = 1.5;
+        //     const viewport = page.getViewport({ scale });
 
-</body>
-</html>
+        //     // Prepare canvas
+        //     const canvas = document.getElementById('pdf-canvas');
+        //     const context = canvas.getContext('2d');
+        //     canvas.height = viewport.height;
+        //     canvas.width = viewport.width;
+
+        //     // Render PDF page into canvas context
+        //     const renderContext = {
+        //       canvasContext: context,
+        //       viewport: viewport
+        //     };
+        
+        //     return page.render(renderContext).promise;
+        //   });
+        // }).then(() => {
+        //   console.log('Page rendered');
+        // }).catch(error => {
+        //   console.error('Error loading PDF: ', error);
+        // });
+    </script>
+@endsection

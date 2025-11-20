@@ -85,6 +85,7 @@ class AbstractController extends Controller {
         $html = view('admin.abstract.preview', [
             'data' => $data
         ])->render(); // or load your React build’s HTML
+        $this->service->orientation = "landscape";
         return $this->service->GeneratePdf($html, $abstract->purpose);
     }
 }

@@ -174,7 +174,7 @@ export class confModal {
         
         document.getElementById('main_event').appendChild(this.modal);
         $(this.modal).modal({
-            allowMultiple: false
+            allowMultiple: false 
         })
         $(this.modal).modal('show');
         $('.confirm_warning_action').on('click', (e) => {
@@ -364,6 +364,43 @@ export const pageLoadMod = new pageLoader();
 export const progressControl = new progressBar();
 export const uploadControl = new Uploader();
 
+export function preview(cont_id, doc) {
+    //Read the Word Document data from the File Upload.
+    // var doc =  //document.getElementById("files").files[0];
+    console.log('Documents',doc);
+    //If Document not NULL, render it.
+    if (doc != null) {
+        //Set the Document options.
+        var docxOptions = Object.assign(docx.defaultOptions, {
+            renderHeaders: true,
+            renderFooters: true,   // optional if you also want footers
+        });
+        //Reference the Container DIV.
+        var container = document.querySelector("#"+ cont_id);
+        console.log('container', container);
+        
+        //Render the Word Document.
+        docx.renderAsync(doc, container, null, docxOptions)
+        .then(() => {
+            const imgs = viewer.querySelectorAll('img');
+            imgs.forEach((img, i) => {
+                if (i % 2 === 0) {
+                    img.style.left = '0';   // left side
+                } else {
+                    img.style.right = '0';  // right side
+                }
+                img.style.position = 'absolute';
+            });
+        });
+        // var cont = document.getElementById("#"+ cont_id);
+        // let dos = cont.lastChild;
+        // $(dos).css('width', '100%');
+        container.className = 'm-auto';
+        container.style = 'max-width:auto;padding:0px';
+        console.log('Yana', container);
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     // pageLoadMod.destroy();
     const editorElement = document.getElementById('draft-editor-container');
@@ -376,3 +413,4 @@ document.addEventListener('DOMContentLoaded', () => {
         AuthClass.logout();
     });
 });
+

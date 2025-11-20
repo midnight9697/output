@@ -17,6 +17,7 @@
         "pdf-lib": "^1.17.1",
         "puppeteer": "^24.26.1",
         "react": "^19.1.1",
+        "react-doc-viewer": "^0.1.15",
         "react-dom": "^19.1.1"
     }
 }

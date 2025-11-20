@@ -12,6 +12,10 @@ export class tableButtons {
         this.deleteClassName = "";
         this.updateClassName = "";
         this.data = {};
+        this.popup = document.createElement('div');
+        this.menu = document.createElement('div'); 
+        this.options_button = document.createElement("div");
+
     }
 
     loadButtons(parent) {
@@ -46,7 +50,7 @@ export class tableButtons {
         `;
 
         dbutton.innerHTML =  `
-          <i class="trash icon"></i> ${this.deleteName}
+          ${this.deleteName}
         `;
 
         dwbutton.className = 'item link';
@@ -83,6 +87,49 @@ export class tableButtons {
         parent.appendChild(popup);
 
         this.relinitialize();
+    }
+
+    createCustomButton(parent, customBtnName, customBtnClassName, action) {
+      var self = this;
+      let button = document.createElement('div');
+      
+      Object.keys(this.data).forEach(key => {
+        button.dataset[key] = this.data[key];
+      });
+      
+      button.innerHTML =  `
+       ${customBtnName}
+      `;
+      
+      // button.className = 'item link';
+      button.className = 'item link'+ " "+customBtnClassName;
+      this.popup.className = 'ui popup custom-popup';
+      this.menu.className = 'ui vertical very tiny menu';
+      this.menu.style = "text-align:center";
+      button.onclick = action;
+
+      if (action) {
+        this.menu.appendChild(button);
+      }
+
+      this.popup.appendChild(this.menu);
+      parent.appendChild(this.popup);
+    }
+
+    loadCustomBtns(parent) {
+      this.resetBtns();
+      let options_button = document.createElement("div");
+      options_button.innerHTML = `
+        <i class="ellipsis vertical icon"></i>
+      `;
+      options_button.className = "ui icon button custom-options-button";
+      parent.appendChild(options_button);
+    }
+    
+    resetBtns() {
+      this.popup.innerHTML = "";
+      this.options_button.innerHTML = "";
+      this.menu.innerHTML = "";
     }
 
     relinitialize() {

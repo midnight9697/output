@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Attachment;
+use App\Models\PPMP;
 use App\Models\PRSupplemental;
 use App\Models\PurchaseRequest;
 use App\Models\Supplementary;
@@ -84,5 +85,23 @@ class FileController extends Controller {
             // 'transaction_id' => $transaction->id
         ];
         return encryptSingle(Attachment::create($new_file_data));
+    }
+
+    public function ppmp_attachment($ppmp_id) {
+        $ppmp_id = decryptUrlSafe($ppmp_id);
+        $pr_spl = PPMP::where('id', $ppmp_id);
+        
+        if (!$pr_spl->exists()) {
+            return abort('404', 'Not Found');
+        }
+        
+        $pr_spl = $pr_spl->first();
+        $transaction = Transaction::where('id', $pr_spl->transaction_id)->first();
+        // Gate::allows('attachment-file-view', $pr_spl);
+        $file = $pr_spl->filename.".".$pr_spl->filetype;
+        if (!Storage::disk('public')->exists('ppmp/'.$file)) {
+            return abort('404', 'File Not Found');
+        }
+        return Storage::disk('public')->download('ppmp/'.$file, $pr_spl->origin);
     }
 }

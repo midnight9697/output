@@ -27,16 +27,21 @@ document.addEventListener('DOMContentLoaded', () => {
     active_table.custom_buttons = (data) => {
         let div = document.createElement('div');
         TBLButton.data = data;
-        TBLButton.deleteAction = (e) => {
-          confirmMod.load(() => {
-            let ppmp__id = e.target.dataset.id;
-            ppmpController.remove(ppmp__id, (e) => {
-              active_table.table.ajax.reload();
-              MessageMod.success("Successfully Deleted.");
-            });
-          }, "Do you want to delete this file ?");
-        }
-        TBLButton.loadButtons(div);
+        TBLButton.loadCustomBtns(div);
+        TBLButton.createCustomButton(div, 'DELETE', 'deleteAction', (e) => {
+            confirmMod.load(() => {
+                let ppmp__id = e.target.dataset.id;
+                ppmpController.remove(ppmp__id, (e) => {
+                    active_table.table.ajax.reload();
+                    MessageMod.success("Successfully Deleted.");
+                });
+            }, "Do you want to delete this file ?");
+        })
+
+        TBLButton.createCustomButton(div, 'DOWNLOAD', 'previewPPMPBtn', (e) => {
+            window.open('/ppmp/download/'+data.id);
+        });
+        
         return div;
     };
 

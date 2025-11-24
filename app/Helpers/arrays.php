@@ -14,7 +14,26 @@
             made to the bid/quotation or combination of quotations resulting in the lowest evaluated quotation
             meeting the Purchaser’s technical specifications.
             ',
-           
+            'Quotations must be delivered to the address below not later than here.',
+            "Prices must be quoted in Philippine Peso and must include the unit price and total price, inclusive
+            of all taxes to be paid and other incidental cost to the delivery site/s if the contract is awarded.
+            \n\n Bid/quotation may be typewritten or handwritten and may be placed in a sealed envelope marked
+            'here' or you may send your bid/quotation through e-mail at embr8_bac@emb.gov.ph. Late bids
+            and proposals above ABC shall be automatically disqualified.",
+            'Bids/quotations shall be valid for sixty (60) calendar days from the deadline of submission of bids.',
+            'The goods should be delivered here. The supplier should inform the Purchaser at least three
+            (3) days before the date of delivery. The delivery will be made only during working days and hours',
+            'The applicable rate for late deliveries is one tenth (1/10) of one (1) percent of the cost of the
+            unperformed portion of the contract for every day of delay. The maximum deduction shall be ten
+            percent (10%) of the amount of contract. Once the cumulative amount of liquidated damages reaches
+            ten percent (10%) of the contract amount, the Purchaser shall rescind the contract without prejudice
+            to other courses of action and remedies open to it.',
+            'The Purchaser reserves the right to accept or reject any quotation, and to annul the bidding/shopping
+            process or reject all quotations at any time prior to contract award, without thereby incurring any
+            liability to the affected bidder/bidders. The Purchaser also reserves the right to waive minor deviations/defects or infirmities therein. A minor deviation/defect or infirmity is one that does not
+            materially affect the overall functionality of the material and the capability of the supplier to perform
+            the contract',
+            'The prospective bidder shall submit the following:',
         ];
     }
 ?>

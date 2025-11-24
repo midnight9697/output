@@ -15,12 +15,12 @@
     $count_pr_inbox = Recepient::where('receiver_id', Auth::user()->id)->where('received', '0')->count();
     $count_rfq = RFQ::where('creator', Auth::user()->id)->count();
 @endphp
-<div class="ui visible sidebar vertical left inverted  menu main-sidebar" id="sidebar">
-    <div class="item">
+<div class="ui visible sidebar vertical left inverted  menu main-sidebar" id="sidebar" style="background: #2C468C">
+    <div class="item" style="background: rgba(255, 255, 255, 0.6)">
         <div class="sixteen wide column">
-          <img src="{{ url('files/images/emb.png') }}" class="ui very tiny circular image centered">
+          <img src="{{ url('files/images/pims_2.png') }}" class="ui very tiny image centered" style="width: 400px;">
         </div>
-        <div class="content" style="text-align: center">
+        <div class="content" style="text-align: center;">
           <span class="header">{{ Auth::user()->full_name }}</span>
           {{-- <div class="meta">
             <span class="date">{{ Auth::user()->full_name }}</span>

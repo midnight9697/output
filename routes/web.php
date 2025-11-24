@@ -75,6 +75,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::prefix('ppmp')->group(function() {
         Route::get('/', [PPMPController::class, 'index'])->name('ppmp request');
+        Route::get('/download/{ppmp_id}', [FileController::class, 'ppmp_attachment'])->name('ppmp download');
     });
 
     Route::prefix('app')->group(function() {

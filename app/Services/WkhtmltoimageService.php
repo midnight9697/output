@@ -99,10 +99,7 @@ class WkhtmltoimageService {
             ->set_option('defaultMediaType', 'all')
             ->setOption('isPhpEnabled', true)         // Enables PHP in HTML
             ->setPaper('A4', $this->orientation);              // Paper size and orientation
-            // ->setOption('margin-top', 0)              // Set top margin to 0
-            // ->setOption('margin-bottom', 0)           // Set bottom margin to 0
-            // ->setOption('margin-left', 0)             // Set left margin to 0
-            // ->setOption('margin-right', 0);           // Set right margin to 0
+           
         unlink($outputPath);
         return $pdf->stream($title);
     }

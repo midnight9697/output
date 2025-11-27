@@ -39,6 +39,7 @@
             'SUPPLIER',
             'UNIT PRICE',
             'UNIT COST',
+            'WINNER',
         ]
       ])
     </div>

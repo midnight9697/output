@@ -95,7 +95,6 @@ function biddersTable(bids) {
     let current_abstract_items = [];
     for (let i = 0; i < bids.length; i++) {
         const bid = bids[i];
-        console.log(bid);
         
         current_abstract_items.push(bid);
         projectrow += `
@@ -103,6 +102,12 @@ function biddersTable(bids) {
                 <td>${bid.supplier.name}</td>
                 <td><input type="text" value="${bid.unit_cost}" class="supplier_unit_price" data-supplier_name="${bid.supplier.name}" id="unitprice${bid.supplier.id}" name="unit_price"  data-supplier="${bid.supplier.id}"placeholder=""></td>
                 <td><input type="text" value="${bid.total_cost}" class="supplier_unit_cost" data-supplier_name="${bid.supplier.name}" id="unitcost${bid.supplier.id}" name="unit_cost" data-supplier="${bid.supplier.id}" placeholder=""></td>
+                <td>
+                    <div class="ui checkbox">
+                      <input type="radio" ${bid.winning_bidder == 1?"checked":""} name="winner" data-id="${bid.id}" class="winner"> 
+                      <label>YES</label>
+                    </div>
+                </td>
             </tr>
         `;
     }
@@ -119,6 +124,21 @@ function biddersTable(bids) {
 
     document.getElementById('abstract-bidders-body').innerHTML = projectrow;
     
+    $('.winner').on('change', (e) => {
+        let bidders = current_item.abstract_items.map((el) => {
+            let bidder = el;
+            if (e.target.dataset.id == el.id) {
+                bidder.winning_bidder = 1;
+            }
+            else {
+                bidder.winning_bidder = 0;
+            }
+            return bidder;
+        });
+
+        current_item.abstract_items = bidders;
+    });
+
     $('.supplier_unit_price').on('input', (e) => {
         console.clear();
         let abstract_item = current_item.abstract_items.find(el => el.supplier.name == e.target.dataset.supplier_name);

@@ -38,15 +38,15 @@ export class tableButtons {
         `;
         
         dwbutton.innerHTML =  `
-          <i class="edit icon"></i> ${this.downName}
+        ${this.downName}
         `;
         
         button.innerHTML =  `
-          <i class="edit icon"></i> ${this.udpateName}
+        ${this.udpateName}
         `;
 
         vbutton.innerHTML =  `
-          <i class="eye icon"></i> ${this.viewName}
+          ${this.viewName}
         `;
 
         dbutton.innerHTML =  `

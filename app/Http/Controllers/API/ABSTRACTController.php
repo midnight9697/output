@@ -56,6 +56,7 @@ class ABSTRACTController extends Controller {
         foreach ($request->items as $item) {
             $item = (object) $item;
             $bidders = $item->abstract_items;
+            AbstractModelItems::where('rfq_item_id', decryptUrlSafe($item->id))->update(['winning_bidder' => '0']);
             foreach ($bidders as $bidder) {
                 $bidder = (object) $bidder;
                 $supplier = (object) $bidder->supplier;
@@ -67,10 +68,13 @@ class ABSTRACTController extends Controller {
                     'item_number' => 0,
                     'unit_cost' => $bidder->unit_cost,
                     'total_cost' => $bidder->total_cost,
+                    'winning_bidder' => $bidder->winning_bidder
                 ];
 
                 $abstractItemExist = AbstractModelItems::where('rfq_item_id', decryptUrlSafe($item->id))->where('supplier_id', decryptUrlSafe($supplier->id));
+               
                 if ($abstractItemExist->exists()) {
+                   
                     AbstractModelItems::where('rfq_id', decryptUrlSafe($item->id))->where('supplier_id', decryptUrlSafe($supplier->id))->update($aitem);
                 }
                 else {

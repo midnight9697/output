@@ -16,6 +16,7 @@ class AbstractModelItems extends Model {
         'item_number',
         'unit_cost',
         'total_cost',
+        'winning_bidder',
     ];
 
     public function supplier() {

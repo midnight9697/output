@@ -89,10 +89,10 @@ export class tableButtons {
         this.relinitialize();
     }
 
-    createCustomButton(parent, customBtnName, customBtnClassName, action) {
+    createCustomButton(parent, customBtnName, customBtnClassName, action, data = {}) {
       var self = this;
       let button = document.createElement('div');
-      
+      button.datasets = data;
       Object.keys(this.data).forEach(key => {
         button.dataset[key] = this.data[key];
       });

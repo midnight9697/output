@@ -7,6 +7,7 @@ use App\Http\Requests\User\EditUserRequest;
 use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
 class ProfileController extends Controller {
@@ -19,6 +20,7 @@ class ProfileController extends Controller {
     }
     
     public function userUpdateView($id) {
+        $id = decryptUrlSafe($id);
         $user = User::where('id', $id)->with('profile')->first();
         Gate::allows('user-update-view', $user);
         return view('admin.settings.users.update', [

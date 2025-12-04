@@ -94,20 +94,6 @@
         <h2 class="underline">RFQ NO. 25-09-162</h2>
     </div>
     <div class="marginTop marginSE textL bookmanOldStyle" style="border: solid: 1px">
-           <table style="width: 100%;margin:10px">
-            @foreach (json_decode($data)->arrays as $key => $rule)
-                <tr>
-                    <td class="verticalTop colNumber">{{ ($key+1) }}.</td>
-                    <td class="verticalTop colSpacing">
-                        <h3 class="textWeightNormal">
-                            @php
-                               echo $rule;
-                            @endphp
-                        </h3>
-                    </td>
-                </tr>
-            @endforeach
-                
-           </table>
+        @include('admin.rfq.preview-rules-table')
     </div>
 </div>

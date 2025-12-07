@@ -5,8 +5,8 @@
   "_Validation-8d628f68.js": {
     "file": "assets/Validation-8d628f68.js"
   },
-  "_action-e7a1b7ba.js": {
-    "file": "assets/action-e7a1b7ba.js",
+  "_action-93bfee17.js": {
+    "file": "assets/action-93bfee17.js",
     "imports": [
       "resources/js/login/login.js",
       "_pagination-008a36c2.js",
@@ -21,8 +21,8 @@
       "_validation-858a56d8.js"
     ]
   },
-  "_custom_table-3ec5b6ab.js": {
-    "file": "assets/custom_table-3ec5b6ab.js",
+  "_custom_table-e330d835.js": {
+    "file": "assets/custom_table-e330d835.js",
     "imports": [
       "resources/js/table/custom_table.js"
     ]
@@ -74,11 +74,11 @@
     "src": "resources/js/PR/create.js"
   },
   "resources/js/PR/index.js": {
-    "file": "assets/index-e4c157a9.js",
+    "file": "assets/index-98c07e08.js",
     "imports": [
       "resources/js/login/login.js",
       "resources/js/table/custom_table.js",
-      "_custom_table-3ec5b6ab.js",
+      "_custom_table-e330d835.js",
       "_purchase_request-8ae33fa3.js",
       "_validation-858a56d8.js"
     ],
@@ -86,11 +86,11 @@
     "src": "resources/js/PR/index.js"
   },
   "resources/js/PR/process.js": {
-    "file": "assets/process-f5b2d832.js",
+    "file": "assets/process-b636410d.js",
     "imports": [
       "resources/js/login/login.js",
       "resources/js/table/custom_table.js",
-      "_custom_table-3ec5b6ab.js",
+      "_custom_table-e330d835.js",
       "_supplemental-c1abe652.js",
       "_purchase_request-8ae33fa3.js",
       "_validation-858a56d8.js"
@@ -114,7 +114,7 @@
     "src": "resources/js/PR/tracking.js"
   },
   "resources/js/PR/update.js": {
-    "file": "assets/update-ed888013.js",
+    "file": "assets/update-bb740fab.js",
     "imports": [
       "_User-18220aaa.js",
       "resources/js/login/login.js",
@@ -126,19 +126,17 @@
     "src": "resources/js/PR/update.js"
   },
   "resources/js/PR/validation.js": {
-    "file": "assets/validation-f5ef5fbf.js",
+    "file": "assets/validation-b5a35c2a.js",
     "isEntry": true,
     "src": "resources/js/PR/validation.js"
   },
   "resources/js/User/Index.js": {
-    "file": "assets/Index-1462269f.js",
+    "file": "assets/Index-fec7bb82.js",
     "imports": [
       "_User-18220aaa.js",
-      "_action-e7a1b7ba.js",
+      "_action-93bfee17.js",
       "_Validation-8d628f68.js",
-      "_custom_table-3ec5b6ab.js",
       "resources/js/login/login.js",
-      "resources/js/table/custom_table.js",
       "_pagination-008a36c2.js"
     ],
     "isEntry": true,
@@ -150,12 +148,12 @@
     "src": "resources/js/User/User.js"
   },
   "resources/js/User/Validation.js": {
-    "file": "assets/Validation-97e73ebb.js",
+    "file": "assets/Validation-b5645bc0.js",
     "isEntry": true,
     "src": "resources/js/User/Validation.js"
   },
   "resources/js/User/action.js": {
-    "file": "assets/action-2a683396.js",
+    "file": "assets/action-83daa0f7.js",
     "imports": [
       "resources/js/login/login.js",
       "_pagination-008a36c2.js",
@@ -166,7 +164,7 @@
     "src": "resources/js/User/action.js"
   },
   "resources/js/User/action_original.js": {
-    "file": "assets/action_original-e47caee9.js",
+    "file": "assets/action_original-085d8fc3.js",
     "imports": [
       "resources/js/login/login.js",
       "_User-18220aaa.js",
@@ -176,12 +174,12 @@
     "src": "resources/js/User/action_original.js"
   },
   "resources/js/User/update.js": {
-    "file": "assets/update-47b58c8b.js",
+    "file": "assets/update-ad4b9b97.js",
     "imports": [
       "resources/js/login/login.js",
       "_User-18220aaa.js",
       "_Validation-8d628f68.js",
-      "_action-e7a1b7ba.js",
+      "_action-93bfee17.js",
       "_pagination-008a36c2.js"
     ],
     "isEntry": true,
@@ -198,7 +196,7 @@
     "src": "resources/js/abstract/add_bidder.js"
   },
   "resources/js/abstract/create.js": {
-    "file": "assets/create-95599274.js",
+    "file": "assets/create-7b5c46f2.js",
     "imports": [
       "resources/js/table/custom_table.js",
       "resources/js/login/login.js"
@@ -207,21 +205,21 @@
     "src": "resources/js/abstract/create.js"
   },
   "resources/js/abstract/index.js": {
-    "file": "assets/index-38e5633d.js",
+    "file": "assets/index-e54b53a1.js",
     "imports": [
       "resources/js/table/custom_table.js",
-      "_custom_table-3ec5b6ab.js"
+      "_custom_table-e330d835.js"
     ],
     "isEntry": true,
     "src": "resources/js/abstract/index.js"
   },
   "resources/js/abstract/validation.js": {
-    "file": "assets/validation-fbf88a6b.js",
+    "file": "assets/validation-f5ef5fbf.js",
     "isEntry": true,
     "src": "resources/js/abstract/validation.js"
   },
   "resources/js/app.js": {
-    "file": "assets/app-98f13033.js",
+    "file": "assets/app-66f94b8c.js",
     "imports": [
       "resources/js/login/login.js"
     ],
@@ -234,22 +232,22 @@
     "src": "resources/js/app/app.js"
   },
   "resources/js/app/index.js": {
-    "file": "assets/index-fe1b9f68.js",
+    "file": "assets/index-6cf81573.js",
     "imports": [
       "resources/js/login/login.js",
       "resources/js/table/custom_table.js",
-      "_custom_table-3ec5b6ab.js"
+      "_custom_table-e330d835.js"
     ],
     "isEntry": true,
     "src": "resources/js/app/index.js"
   },
   "resources/js/app/validation.js": {
-    "file": "assets/validation-b5a35c2a.js",
+    "file": "assets/validation-4ed993c7.js",
     "isEntry": true,
     "src": "resources/js/app/validation.js"
   },
   "resources/js/home.js": {
-    "file": "assets/home-320369c9.js",
+    "file": "assets/home-e2f60a0c.js",
     "imports": [
       "resources/js/login/login.js"
     ],
@@ -257,7 +255,7 @@
     "src": "resources/js/home.js"
   },
   "resources/js/login/forgot_password.js": {
-    "file": "assets/forgot_password-7061695d.js",
+    "file": "assets/forgot_password-0a07dba9.js",
     "imports": [
       "_validation-31a9c077.js",
       "resources/js/login/login.js"
@@ -266,7 +264,7 @@
     "src": "resources/js/login/forgot_password.js"
   },
   "resources/js/login/index.js": {
-    "file": "assets/index-fc9390c5.js",
+    "file": "assets/index-09485640.js",
     "imports": [
       "resources/js/login/login.js"
     ],
@@ -274,7 +272,7 @@
     "src": "resources/js/login/index.js"
   },
   "resources/js/login/login.js": {
-    "file": "assets/login-2eaeddfa.js",
+    "file": "assets/login-dacdc280.js",
     "isEntry": true,
     "src": "resources/js/login/login.js"
   },
@@ -284,7 +282,7 @@
     "src": "resources/js/login/pagination.js"
   },
   "resources/js/login/reset_password.js": {
-    "file": "assets/reset_password-99971611.js",
+    "file": "assets/reset_password-78142426.js",
     "imports": [
       "resources/js/login/login.js",
       "_validation-31a9c077.js"
@@ -293,16 +291,16 @@
     "src": "resources/js/login/reset_password.js"
   },
   "resources/js/login/validation.js": {
-    "file": "assets/validation-4ed993c7.js",
+    "file": "assets/validation-fbf88a6b.js",
     "isEntry": true,
     "src": "resources/js/login/validation.js"
   },
   "resources/js/ppmp/index.js": {
-    "file": "assets/index-f24f56fc.js",
+    "file": "assets/index-50e7cc33.js",
     "imports": [
       "resources/js/login/login.js",
       "resources/js/table/custom_table.js",
-      "_custom_table-3ec5b6ab.js"
+      "_custom_table-e330d835.js"
     ],
     "isEntry": true,
     "src": "resources/js/ppmp/index.js"
@@ -318,7 +316,7 @@
     "src": "resources/js/ppmp/validation.js"
   },
   "resources/js/rfq/create.js": {
-    "file": "assets/create-38d6bb05.js",
+    "file": "assets/create-92e41178.js",
     "imports": [
       "_purchase_request-8ae33fa3.js",
       "_validation-858a56d8.js",
@@ -330,11 +328,11 @@
     "src": "resources/js/rfq/create.js"
   },
   "resources/js/rfq/index.js": {
-    "file": "assets/index-86c12b10.js",
+    "file": "assets/index-1ae0f833.js",
     "imports": [
       "resources/js/login/login.js",
       "resources/js/table/custom_table.js",
-      "_custom_table-3ec5b6ab.js",
+      "_custom_table-e330d835.js",
       "_rfq-dedac424.js"
     ],
     "isEntry": true,
@@ -346,7 +344,7 @@
     "src": "resources/js/rfq/rfq.js"
   },
   "resources/js/rfq/update.js": {
-    "file": "assets/update-a472686e.js",
+    "file": "assets/update-7486f54b.js",
     "imports": [
       "_validation-858a56d8.js",
       "resources/js/login/login.js",
@@ -358,7 +356,7 @@
     "src": "resources/js/rfq/update.js"
   },
   "resources/js/supplemental/create.js": {
-    "file": "assets/create-58769227.js",
+    "file": "assets/create-b270566c.js",
     "imports": [
       "resources/js/login/login.js",
       "_validation-e9260cf5.js",
@@ -370,11 +368,11 @@
     "src": "resources/js/supplemental/create.js"
   },
   "resources/js/supplemental/index.js": {
-    "file": "assets/index-6cb084fd.js",
+    "file": "assets/index-55ed13e3.js",
     "imports": [
       "resources/js/login/login.js",
       "resources/js/table/custom_table.js",
-      "_custom_table-3ec5b6ab.js",
+      "_custom_table-e330d835.js",
       "_supplemental-c1abe652.js"
     ],
     "isEntry": true,
@@ -386,7 +384,7 @@
     "src": "resources/js/supplemental/supplemental.js"
   },
   "resources/js/supplemental/update.js": {
-    "file": "assets/update-5d5cbc03.js",
+    "file": "assets/update-37a7b5fd.js",
     "imports": [
       "resources/js/login/login.js",
       "_validation-e9260cf5.js",
@@ -398,12 +396,12 @@
     "src": "resources/js/supplemental/update.js"
   },
   "resources/js/supplemental/validation.js": {
-    "file": "assets/validation-b5645bc0.js",
+    "file": "assets/validation-3f7a7dc7.js",
     "isEntry": true,
     "src": "resources/js/supplemental/validation.js"
   },
   "resources/js/supplier/create.js": {
-    "file": "assets/create-2ebcfc4b.js",
+    "file": "assets/create-18719b1f.js",
     "imports": [
       "resources/js/login/login.js",
       "_validation-0c199e41.js"
@@ -412,11 +410,11 @@
     "src": "resources/js/supplier/create.js"
   },
   "resources/js/supplier/index.js": {
-    "file": "assets/index-d60ddb65.js",
+    "file": "assets/index-ef6ae692.js",
     "imports": [
       "resources/js/login/login.js",
       "resources/js/table/custom_table.js",
-      "_custom_table-3ec5b6ab.js",
+      "_custom_table-e330d835.js",
       "_validation-0c199e41.js"
     ],
     "isEntry": true,
@@ -428,17 +426,17 @@
     "src": "resources/js/supplier/supplier.js"
   },
   "resources/js/supplier/validation.js": {
-    "file": "assets/validation-3f7a7dc7.js",
+    "file": "assets/validation-97e73ebb.js",
     "isEntry": true,
     "src": "resources/js/supplier/validation.js"
   },
   "resources/js/table/buttons.js": {
-    "file": "assets/buttons-7550d78e.js",
+    "file": "assets/buttons-d78cff11.js",
     "isEntry": true,
     "src": "resources/js/table/buttons.js"
   },
   "resources/js/table/custom_table.js": {
-    "file": "assets/custom_table-ff526490.js",
+    "file": "assets/custom_table-33f673bb.js",
     "isEntry": true,
     "src": "resources/js/table/custom_table.js"
   }

@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         TBLButton.createCustomButton(div, 'UPDATE', 'updateAbstract', (data) => {
             window.location = "./abstract/process/"+data.rfq_id;
         }, data);
-
+        
         TBLButton.createCustomButton(div, 'PREVIEW', 'previewAbstract', () => {
             window.open("/abstract/preview/"+data.id, '__blank')
         })

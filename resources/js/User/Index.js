@@ -15,10 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
     usersTableConroller.custom_buttons = (data) => {
         let div = document.createElement('div');
         TBLButton.loadCustomBtns(div);
-        TBLButton.createCustomButton(div, 'UPDATE', 'update_btn', (e) => {
-            let target = e.target.datasets;
-            console.log(target);
-            // window.location = './users/'+target.id+'/edit';
+        TBLButton.data = data;
+        TBLButton.createCustomButton(div, 'UPDATE', 'update_btn', (data) => {
+            window.location = './users/'+data.id+'/edit';
         }, data);
 
         return div;

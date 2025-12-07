@@ -24,7 +24,7 @@ class UserPolicy
 
     public function update(User $model) {
         $user = Auth::user();
-        return (($user->role == "superadmin" || $user->role == "admin")  || $model->id == $user->id)?true:abort('403', 'Unauthorized action');
+        return (($user->role == "superadmin" || $user->role == "admin")  || decryptUrlSafe($model->id) == $user->id)?true:abort('403', 'Unauthorized action');
     }
     
     public function delete(User $user, User $model) {

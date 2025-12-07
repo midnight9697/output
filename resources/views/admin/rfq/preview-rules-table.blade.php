@@ -17,4 +17,14 @@
             </h3>
         </td>
     </tr>
+    <tr>
+        <td class="verticalTop colNumber">2.</td>
+        <td class="verticalTop colSpacing">
+            <h3 class="textWeightNormal">
+                A set of technical specifications are provided in Attachment 1. Bidders must quote only based on
+                their available stock/s except for order basis (e.g., ICT/Laboratory equipment) and shall
+                indicate clearly the specifications, brand or model of the items/menu for catering being offered.
+            </h3>
+        </td>
+    </tr>
 </table>

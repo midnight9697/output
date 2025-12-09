@@ -65,10 +65,9 @@ function CTable(CTBL, tab = 'inbox') {
                 window.location = '/pr/'+data.id+'/track';
 
             })
-
-            TBLButton.createCustomButton(div, 'PR MONITOR', 'pr_monitor', () => {
+            
+            TBLButton.createCustomButton(div, 'PR MONITOR', 'pr_monitor', (data) => {
                 current_update_pr = data;
-                console.log(data);
                 $('#formCreatePRMonitorItem')[0].reset();      
                 $('.ui.dropdown.suppliers').dropdown('clear');
                 document.getElementById('monitoring_pr_number').innerHTML = data.pr_number;

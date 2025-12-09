@@ -33,12 +33,16 @@
             @endforeach
         </select>
     </div>
+    <div class="field">
+        <button type="button" class="ui primary very tiny button clear_winner">UNCHECK ALL</button>
+    </div>
     <div class="ui bottom attached segment">
         @include('default.create-table', [ 'name' => 'abstract-bidders-table', 'body' => 'abstract-bidders-body',
         'columns' => [
             'SUPPLIER',
             'UNIT PRICE',
             'UNIT COST',
+            'WINNER',
         ]
       ])
     </div>

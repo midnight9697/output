@@ -18,6 +18,9 @@ export default class Custom_table {
         this.getItems = (items) => {};
         this.custom_buttons = () => {}
         self = this;
+        this.topButton = false;
+        this.topButtonText = 'Custom Button';
+        this.topButtonAction = () => {};
         this.dataSrc = function(json) {
             self.getItems(json);
             return json.data;
@@ -55,7 +58,25 @@ export default class Custom_table {
             info: self.info,
             responsive: true
         }
-
+        if (self.topButton) {
+            settings. dom = `
+            <"table-header"<"left-buttons"B><"right-search"f>>
+            rt
+            <"table-footer"<"left-info"i><"right-pagination"p>>
+            `
+            settings.buttons = [
+                {
+                    text: self.topButtonText,
+                    className: 'ui primary button',
+                    action: function (e, dt, node, config) {
+                        self.topButtonAction(e, dt, node, config);
+                    }
+                },
+                // Add more custom buttons as needed
+                'excelHtml5', // Example of a built-in button type
+                'pdfHtml5'
+            ];
+        }
         settings.serverSide = self.serverSide,
         settings.ajax = {
             url: self.url,
@@ -104,7 +125,7 @@ export default class Custom_table {
 
         TBColumns.push({
             data: null,
-            render: self.custom_buttons
+            render:  self.custom_buttons
         });
 
         this.config = this.configurations(TBColumns);

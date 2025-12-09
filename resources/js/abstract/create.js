@@ -3,6 +3,7 @@ import { abstractBidValidator } from "./validation";
 import { abstractController } from "./abstract";
 import { MessageMod } from "../app";
 import { map } from "lodash";
+let beforSelectedSuppliers = [];
 let selectedSuppliers = [];
 let current_item = {};
 let items = [];
@@ -21,7 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
     $('.ui.dropdown.suppliers').dropdown({
         onChange: function(value, text, $choice) {
             if (typeof $choice == "object") {
-                selectedSuppliers = selectedSuppliers.filter(el => (value.includes(el.name)));
+                console.log(selectedSuppliers);
+                selectedSuppliers = selectedSuppliers.filter(el => (value.includes(el.supplier.name)));
             }
             else {
                 value.forEach(supplier_name => {
@@ -36,7 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 });
             }
-            console.log('supplier', selectedSuppliers);
             if (!all_selected_suppliers.includes(text)) {
                 all_selected_suppliers.push(text);
             }
@@ -60,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
     abstractBidValidator.CreateAbstractBidValidation((e) => {
         e.preventDefault();
         let tmp_suppliers = $('.ui.dropdown.suppliers').dropdown('get value');
-        console.log(all_supplier_lists.filter(el => all_selected_suppliers.includes(el.name)));
+        console.log('all selected suppliers', all_selected_suppliers);
         projectsTable({
             'items': items,
             'all_supplier_lists': all_supplier_lists,
@@ -71,7 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     abstractBidValidator.CreateAbstractValidation((e) => {
         e.preventDefault();
-        console.log('tmp_item', items);
         abstractController.create({
             purpose: $('#purpose').val(),
             rfq_ids: [$('.ui.dropdown.rfqs').dropdown('get value')],
@@ -89,13 +89,13 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function biddersTable(bids) {
+    $('.winner').prop('checked', false);
     current_item.abstract_items = selectedSuppliers;
     let projectrow = "";
     const biddersTableButton = new tableButtons();
     let current_abstract_items = [];
     for (let i = 0; i < bids.length; i++) {
         const bid = bids[i];
-        console.log(bid);
         
         current_abstract_items.push(bid);
         projectrow += `
@@ -103,6 +103,12 @@ function biddersTable(bids) {
                 <td>${bid.supplier.name}</td>
                 <td><input type="text" value="${bid.unit_cost}" class="supplier_unit_price" data-supplier_name="${bid.supplier.name}" id="unitprice${bid.supplier.id}" name="unit_price"  data-supplier="${bid.supplier.id}"placeholder=""></td>
                 <td><input type="text" value="${bid.total_cost}" class="supplier_unit_cost" data-supplier_name="${bid.supplier.name}" id="unitcost${bid.supplier.id}" name="unit_cost" data-supplier="${bid.supplier.id}" placeholder=""></td>
+                <td>
+                    <div class="ui checkbox">
+                      <input type="radio" ${bid.winning_bidder == 1?"checked":""} name="winner"  id="winner-${bid.id}" data-id="${bid.id}" class="winner"> 
+                      <label>YES</label>
+                    </div>
+                </td>
             </tr>
         `;
     }
@@ -119,6 +125,29 @@ function biddersTable(bids) {
 
     document.getElementById('abstract-bidders-body').innerHTML = projectrow;
     
+    $('.clear_winner').on('click', () => {
+        let abstract_items = current_item.abstract_items;
+        $('.winner').prop('checked', false);
+        abstract_items = abstract_items.map(el => {
+            el.winning_bidder = '0';
+            return el;
+        });
+        current_item.abstract_items = abstract_items;
+    });
+
+    $('.winner').on('change', (e) => {
+        let abstract_items = current_item.abstract_items;
+        let abstract_item = abstract_items.find(el => el.id == e.target.dataset.id);
+        abstract_item.winning_bidder = '1';
+        console.log('checked? ', e.target.checked);
+        abstract_items = abstract_items.map(el => {
+            el.winning_bidder = (el.id == abstract_item.id?abstract_item.winning_bidder:'0');
+            console.log('Match ?', el.id == abstract_item.id);
+            return el;
+        });
+        current_item.abstract_items = abstract_items;
+    });
+
     $('.supplier_unit_price').on('input', (e) => {
         console.clear();
         let abstract_item = current_item.abstract_items.find(el => el.supplier.name == e.target.dataset.supplier_name);

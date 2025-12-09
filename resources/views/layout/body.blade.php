@@ -15,18 +15,18 @@
     $count_pr_inbox = Recepient::where('receiver_id', Auth::user()->id)->where('received', '0')->count();
     $count_rfq = RFQ::where('creator', Auth::user()->id)->count();
 @endphp
-<div class="ui visible sidebar vertical left inverted  menu main-sidebar" id="sidebar">
-    <div class="item">
+<div class="ui visible sidebar vertical left inverted  menu main-sidebar" id="sidebar" style="background: #2C468C">
+    <div class="item" style="background: rgba(255, 255, 255, 0.6)">
         <div class="sixteen wide column">
-          <img src="{{ url('files/images/emb.png') }}" class="ui very tiny circular image centered">
+          <img src="{{ url('files/images/pims_2.png') }}" class="ui very tiny image centered" style="width: 400px;">
         </div>
-        <div class="content" style="text-align: center">
-          <span class="header">{{ auth()->user()->full_name }}</span>
+        <div class="content" style="text-align: center;">
+          <span class="header">{{ Auth::user()->full_name }}</span>
           {{-- <div class="meta">
             <span class="date">{{ Auth::user()->full_name }}</span>
           </div> --}}
           <div class="description">
-            {{ auth()->user()->profile->position }}
+            {{ Auth::user()->profile->position }}
           </div>
         </div>
     </div>
@@ -36,12 +36,12 @@
             {{ view('layout.menu', [ 'url' => route('home'), 'title' => 'Dashboard', 'routesplit' => $routesplit, 'permission' => true]) }}
             {{ view('layout.menu', ['badge' => $count_pr_inbox,  'url' => url('pr'), 'title' => 'Purchase Request', 'routesplit' => $routesplit, 'permission' => true]) }}
             {{-- {{ view('layout.menu', [ 'url' => url('#'), 'title' => 'APP', 'routesplit' => $routesplit, 'permission' => (Auth::user()->profile->unit_id == 1)]) }} --}}
-            {{ view('layout.menu', [ 'url' => url('app'), 'title' => 'APP', 'routesplit' => $routesplit, 'permission' => true]) }}
+            {{ view('layout.menu', [ 'url' => url('app'), 'title' => 'APP', 'routesplit' => $routesplit, 'permission' => Auth::user()->role != 'user']) }}
             {{ view('layout.menu', [ 'url' => url('ppmp'), 'title' => 'PPMP', 'routesplit' => $routesplit, 'permission' => true]) }}
-            {{ view('layout.menu', [ 'url' => url('supplemental'), 'title' => 'Supplemental', 'routesplit' => $routesplit, 'permission' => true]) }}
-            {{ view('layout.menu', [ 'url' => url('rfq'), 'title' => 'RFQ', 'routesplit' => $routesplit, 'permission' => true]) }}
-            {{ view('layout.menu', [ 'url' => url('purchase_order'), 'title' => 'Purchase Order', 'routesplit' => $routesplit, 'permission' => true]) }}
-            {{ view('layout.menu', [ 'url' => url('abstract'), 'title' => 'Abstract', 'routesplit' => $routesplit, 'permission' => true]) }}
+            {{ view('layout.menu', [ 'url' => url('supplemental'), 'title' => 'Supplemental', 'routesplit' => $routesplit, 'permission' => Auth::user()->role != 'user']) }}
+            {{ view('layout.menu', [ 'url' => url('rfq'), 'title' => 'RFQ', 'routesplit' => $routesplit, 'permission' => Auth::user()->role != 'user']) }}
+            {{ view('layout.menu', [ 'url' => url('purchase_order'), 'title' => 'Purchase Order', 'routesplit' => $routesplit, 'permission' => Auth::user()->role != 'user']) }}
+            {{ view('layout.menu', [ 'url' => url('abstract'), 'title' => 'Abstract', 'routesplit' => $routesplit, 'permission' => Auth::user()->role != 'user']) }}
         </div>
     </div>
     
@@ -79,7 +79,7 @@
         <div class="ui dropdown item">
             <i class="user circle icon"></i>
             <div class="menu">
-                <a href="{{ url('users/'.Auth::user()->id.'/edit') }}" class="item">
+                <a href="{{ url('users/'.(encryptUrlSafe(Auth::user()->id)).'/edit') }}" class="item">
                     <i class="info circle icon"></i> Profile
                 </a>
                 <a href="#" class="item" id="logout_user">

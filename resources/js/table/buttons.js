@@ -38,15 +38,15 @@ export class tableButtons {
         `;
         
         dwbutton.innerHTML =  `
-          <i class="edit icon"></i> ${this.downName}
+        ${this.downName}
         `;
         
         button.innerHTML =  `
-          <i class="edit icon"></i> ${this.udpateName}
+        ${this.udpateName}
         `;
 
         vbutton.innerHTML =  `
-          <i class="eye icon"></i> ${this.viewName}
+          ${this.viewName}
         `;
 
         dbutton.innerHTML =  `
@@ -89,25 +89,26 @@ export class tableButtons {
         this.relinitialize();
     }
 
-    createCustomButton(parent, customBtnName, customBtnClassName, action) {
+    createCustomButton(parent, customBtnName, customBtnClassName, action, data = {}) {
       var self = this;
-      let button = document.createElement('div');
-      
-      Object.keys(this.data).forEach(key => {
-        button.dataset[key] = this.data[key];
+      const button = document.createElement('div');
+      let keys = Object.keys(data)
+      console.log(data);
+      keys.forEach(key => {
+        button.dataset[key] = data[key];
       });
+      button.dataset.uid = Date.now().toString();
       
       button.innerHTML =  `
        ${customBtnName}
       `;
       
-      // button.className = 'item link';
       button.className = 'item link'+ " "+customBtnClassName;
       this.popup.className = 'ui popup custom-popup';
       this.menu.className = 'ui vertical very tiny menu';
       this.menu.style = "text-align:center";
-      button.onclick = action;
-
+      button.onclick = (e) => action(data);
+      
       if (action) {
         this.menu.appendChild(button);
       }
@@ -127,9 +128,9 @@ export class tableButtons {
     }
     
     resetBtns() {
-      this.popup.innerHTML = "";
-      this.options_button.innerHTML = "";
-      this.menu.innerHTML = "";
+      this.popup = document.createElement('div');
+      this.menu = document.createElement('div'); 
+      this.options_button = document.createElement("div");
     }
 
     relinitialize() {

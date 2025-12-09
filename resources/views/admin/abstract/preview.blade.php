@@ -1,3 +1,30 @@
+<style>
+    .table-container {
+      width: 100%;       /* div takes full width of parent */
+      max-width: 100%;   /* prevents overflow */
+      /* font-size: clamp(30px, 100px, 60px) !important;  */
+      /* -webkit-text-size-adjust: 10%; */
+    }
+    /* table, th, td {
+        border: 1px solid black;
+        color:black;
+        text-align:center;
+        padding:5px;
+    } */
+    .table-container table {
+        width: 100%;
+        table-layout: fixed;
+        border-collapse: collapse;
+        /*font-size: clamp(2rem, 10%, 4rem); text scales between 12px and 16px */
+    }
+    .table-container th,
+    .table-container td {
+        padding: 8px;
+        border: 1px solid #ccc;
+        word-wrap: break-word;  /* wraps long content inside cell */
+        white-space: normal;    /* allows text to wrap */
+    }
+</style>
     <div>
         <img src="{{ (!$data?$url:json_decode($data)->data) }}/files/images/abstract-header.png" alt="footer.png" height="80px"style="left: 0;right: 0;background-color: white;background-blend-mode: luminosity;width:100%;margin-bottom:10px">
     </div>

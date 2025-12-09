@@ -14,11 +14,15 @@ document.addEventListener('DOMContentLoaded', () => {
     active_table.custom_buttons = (data) => {
         let div = document.createElement('div');
         TBLButton.udpateName = "UPDATE";
-        TBLButton.updateAction = () => {
-          window.location = "./abstract/process/"+data.rfq_id;
-        }
+        TBLButton.loadCustomBtns(div);
         
-        TBLButton.loadButtons(div);
+        TBLButton.createCustomButton(div, 'UPDATE', 'updateAbstract', (data) => {
+            window.location = "./abstract/process/"+data.rfq_id;
+        }, data);
+        
+        TBLButton.createCustomButton(div, 'PREVIEW', 'previewAbstract', () => {
+            window.open("/abstract/preview/"+data.id, '__blank')
+        })
         return div;
     }
 

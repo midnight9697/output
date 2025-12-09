@@ -13,7 +13,12 @@
 @php
     use App\Models\RFQ;
 @endphp
-@include('layout.custom-modal', ['view' => 'admin.abstract.add_bidder', 'name' => 'addBiddderModal', 'title' => 'ADD BIDDER SPECIFICATION', 'actions_button' => 'submit_bidder_button'])
+@include('layout.custom-modal', [
+    'view' => 'admin.abstract.add_bidder', 
+    'name' => 'addBiddderModal', 
+    'title' => 'ADD BIDDER SPECIFICATION', 
+    'actions_button' => 'submit_bidder_button'
+    ])
 
 <form action="#" class="form ui form-create-abstract">
     <div class="ui error message">

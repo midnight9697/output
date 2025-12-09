@@ -9,6 +9,7 @@ use App\Http\Requests\PR\UpdatePrRequest;
 use App\Models\Attachment;
 use App\Models\Member;
 use App\Models\PRItem;
+use App\Models\PRMonitor;
 use App\Models\PRSupplemental;
 use App\Models\PurchaseRequest;
 use App\Models\Recepient;
@@ -261,7 +262,13 @@ class PurchaseRequestController extends Controller {
         $close_pr =  PurchaseRequest::with('close_pr')->whereHas('transactions', function($query) {
             return $query->where('sender_id', Auth::user()->id)
                     ->where('action' , 12);
-        });
+        })->with('monitoring');
+        $close_pr->orderByDesc(
+            Transaction::select('created_at')
+                ->whereColumn('transactions.purchase_request_id', 'purchase_requests.id')
+                ->latest()
+                ->take(1)
+        );
         return encryptIds($this->pr_data_fetcher($close_pr));
     }
 
@@ -313,5 +320,24 @@ class PurchaseRequestController extends Controller {
         ->with('lastTransaction')
         ->with('createdBy');
         // ->orderBy('desc', 'last_transaction_created_at_as_latest_date');
+    }
+
+    public function create_pr_monitor(Request $request) {
+        $data = [
+            'pr_id' => decryptUrlSafe($request->pr_id),
+            'canvass' => $request->canvass_date,
+            'abstract' => $request->abstract_date,
+            'opening' => $request->opening_date,
+            'winner' => json_encode($request->winners),
+            'award_date' => $request->date_of_award,
+            'order_date' => $request->date_of_po,
+        ];
+        if (!PRMonitor::where('pr_id', decryptUrlSafe($request->pr_id))->exists()) {
+            PRMonitor::create($data);
+        }
+        else {
+            PRMonitor::where('pr_id', decryptUrlSafe($request->pr_id))->update($data);
+        }
+        return response([PRMonitor::where('pr_id', decryptUrlSafe($request->pr_id))->first()]);
     }
 }

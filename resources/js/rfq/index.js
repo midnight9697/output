@@ -1,3 +1,4 @@
+import { preview } from "../app";
 import { quillClass } from "../quil";
 import { TBLButton } from "../table/buttons";
 import Custom_table from "../table/custom_table";
@@ -66,20 +67,28 @@ function CTable(CTBL, tab = 'inbox') {
     
     CTBL.custom_buttons = (data) => {
       
-      let div = document.createElement('div');
-      TBLButton.viewName = "ABSTRACT";
-      TBLButton.udpateName = "UPDATE";
-      TBLButton.updateAction = () => {
-        window.location = "./rfq/form-update/"+data.id;        
-      }
+        let div = document.createElement('div');
+        TBLButton.loadCustomBtns(div);
 
-      TBLButton.viewAction = () => {
-        window.location = "./abstract/process/"+data.id;        
-      }
-      
-      TBLButton.loadButtons(div);
-      return div;
-  }
+        TBLButton.createCustomButton(div, 'PREVIEW', 'preview_btn', () => {
+            window.open( "./rfq/preview/"+data.id, "_blank");
+            // rfqClass.getDox((data) => {
+            //     console.log('file', data);
+            //     $('#modalDocumentPreview').modal('show');
+            //     preview('document-preview', data);
+            // });
+        })
+
+        TBLButton.createCustomButton(div, 'UPDATE', 'update_btn', () => {
+            window.location = "./rfq/form-update/"+data.id;    
+        })
+
+        TBLButton.createCustomButton(div, 'ABSTRACT', 'abstract_btn', () => {
+            window.location = "./abstract/process/"+data.id;
+        })
+        TBLButton.relinitialize();
+        return div;
+    }
 
     CTBL.load([
         'rfq_number',

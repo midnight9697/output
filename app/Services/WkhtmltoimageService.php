@@ -4,11 +4,13 @@ namespace App\Services;
 
 use App\Models\TemporaryImages;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Dompdf\Options;
 use Intervention\Image\ImageManagerStatic as Image;
 
 class WkhtmltoimageService {
     protected string $binary;
     protected $service;
+    public $orientation = 'portrait';
 
     public function __construct() {
         $this->binary = base_path(env('WKHTMLTOIMAGE_PATH'));
@@ -52,7 +54,7 @@ class WkhtmltoimageService {
         $img = Image::make($imagePath);
         $width = $img->width();
         $height = $img->height();
-        $pageHeight = 794;//$canvas->get_height();
+        $pageHeight = $this->orientation == "portrait"?1123:794;//$canvas->get_height();
         $numSlices = ceil($height / $pageHeight);
        
         $slices = [];
@@ -75,6 +77,15 @@ class WkhtmltoimageService {
             <head>
                 <meta charset="UTF-8">
                 <title>{$title}</title>
+                <style>
+                    @page {
+                        margin: 0; /* Removes the default margins */
+                    }
+                    body {
+                        margin: 0;
+                        padding: 0;
+                    }
+                </style>
             </head>
             <body>
                 <img src="data:image/png;base64,{$base64}" alt="Generated Image" width="100%">
@@ -82,7 +93,13 @@ class WkhtmltoimageService {
             </html>
             HTML;
         }
-        $pdf = Pdf::loadHTML($html)->setPaper('A4', 'landscape');
+        
+        $pdf = Pdf::loadHTML($html)
+            ->setOption('isHtml5ParserEnabled', true)  // Enables HTML5 support
+            ->set_option('defaultMediaType', 'all')
+            ->setOption('isPhpEnabled', true)         // Enables PHP in HTML
+            ->setPaper('A4', $this->orientation);              // Paper size and orientation
+           
         unlink($outputPath);
         return $pdf->stream($title);
     }

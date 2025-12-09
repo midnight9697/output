@@ -81,6 +81,7 @@ export class PurchaseOrder {
         action(e.data.data);
       } )
     }
+
 }
 
 export const PurchaseOrderClass = new PurchaseOrder();

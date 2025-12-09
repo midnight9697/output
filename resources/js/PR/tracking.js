@@ -50,7 +50,7 @@ function transactionTable() {
         <div class="item">
         <div class="right floated content">
         ${
-            (transaction.action == 12?"<span class='ui red text bold'><small><b>FILE CLOSED</b></small></span>":
+            (transaction.action == 12?`<span class='ui red text bold'><small><b>APPROVED PR</b></small></span>`:
                 `<small>Assigned to: <b><i>${((member_count > 1)?"Members":transaction.recepient.profile.firstname+" "+transaction.recepient.profile.lastname)}</b></i></small>`
             )
         }
@@ -62,9 +62,9 @@ function transactionTable() {
             </i>
           <div class="content">
             <a class="header">${(transaction.sender_id==localStorage.getItem('user')?"You":transaction.sender.firstname+" "+transaction.sender.lastname)}</a>
-            ${(transaction.action == 1 && transaction.body != ""?"":`<small style="color:green">(${transaction.act.synonyms})${transaction.recepient.received == 1?" | Received":""}</small>`)}
+            ${(transaction.action == 1 && transaction.body != ""?"":`<small style="color:green">(${transaction.action==12?`Signed`:transaction.act.synonyms})${transaction.recepient.received == 1?" | Received":""}</small>`)}
             <div class="description"><b>${transaction.created_for}</b></div>
-            <div class="remarks_menu">Remarks: ${transaction.body}</div>
+            ${(transaction.body?`<div class="remarks_menu">${transaction.body}</div>`:"")}
           </div>
         </div>
         `;

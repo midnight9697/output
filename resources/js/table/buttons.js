@@ -12,6 +12,10 @@ export class tableButtons {
         this.deleteClassName = "";
         this.updateClassName = "";
         this.data = {};
+        this.popup = document.createElement('div');
+        this.menu = document.createElement('div'); 
+        this.options_button = document.createElement("div");
+
     }
 
     loadButtons(parent) {
@@ -34,19 +38,19 @@ export class tableButtons {
         `;
         
         dwbutton.innerHTML =  `
-          <i class="edit icon"></i> ${this.downName}
+        ${this.downName}
         `;
         
         button.innerHTML =  `
-          <i class="edit icon"></i> ${this.udpateName}
+        ${this.udpateName}
         `;
 
         vbutton.innerHTML =  `
-          <i class="eye icon"></i> ${this.viewName}
+          ${this.viewName}
         `;
 
         dbutton.innerHTML =  `
-          <i class="trash icon"></i> ${this.deleteName}
+          ${this.deleteName}
         `;
 
         dwbutton.className = 'item link';
@@ -83,6 +87,50 @@ export class tableButtons {
         parent.appendChild(popup);
 
         this.relinitialize();
+    }
+
+    createCustomButton(parent, customBtnName, customBtnClassName, action, data = {}) {
+      var self = this;
+      const button = document.createElement('div');
+      let keys = Object.keys(data)
+      console.log(data);
+      keys.forEach(key => {
+        button.dataset[key] = data[key];
+      });
+      button.dataset.uid = Date.now().toString();
+      
+      button.innerHTML =  `
+       ${customBtnName}
+      `;
+      
+      button.className = 'item link'+ " "+customBtnClassName;
+      this.popup.className = 'ui popup custom-popup';
+      this.menu.className = 'ui vertical very tiny menu';
+      this.menu.style = "text-align:center";
+      button.onclick = (e) => action(data);
+      
+      if (action) {
+        this.menu.appendChild(button);
+      }
+
+      this.popup.appendChild(this.menu);
+      parent.appendChild(this.popup);
+    }
+
+    loadCustomBtns(parent) {
+      this.resetBtns();
+      let options_button = document.createElement("div");
+      options_button.innerHTML = `
+        <i class="ellipsis vertical icon"></i>
+      `;
+      options_button.className = "ui icon button custom-options-button";
+      parent.appendChild(options_button);
+    }
+    
+    resetBtns() {
+      this.popup = document.createElement('div');
+      this.menu = document.createElement('div'); 
+      this.options_button = document.createElement("div");
     }
 
     relinitialize() {

@@ -1,23 +1,9 @@
 <style>
-    @page {
-        /* display:inline-block; */
-        margin-bottom:none;
-        margin-top:10px;
-    }
-    thead {
-        display: table-header-group; /* default behavior */
-    }
-
-    thead {
-        display: table-row-group !important; /* prevent repeating */
-    }
     .table-container {
-        width: 100%;       /* div takes full width of parent */
-        max-width: 100%;   /* prevents overflow */
-        /* font-size: clamp(30px, 100px, 60px) !important;  */
-        /* -webkit-text-size-adjust: 10%; */
-        transform-origin:center top;
-        font-family: "Helvetica", sans-serif;
+      width: 100%;       /* div takes full width of parent */
+      max-width: 100%;   /* prevents overflow */
+      /* font-size: clamp(30px, 100px, 60px) !important;  */
+      /* -webkit-text-size-adjust: 10%; */
     }
     /* table, th, td {
         border: 1px solid black;
@@ -27,29 +13,18 @@
     } */
     .table-container table {
         width: 100%;
-        /* table-layout: fixed; */
+        table-layout: fixed;
         border-collapse: collapse;
         /*font-size: clamp(2rem, 10%, 4rem); text scales between 12px and 16px */
     }
-
     .table-container th,
     .table-container td {
         padding: 8px;
-        border: 1px solid #524c4c;
+        border: 1px solid #ccc;
         word-wrap: break-word;  /* wraps long content inside cell */
         white-space: normal;    /* allows text to wrap */
-        text-align: center;
-        font-size: 12;
     }
-    
-    table, tr, td, th {
-        page-break-inside: auto !important;
-        break-inside: auto !important;
-    }
-    /* td:nth-child(2) { width: 7%; }
-    td:nth-child(4) { width: 30%; } */
 </style>
-    {{-- <div class="table-container" id="content" style=" transform: scale({{ (isset(json_decode($data)->scaleX)?json_decode($data)->scaleX:1) }});"> --}}
     <div>
         <img src="{{ (!$data?$url:json_decode($data)->data) }}/files/images/abstract-header.png" alt="footer.png" height="80px"style="left: 0;right: 0;background-color: white;background-blend-mode: luminosity;width:100%;margin-bottom:10px">
     </div>
@@ -106,3 +81,67 @@
             </tbody>
         </table>
     </div>
+    
+    <table style="width:100%;margin-top:30px;font-size:12px">
+        <thead>
+            <tr>
+                <td>Prepared by:</td>
+                <td>Conforme (End-user):</td>
+                <td colspan="2">Recommending Approval:</td>
+            </tr>
+            <tr>
+                <td style="height: 100px;text-align:center">
+                    <div style="text-wrap:wrap">
+                        <p style="margin:0px;text-decoration:underline;font-weight:bold">JANE C. NOVEDA</p>
+                        <small>Support Staff</small>
+                    </div>
+                </td>
+                <td style="font-weight:bold;text-align:center">
+                    <p style="margin:0px;text-decoration:underline;font-weight:bold">ATTY. RODOLFO A. YODICO, II</p>
+                    <small style="height:70px"></small>
+                </td>
+                <td style="font-weight:bold;text-align:center">
+                    <p style="margin:0px;text-decoration:underline;font-weight:bold">ENGR.VENUS V. BAUTISTA</p>
+                    <small>Member, BAC</small>
+                </td>
+                <td style="font-weight:bold;text-align:center">
+                    <p style="margin:0px;text-decoration:underline;font-weight:bold">ENGR.LIZA A. TAN</p>
+                    <small>Member, BAC</small>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="3">Canvassed by:</td>
+            </tr>
+            <tr>
+                <td>
+
+                </td>
+                <td style="height: 100px;text-align:center;">
+                    <p style="margin:0px;text-decoration:underline;font-weight:bold">EIVER KY C. VILLEGAS</p>
+                    <small>Canvasser</small>
+                </td>
+                <td style="text-align:center;font-weight:bold">
+                    <p style="margin:0px;text-decoration:underline;font-weight:bold">ENGR. HENNENCY G. HAYAG</p>
+                    <small>Chairperson, BAC</small>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="3">Checked by:</td>
+            </tr>
+            <tr>
+                <td>
+                    
+                </td>
+                <td style="height: 100px;text-align:center;">
+                    <p style="margin:0px;text-decoration:underline;font-weight:bold">ENGR. NOEL C. CABIAO</p>
+                    <small>Head, Property and Supply Unit</small>
+                </td>
+                <td style="text-align:center;">
+                    <p style="margin:0px;text-decoration:underline;font-weight:bold">ENGR. ALEX D. JIMENEZ</p>
+                    <small> Regional Director</small>
+                </td>
+            </tr>
+        </thead>
+    </table>

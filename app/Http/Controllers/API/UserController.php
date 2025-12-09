@@ -22,14 +22,15 @@ class UserController extends Controller {
             'name' => Profile::select('firstname')
             ->whereColumn('user_id', 'users.id')
             ->limit(1)
-        ])->whereHas('profile')->orderBy('created_at', 'desc')->paginate(10);
+        ])->whereHas('profile')->orderBy('created_at', 'desc');
         foreach ($users as $user) {
             $user->full_name = $user->full_name;
             $user->division_name = $user->division_name;
             $user->section_name = $user->section_name;
             $user->date = date('M d, Y', strtotime($user->created_at));
         }
-        return $users;
+        $users->orderBy('created_at', 'desc');
+        return encryptIds($users);
     }
 
     public function fetchAll() {

@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Auth;
 
 class UserPolicy
 {
@@ -21,8 +22,9 @@ class UserPolicy
         //
     }
 
-    public function update(User $user, User $model) {
-        return (($user->role == "superadmin" || $user->role == "admin")  || $model->id == $user->id)?true:abort('403', 'Unauthorized action');
+    public function update(User $model) {
+        $user = Auth::user();
+        return (($user->role == "superadmin" || $user->role == "admin")  || decryptUrlSafe($model->id) == $user->id)?true:abort('403', 'Unauthorized action');
     }
     
     public function delete(User $user, User $model) {

@@ -20,13 +20,19 @@
   'link' => url('supplemental/create')
 ])
 
-@include('default.create-table', [ 'name' => 'splTable',
+<div class="ui top attached tabular menu">
+  <div class="active item" data-tab="head1">SUPPLEMENTAL</div>
+</div>
+<div class="ui bottom attached active tab segment" data-tab="head1">
+  @include('default.create-table', [ 'name' => 'splTable',
   'columns' => [
     'CODE',
     'TITLE',
     'UPLOADED AT'
   ]
 ])
+</div>
+
 
 @endsection
 

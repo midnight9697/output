@@ -3,6 +3,7 @@
         text-transform: none;
     }
 </style>
+
 <div class="ui top aligned modal" id="modalCreateRFQSpec">
     <i class="close icon"></i>
     <div class="header">

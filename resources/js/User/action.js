@@ -26,7 +26,7 @@ export class UserController {
       document.getElementById('section').innerHTML = ht;
     }
     
-    createUser(e) {
+    createUser(e, table) {
 
       e.preventDefault();
       let user = {};
@@ -42,7 +42,7 @@ export class UserController {
       usersClass.createUser(user, (json) => {
         BtnLoaderMod.load(document.getElementById('createUserFinalize'), () => {
           new UserController().failedAction('formCreateUser');
-          usersClass.getByPage(new UserController().fetchUsersTable);
+          table.table.ajax.reload();
           MessageMod.success("User Successfully Created");
         }, "REGISTER USER");
       }, (response) => {

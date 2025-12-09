@@ -133,7 +133,6 @@ h1 { text-align: center; }
     </div>
 </div>
 
-
 <div class="ui grid stackable padded">
         <div class="ui fluid card">
            <div class="content">
@@ -142,6 +141,7 @@ h1 { text-align: center; }
                 </div>
             </div>
         </div>
+    </div>
 </div>
 <script async src="{{env('MARCO_MAP_API')}}"></script>
 @endsection

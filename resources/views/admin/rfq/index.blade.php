@@ -1,6 +1,40 @@
 @extends('layout.app')
 
 @section('main_content')
+<style>
+    #viewer img {
+      display: inline-block;
+      vertical-align: middle;
+    }
+    
+    #viewer .left-align {
+      float: left;
+      margin-right: 10px;
+    }
+    
+    #viewer .right-align {
+      float: right;
+      margin-left: 10px;
+    }
+
+</style>
+
+<div class="ui top aligned modal" id="modalDocumentPreview">
+    <i class="close icon"></i>
+    <div class="header">
+        <h3 class="modal-title">RFQ PREVIEW</h3>
+    </div>
+    <div class="content">
+        <div class="ui form attached segment">
+            <div id="document-preview" style="height:100%;width:100%">
+
+            </div>
+        </div>
+    </div>
+    <div class="actions">
+        <button class="ui primary very tiny button add_rfq_item_button">PROCEED</button>
+    </div>
+</div>
     {{-- @include('default.create-button', [
       'name' => 'create_rfq_btn',
       'text' => 'CREATE RFQ',
@@ -29,6 +63,7 @@
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script> --}}
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"></script> --}}
     {{-- <script src="https://unpkg.com/pdfjs-dist/build/pdf.js"></script> --}}
+   
     @vite(['resources/js/rfq/index.js'])
     {{-- @vite(['resources/js/table/pdf.js']) --}}
     {{-- @vite(['resources/js/table/pdf-1.js']) --}}

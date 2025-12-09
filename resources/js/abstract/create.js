@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             supplier:all_supplier_lists.find(el => el.name == text),
                             unit_cost: '',
                             total_cost: '',
+                            winning_bidder: '0',
                         });
                         
                         selectedSuppliers.push(supplier);
@@ -138,7 +139,7 @@ function biddersTable(bids) {
     $('.winner').on('change', (e) => {
         let abstract_items = current_item.abstract_items;
         let abstract_item = abstract_items.find(el => el.id == e.target.dataset.id);
-        abstract_item.winning_bidder = '1';
+        console.log(abstract_items);
         console.log('checked? ', e.target.checked);
         abstract_items = abstract_items.map(el => {
             el.winning_bidder = (el.id == abstract_item.id?abstract_item.winning_bidder:'0');
@@ -154,7 +155,8 @@ function biddersTable(bids) {
         abstract_item = (abstract_item?abstract_item:{
             'supplier': all_supplier_lists.find(el => el.name == e.target.dataset.supplier_name),
             'unit_cost': '',
-            'total_cost': ''
+            'total_cost': '',
+            'winning_bidder': '0'
         })
         abstract_item.unit_cost = e.target.value;
         current_item.abstract_items = current_item.abstract_items.map(el => {
@@ -175,7 +177,8 @@ function biddersTable(bids) {
         abstract_item = (abstract_item?abstract_item:{
             'supplier': all_supplier_lists.find(el => el.name == e.target.dataset.supplier_name),
             'unit_cost': '',
-            'total_cost': ''
+            'total_cost': '',
+            'winning_bidder': '0'
         })
         abstract_item.total_cost = e.target.value;
         current_item.abstract_items = current_item.abstract_items.map(el => {

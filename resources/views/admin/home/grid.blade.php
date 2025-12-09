@@ -26,12 +26,17 @@ $quotation = RFQ::orderByDesc('id')->with('created_by')->first();
               Users
             </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
             <div class="description">
               <b>{{ (User::has('profile')->orderByDesc('id')->first()->full_name) }}</b> have been recently added to the system.
 =======
             <div class="description" style="min-height:40px">
               <b>{{ User::orderByDesc('id')->first()->fullname }}</b> have been recently added to the system.
 >>>>>>> 7a2808c7e1015e1bb6029e6bc7b10eadc3c147e2
+=======
+            <div class="description" style="min-height:40px">
+              <b>{{ User::orderByDesc('id')->first()->fullname }}</b> have been recently added to the system.
+>>>>>>> cc64edf44b4cd10f8aa3c0f56bab2959ee268f8e
             </div>
           </div>
           <div class="extra content">

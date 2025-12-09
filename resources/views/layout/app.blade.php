@@ -13,6 +13,7 @@
     <script src="{{ url('plugins/docx-preview/jszip.min.js') }}"></script>
     <script src="{{ url('plugins/docx-preview/docx-preview.js') }}"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @yield('head_js')
 </head>
 <style>
     #visibleSidebar {

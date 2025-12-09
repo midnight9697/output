@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             supplier:all_supplier_lists.find(el => el.name == text),
                             unit_cost: '',
                             total_cost: '',
-                            winning_bidder: '0',
+                            // winning_bidder: '0',
                         });
                         
                         selectedSuppliers.push(supplier);
@@ -106,7 +106,7 @@ function biddersTable(bids) {
                 <td><input type="text" value="${bid.total_cost}" class="supplier_unit_cost" data-supplier_name="${bid.supplier.name}" id="unitcost${bid.supplier.id}" name="unit_cost" data-supplier="${bid.supplier.id}" placeholder=""></td>
                 <td>
                     <div class="ui checkbox">
-                      <input type="radio" ${bid.winning_bidder == 1?"checked":""} name="winner"  id="winner-${bid.id}" data-id="${bid.id}" class="winner"> 
+                      <input type="radio" ${bid.winning_bidder == 1?"checked":""} name="winner" data-supplierId="${bid.supplier.name}"  id="winner-${bid.id}" data-id="${bid.id}" class="winner"> 
                       <label>YES</label>
                     </div>
                 </td>
@@ -135,17 +135,29 @@ function biddersTable(bids) {
         });
         current_item.abstract_items = abstract_items;
     });
+    
 
     $('.winner').on('change', (e) => {
         let abstract_items = current_item.abstract_items;
         let abstract_item = abstract_items.find(el => el.id == e.target.dataset.id);
-        console.log(abstract_items);
-        console.log('checked? ', e.target.checked);
+        abstract_item = abstract_items.filter(el => el.id == e.target.dataset.id).length > 0?abstract_item:{
+            'supplier': all_supplier_lists.find(el => el.name == e.target.dataset.supplierid),
+            'unit_cost': '',
+            'total_cost': '',
+            'winning_bidder': '1',
+            'id': (abstract_items.length + 1)
+        }
+
+        if (abstract_items.filter(el => el.supplier.name == abstract_item.supplier.name).length == 0) {
+            abstract_items.push(abstract_item);
+        }
         abstract_items = abstract_items.map(el => {
-            el.winning_bidder = (el.id == abstract_item.id?abstract_item.winning_bidder:'0');
-            console.log('Match ?', el.id == abstract_item.id);
+            el.winning_bidder = ((el.id == abstract_item.id || el.supplier.id == abstract_item.supplier.id)?'1':'0');
+            console.log('Match ?', el.id == abstract_item.id || el.supplier.id == abstract_item.supplier.id);
             return el;
         });
+        console.log(abstract_items);
+
         current_item.abstract_items = abstract_items;
     });
 
@@ -158,6 +170,7 @@ function biddersTable(bids) {
             'total_cost': '',
             'winning_bidder': '0'
         })
+        console.log('1233');
         abstract_item.unit_cost = e.target.value;
         current_item.abstract_items = current_item.abstract_items.map(el => {
             if (el.supplier.name == abstract_item.supplier.name) {

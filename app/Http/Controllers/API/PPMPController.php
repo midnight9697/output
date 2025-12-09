@@ -6,19 +6,22 @@ use App\Http\Controllers\Controller;
 use App\Models\PPMP;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class PPMPController extends Controller {
     protected $attachment_path = "public/ppmp";
 
     public function fetch_by_page(Request $request) {
-        $ppmps = PPMP::orderBy('created_at', 'desc');
+        $ppmps = PPMP::where('creator', Auth::user()->id)->orderBy('created_at', 'desc');
         return encryptIds($ppmps);
     }
 
     public function remove(Request $request) {
         $id = decryptUrlSafe($request->id);
         $ppmp = PPMP::where('id', $id);
+        Gate::allows('ppmp-remove', $ppmp->first());
+        
         $file = $ppmp->first()->filename.".".$ppmp->first()->filetype;
         if (Storage::disk('public')->exists('ppmp/'.$file)) {
             Storage::delete('public/ppmp/'.$file);

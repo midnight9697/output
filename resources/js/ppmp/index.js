@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
         TBLButton.loadCustomBtns(div);
         TBLButton.createCustomButton(div, 'DELETE', 'deleteAction', (e) => {
             confirmMod.load(() => {
-                let ppmp__id = e.target.dataset.id;
+                let ppmp__id = e.id;
                 ppmpController.remove(ppmp__id, (e) => {
                     active_table.table.ajax.reload();
                     MessageMod.success("Successfully Deleted.");

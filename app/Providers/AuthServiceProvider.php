@@ -7,6 +7,7 @@ namespace App\Providers;
 use App\Models\PurchaseRequest;
 use App\Models\User;
 use App\Policies\AttachmentPolicy;
+use App\Policies\PPMPPolicy;
 use App\Policies\PRPolicy;
 use App\Policies\PurchaseRequestPolicy;
 use App\Policies\RFQPolicy;
@@ -59,6 +60,9 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('rfq-update-view', [RFQPolicy::class, 'updateView']);
         Gate::define('supplier-update-view', [SupplierPolicy::class, 'updateView']);
         Gate::define('supplier-view-view', [SupplierPolicy::class, 'supplierView']);
+
+        // PPMP
+        Gate::define('ppmp-remove', [PPMPPolicy::class, 'remove']);
 
     }
 }

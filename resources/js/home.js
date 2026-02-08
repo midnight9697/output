@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
    //    rfqCounter();
    // }, 1000);
    // pageLoadMod.destroy();
-   initMap();
+//    initMap();
 });
 
 function rfqCounter() {
@@ -22,7 +22,7 @@ function rfqCounter() {
 }
 
  
-function initMap() {
+window.initMap = function initMap() {
   
    // INITIALIZE THE MAP
    mapIcon.url = localStorage.getItem('asset');

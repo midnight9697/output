@@ -7,6 +7,7 @@
     "require": {
         "php": "^8.0.2",
         "barryvdh/laravel-dompdf": "^2.2",
+        "barryvdh/laravel-snappy": "^1.0",
         "cloudconvert/cloudconvert-laravel": "^1.1",
         "guzzlehttp/guzzle": "^7.10",
         "intervention/image": "2.7.2",
@@ -14,6 +15,7 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "mikehaertl/phpwkhtmltopdf": "^2.5",
+        "mpdf/mpdf": "^8.2",
         "phpoffice/phpword": "^1.4",
         "setasign/fpdf": "^1.8",
         "setasign/fpdi": "^2.6",

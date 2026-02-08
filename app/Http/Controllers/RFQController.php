@@ -7,9 +7,12 @@ use App\Models\RFQ;
 use App\Services\ParaphraserService;
 use App\Services\WkhtmltoimageService;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Barryvdh\Snappy\Facades\SnappyPdf;
 use Dompdf\Options;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Vite;
+use Mpdf\Mpdf;
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\TemplateProcessor;
 use Symfony\Component\HttpFoundation\StreamedResponse;
@@ -62,6 +65,24 @@ class RFQController extends Controller {
     }
 
     public function rfqPreview($rfq_id) {
+        return view('admin.rfq.preview2');
+        $data = [
+            'css' => public_path('style.css'),
+            'emb_logo' => public_path('denr-emb-logo.jpg'),
+            'bp_logo' => public_path('Bagong_Pilipinas_logo.jpg'),
+        ];
+        $html = view('admin.rfq.preview_orig', [ 'data' =>  json_encode($data) ]);
+        $mpdf = new Mpdf();
+        
+        $mpdf->WriteHTML($html);
+    
+        $mpdf->Output('invoice.pdf', 'I'); // 'I' for inline, 'D' for download
+        return [];
+        // $dompdf =  SnappyPdf::loadView('admin.rfq.preview_orig',[
+        //     'data' =>  json_encode($data)
+        // ]);
+        // return $dompdf->inline();
+        
         $template = new TemplateProcessor(resource_path('templates/test.docx'));
         // Replace placeholders
         $template->setValue('name', 'John Doe');

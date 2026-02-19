@@ -9,6 +9,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BACController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DivisionController;
+use App\Http\Controllers\GoogleDriveController;
 use App\Http\Controllers\InspectorController;
 use App\Http\Controllers\PPMPController;
 use App\Http\Controllers\PR\PurchaseRequestController;
@@ -182,3 +183,5 @@ Route::get('pdf-view', function() {
 });
 
 
+Route::get('/google/login', [GoogleDriveController::class, 'login']);
+Route::get('/google/callback', [GoogleDriveController::class, 'callback']);

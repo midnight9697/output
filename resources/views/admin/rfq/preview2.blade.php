@@ -18,41 +18,55 @@
         top: 0;
         border: solid 1px;
         padding: 0px;
+        height: 100vh
+    }
+
+    spacer {
+      height: 100%;
     }
 
     @media print {
         html, body {
-          height: 100%;
+          min-height: 100%;
           margin: 0;
           padding: 0;
+          border: solid green 10px;
         }
         @page {
+            position:absolute;
+            bottom: 0;
+            top: 0;
+            height: 100vh;
             margin: 0px;
+            border: solid 10px;
         }
         
         table {
             border: none;
+            height: 100vh;
             /* visibility: visible; */
-            height: 100%;
         }
 
         body {
+          height: 100%;
             /* visibility: hidden; */
         }
 
         thead {
           display: table-header-group; /* repeats on every page */
         }
+
         tfoot {
           display: table-footer-group; /* repeats on every page */
         }
+        
         tr {
           page-break-inside: avoid; /* prevent row splitting */
         }
+
         table {
           page-break-inside: auto;
         }
-
     }
 
     header {
@@ -105,7 +119,7 @@
 </head>
 <body>
     <main>
-        <table>
+        <table height="100%">
             <thead>
                 <tr>
                     <th>
@@ -119,10 +133,13 @@
                         @include('admin.rfq.content')
                     </td>
                 </tr>
+                <tr class="spacer">
+                  <td></td>
+                </tr>
             </tbody>
             <tfoot>
                 <tr>
-                    <th style="border: solid 1px;position:relative;height: 100%">
+                    <th style="border: solid 1px;height: 100%">
                         @include('admin.rfq.tbFooter')
                     </th>
                 </tr>

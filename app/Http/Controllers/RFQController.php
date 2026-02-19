@@ -9,6 +9,9 @@ use App\Services\WkhtmltoimageService;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Barryvdh\Snappy\Facades\SnappyPdf;
 use Dompdf\Options;
+use Google\Client;
+use Google\Service\Drive;
+use Google\Service\Drive\DriveFile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Vite;
@@ -65,7 +68,8 @@ class RFQController extends Controller {
     }
 
     public function rfqPreview($rfq_id) {
-        return view('admin.rfq.preview2');
+       
+        return view('admin.rfq.viewing');
         $data = [
             'css' => public_path('style.css'),
             'emb_logo' => public_path('denr-emb-logo.jpg'),

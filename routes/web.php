@@ -20,6 +20,7 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\Supplemental\SupplementalController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\SystemController;
+use App\Http\Controllers\UploadAndConvertController;
 use App\Http\Controllers\User\ProfileController as UserProfileController;
 use App\Models\Division;
 use App\Models\Supplementary;
@@ -185,3 +186,4 @@ Route::get('pdf-view', function() {
 
 Route::get('/google/login', [GoogleDriveController::class, 'login']);
 Route::get('/google/callback', [GoogleDriveController::class, 'callback']);
+Route::get('/upload-convert', [UploadAndConvertController::class, 'uploadAndConvert']);

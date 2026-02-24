@@ -57,7 +57,7 @@
             The Purchaser reserves the right to accept or reject any quotation, and to annul the bidding/shopping process or reject all quotations at any time prior to contract award, without thereby incurring any liability to the affected bidder/bidders. The Purchaser also reserves the right to waive minor deviations/defects or infirmity is one that does not material/affect the overall funcionality of the material and the capability of the supplier to perform the contract.
         </li>
         <li>
-            Th prospective bidder shall submit the following:
+            The prospective bidder shall submit the following:
             <ol type="a" style="font-weight: bold;">
                 <li>Quotation Form/Technical Specifications;</li>
                 <li>Latest Mayor's/Business Permit;</li>
@@ -67,3 +67,13 @@
         </li>
     </ol>
 </section>
+<style>
+     .content {
+        margin-bottom: 126px;
+        margin-left: 60px;
+        margin-right: 60px;
+    }
+    .title-block {
+        margin-top: 166px;
+    }
+</style>

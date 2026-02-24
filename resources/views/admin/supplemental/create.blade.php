@@ -33,7 +33,7 @@
 <div class="ui top attached segment">
     <div class="ui two column grid">
         <div class="column">
-            <b class="modal-title">PRCUREMENT PROJECTS</b>
+            <b class="modal-title">PROCUREMENT PROJECTS</b>
         </div>
         <div class="column" style="text-align:right">
             <button class="ui primary very tiny button add_item_button">ADD PROJECT ITEM</button>

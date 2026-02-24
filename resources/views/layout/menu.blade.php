@@ -1,12 +1,16 @@
-
+<style>
+    .menu_anchor {
+        text-decoration-line: none;
+        color: lightgray;
+    }
+</style>
 @if ($permission == true)
-    <a href="{{ $url }}" target="{{ (isset($target)?"__blank":"") }}" class="item {{ request()->url() == $url ? 'active': '' }}">
+    <li>
+    <a style="width:100%;display:block;height:100%" class="menu_anchor" href="{{ $url }}" target="{{ (isset($target)?"__blank":"") }}" class="item {{ request()->url() == $url ? 'active': '' }}">
         {{-- <div><i class="icon users"></i>{{ $title }}</div> --}}
         {{-- <i class="home icon"></i> --}}    
         
     @php
-            
-        
             $icon = "";
 
             switch ($title) {
@@ -36,18 +40,12 @@
                     $icon = "arrow right";
                     break;
             }
-        @endphp
-        {{-- <div> --}}
-            @if (isset($badge))
-                @if ($badge > 0)
-                    <div class="ui red left pointing label">{{ $badge }}</div>
-                @else
-                    <i class="{{ $icon }} icon"></i>
-                @endif
-            @else
-                <i class="{{ $icon }} icon"></i>
-            @endif
-            {{ $title }}
-        {{-- </div> --}}
+    @endphp
+        <i class="{{ $icon }} icon"></i>
+        {{ $title }}
+        @if(isset($badge))
+            <small style="font-size:8px; display:inline" class="ui red left pointing label">{{ $badge }}</small>
+        @endif
     </a>
+    </li>
 @endif

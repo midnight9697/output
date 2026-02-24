@@ -9,7 +9,51 @@ $lastTransaction = Transaction::orderByDesc('id')->with('purchase_request')->fir
 $quotation = RFQ::orderByDesc('id')->with('created_by')->first();
 @endphp
 
-<div class="ui grid stackable padded">
+<!-- STATS -->
+<div class="stats">
+  <div class="card">
+    <h3>Total Users</h3>
+    <div class="value">{{ $count_user }}</div>
+    <div class="change success">+12% this month</div>
+  </div>
+  
+  <div class="card">
+    <h3>Supplier</h3>
+    <div class="value">{{ $count_supplier }}</div>
+    <div class="change success">+8.2%</div>
+  </div>
+
+  <div class="card">
+    <h3>Purchase Request</h3>
+    <div class="value">{{ $count_pr }}</div>
+    <div class="change warning">+5 new</div>
+  </div>
+
+  <div class="card">
+    <h3>Request for Quotation</h3>
+    <div class="value">{{ $count_rfq }}</div>
+    <div class="change danger">-2 resolved</div>
+  </div>
+</div>
+<div class="grid-2">
+    <div class="chart-placeholder">
+      <div id="dashmap" style="height:50vh; width:100%">
+        <!-- THIS SHIT RIGHT HERE IS WHERE THE MAP MAGICALLY APPEARS OUT OF NOWHERE -->
+      </div>
+    </div>
+
+  <div class="card activity">
+    <h3>Recent Activity</h3>
+    <ul>
+      <li>New user registered</li>
+      <li>Order #1024 completed</li>
+      <li>Password changed</li>
+      <li>Server updated</li>
+    </ul>
+  </div>
+</div>
+
+{{-- <div class="ui grid stackable padded">
     <div
         class="four wide computer eight wide tablet sixteen wide mobile column">
         <div class="ui fluid card">
@@ -105,4 +149,4 @@ $quotation = RFQ::orderByDesc('id')->with('created_by')->first();
           </div>
         </div>
     </div>
-</div>
+</div> --}}

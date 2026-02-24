@@ -4,7 +4,7 @@
           <a href="{{ $link }}" type="button" class="ui tiny primary labeled icon button" id="{{ $name }}">
             <i class="{{ $icon }} icon"></i> {{ $text }}
           </a>
-      @else
+        @else
           @if (isset($name))
             <button type="button" class="ui tiny primary labeled icon button" id="{{ $name }}">
                 <i class="{{ $icon }} icon"></i> {{ $text }}

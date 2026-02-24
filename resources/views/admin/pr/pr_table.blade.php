@@ -16,6 +16,6 @@
     // 'Member',
     'Date Created',
     'Latest Update',
-
-  ]
+],
+'creator' => $creator
 ])

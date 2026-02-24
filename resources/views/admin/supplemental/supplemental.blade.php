@@ -12,28 +12,29 @@
       width:100%;
   }
 </style>
-@include('default.create-button', [
+{{-- @include('default.create-button', [
   'name' => 'create-supplemental',
   'text' => 'SUPPLEMENTAL',
   'icon' => 'upload',
   'view' => "progress-upload",
   'link' => url('supplemental/create')
-])
+]) --}}
 
-<div class="ui top attached tabular menu">
-  <div class="active item" data-tab="head1">SUPPLEMENTAL</div>
-</div>
-<div class="ui bottom attached active tab segment" data-tab="head1">
+<section class="ui segment">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+      <h2 style="margin:0; font-size:18px;">SUPPLEMENTAL</h2>
+      <a href="{{ url('supplemental/create') }}" class="btn" style="background: var(--color-success);" id="create-supplemental">
+        <i class="fa-solid fa-plus"></i> Add New
+      </a>
+  </div>
   @include('default.create-table', [ 'name' => 'splTable',
-  'columns' => [
-    'CODE',
-    'TITLE',
-    'UPLOADED AT'
-  ]
-])
-</div>
-
-
+    'columns' => [
+      'CODE',
+      'TITLE',
+      'UPLOADED AT'
+    ]
+  ])
+</section>
 @endsection
 
 @section('custom_js')

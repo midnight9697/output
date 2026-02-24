@@ -68,8 +68,7 @@ class RFQController extends Controller {
     }
 
     public function rfqPreview($rfq_id) {
-       
-        return view('admin.rfq.viewing');
+        return view('admin.rfq.preview2');
         $data = [
             'css' => public_path('style.css'),
             'emb_logo' => public_path('denr-emb-logo.jpg'),

@@ -1,41 +1,54 @@
-@extends('auth.app')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - MySystem</title>
+<meta name="csrf-token" content="{{csrf_token()}}" />
+<script src="{{ url('plugins/login/jquery.min.js.download') }}"></script>
+<script src="{{ url('plugins/login/form.js.download') }}"></script>
+<script src="{{ url('plugins/login/transition.js.download') }}"></script>
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-@section('content')
+<!-- Font Awesome Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="{{ url('custom/css/custom-login-style.css') }}">
 
-<div class="ui middle aligned center aligned grid">
-    <div class="column">
-        <h2 class="ui teal image header">
-          <img src="{{ url('files/images/pims_2.png') }}" class="image" style="width:500px">
-          {{-- <img src="{{ url('files/images/logoko.png') }}" class="image"> --}}
-        </h2>
-        <form class="ui large form" method="POST" action="#" id="loginForm">
-            {{ csrf_field() }}
-            <div class="ui stacked segment">
-              <div class="field">
-                <div class="ui left icon input">
-                  <i class="user icon"></i>
-                  <input type="text" name="email" id="email" placeholder="E-mail address">
-                </div>
-              </div>
-              <div class="field">
-                <div class="ui left icon input">
-                  <i class="lock icon"></i>
-                  <input type="password" name="password" id="password" placeholder="Password">
-                </div>
-              </div>
-              <div class="ui fluid large teal submit button">Login</div>
-            </div>
-            <div class="ui error message"></div>
-        </form>
-        <div class="ui message">
-          Forgot Password? <a href="{{ url('login/forgot_password') }}">Click here</a>
-        </div>
-    </div>
+</head>
+@include('layout.cssinclude')
+<body>
+
+<div class="login-container">
+
+  <!-- Logo -->
+  <div class="logo">
+    <img src="{{ url('denr-emb-logo.png') }}" alt="MySystem Logo">
+    <span>PIMS</span>
   </div>
-@endsection
-@section('custom_js')
+
+  {{-- <h2>Welcome Back</h2> --}}
+
+  <!-- Login Form -->
+  <form class="ui large form" method="POST" action="#" id="loginForm">
+    {{ csrf_field() }}
+    <input type="text" placeholder="Username" required name="email" id="email">
+    <input type="password" placeholder="Password" required name="password" id="password">
+    <button type="submit">Login</button>
+    <div class="ui error message"></div>
+  </form>
+
+  <!-- Links -->
+  <div class="links">
+    <a href="#">Forgot Password?</a>
+    <a href="#">Sign Up</a>
+  </div>
+
+</div>
+@include('layout.jsinclude')
+
 <script>
-  $(document)
+      $(document)
     .ready(function() {
       $('.ui.form')
         .form({
@@ -70,5 +83,6 @@
       });
   });
 </script>
-  @vite(['resources/js/login/index.js'])
-@endsection
+@vite(['resources/js/login/index.js'])
+</body>
+</html>

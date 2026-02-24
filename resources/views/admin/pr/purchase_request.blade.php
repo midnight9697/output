@@ -16,6 +16,7 @@
         'actions_button' => 'submit_monitoring_button',
         'size' => 'small'
     ])
+    
     @include('default.create-button', [
       'name' => 'create_user_vbtn',
       'text' => 'PURCHASE REQUEST',
@@ -30,16 +31,16 @@
         <div class="item active" data-tab="close">CLOSED</div>
     </div>
     <div class="ui bottom attached tab segment" data-tab="inbox">
-        @include('admin.pr.pr_table', ['name' => 'inbox'])
+        @include('admin.pr.pr_table', ['name' => 'inbox', 'creator' => 'create_user_vbtn'])
     </div>
     <div class="ui bottom attached tab segment" data-tab="outbox">
-        @include('admin.pr.pr_table', ['name' => 'outbox'])
+        @include('admin.pr.pr_table', ['name' => 'outbox', 'creator' => 'create_user_vbtn'])
     </div>
     <div class="ui bottom attached tab segment" data-tab="personal">
-        @include('admin.pr.pr_table', ['name' => 'personal'])
+        @include('admin.pr.pr_table', ['name' => 'personal', 'creator' => 'create_user_vbtn'])
     </div>
     <div class="ui bottom attached tab active segment" data-tab="close">
-        @include('admin.pr.pr_table', ['name' => 'close'])
+        @include('admin.pr.pr_table', ['name' => 'close', 'creator' => 'create_user_vbtn'])
     </div>
     
 @endsection

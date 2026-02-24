@@ -10,16 +10,13 @@
 
 @section('main_content')
     @include('layout.custom-modal', ['view' => 'admin.ppmp.create', 'name' => 'uploadPPMPModal', 'title' => 'UPLOAD PROJECT PROCUREMENT MANAGEMENT PLAN', 'actions_button' => 'submit_upload_button'])
-    @include('default.create-button', [
-      'name' => 'create_ppmp_vbtn',
-      'text' => 'UPLOAD PPMP',
-      'icon' => 'plus',
-    ])
-
-    <div class="ui top attached tabular menu">
-        <div class="active item" data-tab="head1">PROJECT PROCUREMENT MONITORING PLAN</div>
-    </div>
-    <div class="ui bottom attached active tab segment" data-tab="head1">
+    <section class="ui segment">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+            <h2 style="margin:0; font-size:18px;">PROJECT PROCUREMENT MONITORING PLAN</h2>
+            <button class="btn" style="background: var(--color-success);" id="create_ppmp_vbtn">
+              <i class="fa-solid fa-plus"></i> Add New
+            </button>
+        </div>
         @include('default.create-table', [ 'name' => 'ppmp-table',
           'columns' => [
             'REF NO.',
@@ -27,9 +24,7 @@
             'UPLOADED AT'
           ]
         ])
-    </div>
-    <div class="ui bottom attached tab segment" data-tab="head2">
-    </div>
+    </section>
 @endsection
 
 @section('custom_js')

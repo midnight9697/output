@@ -16,7 +16,6 @@
     
     table {
         top: 0;
-        border: solid 1px;
         padding: 0px;
         height: 100vh
     }
@@ -30,7 +29,6 @@
           min-height: 100%;
           margin: 0;
           padding: 0;
-          border: solid green 10px;
         }
         @page {
             position:absolute;
@@ -38,7 +36,6 @@
             top: 0;
             height: 100vh;
             margin: 0px;
-            border: solid 10px;
         }
         
         table {
@@ -70,12 +67,11 @@
     }
 
     header {
+      position: fixed;
       top: 0;
-      left: 0;
       width: 100%;
       text-align: center;
-      z-index: 1000;
-      border-bottom: solid blue 10px;
+      /* border-bottom: solid blue 10px; */
     }
 
     @page {
@@ -84,15 +80,13 @@
     }
     /* Main content styling */
     main {
-        width: 816px;
-      line-height: 1.6;
+        width: 100%;
+        line-height: 1.6;
+        margin-bottom:126px;
+        margin-top:126px;
     }
     
-    .content {
-      /* border: solid 1px; */
-      margin-left: 60px;
-      margin-right: 60px;
-    }
+   
 
     .content ol {
         margin-top: 20px;
@@ -110,20 +104,25 @@
     }
 
     footer {
-        margin-top: 40px;
-        text-align: center;
-        font-size: 11px;
-        color: #333;
+      height: 116;
+      width:100%;
+      background: black;
+      position: fixed;
+      bottom: 0;
     }
   </style>
 </head>
 <body>
+  <header>
+    @include('admin.rfq.tbHeader')
+    @include('admin.rfq.content')
+  </header>
     <main>
-        <table height="100%">
+        {{-- <table height="100%">
             <thead>
                 <tr>
                     <th>
-                        @include('admin.rfq.tbHeader')
+                       
                     </th>
                 </tr>
             </thead>
@@ -137,15 +136,11 @@
                   <td></td>
                 </tr>
             </tbody>
-            <tfoot>
-                <tr>
-                    <th style="border: solid 1px;height: 100%">
-                        @include('admin.rfq.tbFooter')
-                    </th>
-                </tr>
-            </tfoot>
-        </table>
+        </table> --}}
     </main>
+    <footer>
+      @include('admin.rfq.tbFooter')
+    </footer>
 
 </body>
 </html>

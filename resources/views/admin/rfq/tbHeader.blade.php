@@ -1,6 +1,6 @@
 <header>
     <div class="header">
-        <img src="{{  url('denr-emb-logo.jpg') }}" alt="Logo" class="logo left">
+        <img src="{{  url('denr-emb-logo.png') }}" alt="Logo" class="logo left">
         <div class="header-text">
             <h3 class="header-three">Republic of the Philippines</h3>
             <h3 class="header-three">Department of Environment and Natural Resources</h3>
@@ -24,6 +24,10 @@
       margin: 0px;
     }
 
+    .blue-line {
+      border: solid blue 5px;
+    }
+    
     .header-emb-line {
       color: blue;
     }

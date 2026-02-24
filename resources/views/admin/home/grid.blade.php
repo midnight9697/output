@@ -16,7 +16,7 @@ $quotation = RFQ::orderByDesc('id')->with('created_by')->first();
     <div class="value">{{ $count_user }}</div>
     <div class="change success">+12% this month</div>
   </div>
-  
+
   <div class="card">
     <h3>Supplier</h3>
     <div class="value">{{ $count_supplier }}</div>
@@ -36,10 +36,14 @@ $quotation = RFQ::orderByDesc('id')->with('created_by')->first();
   </div>
 </div>
 <div class="grid-2">
-    <div class="chart-placeholder">
-      <div id="dashmap" style="height:50vh; width:100%">
-        <!-- THIS SHIT RIGHT HERE IS WHERE THE MAP MAGICALLY APPEARS OUT OF NOWHERE -->
-      </div>
+    <div class="ui grid stackable padded">
+        <div class="ui fluid card">
+           <div class="content">
+                <div id="dashmap" style="height:50vh; width:100%">
+                    <!-- THIS SHIT RIGHT HERE IS WHERE THE MAP MAGICALLY APPEARS OUT OF NOWHERE -->
+                </div>
+            </div>
+        </div>
     </div>
 
   <div class="card activity">

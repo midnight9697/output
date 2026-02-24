@@ -44,9 +44,11 @@
           </tbody>
         </table>
       </div>
+{{-- <script async src="{{env('MARCO_MAP_API')}}"></script> --}}
 @endsection
 @section('custom_js')
-    <script async defer src="{{env('MARCO_MAP_API')}}&callback=initMap"></script>
+    <script async defer src="{{env('MARCO_MAP_API')}}"></script>
+    {{-- @vite(['resources/js/home.js']) --}}
     <script>
         localStorage.setItem('asset', "{{ asset('mapicon.png') }}");
     </script>

@@ -138,6 +138,7 @@
     box-shadow: var(--shadow-sm);
     display: none;
     flex-direction: column;
+    z-index: 1000;
   }
   
   .dropdown button {
@@ -301,7 +302,7 @@
       display: none;
       z-index: 999;
     }
-  
+    
     .overlay.active {
       display: block;
     }

@@ -1,9 +1,7 @@
 @extends('layout.app')
-
-@section('head_js')
-    @vite(['resources/js/home.js'])
+  <script async defer src="{{env('MARCO_MAP_API')}}"></script>
+@section ('head_js')
 @endsection
-
 @section('main_content')
     @include('admin.home.grid', [ 'count_user' => $count_user, 'count_supplier' => $count_supplier, 'count_pr' => $count_pr, 'count_rfq' => $count_rfq ])
     <!-- TABLE -->
@@ -44,12 +42,10 @@
           </tbody>
         </table>
       </div>
-{{-- <script async src="{{env('MARCO_MAP_API')}}"></script> --}}
 @endsection
 @section('custom_js')
-    <script async defer src="{{env('MARCO_MAP_API')}}"></script>
-    {{-- @vite(['resources/js/home.js']) --}}
-    <script>
-        localStorage.setItem('asset', "{{ asset('mapicon.png') }}");
-    </script>
+  <script>
+      localStorage.setItem('asset', "{{ asset('mapicon.png') }}");
+  </script>
+  @vite(['resources/js/home.js'])
 @endsection

@@ -2,8 +2,6 @@ import places from './places.json'
 import { AuthClass } from "./login/login";
 let pageLoaderGlobal;
 
-
-
 export class Section {
 
     getSection(division_id = false, action) {
@@ -402,12 +400,6 @@ export function preview(cont_id, doc) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // pageLoadMod.destroy();
-    const editorElement = document.getElementById('draft-editor-container');
-    // if (editorElement) {
-    //     createRoot(editorElement).render(<DraftEditor />);
-    // }
-    
     $('.ui .dropdown').dropdown();
     $('#logout_user').on('click', () => {
         AuthClass.logout();

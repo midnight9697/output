@@ -12,18 +12,10 @@ document.addEventListener('DOMContentLoaded', () => {
    //    rfqCounter();
    // }, 1000);
    // pageLoadMod.destroy();
-//    initMap();
+   initMap();
 });
-
-function rfqCounter() {
-   rfqClass.counter(function(res) {
-      $('.rfq_counter').html(res);
-   });
-}
-
  
-window.initMap = function initMap() {
-  
+function initMap() {
    // INITIALIZE THE MAP
    mapIcon.url = localStorage.getItem('asset');
    mapIcon.scaledSize = new google.maps.Size(15, 15)
@@ -71,8 +63,8 @@ function setMarkers(data) {
                                      '<td>' + response[x].barangay + ', ' +  response[x].municipality + ', ' + response[x].province + '</td>' +
                                      '</tr>' +
                                      '</table>'
-                 infoWindow.setContent(textContent)
-                 infoWindow.open(map, marker)
+                infoWindow.setContent(textContent)
+                infoWindow.open(map, marker)
              }
          })(marker, x))
      }

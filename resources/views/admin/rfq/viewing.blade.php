@@ -14,7 +14,7 @@
     </style>
 @endsection
 
-@section('custom_js')
+@section('custom_js') v
 <script>
     // Later, you can revoke the URL
     // URL.revokeObjectURL(url);

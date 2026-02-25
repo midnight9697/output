@@ -36,7 +36,7 @@
                 Brgy 92, Jones St., Tacloban City
             </p>
         </li>
-        <li>
+        <li> 
             Prices must be quoted in Philippine Peso and must include the <strong>unit price and total price, inclusive of
             all taxes to be paid and other incidental cost</strong> to the delivery site/s if the contract is awarded.
             <br>

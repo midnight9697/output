@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PIMS Dashboard</title>
-@include('layout.cssinclude')
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<link rel="stylesheet" href="{{ url('custom/css/customize-style.css') }}">
-@vite(['resources/css/app.css', 'resources/js/app.js'])
+  <html lang="en">
+  <head>
+    <meta name="csrf-token" content="{{csrf_token()}}" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIMS Dashboard</title>
+    @include('layout.cssinclude')
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url('custom/css/customize-style.css') }}">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @yield('head_js')
 </head>
 @php
     use Illuminate\Support\Facades\Gate;
@@ -32,47 +34,85 @@
     <div class="dashboard">
         <!-- SIDEBAR -->
         <div class="sidebar">
-          <div class="logo">
-            <img src="{{ url('denr-emb-logo.png') }}" alt="MySystem Logo">
-            <span>PIMS</span>
-            <small>ENVIRONMENTAL MANAGEMENT BUREAU R08</small>
+
+          <!-- HEADER (Fixed) -->
+          <div class="sidebar-header">
+              <div class="logo">
+                <img src="{{ url('denr-emb-logo.png') }}" alt="MySystem Logo">
+                <span>PIMS</span>
+                <small>ENVIRONMENTAL MANAGEMENT BUREAU R08</small>
+              </div>
           </div>
-          <div class="sidebar-section">
-            <div class="sidebar-title">General</div>
-            <ul>
-                {{ view('layout.menu', [ 'url' => route('home'), 'title' => 'Dashboard', 'routesplit' => $routesplit, 'permission' => true]) }}
-                {{ view('layout.menu', ['badge' => $count_pr_inbox,  'url' => url('pr'), 'title' => 'Purchase Request', 'routesplit' => $routesplit, 'permission' => true]) }}
-                {{-- <li class="has-submenu" onclick="toggleUsersMenu(this)">
-                    <div class="menu-item">
-                      <span><i class="arrow right"></i> Purchase Request</span>
-                      <i class="fa-solid fa-chevron-down arrow"></i>
-                    </div>
-                    <ul class="submenu">
-                      <li><i class="fa-solid fa-list"></i> All Users</li>
-                      <li><i class="fa-solid fa-user-check"></i> Active Users</li>
-                      <li><i class="fa-solid fa-user-xmark"></i> Deactivated Users</li>
-                    </ul>
-                </li> --}}
-                {{ view('layout.menu', [ 'url' => url('app'), 'title' => 'APP', 'routesplit' => $routesplit, 'permission' => Auth::user()->role != 'user']) }}
-                {{ view('layout.menu', [ 'url' => url('ppmp'), 'title' => 'PPMP', 'routesplit' => $routesplit, 'permission' => true]) }}
-                {{ view('layout.menu', [ 'url' => url('supplemental'), 'title' => 'Supplemental', 'routesplit' => $routesplit, 'permission' => Auth::user()->role != 'user']) }}
-                {{ view('layout.menu', [ 'url' => url('rfq'), 'title' => 'RFQ', 'routesplit' => $routesplit, 'permission' => Auth::user()->role != 'user']) }}
-                {{ view('layout.menu', [ 'url' => url('purchase_order'), 'title' => 'Purchase Order', 'routesplit' => $routesplit, 'permission' => Auth::user()->role != 'user']) }}
-                {{ view('layout.menu', [ 'url' => url('abstract'), 'title' => 'Abstract', 'routesplit' => $routesplit, 'permission' => Auth::user()->role != 'user']) }}
-            </ul>
+      
+          <!-- SCROLLABLE MENU -->
+          <div class="sidebar-menu">
+            <div class="sidebar-section">
+              <div class="sidebar-title">General</div>
+              <ul>
+                  {{ view('layout.menu', [ 'url' => route('home'), 'title' => 'Dashboard', 'routesplit' => $routesplit, 'permission' => true]) }}
+                  {{-- {{ view('layout.menu', ['badge' => $count_pr_inbox,  'url' => url('pr'), 'title' => 'Purchase Request', 'routesplit' => $routesplit, 'permission' => true]) }} --}}
+                  <li>
+                      <div class="has-submenu" onclick="toggleUsersMenu(this)">
+                        <div class="menu-item">
+                          <span><i class="arrow right icon"></i> Purchase Request</span>
+                          <i class="fa-solid fa-chevron-down arrow" style="position:absolute;left:200px"></i>
+                        </div>
+                        <ul class="submenu">
+                          <li><i class="arrow left icon"></i> Inbox</li>
+                          <li><i class="arrow left icon"></i> Outbox</li>
+                          <li><i class="arrow left icon"></i> Draft</li>
+                          <li><i class="arrow left icon"></i> Approved</li>
+                        </ul>
+                      </div>
+                  </li>
+                  {{ view('layout.menu', [ 'url' => url('app'), 'title' => 'APP', 'routesplit' => $routesplit, 'permission' => Auth::user()->role != 'user']) }}
+                  {{ view('layout.menu', [ 'url' => url('ppmp'), 'title' => 'PPMP', 'routesplit' => $routesplit, 'permission' => true]) }}
+                  {{ view('layout.menu', [ 'url' => url('supplemental'), 'title' => 'Supplemental', 'routesplit' => $routesplit, 'permission' => Auth::user()->role != 'user']) }}
+                  {{ view('layout.menu', [ 'url' => url('rfq'), 'title' => 'RFQ', 'routesplit' => $routesplit, 'permission' => Auth::user()->role != 'user']) }}
+                  {{ view('layout.menu', [ 'url' => url('purchase_order'), 'title' => 'Purchase Order', 'routesplit' => $routesplit, 'permission' => Auth::user()->role != 'user']) }}
+                  {{ view('layout.menu', [ 'url' => url('abstract'), 'title' => 'Abstract', 'routesplit' => $routesplit, 'permission' => Auth::user()->role != 'user']) }}
+              </ul>
+            </div>
+            <hr>
+            <!-- Administration Section -->
+            <div class="sidebar-section">
+              <div class="sidebar-title">Administration</div>
+              <ul>
+                {{ view('layout.menu', [ 'url' => url('users'), 'title' => 'Users', 'routesplit' => $routesplit , 'permission' => Gate::allows('user-view-page')]) }}
+                {{ view('layout.menu', [ 'url' => "http://notices.ps-philgeps.gov.ph", 'title' => 'PhilGeps', 'routesplit' => $routesplit, 'permission' => true,'target' => true]) }}
+                {{ view('layout.menu', [ 'url' => "division", 'title' => 'Division', 'routesplit' => $routesplit, 'permission' => true]) }}
+                {{ view('layout.menu', [ 'url' => "bac", 'title' => 'BAC', 'routesplit' => $routesplit, 'permission' => true]) }}
+                {{ view('layout.menu', [ 'url' => "inspector", 'title' => 'Inspector', 'routesplit' => $routesplit, 'permission' => true]) }}
+                {{ view('layout.menu', [ 'url' => "https://r8.emb.gov.ph/wp-content/uploads/2025/02/EMB8-Citizens-Charter-External-Internal-Service-2025-Edition-portrait-1.pdf", 'title' => 'RA 9184', 'routesplit' => $routesplit, 'permission' => true, 'target' => true]) }}
+                {{ view('layout.menu', [ 'url' => url("supplier"), 'title' => 'Supplier', 'routesplit' => $routesplit, 'permission' => Gate::allows('supplier-view-view')]) }}
+              </ul>
+            </div>
           </div>
+      
+          <!-- FOOTER (Fixed) -->
+          <div class="sidebar-footer">
+            <div class="footer-user">
+              <i class="fa-solid fa-user-circle"></i>
+              <div>
+                <div class="user-name">
+                  {{ Auth::user()->full_name }}
+                </div>
+                <div class="user-role"><small>{{ Auth::user()->profile->position }}</small></div>
+              </div>
+            </div>
         
-          <hr>
+            <button class="btn btn-logout">
+              <i class="fa-solid fa-right-from-bracket"></i>
+              Logout
+            </button>
         
-          <!-- Administration Section -->
-          <div class="sidebar-section">
-            <div class="sidebar-title">Administration</div>
-            <ul>
-              <li><i class="fa-solid fa-file-lines"></i> Reports</li>
-              <li><i class="fa-solid fa-gear"></i> Settings</li>
-            </ul>
+            <div class="footer-version">
+              v1.0.0
+            </div>
           </div>
-        </div>
+      
+      </div>
+        
         <!-- MAIN -->
         <div class="main">
             <!-- NAVBAR -->
@@ -95,7 +135,7 @@
                       <button onclick="changePassword()">
                         <i class="fa-solid fa-key"></i> Change Password
                       </button>
-                      <button class="logout" onclick="logout()">
+                      <button class="logout" id="logout_user">
                         <i class="fa-solid fa-right-from-bracket"></i> Logout
                       </button>
                     </div>
@@ -110,6 +150,7 @@
     @include('layout.jsinclude')
     <link rel="stylesheet" href="{{ url('custom/css/custom-crud-style.css') }}">
     <script>
+        
         axios.defaults.baseURL = "{{ url('/') }}";
         localStorage.setItem('user', "{{ Auth::user()->id }}")
         
@@ -120,6 +161,7 @@
     
         function toggleSidebar() {
           document.querySelector(".sidebar").classList.toggle("active");
+          console.log(document.querySelector(".sidebar"));
           document.getElementById("overlay").classList.toggle("active");
         }
         

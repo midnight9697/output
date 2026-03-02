@@ -55,7 +55,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/', [ProfileController::class, 'homeView'])->name('home');
     // Route::get('logout', [AuthController::class, 'logout']);
     Route::get('dashboard', [ProfileController::class, 'homeView']);
-
+    
     //Users Management Routes
     Route::prefix('users')->group(function () {
         Route::get('/', [UserProfileController::class, 'userView'])->name("Users");
@@ -66,8 +66,14 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // Purchase Request Routes
     Route::prefix('pr')->group(function() {
         Route::get('/', [PurchaseRequestController::class, 'prView'])->name('purchase request');
+         // Status
+         Route::get('inbox', [RFQController::class, 'inboxView'])->name('Request for Quotation');
+         Route::get('outbox', [RFQController::class, 'outboxView'])->name('Request for Quotation');
+         Route::get('draft', [RFQController::class, 'draftView'])->name('Request for Quotation');
+         Route::get('approved', [RFQController::class, 'approveView'])->name('Request for Quotation');
+         // End Status
         Route::get('create', [PurchaseRequestController::class, 'createView'])->name('create.purchase.request');
-        Route::get('{id}/edit', [PurchaseRequestController::class, 'updateView'])->name('edit.purchase.request');
+        Route::get('draft/{id}/edit', [PurchaseRequestController::class, 'updateView'])->name('edit.purchase.request');
         Route::get('{id}/track', [PurchaseRequestController::class, 'trackView'])->name('transaction.history');
         Route::get('view/{id}', [PurchaseRequestController::class, 'viewPR'])->name('view.purchase request');
         Route::get('process/{id}', [PurchaseRequestController::class, 'processView'])->name('process.purchase request');

@@ -6,10 +6,10 @@ import { PRValidator } from "./validation";
 let current_update_pr = [];
 document.addEventListener('DOMContentLoaded', () => {
     $('.menu .item').tab();
-    CTable(new Custom_table('#inbox', false, true, false, false, './api/pr/inbox_pr'), 'inbox');
-    CTable(new Custom_table('#outbox', false, true, false, false, './api/pr/outbox_pr'), 'outbox');
-    CTable(new Custom_table('#personal', false, true, false, false, './api/pr/track_pr'), 'track');
-    CTable(new Custom_table('#close', false, true, false, false, './api/pr/closed_pr'), 'close');
+    CTable(new Custom_table('#inbox', false, true, false, false, '../api/pr/inbox_pr'), 'inbox');
+    CTable(new Custom_table('#outbox', false, true, false, false, '../api/pr/outbox_pr'), 'outbox');
+    CTable(new Custom_table('#personal', false, true, false, false, '../api/pr/track_pr'), 'track');
+    CTable(new Custom_table('#close', false, true, false, false, '../api/pr/closed_pr'), 'close');
     $('.submit_monitoring_button').on('click', () => {
         $('#formCreatePRMonitorItem').trigger('submit');
     })
@@ -123,7 +123,7 @@ function CTable(CTBL, tab = 'inbox') {
                         if (data.last_transaction.last_recepient.received == 1) {
                             title = 'PROCESS';
                             ui = "ui very tiny green button";
-                            url = window.location+'/process/'+data.id;
+                            url = './process/'+data.id;
                         }
                     }
                 }

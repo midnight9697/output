@@ -2,7 +2,7 @@ export class PurchaseRequests {
     
     getByPage(action, page = false) {
       console.log('local', localStorage.getItem('bearer'));
-      axios.get('./api/pr/page'+(page?"?page="+page:""), {
+      axios.get('../api/pr/page'+(page?"?page="+page:""), {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('bearer')}`
         }
@@ -13,7 +13,7 @@ export class PurchaseRequests {
     }
 
     getPrItems(pr_id, action) {
-      axios.get('./api/pr/'+pr_id+'/items', {
+      axios.get('../api/pr/'+pr_id+'/items', {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('bearer')}`
         }
@@ -24,7 +24,7 @@ export class PurchaseRequests {
     }
 
     getDecryptAction(action_id, action) {
-      axios.post('./api/pr/decrypt_action',{action:action_id,}, {
+      axios.post('../api/pr/decrypt_action',{action:action_id,}, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('bearer')}`,
           'Content-Type': 'application/json; charset=utf-8',
@@ -39,7 +39,7 @@ export class PurchaseRequests {
     creatPR(pr, items, action = () => {}, fail = () => {}) {
       var usersClone = this;
       pr['items'] = items;
-      axios.post('./api/pr/create', pr, {
+      axios.post('../api/pr/create', pr, {
           headers: {
             'Content-Type': 'application/json; charset=utf-8',
             'Accept': 'application/vnd.github+json',
@@ -54,7 +54,7 @@ export class PurchaseRequests {
       var usersClone = this;
       pr['items'] = items;
       pr['members'] = members;
-      axios.post('./api/pr/'+localStorage.getItem('pr_id')+'/edit', pr, {
+      axios.post('../api/pr/'+localStorage.getItem('pr_id')+'/edit', pr, {
           headers: {
             'Content-Type': 'application/json; charset=utf-8',
             'Accept': 'application/vnd.github+json',
@@ -68,7 +68,7 @@ export class PurchaseRequests {
     commentPR(data, action = () => {}, fail = () => {}) {
       var usersClone = this;
       data['pr_id'] = localStorage.getItem('pr_id');
-      axios.post('./api/pr/comment', data, {
+      axios.post('../api/pr/comment', data, {
           headers: {
             'Content-Type': 'application/json; charset=utf-8',
             'Accept': 'application/vnd.github+json',
@@ -82,7 +82,7 @@ export class PurchaseRequests {
     routePR(data, action = () => {}, fail = () => {}) {
       var usersClone = this;
       data['pr_id'] = localStorage.getItem('pr_id');
-      axios.post('./api/pr/route', data, {
+      axios.post('../api/pr/route', data, {
           headers: {
             'Content-Type': 'application/json; charset=utf-8',
             'Accept': 'application/vnd.github+json',
@@ -95,7 +95,7 @@ export class PurchaseRequests {
 
     receivePR(data, action = () => {}, fail = () => {}) {
       var usersClone = this;
-      axios.post('./api/pr/'+data.pr_id+"/receive", data, {
+      axios.post('../api/pr/'+data.pr_id+"/receive", data, {
           headers: {
             'Content-Type': 'application/json; charset=utf-8',
             'Accept': 'application/vnd.github+json',
@@ -108,7 +108,7 @@ export class PurchaseRequests {
 
     createUpdatePRMonitor(data, action = () => {}, fail = () => {}) {
       var usersClone = this;
-      axios.post('./api/pr/monitor/create', data, {
+      axios.post('../api/pr/monitor/create', data, {
           headers: {
             'Content-Type': 'application/json; charset=utf-8',
             'Accept': 'application/vnd.github+json',
@@ -120,7 +120,7 @@ export class PurchaseRequests {
     }
 
     uploadAtt(file, action = () => {}, fail = () => {}) {
-      axios.post('./api/pr/attachment/upload', file, {
+      axios.post('../api/pr/attachment/upload', file, {
           headers: {
             'Content-Type': 'application/json; charset=utf-8',
             'Accept': 'application/vnd.github+json',
@@ -134,7 +134,7 @@ export class PurchaseRequests {
     generatePR(id, action = () => {}, fail = () => {}) {
       let fd = new FormData();
       fd.append('id', id);
-      axios.post('./api/pr/generate_pr_number', fd, {
+      axios.post('../api/pr/generate_pr_number', fd, {
           headers: {
             'Content-Type': 'application/json; charset=utf-8',
             'Accept': 'application/vnd.github+json',
@@ -146,7 +146,7 @@ export class PurchaseRequests {
     }
 
     closed_pr(action) {
-      axios.get('./api/pr/closed_pr', {
+      axios.get('../api/pr/closed_pr', {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('bearer')}`
         }
@@ -157,7 +157,7 @@ export class PurchaseRequests {
     }
 
     outbox_pr(action) {
-      axios.get('./api/pr/outbox_pr', {
+      axios.get('../api/pr/outbox_pr', {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('bearer')}`
         }
@@ -168,7 +168,7 @@ export class PurchaseRequests {
     }
 
     inbox_pr(action) {
-      axios.get('./api/pr/inbox_pr', {
+      axios.get('../api/pr/inbox_pr', {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('bearer')}`
         }
@@ -177,8 +177,6 @@ export class PurchaseRequests {
         action(e.data);
       } )
     }
-
-    
 }
 
 export var PRClass = new PurchaseRequests();

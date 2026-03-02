@@ -6,10 +6,9 @@
 </style>
 @if ($permission == true)
     <li>
-    <a style="width:100%;display:block;height:100%" class="menu_anchor" href="{{ $url }}" target="{{ (isset($target)?"__blank":"") }}" class="item {{ request()->url() == $url ? 'active': '' }}">
+    <a style="width:100%;display:block;height:100%;" class="menu_anchor" href="{{ $url }}" target="{{ (isset($target)?"__blank":"") }}" class="item {{ request()->url() == $url ? 'active': '' }}">
         {{-- <div><i class="icon users"></i>{{ $title }}</div> --}}
         {{-- <i class="home icon"></i> --}}    
-        
     @php
             $icon = "";
 

@@ -34,6 +34,34 @@ class RFQController extends Controller {
         return view('admin.rfq.index');
     }
 
+    public function inboxView() {
+        return view('admin.pr.status.inbox', [
+            'status' => 'inbox',
+            'name' => 'inbox'
+        ]);
+    }
+
+    public function outboxView() {
+        return view('admin.pr.status.inbox', [
+            'status' => 'outbox',
+            'name' => 'outbox'
+        ]);
+    }
+
+    public function draftView() {
+        return view('admin.pr.status.inbox', [
+            'status' => 'personal',
+            'name' => 'draft'
+        ]);
+    }
+
+    public function approveView() {
+        return view('admin.pr.status.inbox', [
+            'status' => 'close',
+            'name' => 'approved'
+        ]);
+    }
+
     public function rfqFormCreate($type, $pr_id) {
         $pr = PurchaseRequest::where('id', decryptUrlSafe($pr_id))->whereHas('transactions', function($query) {
             return $query->where('action', 12);

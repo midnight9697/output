@@ -30,7 +30,7 @@
     $count_rfq = RFQ::where('creator', Auth::user()->id)->count();
 @endphp
 @yield('custom_css')
-<body>
+<body id="main_event">
     <div class="dashboard">
         <!-- SIDEBAR -->
         <div class="sidebar">
@@ -54,14 +54,15 @@
                   <li>
                       <div class="has-submenu" onclick="toggleUsersMenu(this)">
                         <div class="menu-item">
-                          <span><i class="arrow right icon"></i> Purchase Request</span>
+                          <span><i class="users icon"></i> Purchase Request</span>
                           <i class="fa-solid fa-chevron-down arrow" style="position:absolute;left:200px"></i>
                         </div>
                         <ul class="submenu">
-                          <li><i class="arrow left icon"></i> Inbox</li>
-                          <li><i class="arrow left icon"></i> Outbox</li>
-                          <li><i class="arrow left icon"></i> Draft</li>
-                          <li><i class="arrow left icon"></i> Approved</li>
+                          {{-- <li><a href="{{ url('pr/inbox') }}"><i class="arrow left icon"></i> Inbox</a></li> --}}
+                          {{-- <li><a href="{{ url('pr/outbox') }}"><i class="arrow left icon"></i> Outbox</a></li> --}}
+                          <li><a href="{{ url('pr/draft') }}"><i class="arrow left icon"></i> Draft PR</a></li>
+                          <li><a href="{{ url('pr/approved') }}"><i class="arrow left icon"></i> Archived</a></li>
+                          {{-- <li><a href="{{ url('pr/approved') }}"><i class="arrow left icon"></i> Approved</a></li> --}}
                         </ul>
                       </div>
                   </li>
@@ -114,7 +115,7 @@
       </div>
         
         <!-- MAIN -->
-        <div class="main">
+      <div class="main">
             <!-- NAVBAR -->
             <div class="navbar">
                 <div>

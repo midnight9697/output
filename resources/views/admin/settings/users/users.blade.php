@@ -51,6 +51,7 @@
 </style>
 @include('admin.settings.users.modal')
   
+<div class="ui segment">
   <table class="ui celled table" id="users_list_table" style="width: 100%">
     <thead>
       <tr>
@@ -68,6 +69,7 @@
       </tr>
     </tbody>
   </table>
+</div>
  
 @endsection
 

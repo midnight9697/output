@@ -1,6 +1,7 @@
 @extends('layout.app')
 
 @section('main_content')
+
 @include('admin.rfq.create')
 <div class="ui top attached segment">
     <div class="ui two column grid">
@@ -20,11 +21,11 @@
         <div class="ui error message">
             {{--  --}}
         </div>
-        <div class="field">
+        {{-- <div class="field"> --}}
             <div  class="two fields">
                 <div class="field">
                     <label>PROCUREMENT CLASSIFICATION</label>
-                    <div class="ui selection dropdown" id="classification_dropdown">
+                    <div class="ui search selection dropdown" id="classification_dropdown">
                         <input type="hidden" name="classification">
                         <i class="dropdown icon"></i>
                         <div class="default text">Procurement Classification</div>
@@ -40,7 +41,7 @@
                     <input type="text" name="rfq_number" placeholder="RFQ NO.">
                 </div>
             </div>
-        </div>
+        {{-- </div> --}}
         <div class="field">
             <div class="three fields">
                 <div class="field">
@@ -110,4 +111,11 @@
         })
     </script>
     @vite(['resources/js/rfq/update.js'])
+    {{-- <style>
+        .ui.dropdown {
+            position: sticky;
+            display: block;
+            /* z-index: 1000; */
+        }
+    </style> --}}
 @endsection

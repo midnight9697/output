@@ -11,25 +11,38 @@
     
    <div class="ui grid">
         <div class="sixteen wide column">
-            <form action="{{ url('api/pr/edit') }}" class="ui form updatepr" method="POST">
+            <form action="{{ url('api/pr/edit') }}" class="ui form segment updatepr" method="POST">
                 @csrf
-                <div class="ui success message">
+                <div class="ui success message" style="position: fixed;z-index:1000;right: 0;width:300px;bottom: 10px;">
                     Changes Saved
                 </div>
-                <div class="ui error message">
+                <div class="ui error message" style="position: fixed;z-index:1000;right: 0;width:300px;bottom: 10px;">
                     {{--  --}}
                 </div>
                 <div class="ui grid">
+                    <div class="ui very tiny bottom attached segment">
+                        {{-- @if (Member::where('user_id', Auth::user()->id)->first()->role == "admin") --}}
+                            {{-- <button class="ui very tiny primary button lunchRouteForm" type="button">Initiate Approval Process</button> --}}
+                        {{-- @endif --}}
+                        {{-- <button type="submit" class="ui very tiny green right floated button">SAVE CHANGES</button> --}}
+                        <div class="ui right aligned grid">
+                            <div class="right floated left aligned eight wide column">
+                                <div class="ui very tiny white button">PURCHASE REQUEST UPDATE FORM</div>
+                            </div>
+                            <div class="left floated right aligned eight wide column">
+                                <button type="button" class="ui very tiny primary button add_item_btn"><i class="plus icon"></i> ADD ITEM</button>
+                                <a href="{{ route('pr.rfq', [
+                                        'type' => 'create',
+                                        'pr_id' => $pr->id
+                                    ]) }}" class="ui very tiny primary button create_rfq_btn">CREATE RFQ</a>
+                                <a href="{{ url("pr/view") }}/{{ $pr->id }}" target="__blank" class="ui very tiny secondary button">PREVIEW</a>
+                                <button type="submit" class="ui very tiny green right floated button">SAVE CHANGES</button>
+                            </div>
+                        </div>
+                    </div>
                     <div class="eight wide column">
                         <div class="ui top attached header">
-                            <div class="ui right aligned grid">
-                                <div class="right floated left aligned eight wide column">
-                                    <div class="button very tiny white button">PURCHASE REQUEST UPDATE FORM</div>
-                                </div>
-                                <div class="left floated right aligned eight wide column">
-                                    <a href="{{ url("pr/view") }}/{{ $pr->id }}" target="__blank" class="ui very tiny secondary button">PREVIEW</a>
-                                </div>
-                            </div>
+                            
                         </div>
                         <div class="ui small form attached segment">
                             <div class="field">
@@ -72,25 +85,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="ui top attached header">
-                            <div class="ui right aligned grid">
-                                <div class="right floated left aligned eight wide column">
-                                    ITEMS
-                                </div>
-                                <div class="left floated right aligned eight wide column">
-                                    <a href="{{ route('pr.rfq', [
-                                        'type' => 'create',
-                                        'pr_id' => $pr->id
-                                    ]) }}" class="ui very tiny primary button create_rfq_btn">CREATE RFQ</a>
-                                    <button type="button" class="ui very tiny primary button add_item_btn">ADD</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="ui very tiny form attached segment table-pr-items">
-                            <div style="text-align:center">Please wait...</div>
-                            {{-- Items Table --}}
-                        </div>
-                        <div class="ui top attached header">
+                        
+                        <div class="ui top attached header" style="display: none;">
                             <div class="ui right aligned grid">
                                 <div class="right floated left aligned eight wide column">
                                     MEMBERS
@@ -101,13 +97,21 @@
                                
                               </div>
                         </div>
-                        <div class="ui form attached segment">
+                        <div class="ui form attached segment" style="display: none">
                             <div class="members-form-section">
                                 <p style="text-align:center">Please wait...</p>
                             </div>
                         </div>
                     </div>
                     <div class="eight wide column">
+                        <div class="ui top attached header">
+                        </div>
+                        <div class="ui very tiny form attached segment table-pr-items">
+                            <div style="text-align:center">Please wait...</div>
+                            {{-- Items Table --}}
+                        </div>
+                    </div>
+                    {{-- <div class="eight wide column" style="display: none">
                         <div class="ui top attached header">
                             INTERNAL REVIEW
                         </div>
@@ -141,14 +145,7 @@
                             </div>
                         </div>
                        
-                    </div>
-                    
-                    <div class="ui very tiny bottom attached segment">
-                        @if (Member::where('user_id', Auth::user()->id)->first()->role == "admin")
-                            <button class="ui very tiny primary button lunchRouteForm" type="button">Initiate Approval Process</button>
-                        @endif
-                        <button type="submit" class="ui very tiny green right floated button">SAVE CHANGES</button>
-                    </div>
+                    </div> --}}
                 </div>
                 {{-- Items --}}
             </form>

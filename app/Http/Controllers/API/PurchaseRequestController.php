@@ -90,7 +90,7 @@ class PurchaseRequestController extends Controller {
             $item_id = (isset($item['id'])?decryptUrlSafe($item['id']):null);
             $itemInstance = PRItem::find($item_id);
             if ($itemInstance) {
-                $itemInstance->update($item);
+                $itemInstance->update([]);
             }
             else {
                 $item['purchase_request_id'] = (int)$pr_id;
@@ -119,8 +119,8 @@ class PurchaseRequestController extends Controller {
                 ]);
             }
         }
-
         foreach ($request->members as $member) {
+            $member['user_id'] = decryptUrlSafe($member['user_id']);
             $mem = Member::where('user_id', $member['user_id'])->where('purchase_request_id', $pr_id);
             if (!$mem->exists()) {
                 Member::create([

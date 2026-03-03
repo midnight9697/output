@@ -150,6 +150,13 @@
     </div>
     @include('layout.jsinclude')
     <link rel="stylesheet" href="{{ url('custom/css/custom-crud-style.css') }}">
+    <style>
+      .ui.dropdown {
+          position: sticky;
+          display: block;
+          /* z-index: 1000; */
+      }
+    </style>
     <script>
         
         axios.defaults.baseURL = "{{ url('/') }}";

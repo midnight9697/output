@@ -406,3 +406,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+$('.ui.dropdown')
+  .dropdown({
+    onChange: function(value) {
+      if (value) {
+        $(this).closest('.field').addClass('active');
+      }
+    }
+});

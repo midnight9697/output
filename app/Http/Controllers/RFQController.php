@@ -166,9 +166,9 @@ class RFQController extends Controller {
         $section->addText("Main document content");
         
         $phpWord->save("report.docx", "Word2007");
-        $publicUrl = url('report.pdf');
+        $publicUrl = url('report.docx');
         $viewerUrl = 'https://view.officeapps.live.com/op/view.aspx?src=' . ($publicUrl);
-        return $viewerUrl;
+        // return $viewerUrl;
         return redirect($viewerUrl);
     }
 }

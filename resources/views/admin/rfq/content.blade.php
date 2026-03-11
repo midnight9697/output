@@ -1,10 +1,11 @@
- <section class="title-block">
+
+<section class="title-block">
     <h2 class="header-three">REQUEST FOR QUOTATION (RFQ)</h2>
     <p class="header-three">(Procurement Type)</p>
     <h3 class="header-three" style="margin-top: 20px">PROJECT TITLE</h3>
     <p class="header-three">RFQ NO.</p>
 </section>
-<section class="content">
+{{-- <section class="content">
     <ol class="rules">
         <li>
             The Department of Environment and Natural Resources – Environmental Management Bureau
@@ -31,16 +32,16 @@
         <li>
             Quotations must be delivered to the address below not later than <strong style="text-decoration: underline;">here</strong>.
             <p class="rules-emb-address">
-                Department of Environment and Natural Resources<br>
-                Environmental Management Bureau<br>
+                Department of Environment and Natural Resources<br/>
+                Environmental Management Bureau<br/>
                 Brgy 92, Jones St., Tacloban City
             </p>
         </li>
         <li> 
             Prices must be quoted in Philippine Peso and must include the <strong>unit price and total price, inclusive of
             all taxes to be paid and other incidental cost</strong> to the delivery site/s if the contract is awarded.
-            <br>
-            <br>
+            <br/>
+            <br/>
             Bid/quotation may be typewritten or handwritten and may be placed in a sealed envelope marked <strong style="text-decoration: underline;">here</strong> or your may send your bid/quotation through e-mail at <u style="color: blue">embr8_bac@emb.gov.ph</u>. Late bids and proposals above ABC shall be automatically disqualified.
         </li>
         <li>
@@ -66,7 +67,7 @@
             </ol>
         </li>
     </ol>
-</section>
+</section> --}}
 <style>
      .content {
         margin-bottom: 126px;
@@ -76,4 +77,5 @@
     .title-block {
         margin-top: 166px;
     }
+    
 </style>

@@ -159,9 +159,9 @@ class RFQController extends Controller {
         $header = $section->addHeader();
         
         $html = view('admin.rfq.tbHeader');
+        $html = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
         
-        Html::addHtml($header, $html);
-        
+        Html::addHtml($section, $html, false, false);
         /* BODY */
         $section->addText("Main document content");
         

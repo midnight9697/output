@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\ABSTRACTController;
 use App\Http\Controllers\API\APPController;
 use App\Http\Controllers\API\FileController;
+use App\Http\Controllers\API\IEPMCController;
 use App\Http\Controllers\API\PPMPController;
 use App\Http\Controllers\API\PurchaseRequestController;
 use App\Http\Controllers\API\RFQController;
@@ -72,6 +73,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('create', [RFQController:: class, 'create_rfq']);
         Route::post('update', [RFQController:: class, 'update_rfq']);
         Route::get('counter', [RFQController:: class, 'countRFQ']);
+        Route::post('upload-update', [RFQController:: class, 'uploadUpdate']);
     });
 
     Route::prefix('supplemental')->group(function() {
@@ -120,5 +122,9 @@ Route::middleware('auth:sanctum')->group(function () {
         return encryptUrlSafe($request->id);
     });
 
-
+    Route::prefix('iepmc')->group(function() {
+        Route::get('page', [IEPMCController::class, 'get_by_page']);
+        Route::get('item/{item_id}', [IEPMCController::class, 'get_item']);
+        Route::post('create', [IEPMCController::class, 'create']);
+    });
 });

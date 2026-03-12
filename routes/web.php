@@ -10,6 +10,7 @@ use App\Http\Controllers\BACController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\GoogleDriveController;
+use App\Http\Controllers\IEPMCController;
 use App\Http\Controllers\InspectorController;
 use App\Http\Controllers\PPMPController;
 use App\Http\Controllers\PR\PurchaseRequestController;
@@ -142,6 +143,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // Authentication Routes
     Route::prefix('login')->group(function() {
         Route::post('logout', [AuthController::class, 'logout']);
+    });
+
+    Route::prefix('iepmc')->group(function() {
+        Route::get('/', [IEPMCController::class, 'mainView'])->name('PREVENTIVE MAINTENANCE');
     });
 });
 

@@ -40,14 +40,40 @@ export class RFQ {
         this.customPostRequest('./api/alternative', {'id': id}, action, fail);
     }
 
-    updateRFQ(data, action = () => {}, fail = () => {}) {
+    updateRFQ(data, blob, action = () => {}, fail = () => {}) {
       var usersClone = this;
-      this.customPostRequest('./api/rfq/update', data, action, fail);
+      const formData = new FormData();
+      Object.keys(data).forEach(key => {
+        formData.append(key, (key=='items'?JSON.stringify(data[key]):data[key]));
+      });
+      const filename = `report-${Date.now()}.docx`; // unique filename
+      formData.append('rfq_id', data.id);
+      formData.append("rfq_file", blob, filename);
+      this.customPostURequest('./api/rfq/update', formData, action, fail);
+      // this.customPostRequest('./api/rfq/update', data, action, fail);
     }
 
     creatRFQTemplate(data, action = () => {}, fail = () => {}) {
         var usersClone = this;
         this.customPostRequest('./api/rfq/create_template', data, action, fail);
+    }
+
+    uploadRFQ(blob, rfq_id,action, fail) {
+      const formData = new FormData();
+      const filename = `report-${Date.now()}.docx`; // unique filename
+      formData.append('rfq_id', rfq_id);
+      formData.append("rfq_file", blob, filename);
+        this.customPostURequest('./api/rfq/upload-update', formData, action, fail);
+    }
+
+    customPostURequest(url, data, action, fail = () => {}) {
+        axios.post(url, data, {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('bearer')}`,
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then(action).catch(fail)
     }
 
     customPostRequest(url, data, action, fail = () => {}) {

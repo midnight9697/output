@@ -12,7 +12,7 @@
       <div class="ui black deny button">
         Cancel
       </div>
-      <button type="button" class="ui positive button submit_iepmc_btn">
+      <button type="button" class="ui positive button submit_update_iepmc_btn">
         Save
       </button>
     </div>

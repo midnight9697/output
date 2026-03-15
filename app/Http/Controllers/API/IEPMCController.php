@@ -4,9 +4,12 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\IEPMC;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use PhpOffice\PhpWord\IOFactory;
+use PhpOffice\PhpWord\Settings;
 
 class IEPMCController extends Controller {
 
@@ -62,7 +65,7 @@ class IEPMCController extends Controller {
             'inspected_by' => $request->inspected_by,
         ];
         $this->uploadUpdate($request);
-        return IEPMC::update($data);
+        return IEPMC::where('id', decryptUrlSafe($request->iepmc_id))->update($data);
     }
 
 
@@ -89,5 +92,24 @@ class IEPMCController extends Controller {
         ];
 
         return ['Success' => 'shit', 'data' => $new_file_data];
+    }
+
+    public function stream($year = "2025", $iepmc_id) {
+        $iepmc = IEPMC::where('id', decryptUrlSafe($iepmc_id));
+        if (!$iepmc->exists()) {
+            return ['NOT FOUND'];
+        }
+        $iepmc = IEPMC::where('id', decryptUrlSafe($iepmc_id))->first();
+        $docxPath = public_path('storage/iepmc/'.$year."/".$iepmc->document_number.".docx");
+                return response()->streamDownload(function () use ($docxPath) {
+            echo file_get_contents($docxPath);
+        }, $iepmc->document_number.".docx");
+    }
+
+    public function streamTemplate() {
+        $docxPath = public_path('IEPMC.docx');
+                return response()->streamDownload(function () use ($docxPath) {
+            echo file_get_contents($docxPath);
+        }, 'iepmc.docx');
     }
 }

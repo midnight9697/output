@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('printer_serial_number')->nullable();
             $table->string('ups_serial_number')->nullable();
             $table->string('monitor_serial_number')->nullable();
-            $table->timestamp('date_last_maintenance')->nullable();
+            $table->string('date_last_maintenance')->nullable();
             $table->string('date_maintenance')->nullable();
             $table->string('inspected_by')->nullable();
             $table->timestamps();

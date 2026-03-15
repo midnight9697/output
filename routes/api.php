@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\ABSTRACTController;
 use App\Http\Controllers\API\APPController;
+use App\Http\Controllers\API\EquipmentController;
 use App\Http\Controllers\API\FileController;
 use App\Http\Controllers\API\IEPMCController;
 use App\Http\Controllers\API\PPMPController;
@@ -126,5 +127,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('page', [IEPMCController::class, 'get_by_page']);
         Route::get('item/{item_id}', [IEPMCController::class, 'get_item']);
         Route::post('create', [IEPMCController::class, 'create']);
+        Route::post('update', [IEPMCController::class, 'update']);
+    });
+
+    Route::prefix('equipment')->group(function() {
+        Route::get('page', [EquipmentController::class, 'get_by_page']);
     });
 });

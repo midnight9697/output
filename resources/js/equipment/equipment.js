@@ -1,7 +1,7 @@
-class IEPMC {
+class Equipment {
     fetch_by_page(action, fail) {
         var usersClone = this;
-        this.customGetRequest('./api/iepmc', action, fail);
+        this.customGetRequest('./api/equipment', action, fail);
     } 
 
     fetch_item(item_id, action, fail) {
@@ -71,4 +71,4 @@ class IEPMC {
     }
 }
 
-export const iepmcController = new IEPMC();
+export const equipmentcController = new Equipment();

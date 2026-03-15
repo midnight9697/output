@@ -8,6 +8,16 @@ class iepmcValidation {
           onSuccess: action
         });
     }
+
+    UpdateIEPMCValidation(action, element = 'update-maintenance_form') {
+        var self = this;
+        this.form =
+        $('.ui.form.'+element)
+        .form({
+          fields: {},
+          onSuccess: action
+        });
+    }
     
     fieldsRules(identifier, rule, msg = false) {
         let result =   {

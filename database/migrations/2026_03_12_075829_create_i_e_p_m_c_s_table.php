@@ -32,6 +32,7 @@ return new class extends Migration
             $table->string('date_last_maintenance')->nullable();
             $table->string('date_maintenance')->nullable();
             $table->string('inspected_by')->nullable();
+            $table->json('checkboxes'); // JSON column for all 37 checkboxes
             $table->timestamps();
         });
     }

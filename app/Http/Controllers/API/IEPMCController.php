@@ -21,6 +21,7 @@ class IEPMCController extends Controller {
     }
 
     public function create(Request $request) {
+        return $request;
         $data = [
             'document_number' => $request->document_number,
             'property_number' => $request->property_number,

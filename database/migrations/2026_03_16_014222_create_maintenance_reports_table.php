@@ -13,16 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('equipment', function (Blueprint $table) {
+        Schema::create('maintenance_reports', function (Blueprint $table) {
             $table->id();
             $table->string('document_number')->nullable();
-            $table->string('property_number')->nullable();
-            $table->string('equipment_type')->nullable();
-            $table->mediumText('description')->nullable();
-            $table->string('status')->nullable();
-            $table->string('issued_location')->nullable();
-            $table->mediumText('remarks')->nullable();
-            $table->string('inspector')->nullable();
+            $table->foreignId('equipment_id')->constrained();
+            $table->foreignId('user_id')->constrained();
+            $table->enum('status', [0, 1])->default(0);
+            $table->integer('year')->default(2025);
             $table->timestamps();
         });
     }
@@ -34,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('equipment');
+        Schema::dropIfExists('maintenance_reports');
     }
 };

@@ -27,5 +27,10 @@ class IEPMC extends Model
         'date_last_maintenance',
         'date_maintenance',
         'inspected_by',
+        'checkboxes'
+    ];
+
+    protected $casts = [
+        'checkboxes' => 'array',
     ];
 }

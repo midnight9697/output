@@ -15,12 +15,33 @@ document.addEventListener('DOMContentLoaded', () => {
     iepmcValidator.CreateIEPMCValidation((e) => {
         e.preventDefault();
         let data = PRValidator.serializeArrayToJson('.maintenance_form');
+        let values = [];
+
+        for (let i = 1; i <= 37; i++) {
+            let cb = $('input[name="cb' + i + '"]');
+        
+            if (cb.is(':checked')) {
+                values.push(cb.val());
+            } else {
+                values.push(0); // or false if unchecked
+            }
+        }
+
+        let cb = $('input[name="cb3A"]');
+        if (cb.is(':checked')) {
+            data.cb3a = [cb.val()];
+        } else {
+            data.cb3a = 0; // or false if unchecked
+        }
+        data.cbs = values;
+
         generateWordBrowser(data, './iepmc/stream-template', (blob) => {
             console.clear();
-            iepmcController.create(data, blob, () => {
-                iepmcTable.table.ajax.reload();
-                $('#maintenanceModal').modal('hide');
-            })
+            console.log('Serialize', data);
+            // iepmcController.create(data, blob, () => {
+            //     iepmcTable.table.ajax.reload();
+            //     $('#maintenanceModal').modal('hide');
+            // })
         });
         alert('Submitted');
     });

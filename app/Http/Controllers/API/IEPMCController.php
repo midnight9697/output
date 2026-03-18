@@ -116,9 +116,16 @@ class IEPMCController extends Controller {
         }, $iepmc->document_number.".docx");
     }
     
-    public function streamOffice(Request $request) {
+    public function streamOffice($year, $iepmc_id) {
         // 1. Get your private file path
-        $originalPath = "iepmc/2025/IEPMC-2025-00006.docx";
+        $iepmc = IEPMC::where('id', decryptUrlSafe($iepmc_id));
+        if (!$iepmc->exists()) {
+            return ['NOT FOUND'];
+        }
+        $iepmc = IEPMC::where('id', decryptUrlSafe($iepmc_id))->first();
+
+        $originalPath = "iepmc/".$year."/".$iepmc->document_number.".docx";
+        // return $originalPath;
         Storage::disk('public')->makeDirectory('temp');
         // 2. Generate random temp filename
         $tempName = 'temp/' . Str::random(40) . '.docx';
@@ -133,13 +140,13 @@ class IEPMCController extends Controller {
         $viewerUrl = "https://view.officeapps.live.com/op/view.aspx?src=" . ($fileUrl);
         
         // 6. Schedule deletion (important!)
-        // dispatch(function () use ($tempName) {
-        //     Storage::disk('public')->delete($tempName);
-        // })->delay(now()->addMinutes(10));
+        dispatch(function () use ($tempName) {
+            Storage::disk('public')->delete($tempName);
+        })->delay(now()->addMinutes(1));
 
         // 7. Return view or redirect
-        // return $viewerUrl;
-        return redirect($viewerUrl);
+        return $viewerUrl;
+        // return redirect($viewerUrl);
     }
 
     public function streamTemplate() {

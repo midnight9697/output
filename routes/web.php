@@ -149,10 +149,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::prefix('iepmc')->group(function() {
         Route::get('/', [IEPMCController::class, 'mainView'])->name('PREVENTIVE MAINTENANCE');
-        Route::get('office/stream', [APIIEPMCController::class, 'streamOffice']);
+        Route::get('office/stream/{year}/{iepmc_id}', [APIIEPMCController::class, 'streamOffice']);
         Route::get('stream-template', [APIIEPMCController::class, 'streamTemplate']);
     });
-
+    
     Route::prefix('equipment')->group(function() {
         Route::get('/', [EquipmentController::class, 'mainView'])->name('ICT Equipment');
     });

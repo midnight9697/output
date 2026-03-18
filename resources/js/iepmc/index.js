@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
         TBLButton.viewName = 'View';
         TBLButton.viewAction = () => {
             // window.location = 'iepmc/stream/2025/'+data.id;
-            window.open('iepmc/office/stream?path=iepmc/stream/2025/'+data.id);
+            window.open('iepmc/office/stream/2025/'+data.id);
         }
 
         TBLButton.deleteAction = (e) => {

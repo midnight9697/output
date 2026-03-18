@@ -1,5 +1,6 @@
 import { PRValidator } from "../PR/validation";
 import { MessageMod, confirmMod } from "../app";
+import { generateWordBrowser } from "../generate";
 import { TBLButton } from "../table/buttons";
 import Custom_table from "../table/custom_table";
 import { rfqClass } from "./rfq";
@@ -45,14 +46,22 @@ RFQValidator.CreateRFQValidation((e) => {
         'standard_unit': PRValidator.serializeArrayToJson('.formCreateRFQ').standard_unit,
         'target_delivery_date': PRValidator.serializeArrayToJson('.formCreateRFQ').target_deliver_date,
         'classification': PRValidator.serializeArrayToJson('.formCreateRFQ').classification,
-        'items': RFQValidator.items
+        'items': RFQValidator.items,
+        'budget': new Intl.NumberFormat('en-PH', {
+            style: 'currency',
+            currency: 'PHP'
+          }).format(PRValidator.serializeArrayToJson('.formCreateRFQ').approved_budget)
     }
     confirmMod.load(() => {
-        rfqClass.updateRFQ(data, (e) => {
-            MessageMod.success("Changes Saved.!", () => {
-                window.location.reload(true);
+        generateWordBrowser(data, '../../RFQ.docx', (blob) => {
+            //   rfqClass.uploadRFQ(blob, data.id);
+              rfqClass.updateRFQ(data, blob, (e) => {
+                // MessageMod.success("Changes Saved.!", () => {
+                //     window.location.reload(true);
+                // });
             });
         });
+        
     },"Save changes ?");
 });
 

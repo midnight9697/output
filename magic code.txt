@@ -1,0 +1,4 @@
+INSERT INTO maintenance_reports (equipment_id, document_number, user_id)
+SELECT id, document_number, 5
+FROM equipment
+WHERE inspector = 'MARCO';

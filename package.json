@@ -13,8 +13,11 @@
     },
     "dependencies": {
         "crypto-js": "^4.2.0",
+        "docxtemplater": "^3.68.3",
         "draft-js": "^0.11.7",
+        "file-saver": "^2.0.5",
         "pdf-lib": "^1.17.1",
+        "pizzip": "^3.2.0",
         "puppeteer": "^24.26.1",
         "react": "^19.1.1",
         "react-doc-viewer": "^0.1.15",

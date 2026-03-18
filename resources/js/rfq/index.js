@@ -1,4 +1,5 @@
 import { preview } from "../app";
+import { generateWordBrowser } from "../generate";
 import { quillClass } from "../quil";
 import { TBLButton } from "../table/buttons";
 import Custom_table from "../table/custom_table";
@@ -71,7 +72,17 @@ function CTable(CTBL, tab = 'inbox') {
         TBLButton.loadCustomBtns(div);
 
         TBLButton.createCustomButton(div, 'PREVIEW', 'preview_btn', () => {
-            window.open( "./rfq/preview/"+data.id, "_blank");
+                generateWordBrowser({
+                  attachment: "Testing la ini na birat",
+                  items: [
+                    { product: "Laptop", quantity: 1, price: "$1200" },
+                    { product: "Mouse", quantity: 2, price: "$40" },
+                    { product: "Keyboard", quantity: 1, price: "$80" }
+                  ]
+                }, './RFQ.docx', (blob) => {
+                    rfqClass.uploadRFQ(blob, data.id);
+                });
+            // window.open( "./rfq/preview/"+data.id, "_blank");
             // rfqClass.getDox((data) => {
             //     console.log('file', data);
             //     $('#modalDocumentPreview').modal('show');

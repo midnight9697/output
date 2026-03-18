@@ -150,6 +150,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::prefix('iepmc')->group(function() {
         Route::get('/', [IEPMCController::class, 'mainView'])->name('PREVENTIVE MAINTENANCE');
         Route::get('stream/{year}/{iepmc_id}', [APIIEPMCController::class, 'stream']);
+        Route::get('office/stream', [APIIEPMCController::class, 'streamOffice']);
         Route::get('stream-template', [APIIEPMCController::class, 'streamTemplate']);
     });
 

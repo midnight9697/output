@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\Settings;
+use Svg\Tag\Rect;
 
 class IEPMCController extends Controller {
 
@@ -21,7 +22,6 @@ class IEPMCController extends Controller {
     }
 
     public function create(Request $request) {
-        return $request;
         $data = [
             'document_number' => $request->document_number,
             'property_number' => $request->property_number,
@@ -40,6 +40,7 @@ class IEPMCController extends Controller {
             'date_last_maintenance' => $request->date_last_maintenance,
             'date_maintenance' => $request->date_maintenance,
             'inspected_by' => $request->inspected_by,
+            'checkboxes' => $request->all()
         ];
         $this->uploadUpdate($request);
         return IEPMC::create($data);
@@ -64,6 +65,7 @@ class IEPMCController extends Controller {
             'date_last_maintenance' => $request->date_last_maintenance,
             'date_maintenance' => $request->date_maintenance,
             'inspected_by' => $request->inspected_by,
+            'checkboxes' => $request->all()
         ];
         $this->uploadUpdate($request);
         return IEPMC::where('id', decryptUrlSafe($request->iepmc_id))->update($data);
@@ -72,7 +74,13 @@ class IEPMCController extends Controller {
 
     public function get_item($item_id) {
         $item_id = decryptUrlSafe($item_id);
-        return encryptSingle(IEPMC::where('id', $item_id)->first());
+        
+        $iepmc = IEPMC::find($item_id);
+        $checkboxes = $iepmc->checkboxes;
+        $iepmc->makeHidden(['checkboxes']);
+        $single = encryptSingle($iepmc);
+        $single->checkboxes = $checkboxes;
+        return $single;
     }
 
     public function uploadUpdate(Request $request) {
@@ -105,6 +113,11 @@ class IEPMCController extends Controller {
                 return response()->streamDownload(function () use ($docxPath) {
             echo file_get_contents($docxPath);
         }, $iepmc->document_number.".docx");
+    }
+    
+    public function streamOffice(Request $request) {
+        $url = "https://view.officeapps.live.com/op/view.aspx?src='";
+        return redirect($url.url($request->path));
     }
 
     public function streamTemplate() {

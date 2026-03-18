@@ -9,4 +9,5 @@ class IEPMCController extends Controller {
     public function mainView() {
         return view('iepmc.index');
     }
+    
 }

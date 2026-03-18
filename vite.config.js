@@ -87,6 +87,12 @@ export default defineConfig({
                     // 'resources/js/table/pdf.js',
                     // 'resources/js/table/table-normal.js',
 
+                    // IEPMC
+                    'resources/js/iepmc/index.js',
+                    'resources/js/iepmc/iepms.js',
+                    'resources/js/iepmc/create.js',
+                    'resources/js/iepmc/update.js',
+                    'resources/js/iepmc/validation.js',
                 ],
             refresh: true,
         }),

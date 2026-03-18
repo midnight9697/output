@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\Settings;
 use Svg\Tag\Rect;
+use Illuminate\Support\Str;
 
 class IEPMCController extends Controller {
 
@@ -116,8 +117,29 @@ class IEPMCController extends Controller {
     }
     
     public function streamOffice(Request $request) {
-        $url = "https://view.officeapps.live.com/op/view.aspx?src='";
-        return redirect($url.url($request->path));
+        // 1. Get your private file path
+        $originalPath = "iepmc/2025/IEPMC-2025-00006.docx";
+        Storage::disk('public')->makeDirectory('temp');
+        // 2. Generate random temp filename
+        $tempName = 'temp/' . Str::random(40) . '.docx';
+        $url = 'https://view.officeapps.live.com/op/view.aspx?src=';
+        $copied = Storage::disk('public')->copy($originalPath, $tempName);
+        if (!$copied) {
+            abort(500, 'Failed to create temp file');
+        }
+        // 4. Generate public URL
+        $fileUrl = asset('storage/' . $tempName);
+        // 5. Generate viewer URL
+        $viewerUrl = "https://view.officeapps.live.com/op/view.aspx?src=" . ($fileUrl);
+        
+        // 6. Schedule deletion (important!)
+        // dispatch(function () use ($tempName) {
+        //     Storage::disk('public')->delete($tempName);
+        // })->delay(now()->addMinutes(10));
+
+        // 7. Return view or redirect
+        // return $viewerUrl;
+        return redirect($viewerUrl);
     }
 
     public function streamTemplate() {

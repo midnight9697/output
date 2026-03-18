@@ -157,10 +157,7 @@ class RFQController extends Controller {
         // 1. Create a section (needed for header)
         // -------------------------------
         $section = $phpWord->addSection();
-        $html = view('admin.rfq.content');
-        $html = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
         
-        Html::addHtml($section, $html, false, false);
         /* HEADER */
         $header = $section->addHeader();
     

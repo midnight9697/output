@@ -153,22 +153,58 @@ class RFQController extends Controller {
     public function officeAction() {
         $phpWord = new PhpWord();
 
+        // -------------------------------
+        // 1. Create a section (needed for header)
+        // -------------------------------
         $section = $phpWord->addSection();
-        
-        /* HEADER */
+    
+        // -------------------------------
+        // 2. Add a header to the section
+        // -------------------------------
         $header = $section->addHeader();
-        
-        $html = view('admin.rfq.tbHeader');
+    
+        $headerHtml = '
+        <header>
+        <div class="header">
+            <div class="header-text">
+                <h3 class="header-three">Republic of the Philippines</h3>
+                <h3 class="header-three">Department of Environment and Natural Resources</h3>
+                <h3 class="header-three header-emb-line">ENVIRONMENTAL MANAGEMENT BUREAU</h3>
+                <h3 class="header-three region-eight-line">Regional Office VIII</h3>
+            </div>
+        </div>
+        <div class="blue-line"></div>
+    </header>
+        ';
+    
+        // Convert encoding to prevent errors
+        $headerHtml = mb_convert_encoding($headerHtml, 'HTML-ENTITIES', 'UTF-8');
+    
+        // Add HTML to header
+        Html::addHtml($header, $headerHtml, false, false);
+    
+        // -------------------------------
+        // 3. Add the main section content from a Blade view
+        // -------------------------------
+        $html = view('admin.rfq.content', [
+            'title' => 'Monthly Report',
+            'users' => [
+                ['name' => 'John Doe', 'age' => 25],
+                ['name' => 'Jane Smith', 'age' => 30],
+            ],
+        ])->render();
+    
         $html = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
-        
+    
         Html::addHtml($section, $html, false, false);
-        /* BODY */
-        $section->addText("Main document content");
-        
-        $phpWord->save("report.docx", "Word2007");
-        $publicUrl = url('report.docx');
-        $viewerUrl = 'https://view.officeapps.live.com/op/view.aspx?src=' . ($publicUrl);
-        // return $viewerUrl;
+    
+        // -------------------------------
+        // 4. Save the Word document to disk
+        // -------------------------------
+        $filePath = public_path('report.docx');
+        $phpWord->save($filePath, 'Word2007');
+        $fileUrl = url('report.docx'); // public URL
+        $viewerUrl = 'https://view.officeapps.live.com/op/view.aspx?src=' . ($fileUrl);
         return redirect($viewerUrl);
     }
 }

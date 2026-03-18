@@ -145,8 +145,8 @@ class IEPMCController extends Controller {
         })->delay(now()->addMinutes(1));
 
         // 7. Return view or redirect
-        return $viewerUrl;
-        // return redirect($viewerUrl);
+        // return $viewerUrl;
+        return redirect($viewerUrl);
     }
 
     public function streamTemplate() {

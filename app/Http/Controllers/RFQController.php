@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Vite;
 use Mpdf\Mpdf;
 use PhpOffice\PhpWord\IOFactory;
+use PhpOffice\PhpWord\PhpWord;
+use PhpOffice\PhpWord\Shared\Html;
 use PhpOffice\PhpWord\TemplateProcessor;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
@@ -97,7 +99,8 @@ class RFQController extends Controller {
     }
 
     public function rfqPreview($rfq_id) {
-        return view('admin.rfq.preview2');
+        return $this->officeAction();
+        return view('admin.rfq.preview');
         $data = [
             'css' => public_path('style.css'),
             'emb_logo' => public_path('denr-emb-logo.jpg'),
@@ -145,5 +148,30 @@ class RFQController extends Controller {
         ])->render(); // or load your React build’s HTML
         // $this->service->orientation = "landscape";
         return $this->service->GeneratePdf($html, 'nothingmore');
+    }
+
+    public function officeAction() {
+        $phpWord = new PhpWord();
+
+        $section = $phpWord->addSection();
+        $html = view('admin.rfq.content');
+        $html = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
+        
+        Html::addHtml($section, $html, false, false);
+        /* HEADER */
+        $header = $section->addHeader();
+        
+        $html = view('admin.rfq.tbHeader');
+        $html = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
+        
+        Html::addHtml($section, $html, false, false);
+        /* BODY */
+        $section->addText("Main document content");
+        
+        $phpWord->save("report.docx", "Word2007");
+        $publicUrl = url('report.pdf');
+        $viewerUrl = 'https://view.officeapps.live.com/op/view.aspx?src=' . ($publicUrl);
+        return $viewerUrl;
+        return redirect($viewerUrl);
     }
 }

@@ -21,7 +21,7 @@ class PPMPPolicy
         }
         return Auth::user()->id == $ppmp->creator?true: abort('419', 'Unauthorized Action');
     }
-
+    
     public function remove($ppmp) {
         if (Auth::user()->role == 'superadmin' || Auth::user()->role == "admin") {
             return true;

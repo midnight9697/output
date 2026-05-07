@@ -76,12 +76,11 @@
                     <option value="user" selected>USER</option> 
                 </select>
             </div>
-            <div class="ui dividing header"></div>
-            <div class="actions">
-                <button type="submit" class="ui primary button" id="createUserFinalize">
-                    REGISTER USER
-                </button>
-            </div>
         </form>
+    </div>
+    <div class="actions">
+        <button type="submit" class="ui primary button" id="createUserFinalize">
+            REGISTER USER
+        </button>
     </div>
 </div>

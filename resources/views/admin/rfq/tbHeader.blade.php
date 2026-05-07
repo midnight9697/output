@@ -1,13 +1,13 @@
 <header>
     <div class="header">
-        <img src="{{  url('denr-emb-logo.png') }}" alt="Logo" class="logo left">
+        <img src="{{  public_path('denr-emb-logo.png') }}" alt="Logo" class="logo left"/>
         <div class="header-text">
             <h3 class="header-three">Republic of the Philippines</h3>
             <h3 class="header-three">Department of Environment and Natural Resources</h3>
             <h3 class="header-three header-emb-line">ENVIRONMENTAL MANAGEMENT BUREAU</h3>
             <h3 class="header-three region-eight-line">Regional Office VIII</h3>
         </div>
-        <img src="{{  url('Bagong_Pilipinas_logo.jpg') }}" alt="Logo" class="logo right">
+        <img src="{{  public_path('Bagong_Pilipinas_logo.jpg') }}" alt="Logo" class="logo right"/>
     </div>
     <div class="blue-line"></div>
 </header>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AbstractController;
 use App\Http\Controllers\API\FileController;
+use App\Http\Controllers\API\IEPMCController as APIIEPMCController;
 use App\Http\Controllers\API\MapController;
 use App\Http\Controllers\API\SupplementalController as APISupplementalController;
 use App\Http\Controllers\APPController;
@@ -9,7 +10,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BACController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DivisionController;
+use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\GoogleDriveController;
+use App\Http\Controllers\IEPMCController;
 use App\Http\Controllers\InspectorController;
 use App\Http\Controllers\PPMPController;
 use App\Http\Controllers\PR\PurchaseRequestController;
@@ -142,6 +145,17 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // Authentication Routes
     Route::prefix('login')->group(function() {
         Route::post('logout', [AuthController::class, 'logout']);
+    });
+
+    Route::prefix('iepmc')->group(function() {
+        Route::get('/', [IEPMCController::class, 'mainView'])->name('PREVENTIVE MAINTENANCE');
+        Route::get('stream/{year}/{iepmc_id}', [APIIEPMCController::class, 'stream']);
+        Route::get('office/stream', [APIIEPMCController::class, 'streamOffice']);
+        Route::get('stream-template', [APIIEPMCController::class, 'streamTemplate']);
+    });
+
+    Route::prefix('equipment')->group(function() {
+        Route::get('/', [EquipmentController::class, 'mainView'])->name('ICT Equipment');
     });
 });
 

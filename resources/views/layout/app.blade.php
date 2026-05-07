@@ -11,6 +11,16 @@
     <link rel="stylesheet" href="{{ url('custom/css/customize-style.css') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @yield('head_js')
+    <style>
+      .ui.selection.dropdown {
+        /* position: relative; */
+        z-index: 10;
+      }
+
+      .ui.selection.dropdown.active {
+        z-index: 100;
+      }
+    </style>
 </head>
 @php
     use Illuminate\Support\Facades\Gate;

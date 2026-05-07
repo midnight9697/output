@@ -5,53 +5,35 @@
     <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
 </head>
 <body>
-    <h1>Office.js Vanilla JS Demo</h1>
-    <button id="insertData">Insert Data (Excel)</button>
-    <button id="insertText">Insert Text (Word)</button>
-
-    {{-- <script src="taskpane.js"></script> --}}
+    <div id="content">
+        <h1>Report</h1>
+        <p>This is HTML converted to Word.</p>
+      </div>
+      
+      <button onclick="exportToWord()">Download Word</button>
 </body>
 </html>
 <script>
-  // Wait until the Office host is ready
-Office.onReady((info) => {
-    if (info.host === Office.HostType.Excel) {
-        document.getElementById("insertData").onclick = insertDataExcel;
-    } else if (info.host === Office.HostType.Word) {
-        document.getElementById("insertText").onclick = insertTextWord;
-    }
-});
+function exportToWord(){
+    var content = document.getElementById("content").innerHTML;
+    var header = "<html xmlns:o='urn:schemas-microsoft-com:office:office' "+
+                 "xmlns:w='urn:schemas-microsoft-com:office:word'>";
+    var footer = "</body></html>";
+    var sourceHTML = header + "<body>" + content + footer;
 
-// Excel example
-async function insertDataExcel() {
-    try {
-        await Excel.run(async (context) => {
-            const sheet = context.workbook.worksheets.getActiveWorksheet();
-            const range = sheet.getRange("A1:B2");
-            range.values = [
-                ["Name", "Age"],
-                ["Alice", 25]
-            ];
-            await context.sync();
-            alert("Data inserted in Excel!");
-        });
-    } catch (error) {
-        console.error(error);
-    }
+    var blob = new Blob(['\ufeff', sourceHTML], {
+        type: 'application/msword'
+    });
+
+    var url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(sourceHTML);
+
+    var downloadLink = document.createElement("a");
+    document.body.appendChild(downloadLink);
+
+    downloadLink.href = url;
+    downloadLink.download = 'document.doc';
+    downloadLink.click();
+
+    document.body.removeChild(downloadLink);
 }
-
-// Word example
-async function insertTextWord() {
-    try {
-        await Word.run(async (context) => {
-            const body = context.document.body;
-            body.insertText("Hello from vanilla JS!", Word.InsertLocation.end);
-            await context.sync();
-            alert("Text inserted in Word!");
-        });
-    } catch (error) {
-        console.error(error);
-    }
-}
-
 </script>

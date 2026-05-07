@@ -1,0 +1,20 @@
+<div class="ui large modal" id="maintenanceModal">
+    <i class="close icon"></i>
+    <div class="header">
+      Equipment Maintenance Form
+    </div>
+    <div class="scrolling content">
+      <form class="ui form maintenance_form" id="maintenance_form">
+      
+      </form>
+    </div>
+    <div class="actions">
+      <div class="ui black deny button">
+        Cancel
+      </div>
+      <button type="button" class="ui positive button submit_iepmc_btn">
+        Save
+      </button>
+    </div>
+  
+  </div>

@@ -193,3 +193,7 @@ Route::get('pdf-view', function() {
 Route::get('/google/login', [GoogleDriveController::class, 'login']);
 Route::get('/google/callback', [GoogleDriveController::class, 'callback']);
 Route::get('/upload-convert', [UploadAndConvertController::class, 'uploadAndConvert']);
+Route::get('eia_corner', function() {
+    return view('official.table');
+});
+

@@ -41,10 +41,10 @@ document.addEventListener('DOMContentLoaded', () => {
         'division',
         'remarks',
     ]);
-    // generateWordBrowser(data, '../../RFQ.docx', (blob) => {
-    //       rfqClass.updateRFQ(data, blob, (e) => {
-    //     });
-    // });
+    generateWordBrowser(data, '../../RFQ.docx', (blob) => {
+          rfqClass.updateRFQ(data, blob, (e) => {
+        });
+    });
     $('#create_iepmc_btn').on('click', function() {
         $('#maintenanceModal').modal('show');
     })

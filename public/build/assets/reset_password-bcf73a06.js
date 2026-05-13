@@ -1,0 +1,1 @@
+import{A as s,M as e}from"./login-9e36f44f.js";import{G as a}from"./validation-1a46e44d.js";document.addEventListener("DOMContentLoaded",()=>{a.passwordChangeValidation(()=>{s.reset_password(o=>{e.success("Password successfully change."),window.location.reload()},document.getElementById("password").value)})});

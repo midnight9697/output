@@ -1,4 +1,4 @@
-export class CustomTable {
+export default class CustomTable {
     constructor(parent, column, keys) {
         this.parent = document.getElementById(parent);
         this.column = column;

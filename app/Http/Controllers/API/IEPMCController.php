@@ -116,10 +116,11 @@ class IEPMCController extends Controller {
     }
     
     public function streamOffice(Request $request) {
-        $url = "https://view.officeapps.live.com/op/view.aspx?src='";
+        $url = "https://view.officeapps.live.com/op/view.aspx?src=";
+        return url($request->path);
         return redirect($url.url($request->path));
     }
-
+    
     public function streamTemplate() {
         $docxPath = public_path('IEPMC.docx');
                 return response()->streamDownload(function () use ($docxPath) {

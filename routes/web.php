@@ -71,9 +71,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/', [PurchaseRequestController::class, 'prView'])->name('purchase request');
          // Status
          Route::get('inbox', [RFQController::class, 'inboxView'])->name('Request for Quotation');
-         Route::get('outbox', [RFQController::class, 'outboxView'])->name('Request for Quotation');
-         Route::get('draft', [RFQController::class, 'draftView'])->name('Request for Quotation');
-         Route::get('approved', [RFQController::class, 'approveView'])->name('Request for Quotation');
+         Route::get('outbox', [RFQController::class, 'outboxView']);
+         Route::get('draft', [RFQController::class, 'draftView']);
+         Route::get('approved', [RFQController::class, 'approveView']);
          // End Status
         Route::get('create', [PurchaseRequestController::class, 'createView'])->name('create.purchase.request');
         Route::get('draft/{id}/edit', [PurchaseRequestController::class, 'updateView'])->name('edit.purchase.request');
@@ -96,7 +96,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::prefix('purchase_order')->group(function() {
         Route::get('/', [PurchaseOrderController::class, 'index'])->name('purchase order request');
         Route::get('/create', [PurchaseOrderController::class, 'create'])->name('create purchase order request');
-        Route::get('form-update/{id}', [PurchaseOrderController::class, 'edit'])->name('RFQ FORM UPDATE');
+        Route::get('form-update/{id}', [PurchaseOrderController::class, 'edit']);
 
     });
 
@@ -129,7 +129,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     });
 
     Route::prefix('rfq')->group(function() {
-        Route::get('/', [RFQController::class, 'rfqView'])->name('Request for Quotation');
+        Route::get('/', [RFQController::class, 'rfqView']);
         Route::get('form-create', [RFQController::class, 'rfqFormCreate'])->name('RFQ FORM CREATE');
         Route::get('form-update/{id}', [RFQController::class, 'rfqFormUpdateView'])->name('RFQ FORM UPDATE');
         Route::get('preview/{id}', [RFQController::class, 'rfqPreview'])->name('RFQ FORM PREVIEW');
@@ -149,7 +149,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::prefix('iepmc')->group(function() {
         Route::get('/', [IEPMCController::class, 'mainView'])->name('PREVENTIVE MAINTENANCE');
-        Route::get('stream/{year}/{iepmc_id}', [APIIEPMCController::class, 'stream']);
         Route::get('office/stream', [APIIEPMCController::class, 'streamOffice']);
         Route::get('stream-template', [APIIEPMCController::class, 'streamTemplate']);
     });
@@ -158,7 +157,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/', [EquipmentController::class, 'mainView'])->name('ICT Equipment');
     });
 });
-
+// Public
+Route::prefix('iepmc')->group(function() {
+    Route::get('stream/{year}/{iepmc_id}', [APIIEPMCController::class, 'stream']);
+});
 Route::prefix('system')->group(function () {
     Route::post('sections', [SystemController::class, 'getSections']);
 });

@@ -128,6 +128,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('item/{item_id}', [IEPMCController::class, 'get_item']);
         Route::post('create', [IEPMCController::class, 'create']);
         Route::post('update', [IEPMCController::class, 'update']);
+        Route::post('remove', [IEPMCController::class, 'remove']);
     });
 
     Route::prefix('equipment')->group(function() {

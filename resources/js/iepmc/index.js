@@ -99,7 +99,9 @@ document.addEventListener('DOMContentLoaded', () => {
         TBLButton.deleteAction = (e) => {
           confirmMod.load(() => {
             let iepmc_id = e.target.dataset.id;
-            iepmcTable.table.ajax.reload();
+            iepmcController.remove(iepmc_id, (res) => {
+                iepmcTable.table.ajax.reload();
+            });
           }, "Do you want to delete this file ?");
         }
 

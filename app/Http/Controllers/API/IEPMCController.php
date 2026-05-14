@@ -104,6 +104,12 @@ class IEPMCController extends Controller {
         return ['Success' => 'shit', 'data' => $new_file_data];
     }
 
+    public function remove(Request $request) {
+       $iepmc_id = decryptUrlSafe($request->id);
+       $iepmc = IEPMC::where('id', $iepmc_id)->delete();
+       return ['message' => 'success'];
+    }
+
     public function stream($year = "2025", $iepmc_id) {
         $iepmc = IEPMC::where('id', decryptUrlSafe($iepmc_id));
         if (!$iepmc->exists()) {

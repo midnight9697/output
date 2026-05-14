@@ -36,4 +36,9 @@
 
 @section('custom_js')
     @vite(['resources/js/iepmc/index.js'])
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            localStorage.setItem('name', "{{ Auth::user()->fullname }}");
+        });
+    </script>
 @endsection

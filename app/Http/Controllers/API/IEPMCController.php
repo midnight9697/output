@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\Settings;
 use Svg\Tag\Rect;
+use Illuminate\Support\Str;
 
 class IEPMCController extends Controller {
 
@@ -115,11 +116,11 @@ class IEPMCController extends Controller {
         }, $iepmc->document_number.".docx");
     }
     
-//     public function streamOffice(Request $request) {
-//         $url = 'https://view.officeapps.live.com/op/view.aspx?src=';
-//         return $url.url($request->path);
-// // ;        return redirect($url.url($request->path));
-//     }
+    //     public function streamOffice(Request $request) {
+    //         $url = 'https://view.officeapps.live.com/op/view.aspx?src=';
+    //         return $url.url($request->path);
+    // // ;        return redirect($url.url($request->path));
+    //     }
     public function streamOffice($year, $iepmc_id) {
         // 1. Get your private file path
         $iepmc = IEPMC::where('id', decryptUrlSafe($iepmc_id));
@@ -127,7 +128,7 @@ class IEPMCController extends Controller {
             return ['NOT FOUND'];
         }
         $iepmc = IEPMC::where('id', decryptUrlSafe($iepmc_id))->first();
-    
+
         $originalPath = "iepmc/".$year."/".$iepmc->document_number.".docx";
         // return $originalPath;
         Storage::disk('public')->makeDirectory('temp');
@@ -142,12 +143,12 @@ class IEPMCController extends Controller {
         $fileUrl = asset('storage/' . $tempName);
         // 5. Generate viewer URL
         $viewerUrl = "https://view.officeapps.live.com/op/view.aspx?src=" . ($fileUrl);
-        
+
         // 6. Schedule deletion (important!)
         dispatch(function () use ($tempName) {
             Storage::disk('public')->delete($tempName);
         })->delay(now()->addMinutes(1));
-    
+
         // 7. Return view or redirect
         // return $viewerUrl;
         return redirect($viewerUrl);

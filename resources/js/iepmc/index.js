@@ -124,6 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'brand_model',
         'mac_address',
         'inspected_by',
+        'updated_at',
     ]);
     // generateWordBrowser(data, '../../RFQ.docx', (blob) => {
     //       rfqClass.updateRFQ(data, blob, (e) => {

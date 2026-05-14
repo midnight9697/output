@@ -27,6 +27,7 @@
                 'BRAND/MODEL',
                 'MAC ADDRESS',
                 'INSPECTED BY',
+                'LAST UPDATED',
             ],
             'creation_id' => 'create_iepmc_btn',
         ]

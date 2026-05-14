@@ -287,32 +287,32 @@
         },
         {
             "name": "cloudconvert/cloudconvert-laravel",
-            "version": "1.1.5",
+            "version": "1.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cloudconvert/cloudconvert-laravel.git",
-                "reference": "0b8c56b1a40e8db14a78b8a4bb68c00a8ea4648b"
+                "reference": "8a38ce5273f90714b1dc4c642942e869bf9cb906"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cloudconvert/cloudconvert-laravel/zipball/0b8c56b1a40e8db14a78b8a4bb68c00a8ea4648b",
-                "reference": "0b8c56b1a40e8db14a78b8a4bb68c00a8ea4648b",
+                "url": "https://api.github.com/repos/cloudconvert/cloudconvert-laravel/zipball/8a38ce5273f90714b1dc4c642942e869bf9cb906",
+                "reference": "8a38ce5273f90714b1dc4c642942e869bf9cb906",
                 "shasum": ""
             },
             "require": {
                 "cloudconvert/cloudconvert-php": "^3.1.0",
-                "illuminate/container": "~5.8.0|^6.0|^7.0|^8.0|^9.0|^10.0 || ^11.0 || ^12.0",
-                "illuminate/http": "~5.8.0|^6.0|^7.0|^8.0|^9.0|^10.0 || ^11.0 || ^12.0",
-                "illuminate/routing": "~5.8.0|^6.0|^7.0|^8.0|^9.0|^10.0 || ^11.0 || ^12.0",
-                "illuminate/support": "~5.8.0|^6.0|^7.0|^8.0|^9.0|^10.0 || ^11.0 || ^12.0",
+                "illuminate/container": "~5.8.0|^6.0|^7.0|^8.0|^9.0|^10.0 || ^11.0 || ^12.0 || ^13.0",
+                "illuminate/http": "~5.8.0|^6.0|^7.0|^8.0|^9.0|^10.0 || ^11.0 || ^12.0 || ^13.0",
+                "illuminate/routing": "~5.8.0|^6.0|^7.0|^8.0|^9.0|^10.0 || ^11.0 || ^12.0 || ^13.0",
+                "illuminate/support": "~5.8.0|^6.0|^7.0|^8.0|^9.0|^10.0 || ^11.0 || ^12.0 || ^13.0",
                 "nyholm/psr7": "^1.2",
                 "php": "^7.1 || ^8.0",
-                "symfony/psr-http-message-bridge": "^1.2|^2.0 || ^7.0"
+                "symfony/psr-http-message-bridge": "^1.2|^2.0 || ^7.0 || ^8.0"
             },
             "require-dev": {
-                "orchestra/testbench": "~3.8.0|^4.0|^5.0|^6.0|^7.0|^8.0 || ^9.0 || ^10.0",
+                "orchestra/testbench": "~3.8.0|^4.0|^5.0|^6.0|^7.0|^8.0 || ^9.0 || ^10.0 || ^11.0",
                 "php-http/guzzle7-adapter": "^1.0",
-                "phpunit/phpunit": "^7.0|^8.0|^9.5.10 || ^10.5 || ^11.5.3"
+                "phpunit/phpunit": "^7.0|^8.0|^9.5.10 || ^10.5 || ^11.5.3 || ^12.5.12"
             },
             "type": "library",
             "extra": {
@@ -344,9 +344,9 @@
             "homepage": "https://github.com/cloudconvert/cloudconvert-php",
             "support": {
                 "issues": "https://github.com/cloudconvert/cloudconvert-laravel/issues",
-                "source": "https://github.com/cloudconvert/cloudconvert-laravel/tree/1.1.5"
+                "source": "https://github.com/cloudconvert/cloudconvert-laravel/tree/1.1.6"
             },
-            "time": "2025-02-17T10:06:01+00:00"
+            "time": "2026-02-24T08:12:38+00:00"
         },
         {
             "name": "cloudconvert/cloudconvert-php",

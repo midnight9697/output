@@ -8,6 +8,7 @@ use App\Http\Controllers\API\SupplementalController as APISupplementalController
 use App\Http\Controllers\APPController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BACController;
+use App\Http\Controllers\CloudConvertController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\EquipmentController;
@@ -215,3 +216,6 @@ Route::get('eia_corner', function() {
     return view('official.table');
 });
 
+Route::get('cloud', [CloudConvertController::class, 'Cloud']);
+
+Route::post('convert-pdf', [CloudConvertController::class, 'google']);

@@ -116,8 +116,9 @@ class IEPMCController extends Controller {
     }
     
     public function streamOffice(Request $request) {
-        $url = "https://view.officeapps.live.com/op/view.aspx?src='";
-        return redirect($url.url($request->path));
+        $url = "https://view.officeapps.live.com/op/view.aspx?src=";
+        // return url($request->path)
+;        return redirect($url.url($request->path));
     }
 
     public function streamTemplate() {

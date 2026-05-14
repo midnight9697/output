@@ -386,6 +386,12 @@ export default function createIEPMCForm() {
         </div>
       </div>
       <div class="field">
+        <div class="ui checkbox">
+          <input type="checkbox" name="b3">
+          <label>Reboot the system</label>
+        </div>
+      </div>
+      <div class="field">
         <label>Record Startup Time</label>
           <input type="text" name="startup_time" >
       </div>

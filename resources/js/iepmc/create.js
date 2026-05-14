@@ -89,7 +89,7 @@ export default function createIEPMCForm() {
           </div>
           <div class="field">
             <label>Inspected By</label>
-            <input type="text" value="${localStorage.get('name')}" name="inspected_by">
+            <input type="text" value="${localStorage.getItem('name')}" name="inspected_by">
           </div>
         </div>
         <!-- General Maintenance -->

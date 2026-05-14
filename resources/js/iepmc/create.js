@@ -5,7 +5,7 @@ export default function createIEPMCForm() {
         <div class="two fields">
           <div class="field">
             <label>Document Number</label>
-            <input type="text" value="" name="document_number">
+            <input type="text" value="IEPMC-${new Date().getFullYear()}-" name="document_number" placeholder="IEPMC-XXXX-XXXXX">
           </div>
           <div class="field">
             <label>Property Number</label>

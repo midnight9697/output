@@ -18,7 +18,7 @@ export function updateIEPMCForm(item) {
     <div class="two fields">
       <div class="field">
         <label>Document Number</label>
-        <input type="text" value="${item.document_number??'N/A'}" name="document_number">
+        <input type="text" value="${item.document_number??'N/A'}" name="document_number" placeholder="IEPMC-XXXX-XXXXX">
       </div>
       <div class="field">
         <label>Property Number</label>

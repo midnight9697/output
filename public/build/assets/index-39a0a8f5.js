@@ -490,7 +490,7 @@ import{c as m}from"./login-9e36f44f.js";import{T as n}from"./custom_table-ff5264
           </div>
           <div class="field">
             <label>Inspected By</label>
-            <input type="text" value="" name="inspected_by">
+            <input type="text" value="${localStorage.get("name")}" name="inspected_by">
           </div>
         </div>
         <!-- General Maintenance -->

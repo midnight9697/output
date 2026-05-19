@@ -93,6 +93,9 @@ export default defineConfig({
                     'resources/js/iepmc/create.js',
                     'resources/js/iepmc/update.js',
                     'resources/js/iepmc/validation.js',
+                     // Scoping
+                    'resources/js/scoping/index.js',
+                    'resources/js/scoping/scoping.js',
                 ],
             refresh: true,
         }),

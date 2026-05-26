@@ -1,4 +1,4 @@
-import{A as t}from"./login-9e36f44f.js";class n{constructor(){this.msgEl=document.createElement("div"),this.msgEl.className="ui very tiny modal",this.msgEl.innerHTML=`
+import{A as t}from"./login-1e9ef6f5.js";class n{constructor(){this.msgEl=document.createElement("div"),this.msgEl.className="ui very tiny modal",this.msgEl.innerHTML=`
             <div class="content">
             </div>
         `,document.getElementsByTagName("body")[0].appendChild(this.msgEl),$(this.msgEl).modal({allowMultiple:!1})}success(i,e=()=>{}){this.buttonY=document.createElement("div"),this.buttonY.className="ui green ok inverted button confirm_warning_action",this.buttonY.onclick=e,this.buttonY.innerHTML=`

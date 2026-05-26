@@ -148,14 +148,14 @@ export class CustomDate {
 }
 
 export class confModal {
-    load(accept, message = false) {
+    load(accept, message = false, cancel = () => {}) {
         const ht = `
             <div class="ui icon header">
                 <i class="warning yellow icon"></i>
                 ${message?message:"Are you sure you want to proceed with this action?"}
             </div>
             <div class="actions">
-                <div class="ui red basic cancel button">
+                <div class="ui red basic button confirm_cancel_action">
                     <i class="remove icon"></i>
                     No
                 </div>
@@ -179,6 +179,12 @@ export class confModal {
             $(self.modal).modal('hide').modal('hide dimmer');
             self.modal.remove();
             accept(e);
+        });
+
+        $('.confirm_cancel_action').on('click', (e) => {
+            $(self.modal).modal('hide').modal('hide dimmer');
+            self.modal.remove();
+            cancel(e);
         });
        
     }

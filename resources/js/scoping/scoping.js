@@ -1,8 +1,20 @@
 class PScoping {
     fetch_by_page(action, fail) {
         var usersClone = this;
-        this.customGetRequest('./ps-data', action, fail);
+        this.customGetRequest('./eia_corner/ps-data', action, fail);
     } 
+
+    insert(data,action, fail) {
+      this.customPostURequest('./eia_corner/scoping/insert', data, action, fail);
+    }
+    
+    update(data,action, fail) {
+      this.customPostURequest('./eia_corner/scoping/update', data, action, fail);
+    }
+
+    remove(data,action, fail) {
+      this.customPostURequest('./eia_corner/scoping/remove', {id: data}, action, fail);
+    }
 
     customGetRequest(url, action, fail = () => {}) {
         axios.get(url, {
@@ -38,4 +50,4 @@ class PScoping {
     }
 }
 
-export const iepmcController = new PScoping();
+export const scopingController = new PScoping();

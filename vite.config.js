@@ -96,6 +96,8 @@ export default defineConfig({
                      // Scoping
                     'resources/js/scoping/index.js',
                     'resources/js/scoping/scoping.js',
+                    'resources/js/scoping/update.js',
+                    'resources/js/scoping/validation.js',
                 ],
             refresh: true,
         }),

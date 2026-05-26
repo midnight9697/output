@@ -235,7 +235,7 @@ Route::get('ps-wp-data', function() {
 
 Route::get('testing-la', function () {
     // Read the file content
-    $file = storage_path('app\data.csv');
+    $file = storage_path('app/data.csv');
 
     // Decode JSON into PHP array
     // $data = json_decode($jsonString, true); // true = associative array

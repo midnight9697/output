@@ -18,6 +18,7 @@ use App\Http\Controllers\InspectorController;
 use App\Http\Controllers\PPMPController;
 use App\Http\Controllers\PR\PurchaseRequestController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PSWpController;
 use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\RFQController;
 use App\Http\Controllers\SettingController;
@@ -223,57 +224,20 @@ Route::get('cloud', [CloudConvertController::class, 'Cloud']);
 
 Route::post('convert-pdf', [CloudConvertController::class, 'google']);
 
-Route::get('ps-data', function() {
-    $ps = PublicScoping::orderBy('id', 'asc');
-    return  encryptIds($ps);
-});
 
-Route::get('ps-wp-data', function() {
-    $ps = PublicScoping::orderBy('id', 'asc')->get();
-    return $ps;
-});
-
-Route::get('testing-la', function () {
-    // Read the file content
-    $file = storage_path('app\data.csv');
-
-    // Decode JSON into PHP array
-    // $data = json_decode($jsonString, true); // true = associative array
-    $data = [];
-    
-    if (($handle = fopen($file, 'r')) !== false) {
-        $header = null; // will store the header row
-        PublicScoping::truncate();
-        while (($row = fgetcsv($handle, 1000, ',')) !== false) {
-            if (!$header) {
-                $header = $row; // first row as header
-            } else {
-                $data[] = array_combine($header, $row); // combine header + row
-            }
-        }
-        fclose($handle);
-    }
-
-    // Use the data
-    foreach ($data as $item) {
-        $objects = array_keys($item);
-        $obj = [];
-        foreach ($objects as $key) {
-            $obj[] = $item[$key];
-        }
-        $dt = PublicScoping::insert([
-            'tentative_date_and_time' => $obj[1],
-            'public_scoping_location' => $obj[2],
-            'project_name' => $obj[3],
-            'project_proponent' => $obj[4],
-            'project_location' => $obj[5],
-            'project_description'=> $obj[7],
-        ]);
-        $edited[] = $obj;
-    }
-    return ['success' => 'message'];
-});
-
-Route::get('public_scoping', function () {
-    return view('scoping.scoping');
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::prefix('eia_corner')->group(function() {
+        Route::get('/', [PSWpController::class, 'dashboardView']);
+        Route::get('scoping',[PSWpController::class, 'PSView'])->name('Public Scoping');
+        Route::get('hearing',[PSWpController::class, 'PHView'])->name('Public Hearing');
+         // WEBSITE DATA OF EIA CORNER
+        Route::get('ps-data', [PSWpController::class, 'getPSDataTable']);
+        Route::get('ps-wp-data', [PSWpController::class, 'getRawData']);
+        Route::get('export-csv', [PSWpController::class, 'importCsv']);
+        Route::prefix('scoping')->group(function() {
+            Route::post('insert', [PSWpController::class, 'insertPS']);
+            Route::post('update', [PSWpController::class, 'updatePS']);
+            Route::post('remove', [PSWpController::class, 'removePS']);
+        });
+    });
 });

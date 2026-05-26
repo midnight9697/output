@@ -22,15 +22,142 @@
       }
     </style>
 </head>
-<body>
-    @yield('custom_css')
-    @yield('content')
+@php
+    use Illuminate\Support\Facades\Gate;
+    $routesplit = explode(".", Request::route()->getName());
+@endphp
+@php
+    use App\Models\PurchaseRequest;
+    use App\Models\Recepient;
+    use App\Models\RFQ;
+    use App\Models\Supplier;
+    use App\Models\User;
+    
+    $count_user = User::count();
+    $count_supplier = Supplier::count();
+    $count_pr = PurchaseRequest::where('created_by', Auth::user()->id)->count();
+    $count_pr_inbox = Recepient::where('receiver_id', Auth::user()->id)->where('received', '0')->count();
+    $count_rfq = RFQ::where('creator', Auth::user()->id)->count();
+@endphp
+@yield('custom_css')
+<body id="main_event">
+    <div class="dashboard">
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+
+          <!-- HEADER (Fixed) -->
+          <div class="sidebar-header">
+              <div class="logo">
+                <img src="{{ url('denr-emb-logo.png') }}" alt="MySystem Logo">
+                <span>PIMS</span>
+                <small>ENVIRONMENTAL MANAGEMENT BUREAU R08</small>
+              </div>
+          </div>
+      
+          <!-- SCROLLABLE MENU -->
+          <div class="sidebar-menu">
+            <div class="sidebar-section">
+              <div class="sidebar-title">General</div>
+              <ul>
+                  {{ view('layout.menu', [ 'url' => url('eia_corner'), 'title' => 'Dashboard', 'routesplit' => $routesplit, 'permission' => Auth::user()->role != 'user']) }}
+                  {{ view('layout.menu', [ 'url' => url('eia_corner/scoping'), 'title' => 'Public Scoping', 'routesplit' => $routesplit, 'permission' => true]) }}
+                  {{ view('layout.menu', [ 'url' => url('eia_corner/hearing'), 'title' => 'Public Hearing', 'routesplit' => $routesplit, 'permission' => Auth::user()->role != 'user']) }}
+                 
+              </ul>
+            </div>
+          </div>
+      
+          <!-- FOOTER (Fixed) -->
+          <div class="sidebar-footer">
+            <div class="footer-user">
+              <i class="fa-solid fa-user-circle"></i>
+              <div>
+                <div class="user-name">
+                  {{ Auth::user()->full_name }}
+                </div>
+                <div class="user-role"><small>{{ Auth::user()->profile->position }}</small></div>
+              </div>
+            </div>
+        
+            <button class="btn btn-logout">
+              <i class="fa-solid fa-right-from-bracket"></i>
+              Logout
+            </button>
+        
+            <div class="footer-version">
+              v1.0.0
+            </div>
+          </div>
+      
+      </div>
+        
+        <!-- MAIN -->
+      <div class="main">
+            <!-- NAVBAR -->
+            <div class="navbar">
+                <div>
+                  <i class="fa-solid fa-bars" onclick="toggleSidebar()"></i>
+                  <h1 style="display: inline;">Dashboard</h1>
+                </div>
+                <div class="profile-container">
+                    <div class="profile-btn" onclick="toggleDropdown()">
+                      <i class="fa-solid fa-user"></i>
+                      Admin
+                      <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="dropdown" id="profileDropdown">
+                      <button onclick="viewProfile()">
+                        <i class="fa-solid fa-id-badge"></i> Profile
+                      </button>
+                  
+                      <button onclick="changePassword()">
+                        <i class="fa-solid fa-key"></i> Change Password
+                      </button>
+                      <button class="logout" id="logout_user">
+                        <i class="fa-solid fa-right-from-bracket"></i> Logout
+                      </button>
+                    </div>
+                </div>
+            </div>
+            <!-- CONTENT -->
+        <div class="content">
+            @yield('main_content')
+            <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+        </div>
+    </div>
     @include('layout.jsinclude')
     <link rel="stylesheet" href="{{ url('custom/css/custom-crud-style.css') }}">
+    <style>
+      .ui.dropdown {
+          position: sticky;
+          display: block;
+          /* z-index: 1000; */
+      }
+    </style>
     <script>
-      document.addEventListener('DOMContentLoaded', () => {
+        
         axios.defaults.baseURL = "{{ url('/') }}";
-      });
+        localStorage.setItem('user', "{{ Auth::user()->id }}")
+        
+        function toggleDropdown() {
+          const dropdown = document.getElementById("profileDropdown");
+          dropdown.style.display = dropdown.style.display === "flex" ? "none" : "flex";
+        }
+    
+        function toggleSidebar() {
+          document.querySelector(".sidebar").classList.toggle("active");
+          console.log(document.querySelector(".sidebar"));
+          document.getElementById("overlay").classList.toggle("active");
+        }
+        
+        function closeSidebar() {
+          document.querySelector(".sidebar").classList.remove("active");
+          document.getElementById("overlay").classList.remove("active");
+        }
+
+        function toggleUsersMenu(element) {
+          element.classList.toggle("active");
+        }
     </script>
     @yield('custom_js')
 </body>

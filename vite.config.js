@@ -98,6 +98,7 @@ export default defineConfig({
                     'resources/js/scoping/scoping.js',
                     'resources/js/scoping/update.js',
                     'resources/js/scoping/validation.js',
+                    'resources/js/scoping/hearing.js',
                 ],
             refresh: true,
         }),

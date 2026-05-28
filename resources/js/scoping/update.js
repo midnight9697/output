@@ -1,4 +1,4 @@
-export function updateForm(data) {
+function updateForm(data) {
     return `
     <div class="field">
       <label>Tentative Date and Time</label>
@@ -60,7 +60,7 @@ export function updateForm(data) {
     `
 }
 
-export function updatePHForm(data) {
+const updatePHForm = (data) => {
   return `
   <div class="field">
     <label>Tentative Date and Time</label>
@@ -121,3 +121,5 @@ export function updatePHForm(data) {
   </div>
   `
 }
+
+export {updateForm, updatePHForm};

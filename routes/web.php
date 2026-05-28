@@ -232,7 +232,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('hearing',[PSWpController::class, 'PHView'])->name('Public Hearing');
          // WEBSITE DATA OF EIA CORNER
         Route::get('ps-data', [PSWpController::class, 'getPSDataTable']);
-        Route::get('ps-wp-data', [PSWpController::class, 'getRawData']);
         Route::get('export-csv', [PSWpController::class, 'importCsv']);
         Route::prefix('scoping')->group(function() {
             Route::post('insert', [PSWpController::class, 'insertPS']);
@@ -241,3 +240,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
         });
     });
 });
+
+Route::get('eia_corner/ps-wp-data', [PSWpController::class, 'getRawData']);

@@ -15,7 +15,7 @@ class PSWpController extends Controller {
 
     public  function importCsv() {
         // Read the file content
-        $file = storage_path('app\data-v3.csv');
+        $file = storage_path('app/data-v3.csv');
     
         // Decode JSON into PHP array
         // $data = json_decode($jsonString, true); // true = associative array

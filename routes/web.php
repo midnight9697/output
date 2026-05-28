@@ -19,6 +19,7 @@ use App\Http\Controllers\PPMPController;
 use App\Http\Controllers\PR\PurchaseRequestController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PSWpController;
+use App\Http\Controllers\PublicHearingController;
 use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\RFQController;
 use App\Http\Controllers\SettingController;
@@ -233,11 +234,22 @@ Route::middleware(['auth:sanctum'])->group(function () {
          // WEBSITE DATA OF EIA CORNER
         Route::get('ps-data', [PSWpController::class, 'getPSDataTable']);
         Route::get('ps-wp-data', [PSWpController::class, 'getRawData']);
+        // WEBSITE HEARING DATA
+        Route::get('ph-data', [PublicHearingController::class, 'getPHDataTable']);
+        Route::get('ph-wp-data', [PublicHearingController::class, 'getRawData']);
+        // Public scoping exporter
         Route::get('export-csv', [PSWpController::class, 'importCsv']);
+        // Public Scoping Corner
         Route::prefix('scoping')->group(function() {
             Route::post('insert', [PSWpController::class, 'insertPS']);
             Route::post('update', [PSWpController::class, 'updatePS']);
             Route::post('remove', [PSWpController::class, 'removePS']);
+        });
+        // Public Hearing Corner
+        Route::prefix('hearing')->group(function() {
+            Route::post('insert', [PublicHearingController::class, 'insertPH']);
+            Route::post('update', [PublicHearingController::class, 'updatePH']);
+            Route::post('remove', [PublicHearingController::class, 'removePH']);
         });
     });
 });

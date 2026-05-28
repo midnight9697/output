@@ -40,7 +40,9 @@ class DatabaseSeeder extends Seeder
         //     ->has(RFQItem::factory()->count(rand(5, 10)))
         //     ->create(['creator' => $user->id]);
         //     // RFQItem::factory(rand(5, 20))->recycle($rfq)->create();
-        // });
+        //     $this->call(PublicScopingsTableSeeder::class);
+        $this->call(PublicHearingsTableSeeder::class);
+    });
         
     }
 }

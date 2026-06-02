@@ -9,6 +9,7 @@ import { PScValidator } from "./validation";
 document.addEventListener('DOMContentLoaded', () => {
     const phTable = new Custom_table('#hearing-table', false, true, false, true, './ph-data');
     const update_field =  document.getElementById('update-ph-form-field');
+    const view_links =  document.getElementById('view-links');
     let current_id;
     PScValidator.CreatePHValidation((e) => {
         e.preventDefault();
@@ -70,6 +71,20 @@ document.addEventListener('DOMContentLoaded', () => {
         TBLButton.data = data;
         TBLButton.viewName = 'View';
         TBLButton.viewAction = () => {
+            const text = data.project_description;
+            const words = text.split(/\s+(.*)/, 2);
+            if (words.length > 1) {
+                let anchor = "<ol>";
+                words.forEach(url => {
+                    anchor += `
+                        <li><a href="${url}">${url}</a></li>
+                    `;
+                });
+                view_links.innerHTML = anchor;
+                view_links.innerHTML += "</ol>"
+                $('#viewLinksModal').modal('show');
+                return;
+            }
             window.open(data.project_description);
         }
 

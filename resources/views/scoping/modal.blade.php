@@ -106,8 +106,6 @@
     </div>
   </div>
 </div>
-
-
 {{-- PUBLIC HEARING MODAL --}}
 
 <!-- Semantic UI Modal -->
@@ -193,28 +191,49 @@
 </div>
 
 <div class="ui modal" id="updatePHModal">
-<i class="close icon"></i>
+  <i class="close icon"></i>
 
-<div class="header">
-  Update Project Information
-</div>
+  <div class="header">
+    Update Project Information
+  </div>
 
-<div class="content">
-  <form class="ui form update-ph-form" id="update-ph-form">
-    <div id="update-ph-form-field">
-      {{-- Field --}}
+  <div class="content">
+    <form class="ui form update-ph-form" id="update-ph-form">
+      <div id="update-ph-form-field">
+        {{-- Field --}}
+      </div>
+    </form>
+  </div>
+
+  <div class="actions">
+    <div class="ui black deny button">
+      Cancel
     </div>
-  </form>
-</div>
 
-<div class="actions">
-  <div class="ui black deny button">
-    Cancel
-  </div>
-
-  <div class="ui green right labeled icon button" id="update-ph-submit-btn">
-    Save
-    <i class="checkmark icon"></i>
+    <div class="ui green right labeled icon button" id="update-ph-submit-btn">
+      Save
+      <i class="checkmark icon"></i>
+    </div>
   </div>
 </div>
+
+{{-- View Links --}}
+<div class="ui modal tiny" id="viewLinksModal">
+  <i class="close icon"></i>
+
+  <div class="header">
+    Project Links
+  </div>
+
+  <div class="content">
+    <div id="view-links">
+
+    </div>
+  </div>
+
+  <div class="actions">
+    <div class="ui black deny button">
+      Cancel
+    </div>
+  </div>
 </div>

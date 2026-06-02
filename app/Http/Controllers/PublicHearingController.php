@@ -12,6 +12,11 @@ class PublicHearingController extends Controller {
         return  encryptIds($ps);
     }
 
+    public function getRawData() {
+        $ps = PublicHearing::orderBy('id', 'desc')->get();
+        return $ps;
+    }
+
     public function insertPH(Request $request) {
         return PublicHearing::create([
             'tentative_date_and_time' => $request->tentative_date_and_time,

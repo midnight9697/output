@@ -22,7 +22,8 @@ class DatabaseSeeder extends Seeder
     public function run() {
        
         $this->call([
-            PublicScopingsTableSeeder::class
+            PublicScopingsTableSeeder::class,
+            PublicHearingsTableSeeder::class
             // DivisionSeeder::class,
             // UserSeeeder::class
         ]);
@@ -40,7 +41,8 @@ class DatabaseSeeder extends Seeder
         //     ->has(RFQItem::factory()->count(rand(5, 10)))
         //     ->create(['creator' => $user->id]);
         //     // RFQItem::factory(rand(5, 20))->recycle($rfq)->create();
-        // });
+        //     $this->call(PublicScopingsTableSeeder::class);
+        $this->call(PublicHearingsTableSeeder::class);
         
     }
 }

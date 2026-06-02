@@ -4,7 +4,7 @@ import { confirmMod } from "../app";
 import { TBLButton } from "../table/buttons";
 import Custom_table from "../table/custom_table";
 import { scopingController } from "./scoping";
-import updateForm from "./update";
+import { updateForm } from "./update";
 import { PScValidator } from "./validation";
 
 document.addEventListener('DOMContentLoaded', () => {

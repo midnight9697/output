@@ -254,3 +254,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 Route::get('eia_corner/ps-wp-data', [PSWpController::class, 'getRawData']);
 Route::get('eia_corner/ph-wp-data', [PublicHearingController::class, 'getRawData']);
+
+Route::get('chat', function() {
+    return view('testing_chat');
+});

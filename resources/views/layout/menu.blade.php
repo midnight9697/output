@@ -37,7 +37,7 @@
                     break;
             }
         @endphp
-        {{-- <div> --}}
+        <div>
             @if (isset($badge))
                 @if ($badge > 0)
                     <div class="ui red left pointing label">{{ $badge }}</div>
@@ -48,6 +48,6 @@
                 <i class="{{ $icon }} icon"></i>
             @endif
             {{ $title }}
-        {{-- </div> --}}
+        </div>
     </a>
 @endif

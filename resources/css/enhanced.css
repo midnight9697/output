@@ -1,0 +1,409 @@
+/* --- 1. Typography & Global --- */
+body {
+    font-family: 'Inter', sans-serif !important;
+    background: linear-gradient(135deg, #f0f4f8 0%, #e8ecf1 100%) !important;
+    color: #2d2d2d;
+    font-size: 16px !important;
+}
+
+/* --- 2. SIDEBAR READABILITY & LAYOUT FIX - DENR-EMB THEME --- */
+.main-sidebar {
+    background: linear-gradient(180deg, #1a3a2a 0%, #2d4a3a 40%, #1a3a2a 100%) !important;
+    box-shadow: 4px 0 20px rgba(0,0,0,0.15) !important;
+    border-right: 2px solid #f5c842 !important;
+}
+
+/* --- SIDEBAR MENU ITEMS: TEXT LEFT, ICON RIGHT --- */
+.main-sidebar .menu a.item {
+    border-top: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+
+    /* Flex layout */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+
+    padding: 12px 20px !important;
+    border-radius: 0px !important;
+}
+
+/* Ensure text stays on the left */
+.main-sidebar .menu a.item > .text,
+.main-sidebar .menu a.item > span {
+    text-align: left !important;
+}
+
+/* Position the icon on the absolute far right */
+.main-sidebar .menu a.item .icon,
+.main-sidebar .menu a.item i,
+.main-sidebar .menu a.item img {
+    opacity: 1 !important;
+    font-size: 1.2rem !important;
+    margin-left: 0 !important;
+}
+
+/* --- COLOR MATCHING FOR SIDEBAR TEXT & ICONS - DENR-EMB COLORS --- */
+
+/* RED Text & Icon - DENR Red */
+.main-sidebar .menu a.item.color-red,
+.main-sidebar .menu a.item.color-red .icon,
+.main-sidebar .menu a.item.color-red i {
+    color: #dc3545 !important;
+}
+
+/* GREEN Text & Icon - DENR Green */
+.main-sidebar .menu a.item.color-green,
+.main-sidebar .menu a.item.color-green .icon,
+.main-sidebar .menu a.item.color-green i {
+    color: #28a745 !important;
+}
+
+/* BLUE Text & Icon - DENR Blue */
+.main-sidebar .menu a.item.color-blue,
+.main-sidebar .menu a.item.color-blue .icon,
+.main-sidebar .menu a.item.color-blue i {
+    color: #0056a7 !important;
+}
+
+/* YELLOW Text & Icon - DENR Yellow */
+.main-sidebar .menu a.item.color-yellow,
+.main-sidebar .menu a.item.color-yellow .icon,
+.main-sidebar .menu a.item.color-yellow i {
+    color: #f5c842 !important;
+}
+
+/* BLACK GREY Text & Icon - DENR Black Grey */
+.main-sidebar .menu a.item.color-blackgrey,
+.main-sidebar .menu a.item.color-blackgrey .icon,
+.main-sidebar .menu a.item.color-blackgrey i {
+    color: #4a4a4a !important;
+}
+
+/* PURPLE Text & Icon */
+.main-sidebar .menu a.item.color-purple,
+.main-sidebar .menu a.item.color-purple .icon,
+.main-sidebar .menu a.item.color-purple i {
+    color: #8b5cf6 !important;
+}
+
+/* TEAL Text & Icon */
+.main-sidebar .menu a.item.color-teal,
+.main-sidebar .menu a.item.color-teal .icon,
+.main-sidebar .menu a.item.color-teal i {
+    color: #14b8a6 !important;
+}
+
+/* --- GENERAL SIDEBAR TEXT --- */
+.main-sidebar .item,
+.main-sidebar .menu a.item {
+    color: #ffffff !important;
+    font-size: 16px !important;
+}
+
+/* Dashboard Active Text & Icon (Yellow Accent) */
+.main-sidebar .menu a.item.active,
+.main-sidebar .menu a.item.active .icon,
+.main-sidebar .menu a.item.active i {
+    color: #f5c842 !important;
+}
+
+/* Sidebar Headers - Yellow Accent */
+.main-sidebar .item > .header {
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    letter-spacing: 1.5px !important;
+    color: #f5c842 !important;
+    padding: 20px 20px 10px 20px !important;
+    margin: 0 !important;
+    text-transform: uppercase !important;
+    text-align: left !important;
+}
+
+/* Sidebar Active Dashboard Background - Blue Accent */
+.main-sidebar .menu a.item.active {
+    background: rgba(0, 86, 167, 0.3) !important;
+    border-right: 4px solid #f5c842 !important;
+    font-weight: 700 !important;
+}
+
+/* Sidebar Hover - Blue Accent */
+.main-sidebar .menu a.item:hover {
+    background: rgba(0, 86, 167, 0.25) !important;
+    color: #ffffff !important;
+}
+.main-sidebar .menu a.item:hover .icon,
+.main-sidebar .menu a.item:hover i {
+    color: #f5c842 !important;
+}
+
+/* User Profile */
+.main-sidebar .item:first-child {
+    background: rgba(0, 86, 167, 0.15) !important;
+    border-bottom: 2px solid #f5c842 !important;
+    padding: 25px 20px 20px 20px !important;
+    margin-bottom: 15px !important;
+}
+.main-sidebar .item:first-child .header {
+    font-size: 1.3rem !important;
+    color: #ffffff !important;
+    margin-top: 10px !important;
+}
+.main-sidebar .item:first-child .description {
+    font-size: 1.05rem !important;
+    color: #f5c842 !important;
+}
+
+/* --- 3. Top Navbar - DENR-EMB BLUE THEME --- */
+.custom-topbar {
+    background: linear-gradient(90deg, #003d7a 0%, #0056a7 50%, #003d7a 100%) !important;
+    border-bottom: 3px solid #f5c842 !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08) !important;
+}
+.custom-topbar .item {
+    color: #ffffff !important;
+    font-size: 1.1rem !important;
+}
+.custom-topbar .left.menu .item {
+    font-size: 1.4rem !important;
+    color: #f5c842 !important;
+}
+.custom-topbar .item:hover {
+    background: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* --- 4. Main Content Area (Cards) --- */
+#main_event.ui.segment {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+}
+
+/* Dashboard Cards */
+.ui.cards > .card, .ui.card {
+    border-radius: 12px !important;
+    border-left: 6px solid #0056a7 !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
+    transition: all 0.3s ease !important;
+
+    padding: 25px !important;
+    margin: 0 !important;
+    height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    position: relative !important;
+}
+.ui.cards > .card:hover, .ui.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+    border-left: 6px solid #f5c842 !important;
+}
+
+/* Remove Semantic UI's internal .content padding */
+.ui.card > .content, .ui.cards > .card > .content {
+    padding: 0 !important;
+    border: none !important;
+    flex: 1 !important;
+}
+
+.ui.card .header {
+    font-family: 'Inter', sans-serif !important;
+    color: #1e293b !important;
+    margin: 0 !important;
+    transition: color 0.2s ease !important;
+}
+.ui.card .header:first-child {
+    font-size: 2.8rem !important;
+    font-weight: 600 !important;
+}
+.ui.card .meta {
+    font-size: 1.2rem !important;
+    font-weight: 600 !important;
+    color: #4a4a4a !important;
+    margin-top: 10px !important;
+}
+.ui.card .description {
+    font-size: 1.05rem !important;
+    line-height: 1.5 !important;
+    color: #555 !important;
+    margin-top: 15px !important;
+    margin-bottom: 15px !important;
+}
+
+/* --- DASHBOARD CARD COLOR MATCHING - DENR-EMB COLORS --- */
+
+/* RED (Users Card) - DENR Red */
+.ui.cards > .card:has(.ui.red.button) .header:first-child,
+.ui.cards > .card:has(.ui.red.button) i.icon,
+.ui.cards > .card:has(.ui.red.button) img {
+    color: #dc3545 !important;
+}
+.ui.cards > .card:has(.ui.red.button) {
+    border-left: 6px solid #dc3545 !important;
+}
+
+/* GREEN (Supplier Card) - DENR Green */
+.ui.cards > .card:has(.ui.green.button) .header:first-child,
+.ui.cards > .card:has(.ui.green.button) i.icon,
+.ui.cards > .card:has(.ui.green.button) img {
+    color: #28a745 !important;
+}
+.ui.cards > .card:has(.ui.green.button) {
+    border-left: 6px solid #28a745 !important;
+}
+
+/* BLUE (Purchase Request Card) - DENR Blue */
+.ui.cards > .card:has(.ui.blue.button) .header:first-child,
+.ui.cards > .card:has(.ui.blue.button) i.icon,
+.ui.cards > .card:has(.ui.blue.button) img {
+    color: #0056a7 !important;
+}
+.ui.cards > .card:has(.ui.blue.button) {
+    border-left: 6px solid #0056a7 !important;
+}
+
+/* YELLOW (Request for Quotation Card) - DENR Yellow */
+.ui.cards > .card:has(.ui.yellow.button) .header:first-child,
+.ui.cards > .card:has(.ui.yellow.button) i.icon,
+.ui.cards > .card:has(.ui.yellow.button) img {
+    color: #f5c842 !important;
+}
+.ui.cards > .card:has(.ui.yellow.button) {
+    border-left: 6px solid #f5c842 !important;
+}
+
+/* BLACK GREY Card - DENR Black Grey */
+.ui.cards > .card:has(.ui.blackgrey.button) .header:first-child,
+.ui.cards > .card:has(.ui.blackgrey.button) i.icon,
+.ui.cards > .card:has(.ui.blackgrey.button) img {
+    color: #4a4a4a !important;
+}
+.ui.cards > .card:has(.ui.blackgrey.button) {
+    border-left: 6px solid #4a4a4a !important;
+}
+
+/* --- Dashboard Buttons - DENR-EMB COLORS --- */
+.ui.button {
+    border-radius: 8px !important;
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 1.05rem !important;
+    padding: 14px 0 !important;
+    width: 100% !important;
+    display: block !important;
+    margin-top: auto !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+    transition: all 0.3s ease !important;
+}
+.ui.button:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15) !important;
+}
+
+/* DENR Red Button */
+.ui.red.button {
+    background: linear-gradient(135deg, #dc3545 0%, #b02a37 100%) !important;
+    color: white !important;
+}
+
+/* DENR Green Button */
+.ui.green.button {
+    background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%) !important;
+    color: white !important;
+}
+
+/* DENR Blue Button */
+.ui.blue.button {
+    background: linear-gradient(135deg, #0056a7 0%, #003d7a 100%) !important;
+    color: white !important;
+}
+
+/* DENR Yellow Button */
+.ui.yellow.button {
+    background: linear-gradient(135deg, #f5c842 0%, #d4a830 100%) !important;
+    color: #1a3a2a !important;
+}
+
+/* DENR Black Grey Button */
+.ui.blackgrey.button {
+    background: linear-gradient(135deg, #4a4a4a 0%, #2d2d2d 100%) !important;
+    color: white !important;
+}
+
+/* Existing button colors maintained for compatibility */
+.ui.teal.button {
+    background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%) !important;
+    color: white !important;
+}
+.ui.purple.button {
+    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%) !important;
+    color: white !important;
+}
+
+/* --- 5. Transitions & Layout --- */
+#visibleSidebar, #hiddenSidebar, #custom-content {
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* --- 6. Responsive Card Wrapping --- */
+#main_event .ui.grid,
+#main_event .ui.cards {
+    margin-top: 40px !important;
+}
+
+.ui.four.cards {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 18px !important;
+    margin: 0 !important;
+}
+
+.ui.four.cards > .card {
+    width: calc(25% - 18px) !important;
+    flex-grow: 1 !important;
+    min-width: 250px !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+}
+
+.ui.card .extra.content, .ui.cards > .card .extra.content {
+    border-top: none !important;
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+@media screen and (max-width: 1200px) {
+    .ui.four.cards > .card {
+        width: calc(50% - 18px) !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .ui.four.cards > .card {
+        width: 100% !important;
+    }
+}
+
+/* --- 7. Space below cards --- */
+#main_event .ui.cards {
+    margin-bottom: 30px !important;
+}
+
+/* --- 8. Additional DENR-EMB Color Classes --- */
+
+/* DENR-EMB Color Classes for custom use */
+.denr-green { color: #28a745 !important; }
+.denr-blue { color: #0056a7 !important; }
+.denr-blackgrey { color: #4a4a4a !important; }
+.denr-yellow { color: #f5c842 !important; }
+.denr-red { color: #dc3545 !important; }
+
+/* DENR-EMB Background Classes */
+.bg-denr-green { background: #28a745 !important; }
+.bg-denr-blue { background: #0056a7 !important; }
+.bg-denr-blackgrey { background: #4a4a4a !important; }
+.bg-denr-yellow { background: #f5c842 !important; }
+.bg-denr-red { background: #dc3545 !important; }

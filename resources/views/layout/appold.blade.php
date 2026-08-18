@@ -6,15 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{csrf_token()}}" />
     <title>PROCUREMENT SYSTEM</title>
-    
     @include('layout.cssinclude')
-    
     <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
     <link href="{{ url('plugins/quill/quill.snow.css') }}" rel="stylesheet">
     <link rel="icon" href="{{asset('emb_logo.png')}}" type="image/x-icon">
     <script src="{{ url('plugins/docx-preview/jszip.min.js') }}"></script>
     <script src="{{ url('plugins/docx-preview/docx-preview.js') }}"></script>
-    
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @yield('head_js')
 </head>

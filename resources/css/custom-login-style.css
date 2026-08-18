@@ -1,0 +1,125 @@
+:root {
+    --color-primary: #2563EB;
+    --color-primary-hover: #1E40AF;
+    --color-bg: #F8FAFC;
+    --color-surface: #FFFFFF;
+    --color-border: #E2E8F0;
+    --color-text-primary: #0F172A;
+    --color-text-secondary: #64748B;
+    --color-danger: #EF4444;
+    --radius: 12px;
+    --radius-sm: 8px;
+    --shadow-sm: 0 4px 12px rgba(0,0,0,0.06);
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--color-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  .login-container {
+    background: var(--color-surface);
+    padding: 40px 30px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+  }
+  
+  .login-container .logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  
+  .login-container .logo img {
+    height: 60px;
+    width: auto;
+    margin-bottom: 10px;
+  }
+  
+  .login-container .logo span {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--color-primary);
+  }
+  
+  .login-container h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: var(--color-text-primary);
+  }
+  
+  .login-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .login-container input[type="text"],
+  .login-container input[type="password"] {
+    padding: 12px 15px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
+    font-size: 14px;
+    outline: none;
+    transition: border 0.2s;
+  }
+  
+  .login-container input[type="text"]:focus,
+  .login-container input[type="password"]:focus {
+    border-color: var(--color-primary);
+  }
+  
+  .login-container button {
+    padding: 12px;
+    background: var(--color-primary);
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  
+  .login-container button:hover {
+    background: var(--color-primary-hover);
+  }
+  
+  .login-container .links {
+    margin-top: 15px;
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .login-container .links a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+  
+  .login-container .links a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Responsive */
+  @media (max-width: 500px) {
+    .login-container {
+      padding: 30px 20px;
+    }
+  }
+  

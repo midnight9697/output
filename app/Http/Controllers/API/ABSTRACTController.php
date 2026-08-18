@@ -61,7 +61,7 @@ class ABSTRACTController extends Controller {
                 $bidder = (object) $bidder;
                 $supplier = (object) $bidder->supplier;
                 $aitem = [
-                    'rfq_id' => decryptUrlSafe($item->rfq_id),
+                    'rfq_id' => decryptUrlSafe($item->rfq_id),  
                     'rfq_item_id' => decryptUrlSafe($item->id),
                     'abstract_id' => $abstract->id,
                     'supplier_id' => decryptUrlSafe($supplier->id),

@@ -56,7 +56,7 @@ class PRPolicy {
         $members = Member::where('user_id', Auth::user()->id)->where('purchase_request_id', $pr->id)->exists();
         $transactions = Transaction::orderBy('id', 'desc')->with('recepient')->first();
         // return ($user->role == "admin"?true:($transactions->recepient->receiver_id?true:$members));
-        return ($transactions->recepient->receiver_id == $user->id?true:($members && $pr->approval != '1'));
+        return (($members && $pr->approval != '1'));
     }
     
     public function delete_pr(User $user, PurchaseRequest $pr) {

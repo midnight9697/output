@@ -90,6 +90,7 @@ class PurchaseRequestController extends Controller {
             $item_id = (isset($item['id'])?decryptUrlSafe($item['id']):null);
             $itemInstance = PRItem::find($item_id);
             if ($itemInstance) {
+                $item['purchase_request_id'] = decryptUrlSafe($item['purchase_request_id']);
                 $itemInstance->update($item);
             }
             else {
@@ -119,23 +120,24 @@ class PurchaseRequestController extends Controller {
                 ]);
             }
         }
-
         foreach ($request->members as $member) {
-            $mem = Member::where('user_id', $member['user_id'])->where('purchase_request_id', $pr_id);
+            $user_id = (is_numeric($member['user_id'])?$member['user_id']:decryptUrlSafe($member['user_id']));
+            $mem = Member::where('user_id',$user_id)->where('purchase_request_id', $pr_id);
             if (!$mem->exists()) {
-                Member::create([
-                    'user_id' => $member['user_id'],
+                $member = Member::create([
+                    'user_id' => $user_id,
                     'purchase_request_id' => $pr_id,
                     'added_by' => Auth::user()->id,
                     'role' => $member['role']
                 ]);
             }
-            // if ((count($updatedColumns) > 0 || $pr->transactions()->getDirty())) {
+
+            if (count($updatedColumns) > 0 ) {
                 Recepient::create([
                     'transaction_id' => $transaction->id,
-                    'receiver_id' => $member['user_id']
+                    'receiver_id' => $user_id
                 ]);
-            // }
+            }
         }
         $pr->save();
         return $updatedColumns;

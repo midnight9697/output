@@ -19,16 +19,55 @@
     @yield('head_js')
 </head>
 <style>
+    /* Enhanced sidebar width control */
     #visibleSidebar {
         width: calc(100% - 260px);
+        transition: all 0.3s ease;
     }
 
     #hiddenSidebar {
         width: 100%;
+        transition: all 0.3s ease;
     }
 
     #custom-content {
         width: calc(100% - 260px);
+        transition: all 0.3s ease;
+    }
+
+    /* Smooth body transitions */
+    body {
+        background: #f1f5f9;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        transition: background 0.3s ease;
+    }
+
+    /* Modern scrollbar */
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+        background: #e2e8f0;
+        border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #94a3b8;
+        border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: #64748b;
+    }
+
+    /* Loading shimmer effect */
+    .shimmer-loader {
+        background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+        background-size: 200% 100%;
+        animation: shimmer 1.5s infinite;
+    }
+    @keyframes shimmer {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
     }
 </style>
 @yield('custom_css')

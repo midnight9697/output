@@ -12,6 +12,8 @@
 <link rel="stylesheet" href="{{ url('plugins/new/datatables/css/dataTables.dateTime.min.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ url('plugins/semantic/semantic.min.css')}}">
 
-{{-- Custom Enhanced CSS --}}
-{{-- Create this file in resources/css/enhanced.css and add the CSS I provided below --}}
-@vite('resources/css/enhanced.css') 
+{{-- Enhanced Custom CSS --}}
+<link rel="stylesheet" href="{{ asset('css/enhanced.css') }}">
+
+{{-- Vite CSS --}}
+@vite('resources/css/enhanced.css')

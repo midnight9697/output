@@ -1,409 +1,1083 @@
-/* --- 1. Typography & Global --- */
-body {
-    font-family: 'Inter', sans-serif !important;
-    background: linear-gradient(135deg, #f0f4f8 0%, #e8ecf1 100%) !important;
-    color: #2d2d2d;
-    font-size: 16px !important;
+/* ============================================ 
+   ENHANCED.CSS - DENR-EMB THEME 
+   Complete Design System with Agency Colors 
+   ============================================ */ 
+ 
+/* ----- DENR-EMB COLOR VARIABLES ----- */ 
+:root { 
+    /* Primary Colors */ 
+    --emb-light-green: #8CC63F; 
+    --emb-green: #009B3A; 
+    --emb-dark-green: #2E7D32; 
+    --emb-blue: #0057A3; 
+    --emb-dark-blue: #003D7A; 
+    --emb-blue-green: #00857C; 
+    --emb-dark-blue-green: #00695C; 
+    --emb-yellow: #FDB913; 
+    --emb-dark-yellow: #FDD835; 
+    --emb-purple: #7B2FBE; 
+    --emb-dark-purple: #6A1B9A; 
+    --emb-white: #FFFFFF; 
+     
+    /* Derived Colors */ 
+    --sidebar-bg-start: #0a1e2f; 
+    --sidebar-bg-end: #1a3a4a; 
+    --sidebar-hover: rgba(140, 198, 63, 0.12); 
+    --sidebar-active: rgba(140, 198, 63, 0.18); 
+    --sidebar-text: #b0c4d9; 
+    --sidebar-text-hover: #ffffff; 
+    --sidebar-header: #6a8fa0; 
+    --topbar-bg: #ffffff; 
+    --topbar-border: #e8edf0; 
+    --primary-btn: linear-gradient(135deg, #00857C, #009B3A); 
+    --primary-btn-hover: linear-gradient(135deg, #00695C, #2E7D32); 
+    --accent-color: #8CC63F; 
+    --text-primary: #1a2a3a; 
+    --text-secondary: #4a6a7a; 
+    --card-shadow: 0 2px 12px rgba(0, 0, 0, 0.06); 
+    --card-shadow-hover: 0 6px 24px rgba(0, 0, 0, 0.10); 
+} 
+ 
+/* ----- 1. GLOBAL RESET & BASE ----- */ 
+* { 
+    box-sizing: border-box; 
+} 
+ 
+body { 
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+    background: #f0f4f8; 
+    color: var(--text-primary); 
+    -webkit-font-smoothing: antialiased; 
+    -moz-osx-font-smoothing: grayscale; 
+    font-size: 15px; 
+    line-height: 1.6; 
+} 
+ 
+/* ----- 2. TYPOGRAPHY ----- */ 
+h1, h2, h3, h4, h5, h6 { 
+    font-family: 'Inter', sans-serif; 
+    font-weight: 600; 
+    color: var(--text-primary); 
+    letter-spacing: -0.01em; 
+    line-height: 1.3; 
+} 
+ 
+h1 { font-size: 2rem; } 
+h2 { font-size: 1.75rem; } 
+h3 { font-size: 1.5rem; } 
+h4 { font-size: 1.25rem; } 
+h5 { font-size: 1.1rem; } 
+h6 { font-size: 1rem; } 
+ 
+p, .text-content { 
+    font-size: 0.95rem; 
+    line-height: 1.7; 
+    color: var(--text-secondary); 
+} 
+ 
+/* ----- 3. SIDEBAR - DENR-EMB THEME ----- */ 
+.main-sidebar { 
+    background: linear-gradient(135deg, #0e3568 0%, #123052 40%, #09203a 100%) !important; 
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15) !important; 
+    border-right: 2px solid rgba(140, 198, 63, 0.15) !important; 
+    padding-top: 0 !important; 
+    font-size: 15px !important; 
+    position: relative; 
+} 
+ 
+/* Sidebar decorative accents */ 
+.sidebar-accent-top { 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    height: 4px; 
+    background: linear-gradient(90deg, #8CC63F, #009B3A, #00857C, #0057A3, #7B2FBE); 
+    opacity: 0.6; 
+} 
+ 
+.sidebar-accent-bottom { 
+    position: absolute; 
+    bottom: 0; 
+    left: 0; 
+    right: 0; 
+    height: 4px; 
+    background: linear-gradient(90deg, #8CC63F, #009B3A, #00857C, #0057A3, #7B2FBE); 
+    opacity: 0.6; 
+} 
+ 
+/* Sidebar User Profile */ 
+.sidebar-profile { 
+    border-bottom: 2px solid rgba(140, 198, 63, 0.15) !important; 
+    padding: 24px 16px 20px 16px !important; 
+} 
+ 
+.sidebar-logo { 
+    filter: brightness(0) invert(1) !important; 
+    opacity: 0.9; 
+    margin-bottom: 8px !important; 
+    width: 400px !important; 
+} 
+ 
+.sidebar-username { 
+    font-size: 1rem !important; 
+    font-weight: 700 !important; 
+    color: #ffffff !important; 
+    letter-spacing: 0.3px; 
+    display: block; 
+} 
+ 
+.sidebar-user-role { 
+    font-size: 0.85rem !important; 
+    color: #8CC63F !important; 
+    font-weight: 500 !important; 
+    padding: 4px 14px !important; 
+    background: rgba(140, 198, 63, 0.12) !important; 
+    border-radius: 20px !important; 
+    display: inline-block !important; 
+    margin-top: 4px !important; 
+} 
+ 
+/* Sidebar Section Headers */ 
+.sidebar-section { 
+    padding: 10px 0 !important; 
+    border-top: none !important; 
+} 
+ 
+.sidebar-section-header { 
+    font-size: 0.7rem !important; 
+    letter-spacing: 2px !important; 
+    font-weight: 700 !important; 
+    color: #6a8fa0 !important; 
+    text-transform: uppercase !important; 
+    padding-left: 16px !important; 
+    margin-bottom: 6px !important; 
+} 
+ 
+/* ----- 4. SIDEBAR MENU - RIGHT ALIGNED ICONS ----- */ 
+.main-sidebar .menu .item { 
+    display: flex !important; 
+    justify-content: space-between !important; 
+    align-items: center !important; 
+    padding: 10px 20px !important; 
+    margin: 3px 10px !important; 
+    border-radius: 10px !important; 
+    font-weight: 900 !important; 
+    font-size: 0.9rem !important; 
+    transition: all 0.25s ease !important; 
+    color: #b0c4d9 !important; 
+    position: relative !important; 
+    font-family: Georgia, serif; 
+} 
+ 
+/* Left side - title text */ 
+.main-sidebar .menu .item .menu-title { 
+    display: flex; 
+    align-items: center; 
+    gap: 12px; 
+    font-weight: 600; 
+} 
+ 
+/* Right side - icon */ 
+.main-sidebar .menu .item .menu-icon { 
+    display: flex; 
+    align-items: center; 
+    transition: all 0.25s ease !important; 
+} 
+ 
+.main-sidebar .menu .item .menu-icon i.icon { 
+    font-size: 1.1rem !important; 
+    color: #6a8fa0 !important; 
+    transition: all 0.25s ease !important; 
+    width: 22px !important; 
+    text-align: right !important; 
+} 
+ 
+/* Active state */ 
+.main-sidebar .menu .item.active { 
+    background: rgba(140, 198, 63, 0.15) !important; 
+    color: #ffffff !important; 
+    border-left: 3px solid #8CC63F !important; 
+    border-radius: 0 10px 10px 0 !important; 
+    margin-left: 7px !important; 
+} 
+ 
+.main-sidebar .menu .item.active .menu-icon i.icon { 
+    color: #8CC63F !important; 
+} 
+ 
+/* Hover state */ 
+.main-sidebar .menu .item:not(.active):hover { 
+    background: rgba(140, 198, 63, 0.08) !important; 
+    color: #ffffff !important; 
+    transform: translateX(4px); 
+} 
+ 
+.main-sidebar .menu .item:not(.active):hover .menu-icon i.icon { 
+    color: #8CC63F !important; 
+} 
+ 
+/* Badge in sidebar */ 
+.main-sidebar .menu .item .ui.red.label { 
+    background: #FDB913 !important; 
+    color: #0a1e2f !important; 
+    font-weight: 700 !important; 
+    border-radius: 20px !important; 
+    padding: 3px 12px !important; 
+    font-size: 0.75rem !important; 
+} 
+ 
+/* ----- 5. TOP NAVBAR - MATCHING SIDEBAR DARK NAVY THEME ----- */ 
+.custom-topbar { 
+    background: linear-gradient(135deg, #123f7a 0%, #133864 40%, #09203a 100%) !important; 
+    border-bottom: 2px solid rgba(140, 198, 63, 0.3) !important; 
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15) !important; 
+    height: 68px !important; 
+    padding: 0 2px !important; 
+    position: relative; 
+} 
+ 
+/* Topbar accent line with DENR-EMB colors */ 
+.custom-topbar::after { 
+    content: ''; 
+    position: absolute; 
+    bottom: -2px; 
+    left: 0; 
+    right: 0; 
+    height: 3px; 
+    background: linear-gradient(90deg, #8CC63F, #009B3A, #00857C, #0057A3, #FDB913, #7B2FBE) !important; 
+    opacity: 0.6; 
+} 
+ 
+/* Topbar items - white text for dark background */ 
+.custom-topbar .item { 
+    color: rgba(255, 255, 255, 0.85) !important; 
+    transition: all 0.2s ease; 
+    font-size: 0.9rem !important; 
+    font-family: Georgia, serif; 
+} 
+ 
+.custom-topbar .item:hover { 
+    background: rgba(255, 255, 255, 0.08) !important; 
+    border-radius: 10px !important; 
+    color: #ffffff !important; 
+} 
+ 
+/* Toggle button */ 
+.custom-topbar .toggle.button { 
+    font-weight: 600; 
+    font-size: 0.9rem !important; 
+    color: rgba(255, 255, 255, 0.9) !important; 
+} 
+ 
+.custom-topbar .toggle.button i { 
+    font-size: 1.2rem !important; 
+    color: #8CC63F !important; 
+    padding: 5px; 
+} 
+ 
+.custom-topbar .toggle.button:hover { 
+    background: rgba(255, 255, 255, 0.08) !important; 
+    border-radius: 10px !important; 
+} 
+ 
+/* Page Title - white text with green accent */ 
+.page-title { 
+    font-size: 1.05rem !important; 
+    font-weight: 700 !important; 
+    color: #ffffff !important; 
+    letter-spacing: -0.3px; 
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); 
+} 
+ 
+.page-title i { 
+    color: #8CC63F !important; 
+} 
+ 
+/* ============================================ 
+   USER DROPDOWN - COMPLETE FIX 
+   ============================================ */ 
+ 
+/* User dropdown container */ 
+.user-dropdown { 
+    border-radius: 10px !important; 
+    padding: 8px 14px !important; 
+    border: 1px solid rgba(255, 255, 255, 0.08) !important; 
+    transition: all 0.2s ease !important; 
+    background: rgba(255, 255, 255, 0.05) !important; 
+    display: flex !important; 
+    align-items: center !important; 
+    gap: 8px !important; 
+    cursor: pointer !important; 
+    position: relative !important; 
+} 
+ 
+.user-dropdown:hover { 
+    background: rgba(255, 255, 255, 0.1) !important; 
+    border-color: rgba(140, 198, 63, 0.2) !important; 
+} 
+ 
+.user-dropdown.active { 
+    background: rgba(255, 255, 255, 0.12) !important; 
+    border-color: rgba(140, 198, 63, 0.3) !important; 
+} 
+ 
+.user-name { 
+    font-size: 0.9rem !important; 
+    font-weight: 600 !important; 
+    color: #ffffff !important; 
+} 
+ 
+.dropdown-arrow { 
+    font-size: 0.7rem; 
+    color: #8CC63F; 
+    margin-left: 4px; 
+    transition: transform 0.3s ease !important; 
+} 
+ 
+.user-dropdown.active .dropdown-arrow { 
+    transform: rotate(180deg) !important; 
+} 
+ 
+/* ============================================ 
+   DROPDOWN MENU - VISIBLE TEXT FIX 
+   ============================================ */ 
+ 
+/* Dropdown menu - Light background for visibility */ 
+.user-dropdown .menu { 
+    background: #e7e9eb !important; 
+    border: 1px solid rgba(255, 255, 255, 0.12) !important; 
+    border-radius: 12px !important; 
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5) !important; 
+    padding: 8px 0 !important; 
+    min-width: 200px !important; 
+    margin-top: 4px !important; 
+    overflow: hidden !important; 
+} 
+ 
+/* Dropdown items - BRIGHT WHITE TEXT for readability */ 
+.user-dropdown .menu .item { 
+    font-size: 1.9rem !important; 
+    padding: 12px 20px !important; 
+    color: #ffffff !important; 
+    background: #e5f3f3f3 !important; 
+    border-radius: 0 !important; 
+    display: flex !important; 
+    align-items: center !important; 
+    gap: 12px !important; 
+    transition: all 0.2s ease !important; 
+    font-weight: 1000 !important; 
+    text-decoration: none !important; 
+    border: none !important; 
+    outline: none !important; 
+    margin: 0 !important; 
+    width: 100% !important; 
+    box-sizing: border-box !important; 
+} 
+ 
+.user-dropdown .menu .item:hover { 
+    background: rgba(10, 15, 2, 0.966) !important; 
+    color: #46ca24 !important; 
+} 
+ 
+.user-dropdown .menu .item:focus { 
+    outline: none !important; 
+} 
+ 
+/* Dropdown icons - green with hover effect */ 
+.user-dropdown .menu .item i { 
+    color: #8CC63F !important; 
+    font-size: 1rem !important; 
+    width: 20px !important; 
+    text-align: center !important; 
+    transition: all 0.2s ease !important; 
+} 
+ 
+.user-dropdown .menu .item:hover i { 
+    transform: scale(1.1); 
+} 
+ 
+.user-dropdown .menu .item:first-child:hover i { 
+    color: #FDB913 !important; 
+} 
+ 
+/* Logout item - with divider and red icon */ 
+.user-dropdown .menu .item:last-child { 
+    border-top: 1px solid rgba(255, 255, 255, 0.08) !important; 
+    margin-top: 4px !important; 
+    padding-top: 12px !important; 
+} 
+ 
+.user-dropdown .menu .item:last-child i { 
+    color: #EF4444 !important; 
+} 
+ 
+.user-dropdown .menu .item:last-child:hover { 
+    background: rgba(239, 68, 68, 0.1) !important; 
+} 
+ 
+.user-dropdown .menu .item:last-child:hover i { 
+    color: #FF6B6B !important; 
+} 
+ 
+/* ============================================ 
+   NOTIFICATION BELL 
+   ============================================ */ 
+ 
+.notification-bell { 
+    position: relative; 
+    background: rgba(255, 255, 255, 0.05) !important; 
+    border-radius: 10px !important; 
+    padding: 8px 12px !important; 
+    border: 1px solid rgba(255, 255, 255, 0.06) !important; 
+} 
+ 
+.notification-bell i { 
+    font-size: 1.3rem !important; 
+    color: rgba(255, 255, 255, 0.8) !important; 
+} 
+ 
+.notification-bell:hover { 
+    background: rgba(255, 255, 255, 0.1) !important; 
+    border-color: rgba(140, 198, 63, 0.2) !important; 
+} 
+ 
+.notification-bell:hover i { 
+    color: #8CC63F !important; 
+} 
+ 
+.notification-dot { 
+    position: absolute; 
+    top: 10px; 
+    right: 6px; 
+    width: 8px; 
+    height: 9px; 
+    background: #EF4444; 
+    border-radius: 50%; 
+    border: 2px solid #0a1e2f; 
+} 
+ 
+/* Notification bell pulse animation */ 
+@keyframes pulse { 
+    0% { transform: scale(1); } 
+    50% { transform: scale(1.1); } 
+    100% { transform: scale(1); } 
+} 
+ 
+.notification-bell { 
+    animation: pulse 2s ease-in-out infinite; 
+} 
+ 
+/* Avatar initials - matching sidebar accent */ 
+.avatar-initials { 
+    width: 36px !important; 
+    height: 36px !important; 
+    border-radius: 50%; 
+    background: linear-gradient(135deg, #8CC63F, #009B3A) !important; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    color: #ffffff !important; 
+    font-weight: 700; 
+    font-size: 1rem !important; 
+} 
+ 
+/* ----- 6. MAIN CONTENT AREA ----- */ 
+.custom-content { 
+    padding: 50px 10px 40px 10px !important; 
+    background: #f0f4f8; 
+    min-height: 200vh; 
+} 
+ 
+/* ----- 7. CARDS / SEGMENTS ----- */ 
+.ui.segment { 
+    border-radius: 16px !important; 
+    box-shadow: var(--card-shadow) !important; 
+    border: 1px solid #e8edf0 !important; 
+    background: #ffffff !important; 
+    transition: all 0.3s ease; 
+    padding: 24px !important; 
+} 
+ 
+.ui.segment:hover { 
+    box-shadow: var(--card-shadow-hover) !important; 
+    border-color: rgba(140, 198, 63, 0.15) !important; 
+} 
+ 
+#main_event { 
+    border-radius: 16px !important; 
+    overflow: hidden; 
+    padding: 0 !important; 
+} 
+ 
+#main_event .ui.segment { 
+    border: none !important; 
+    box-shadow: none !important; 
+} 
+ 
+#body_content_default { 
+    padding: 28px !important; 
+} 
+ 
+/* ----- 8. PAGE TITLES & HEADERS ----- */ 
+.content_header { 
+    margin-bottom: 24px !important; 
+} 
+ 
+.content_header h1, 
+.content_header h2, 
+.content_header h3 { 
+    font-size: 1.4rem !important; 
+    font-weight: 700 !important; 
+    color: #0057A3 !important; 
+    margin-bottom: 4px !important; 
+} 
+ 
+.content_header h1 i, 
+.content_header h2 i, 
+.content_header h3 i { 
+    color: #00857C !important; 
+} 
+ 
+.content_header .sub.header { 
+    font-size: 0.95rem !important; 
+    color: var(--text-secondary) !important; 
+    font-weight: 400 !important; 
+     /* font-family: Georgia, serif; */ 
+} 
+ 
+/* ----- 9. BUTTONS - DENR-EMB THEME ----- */ 
+.ui.primary.button, 
+.ui.primary.labeled.icon.button { 
+    background: var(--primary-btn) !important; 
+    border: none !important; 
+    padding: 12px 35px !important; 
+    border-radius: 10px !important; 
+    font-weight: 600 !important; 
+    font-size: 0.9rem !important; 
+    box-shadow: 0 2px 12px rgba(0, 155, 58, 0.25) !important; 
+    transition: all 0.25s ease !important; 
+    color: #ffffff !important; 
+} 
+ 
+.ui.primary.button i.icon, 
+.ui.primary.labeled.icon.button i.icon { 
+    font-size: 1rem !important; 
+    color: #ffffff !important; 
+} 
+ 
+.ui.primary.button:hover, 
+.ui.primary.labeled.icon.button:hover { 
+    transform: translateY(-2px); 
+    box-shadow: 0 6px 24px rgba(0, 155, 58, 0.35) !important; 
+    background: var(--primary-btn-hover) !important; 
+} 
+ 
+.ui.tiny.button { 
+    font-size: 0.85rem !important; 
+    padding: 10px 18px !important; 
+} 
+ 
+/* ----- 10. TABLES ----- */ 
+.ui.celled.table { 
+    border-radius: 12px !important; 
+    overflow: hidden !important; 
+    border-collapse: separate !important; 
+    border-spacing: 0 !important; 
+    font-size: 0.9rem !important; 
+} 
+ 
+.ui.celled.table thead th { 
+    background: linear-gradient(180deg, #f8fafc, #f0f4f8) !important; 
+    color: #0057A3 !important; 
+    font-weight: 700 !important; 
+    font-size: 0.85rem !important; 
+    text-transform: uppercase !important; 
+    letter-spacing: 0.5px !important; 
+    padding: 14px 18px !important; 
+    border-bottom: 2px solid #8CC63F !important; 
+} 
+ 
+.ui.celled.table tbody td { 
+    padding: 14px 18px !important; 
+    border-bottom: 1px solid #e8edf0 !important; 
+    color: var(--text-primary) !important; 
+    font-size: 0.9rem !important; 
+} 
+ 
+.ui.celled.table tbody tr:hover { 
+    background: rgba(140, 198, 63, 0.04) !important; 
+} 
+ 
+/* ----- 11. FORMS ----- */ 
+.ui.form .field { 
+    margin-bottom: 1.5rem !important; 
+} 
+ 
+.ui.form .field > label { 
+    font-weight: 700 !important; 
+    color: #0057A3 !important; 
+    font-size: 0.9rem !important; 
+    margin-bottom: 8px !important; 
+} 
+ 
+.ui.form input[type="text"], 
+.ui.form input[type="email"], 
+.ui.form input[type="password"], 
+.ui.form input[type="number"], 
+.ui.form input[type="date"], 
+.ui.form textarea, 
+.ui.form select { 
+    border-radius: 10px !important; 
+    border: 2px solid #e8edf0 !important; 
+    padding: 12px 16px !important; 
+    font-family: 'Inter', sans-serif !important; 
+    font-size: 0.95rem !important; 
+    transition: all 0.2s ease !important; 
+    background: #ffffff !important; 
+    min-height: 44px !important; 
+} 
+ 
+.ui.form input:focus, 
+.ui.form textarea:focus, 
+.ui.form select:focus { 
+    border-color: #8CC63F !important; 
+    box-shadow: 0 0 0 4px rgba(140, 198, 63, 0.1) !important; 
+} 
+ 
+/* ----- 12. MODALS ----- */ 
+.ui.modal { 
+    border-radius: 16px !important; 
+    overflow: hidden !important; 
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15) !important; 
+} 
+ 
+.ui.modal > .header { 
+    background: linear-gradient(135deg, #f8fafc, #f0f4f8) !important; 
+    padding: 22px 28px !important; 
+    border-bottom: 2px solid #8CC63F !important; 
+} 
+ 
+.ui.modal > .header h3 { 
+    font-weight: 700 !important; 
+    color: #0057A3 !important; 
+    margin: 0 !important; 
+    font-size: 1.2rem !important; 
+} 
+ 
+.ui.modal > .content { 
+    padding: 28px !important; 
+    background: #ffffff !important; 
+    font-size: 0.95rem !important; 
+} 
+ 
+.ui.modal > .actions { 
+    background: #f8fafc !important; 
+    padding: 18px 28px !important; 
+    border-top: 1px solid #e8edf0 !important; 
+    border-radius: 0 0 16px 16px !important; 
+} 
+ 
+/* ----- 13. EMPTY STATES ----- */ 
+.ui.placeholder.segment { 
+    border-radius: 16px !important; 
+    border: 2px dashed #c0d4e0 !important; 
+    background: linear-gradient(135deg, #fafbfc, #f0f4f8) !important; 
+    padding: 70px 40px !important; 
+} 
+ 
+.ui.placeholder.segment .icon.header { 
+    color: #6a8fa0 !important; 
+    font-weight: 500 !important; 
+    font-size: 1.1rem !important; 
+} 
+ 
+.ui.placeholder.segment .icon.header i.icon { 
+    font-size: 3.5rem !important; 
+    color: #8CC63F !important; 
+    opacity: 0.5; 
+    margin-bottom: 20px !important; 
+} 
+ 
+/* ----- 14. LOADERS ----- */ 
+.ui.loader { 
+    font-weight: 600 !important; 
+    font-size: 1rem !important; 
+    color: #0057A3 !important; 
+} 
+ 
+.ui.inverted.dimmer { 
+    border-radius: 16px !important; 
+    background: rgba(10, 30, 47, 0.85) !important; 
+} 
+ 
+.ui.inverted.dimmer .ui.loader { 
+    font-size: 1.1rem !important; 
+    color: #8CC63F !important; 
+} 
+ 
+/* ----- 15. RESPONSIVE ----- */ 
+@media (max-width: 768px) { 
+    .custom-content { 
+        padding: 16px !important; 
+    } 
+     
+    #body_content_default { 
+        padding: 16px !important; 
+    } 
+     
+    .custom-topbar { 
+        padding: 0 12px !important; 
+        height: 60px !important; 
+    } 
+     
+    .page-title { 
+        font-size: 0.85rem !important; 
+    } 
+     
+    .user-name { 
+        display: none !important; 
+    } 
+     
+    .notification-bell { 
+        padding: 6px 10px !important; 
+    } 
+} 
+ 
+@media (max-width: 480px) { 
+    .custom-content { 
+        padding: 12px !important; 
+    } 
+     
+    .ui.segment { 
+        border-radius: 12px !important; 
+        padding: 16px !important; 
+    } 
+     
+    .ui.placeholder.segment { 
+        padding: 40px 20px !important; 
+    } 
+     
+    .custom-topbar { 
+        padding: 0 8px !important; 
+        height: 56px !important; 
+    } 
+     
+    .custom-topbar .toggle.button span { 
+        display: none !important; 
+    } 
+     
+    .page-title { 
+        font-size: 0.75rem !important; 
+    } 
+} 
+ 
+/* ----- 16. SCROLLBAR ----- */ 
+::-webkit-scrollbar { 
+    width: 8px; 
+    height: 8px; 
+} 
+ 
+::-webkit-scrollbar-track { 
+    background: #e8edf0; 
+    border-radius: 10px; 
+} 
+ 
+::-webkit-scrollbar-thumb { 
+    background: #8CC63F; 
+    border-radius: 10px; 
+} 
+ 
+::-webkit-scrollbar-thumb:hover { 
+    background: #009B3A; 
+} 
+ 
+/* ----- 17. DROPZONE ----- */ 
+.dropzone { 
+    border-radius: 12px !important; 
+    border: 2px dashed #c0d4e0 !important; 
+    background: #fafbfc !important; 
+    transition: all 0.3s ease !important; 
+    padding: 30px !important; 
+} 
+ 
+.dropzone:hover { 
+    border-color: #8CC63F !important; 
+    background: rgba(140, 198, 63, 0.04) !important; 
+} 
+ 
+/* ----- 18. QUILL EDITOR ----- */ 
+.ql-container { 
+    border-radius: 0 0 10px 10px !important; 
+    border: 2px solid #e8edf0 !important; 
+    font-size: 0.95rem !important; 
+} 
+ 
+.ql-toolbar { 
+    border-radius: 10px 10px 0 0 !important; 
+    border: 2px solid #e8edf0 !important; 
+    background: #f8fafc !important; 
+    border-bottom: none !important; 
+} 
+ 
+/* ----- 19. COLOR ACCENTS ----- */ 
+.emb-light-green { color: #8CC63F !important; } 
+.emb-green { color: #009B3A !important; } 
+.emb-blue { color: #0057A3 !important; } 
+.emb-blue-green { color: #00857C !important; } 
+.emb-yellow { color: #FDB913 !important; } 
+.emb-purple { color: #7B2FBE !important; } 
+ 
+.bg-emb-light-green { background: #8CC63F !important; color: #fff !important; } 
+.bg-emb-green { background: #009B3A !important; color: #fff !important; } 
+.bg-emb-blue { background: #0057A3 !important; color: #fff !important; } 
+.bg-emb-blue-green { background: #00857C !important; color: #fff !important; } 
+.bg-emb-yellow { background: #FDB913 !important; color: #0a1e2f !important; } 
+.bg-emb-purple { background: #7B2FBE !important; color: #fff !important; } 
+ 
+/* ----- 20. UPLOAD PPMP PAGE SPECIFIC ----- */ 
+/* Page header */ 
+.upload-ppmp-header { 
+    font-size: 1.6rem !important; 
+    font-weight: 700 !important; 
+    color: #0f172a !important; 
+    margin-bottom: 8px !important; 
+} 
+ 
+.upload-ppmp-subheader { 
+    font-size: 1rem !important; 
+    color: #64748b !important; 
+    font-weight: 400 !important; 
+    margin-bottom: 24px !important; 
+} 
+ 
+/* Upload form area */ 
+.upload-ppmp-form .ui.field { 
+    margin-bottom: 20px !important; 
+} 
+ 
+.upload-ppmp-form label { 
+    font-weight: 700 !important; 
+    font-size: 0.95rem !important; 
+    color: #0f172a !important; 
+    display: block !important; 
+    margin-bottom: 8px !important; 
+} 
+ 
+.upload-ppmp-form input[type="file"] { 
+    padding: 16px !important; 
+    border: 2px dashed #e2e8f0 !important; 
+    border-radius: 12px !important; 
+    background: #fafbfc !important; 
+    font-size: 0.95rem !important; 
+    width: 100% !important; 
+} 
+ 
+.upload-ppmp-form input[type="file"]:hover { 
+    border-color: #3b82f6 !important; 
+    background: #f8fafc !important; 
+} 
+ 
+/* Table header text */ 
+.upload-table thead th { 
+    font-size: 0.9rem !important; 
+    font-weight: 700 !important; 
+    text-transform: uppercase !important; 
+    letter-spacing: 0.5px !important; 
+    color: #0f172a !important; 
+} 
+ 
+/* "No data available" text */ 
+.upload-table .no-data { 
+    font-size: 1rem !important; 
+    color: #94a3b8 !important; 
+    padding: 30px 0 !important; 
+    text-align: center !important; 
 }
 
-/* --- 2. SIDEBAR READABILITY & LAYOUT FIX - DENR-EMB THEME --- */
-.main-sidebar {
-    background: linear-gradient(180deg, #1a3a2a 0%, #2d4a3a 40%, #1a3a2a 100%) !important;
-    box-shadow: 4px 0 20px rgba(0,0,0,0.15) !important;
-    border-right: 2px solid #f5c842 !important;
-}
 
-/* --- SIDEBAR MENU ITEMS: TEXT LEFT, ICON RIGHT --- */
-.main-sidebar .menu a.item {
-    border-top: none !important;
-    border-bottom: none !important;
-    box-shadow: none !important;
+/* ============================================
+   21. ADDITIONAL - NOTIFICATION BADGE
+   Keeps all existing CSS above unchanged
+   ============================================ */
 
-    /* Flex layout */
+/* Keep notification title and badge together */
+.main-sidebar .menu .item .menu-title {
     display: flex !important;
     align-items: center !important;
-    justify-content: space-between !important;
-
-    padding: 12px 20px !important;
-    border-radius: 0px !important;
+    gap: 8px !important;
 }
 
-/* Ensure text stays on the left */
-.main-sidebar .menu a.item > .text,
-.main-sidebar .menu a.item > span {
-    text-align: left !important;
-}
+/* Notification badge */
+.main-sidebar .menu .item .menu-title .ui.red.label {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 
-/* Position the icon on the absolute far right */
-.main-sidebar .menu a.item .icon,
-.main-sidebar .menu a.item i,
-.main-sidebar .menu a.item img {
-    opacity: 1 !important;
-    font-size: 1.2rem !important;
-    margin-left: 0 !important;
-}
+    min-width: 20px !important;
+    height: 20px !important;
 
-/* --- COLOR MATCHING FOR SIDEBAR TEXT & ICONS - DENR-EMB COLORS --- */
+    padding: 2px 7px !important;
+    margin: 0 0 0 4px !important;
 
-/* RED Text & Icon - DENR Red */
-.main-sidebar .menu a.item.color-red,
-.main-sidebar .menu a.item.color-red .icon,
-.main-sidebar .menu a.item.color-red i {
-    color: #dc3545 !important;
-}
+    background: #FDB913 !important;
+    color: #0a1e2f !important;
 
-/* GREEN Text & Icon - DENR Green */
-.main-sidebar .menu a.item.color-green,
-.main-sidebar .menu a.item.color-green .icon,
-.main-sidebar .menu a.item.color-green i {
-    color: #28a745 !important;
-}
+    border-radius: 10px !important;
 
-/* BLUE Text & Icon - DENR Blue */
-.main-sidebar .menu a.item.color-blue,
-.main-sidebar .menu a.item.color-blue .icon,
-.main-sidebar .menu a.item.color-blue i {
-    color: #0056a7 !important;
-}
-
-/* YELLOW Text & Icon - DENR Yellow */
-.main-sidebar .menu a.item.color-yellow,
-.main-sidebar .menu a.item.color-yellow .icon,
-.main-sidebar .menu a.item.color-yellow i {
-    color: #f5c842 !important;
-}
-
-/* BLACK GREY Text & Icon - DENR Black Grey */
-.main-sidebar .menu a.item.color-blackgrey,
-.main-sidebar .menu a.item.color-blackgrey .icon,
-.main-sidebar .menu a.item.color-blackgrey i {
-    color: #4a4a4a !important;
-}
-
-/* PURPLE Text & Icon */
-.main-sidebar .menu a.item.color-purple,
-.main-sidebar .menu a.item.color-purple .icon,
-.main-sidebar .menu a.item.color-purple i {
-    color: #8b5cf6 !important;
-}
-
-/* TEAL Text & Icon */
-.main-sidebar .menu a.item.color-teal,
-.main-sidebar .menu a.item.color-teal .icon,
-.main-sidebar .menu a.item.color-teal i {
-    color: #14b8a6 !important;
-}
-
-/* --- GENERAL SIDEBAR TEXT --- */
-.main-sidebar .item,
-.main-sidebar .menu a.item {
-    color: #ffffff !important;
-    font-size: 16px !important;
-}
-
-/* Dashboard Active Text & Icon (Yellow Accent) */
-.main-sidebar .menu a.item.active,
-.main-sidebar .menu a.item.active .icon,
-.main-sidebar .menu a.item.active i {
-    color: #f5c842 !important;
-}
-
-/* Sidebar Headers - Yellow Accent */
-.main-sidebar .item > .header {
-    font-size: 12px !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 0.70rem !important;
     font-weight: 700 !important;
-    letter-spacing: 1.5px !important;
-    color: #f5c842 !important;
-    padding: 20px 20px 10px 20px !important;
-    margin: 0 !important;
-    text-transform: uppercase !important;
-    text-align: left !important;
-}
+    line-height: 1 !important;
 
-/* Sidebar Active Dashboard Background - Blue Accent */
-.main-sidebar .menu a.item.active {
-    background: rgba(0, 86, 167, 0.3) !important;
-    border-right: 4px solid #f5c842 !important;
-    font-weight: 700 !important;
-}
+    box-shadow: 0 2px 6px rgba(253, 185, 19, 0.25) !important;
 
-/* Sidebar Hover - Blue Accent */
-.main-sidebar .menu a.item:hover {
-    background: rgba(0, 86, 167, 0.25) !important;
-    color: #ffffff !important;
-}
-.main-sidebar .menu a.item:hover .icon,
-.main-sidebar .menu a.item:hover i {
-    color: #f5c842 !important;
-}
-
-/* User Profile */
-.main-sidebar .item:first-child {
-    background: rgba(0, 86, 167, 0.15) !important;
-    border-bottom: 2px solid #f5c842 !important;
-    padding: 25px 20px 20px 20px !important;
-    margin-bottom: 15px !important;
-}
-.main-sidebar .item:first-child .header {
-    font-size: 1.3rem !important;
-    color: #ffffff !important;
-    margin-top: 10px !important;
-}
-.main-sidebar .item:first-child .description {
-    font-size: 1.05rem !important;
-    color: #f5c842 !important;
-}
-
-/* --- 3. Top Navbar - DENR-EMB BLUE THEME --- */
-.custom-topbar {
-    background: linear-gradient(90deg, #003d7a 0%, #0056a7 50%, #003d7a 100%) !important;
-    border-bottom: 3px solid #f5c842 !important;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08) !important;
-}
-.custom-topbar .item {
-    color: #ffffff !important;
-    font-size: 1.1rem !important;
-}
-.custom-topbar .left.menu .item {
-    font-size: 1.4rem !important;
-    color: #f5c842 !important;
-}
-.custom-topbar .item:hover {
-    background: rgba(255, 255, 255, 0.15) !important;
-}
-
-/* --- 4. Main Content Area (Cards) --- */
-#main_event.ui.segment {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    padding: 0 !important;
-}
-
-/* Dashboard Cards */
-.ui.cards > .card, .ui.card {
-    border-radius: 12px !important;
-    border-left: 6px solid #0056a7 !important;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
-    transition: all 0.3s ease !important;
-
-    padding: 25px !important;
-    margin: 0 !important;
-    height: auto !important;
-    display: flex !important;
-    flex-direction: column !important;
     position: relative !important;
-}
-.ui.cards > .card:hover, .ui.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
-    border-left: 6px solid #f5c842 !important;
+    top: 0 !important;
+    right: auto !important;
 }
 
-/* Remove Semantic UI's internal .content padding */
-.ui.card > .content, .ui.cards > .card > .content {
-    padding: 0 !important;
-    border: none !important;
-    flex: 1 !important;
-}
-
-.ui.card .header {
-    font-family: 'Inter', sans-serif !important;
-    color: #1e293b !important;
-    margin: 0 !important;
-    transition: color 0.2s ease !important;
-}
-.ui.card .header:first-child {
-    font-size: 2.8rem !important;
-    font-weight: 600 !important;
-}
-.ui.card .meta {
-    font-size: 1.2rem !important;
-    font-weight: 600 !important;
-    color: #4a4a4a !important;
-    margin-top: 10px !important;
-}
-.ui.card .description {
-    font-size: 1.05rem !important;
-    line-height: 1.5 !important;
-    color: #555 !important;
-    margin-top: 15px !important;
-    margin-bottom: 15px !important;
-}
-
-/* --- DASHBOARD CARD COLOR MATCHING - DENR-EMB COLORS --- */
-
-/* RED (Users Card) - DENR Red */
-.ui.cards > .card:has(.ui.red.button) .header:first-child,
-.ui.cards > .card:has(.ui.red.button) i.icon,
-.ui.cards > .card:has(.ui.red.button) img {
-    color: #dc3545 !important;
-}
-.ui.cards > .card:has(.ui.red.button) {
-    border-left: 6px solid #dc3545 !important;
-}
-
-/* GREEN (Supplier Card) - DENR Green */
-.ui.cards > .card:has(.ui.green.button) .header:first-child,
-.ui.cards > .card:has(.ui.green.button) i.icon,
-.ui.cards > .card:has(.ui.green.button) img {
-    color: #28a745 !important;
-}
-.ui.cards > .card:has(.ui.green.button) {
-    border-left: 6px solid #28a745 !important;
-}
-
-/* BLUE (Purchase Request Card) - DENR Blue */
-.ui.cards > .card:has(.ui.blue.button) .header:first-child,
-.ui.cards > .card:has(.ui.blue.button) i.icon,
-.ui.cards > .card:has(.ui.blue.button) img {
-    color: #0056a7 !important;
-}
-.ui.cards > .card:has(.ui.blue.button) {
-    border-left: 6px solid #0056a7 !important;
-}
-
-/* YELLOW (Request for Quotation Card) - DENR Yellow */
-.ui.cards > .card:has(.ui.yellow.button) .header:first-child,
-.ui.cards > .card:has(.ui.yellow.button) i.icon,
-.ui.cards > .card:has(.ui.yellow.button) img {
-    color: #f5c842 !important;
-}
-.ui.cards > .card:has(.ui.yellow.button) {
-    border-left: 6px solid #f5c842 !important;
-}
-
-/* BLACK GREY Card - DENR Black Grey */
-.ui.cards > .card:has(.ui.blackgrey.button) .header:first-child,
-.ui.cards > .card:has(.ui.blackgrey.button) i.icon,
-.ui.cards > .card:has(.ui.blackgrey.button) img {
-    color: #4a4a4a !important;
-}
-.ui.cards > .card:has(.ui.blackgrey.button) {
-    border-left: 6px solid #4a4a4a !important;
-}
-
-/* --- Dashboard Buttons - DENR-EMB COLORS --- */
-.ui.button {
-    border-radius: 8px !important;
-    font-family: 'Inter', sans-serif !important;
-    font-weight: 600 !important;
-    font-size: 1.05rem !important;
-    padding: 14px 0 !important;
-    width: 100% !important;
-    display: block !important;
-    margin-top: auto !important;
-    text-align: center !important;
-    box-sizing: border-box !important;
-    transition: all 0.3s ease !important;
-}
-.ui.button:hover {
-    transform: translateY(-2px) !important;
-    box-shadow: 0 6px 12px rgba(0,0,0,0.15) !important;
-}
-
-/* DENR Red Button */
-.ui.red.button {
-    background: linear-gradient(135deg, #dc3545 0%, #b02a37 100%) !important;
-    color: white !important;
-}
-
-/* DENR Green Button */
-.ui.green.button {
-    background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%) !important;
-    color: white !important;
-}
-
-/* DENR Blue Button */
-.ui.blue.button {
-    background: linear-gradient(135deg, #0056a7 0%, #003d7a 100%) !important;
-    color: white !important;
-}
-
-/* DENR Yellow Button */
-.ui.yellow.button {
-    background: linear-gradient(135deg, #f5c842 0%, #d4a830 100%) !important;
-    color: #1a3a2a !important;
-}
-
-/* DENR Black Grey Button */
-.ui.blackgrey.button {
-    background: linear-gradient(135deg, #4a4a4a 0%, #2d2d2d 100%) !important;
-    color: white !important;
-}
-
-/* Existing button colors maintained for compatibility */
-.ui.teal.button {
-    background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%) !important;
-    color: white !important;
-}
-.ui.purple.button {
-    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%) !important;
-    color: white !important;
-}
-
-/* --- 5. Transitions & Layout --- */
-#visibleSidebar, #hiddenSidebar, #custom-content {
-    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-}
-
-/* --- 6. Responsive Card Wrapping --- */
-#main_event .ui.grid,
-#main_event .ui.cards {
-    margin-top: 40px !important;
-}
-
-.ui.four.cards {
+/* Keep the menu icon on the far right */
+.main-sidebar .menu .item .menu-icon {
     display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 18px !important;
-    margin: 0 !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    flex-shrink: 0 !important;
+    margin-left: auto !important;
 }
 
-.ui.four.cards > .card {
-    width: calc(25% - 18px) !important;
-    flex-grow: 1 !important;
-    min-width: 250px !important;
-    margin: 0 !important;
-    box-sizing: border-box !important;
+/* Notification badge hover */
+.main-sidebar .menu .item:hover .menu-title .ui.red.label {
+    background: #8CC63F !important;
+    color: #0a1e2f !important;
 }
 
-.ui.card .extra.content, .ui.cards > .card .extra.content {
-    border-top: none !important;
-    background: transparent !important;
-    padding: 0 !important;
-    margin: 0 !important;
+/* Active menu notification badge */
+.main-sidebar .menu .item.active .menu-title .ui.red.label {
+    background: #FDB913 !important;
+    color: #0a1e2f !important;
 }
 
-@media screen and (max-width: 1200px) {
-    .ui.four.cards > .card {
-        width: calc(50% - 18px) !important;
+
+/* ============================================
+   22. NOTIFICATION BADGE - RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+
+    .main-sidebar .menu .item .menu-title {
+        gap: 6px !important;
     }
-}
 
-@media screen and (max-width: 768px) {
-    .ui.four.cards > .card {
-        width: 100% !important;
+    .main-sidebar .menu .item .menu-title .ui.red.label {
+        min-width: 18px !important;
+        height: 18px !important;
+
+        padding: 2px 6px !important;
+
+        font-size: 0.65rem !important;
     }
+
 }
 
-/* --- 7. Space below cards --- */
-#main_event .ui.cards {
-    margin-bottom: 30px !important;
+@media (max-width: 480px) {
+
+    .main-sidebar .menu .item .menu-title {
+        gap: 5px !important;
+    }
+
+    .main-sidebar .menu .item .menu-title .ui.red.label {
+        min-width: 17px !important;
+        height: 17px !important;
+
+        padding: 2px 5px !important;
+
+        font-size: 0.6rem !important;
+    }
+
+}
+/* ============================================
+   NOTIFICATION BADGE BESIDE MENU ICON
+   Existing icon is NOT removed
+   ============================================ */
+
+/* Keep menu title on the left */
+.main-sidebar .menu .item .menu-title {
+    display: flex !important;
+    align-items: center !important;
 }
 
-/* --- 8. Additional DENR-EMB Color Classes --- */
+/* Keep icon and badge together on the right */
+.main-sidebar .menu .item .menu-icon {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 6px !important;
+    margin-left: auto !important;
+    flex-shrink: 0 !important;
+}
 
-/* DENR-EMB Color Classes for custom use */
-.denr-green { color: #28a745 !important; }
-.denr-blue { color: #0056a7 !important; }
-.denr-blackgrey { color: #4a4a4a !important; }
-.denr-yellow { color: #f5c842 !important; }
-.denr-red { color: #dc3545 !important; }
+/* Notification badge */
+.main-sidebar .menu .item .notification-badge {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 
-/* DENR-EMB Background Classes */
-.bg-denr-green { background: #28a745 !important; }
-.bg-denr-blue { background: #0056a7 !important; }
-.bg-denr-blackgrey { background: #4a4a4a !important; }
-.bg-denr-yellow { background: #f5c842 !important; }
-.bg-denr-red { background: #dc3545 !important; }
+    min-width: 20px !important;
+    height: 20px !important;
+
+    padding: 2px 6px !important;
+    margin: 0 !important;
+
+    background: #FDB913 !important;
+    color: #0a1e2f !important;
+
+    border-radius: 50% !important;
+
+    font-family: 'Inter', sans-serif !important;
+    font-size: 10px !important;
+    font-weight: 800 !important;
+    line-height: 1 !important;
+
+    box-shadow: 0 2px 6px rgba(253, 185, 19, 0.35) !important;
+
+    position: static !important;
+}
+
+/* Existing icon remains visible */
+.main-sidebar .menu .item .menu-icon i.icon {
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+
+    width: 22px !important;
+    min-width: 22px !important;
+
+    font-size: 1.1rem !important;
+    color: #6a8fa0 !important;
+
+    text-align: center !important;
+
+    margin: 0 !important;
+}
+
+/* Hover */
+.main-sidebar .menu .item:hover .notification-badge {
+    background: #8CC63F !important;
+    color: #0a1e2f !important;
+}
+
+.main-sidebar .menu .item:hover .menu-icon i.icon {
+    color: #8CC63F !important;
+}
+
+/* Active */
+.main-sidebar .menu .item.active .notification-badge {
+    background: #FDB913 !important;
+    color: #0a1e2f !important;
+}
+
+.main-sidebar .menu .item.active .menu-icon i.icon {
+    color: #8CC63F !important;
+}

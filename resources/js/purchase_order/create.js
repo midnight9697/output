@@ -42,6 +42,4 @@ document.addEventListener('DOMContentLoaded', () => {
         PurchaseOrderClass.select_supplier(d);
         console.log(d);
       };
-      
-      
 })

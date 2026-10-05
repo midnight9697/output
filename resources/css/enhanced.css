@@ -229,70 +229,118 @@ p, .text-content {
  
 /* ----- 5. TOP NAVBAR - MATCHING SIDEBAR DARK NAVY THEME ----- */ 
 .custom-topbar { 
-    background: linear-gradient(135deg, #123f7a 0%, #133864 40%, #09203a 100%) !important; 
+
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #eef5f9 100%) !important;
+
     border-bottom: 2px solid rgba(140, 198, 63, 0.3) !important; 
+
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15) !important; 
+
     height: 68px !important; 
+
     padding: 0 2px !important; 
+
     position: relative; 
+
 } 
- 
+
 /* Topbar accent line with DENR-EMB colors */ 
+
 .custom-topbar::after { 
+
     content: ''; 
+
     position: absolute; 
+
     bottom: -2px; 
+
     left: 0; 
+
     right: 0; 
+
     height: 3px; 
+
     background: linear-gradient(90deg, #8CC63F, #009B3A, #00857C, #0057A3, #FDB913, #7B2FBE) !important; 
+
     opacity: 0.6; 
+
 } 
- 
-/* Topbar items - white text for dark background */ 
+
+/* Topbar items - dark text for light background */ 
+
 .custom-topbar .item { 
-    color: rgba(255, 255, 255, 0.85) !important; 
+
+    color: #2E3A46 !important; 
+
     transition: all 0.2s ease; 
+
     font-size: 0.9rem !important; 
+
     font-family: Georgia, serif; 
+
 } 
- 
+
 .custom-topbar .item:hover { 
-    background: rgba(255, 255, 255, 0.08) !important; 
+
+    background: rgba(0, 155, 58, 0.08) !important; 
+
     border-radius: 10px !important; 
-    color: #ffffff !important; 
+
+    color: #009B3A !important; 
+
 } 
- 
+
 /* Toggle button */ 
+
 .custom-topbar .toggle.button { 
+
     font-weight: 600; 
+
     font-size: 0.9rem !important; 
-    color: rgba(255, 255, 255, 0.9) !important; 
+
+    color: #2E3A46 !important; 
+
 } 
- 
+
 .custom-topbar .toggle.button i { 
+
     font-size: 1.2rem !important; 
-    color: #8CC63F !important; 
+
+    color: #009B3A !important; 
+
     padding: 5px; 
+
 } 
- 
+
 .custom-topbar .toggle.button:hover { 
-    background: rgba(255, 255, 255, 0.08) !important; 
+
+    background: rgba(0, 155, 58, 0.08) !important; 
+
     border-radius: 10px !important; 
+
 } 
- 
-/* Page Title - white text with green accent */ 
+
+/* Page Title - dark text with green accent */ 
+
 .page-title { 
+
     font-size: 1.05rem !important; 
+
     font-weight: 700 !important; 
-    color: #ffffff !important; 
+
+    color: #123F7A !important; 
+
     letter-spacing: -0.3px; 
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); 
+
+    text-shadow: none; 
+
 } 
- 
+
 .page-title i { 
-    color: #8CC63F !important; 
-} 
+
+    color: #009B3A !important; 
+
+}
  
 /* ============================================ 
    USER DROPDOWN - COMPLETE FIX 
@@ -325,7 +373,8 @@ p, .text-content {
 .user-name { 
     font-size: 0.9rem !important; 
     font-weight: 600 !important; 
-    color: #ffffff !important; 
+    color: #110707 !important; 
+    padding: 10px;
 } 
  
 .dropdown-arrow { 
@@ -345,80 +394,138 @@ p, .text-content {
  
 /* Dropdown menu - Light background for visibility */ 
 .user-dropdown .menu { 
-    background: #e7e9eb !important; 
-    border: 1px solid rgba(255, 255, 255, 0.12) !important; 
+
+    background: #ffffff !important; 
+
+    border: 1px solid rgba(0, 155, 58, 0.15) !important; 
+
     border-radius: 12px !important; 
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5) !important; 
+
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15) !important; 
+
     padding: 8px 0 !important; 
+
     min-width: 200px !important; 
+
     margin-top: 4px !important; 
+
     overflow: hidden !important; 
+
 } 
- 
-/* Dropdown items - BRIGHT WHITE TEXT for readability */ 
+
+/* Dropdown items - dark text for white background */ 
+
 .user-dropdown .menu .item { 
+
     font-size: 1.9rem !important; 
+
     padding: 12px 20px !important; 
-    color: #ffffff !important; 
-    background: #e5f3f3f3 !important; 
+
+    color: #2E3A46 !important; 
+
+    background: #ffffff !important; 
+
     border-radius: 0 !important; 
+
     display: flex !important; 
+
     align-items: center !important; 
+
     gap: 12px !important; 
+
     transition: all 0.2s ease !important; 
-    font-weight: 1000 !important; 
+
+    font-weight: 700 !important; 
+
     text-decoration: none !important; 
+
     border: none !important; 
+
     outline: none !important; 
+
     margin: 0 !important; 
+
     width: 100% !important; 
+
     box-sizing: border-box !important; 
+
 } 
- 
+
 .user-dropdown .menu .item:hover { 
-    background: rgba(10, 15, 2, 0.966) !important; 
-    color: #46ca24 !important; 
+
+    background: rgba(0, 155, 58, 0.08) !important; 
+
+    color: #009B3A !important; 
+
 } 
- 
+
 .user-dropdown .menu .item:focus { 
+
     outline: none !important; 
+
 } 
- 
+
 /* Dropdown icons - green with hover effect */ 
+
 .user-dropdown .menu .item i { 
-    color: #8CC63F !important; 
+
+    color: #009B3A !important; 
+
     font-size: 1rem !important; 
+
     width: 20px !important; 
+
     text-align: center !important; 
+
     transition: all 0.2s ease !important; 
+
 } 
- 
+
 .user-dropdown .menu .item:hover i { 
+
     transform: scale(1.1); 
+
+    color: #8CC63F !important; 
+
 } 
- 
+
 .user-dropdown .menu .item:first-child:hover i { 
+
     color: #FDB913 !important; 
+
 } 
- 
+
 /* Logout item - with divider and red icon */ 
+
 .user-dropdown .menu .item:last-child { 
-    border-top: 1px solid rgba(255, 255, 255, 0.08) !important; 
+
+    border-top: 1px solid rgba(0, 0, 0, 0.08) !important; 
+
     margin-top: 4px !important; 
+
     padding-top: 12px !important; 
+
 } 
- 
+
 .user-dropdown .menu .item:last-child i { 
+
     color: #EF4444 !important; 
+
 } 
- 
+
 .user-dropdown .menu .item:last-child:hover { 
-    background: rgba(239, 68, 68, 0.1) !important; 
+
+    background: rgba(239, 68, 68, 0.08) !important; 
+
+    color: #DC2626 !important; 
+
 } 
- 
+
 .user-dropdown .menu .item:last-child:hover i { 
+
     color: #FF6B6B !important; 
-} 
+
+}
  
 /* ============================================ 
    NOTIFICATION BELL 
@@ -434,7 +541,7 @@ p, .text-content {
  
 .notification-bell i { 
     font-size: 1.3rem !important; 
-    color: rgba(255, 255, 255, 0.8) !important; 
+    color: rgba(20, 5, 5, 0.959) !important; 
 } 
  
 .notification-bell:hover { 
@@ -477,7 +584,7 @@ p, .text-content {
     display: flex; 
     align-items: center; 
     justify-content: center; 
-    color: #ffffff !important; 
+    color: #0f0808 !important; 
     font-weight: 700; 
     font-size: 1rem !important; 
 } 
